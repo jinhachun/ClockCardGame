@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1254896972569774197}
   - component: {fileID: 4731196989299199355}
   m_Layer: 0
-  m_Name: RerollButton
+  m_Name: AttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d75c8abb502835140ae9f44dab704f8a, type: 3}
+  m_SortingOrder: 50
+  m_Sprite: {fileID: 21300000, guid: 98253080f1882714ca4095bbb965fb01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rerollButtonPrefab: {fileID: 589155071715725636}
-  _Name: Reroll
+  _Name: Attack
 --- !u!61 &4731196989299199355
 BoxCollider2D:
   m_ObjectHideFlags: 0

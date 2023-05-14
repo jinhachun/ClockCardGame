@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class CardDatabase : MonoBehaviour
@@ -15,7 +16,18 @@ public class CardDatabase : MonoBehaviour
     }
     [SerializeField] List<CardStruct> cardDatabase;
     [SerializeField] List<Sprite> cardinfoSprites;
-    public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault(); 
+    [SerializeField] List<Sprite> btnSprites;
+    public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
+    public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
+
+    public CardStruct card(int a) => cardDatabase[a];
+    public CardStruct RandomCard()
+    {
+        int a = RandomCardIndex;
+        Debug.Log(a);
+        return card(a);
+    }
+    public Sprite btn(int i) => btnSprites[i];
 public Sprite companySprite(COMPANY c)
     {
         switch (c){

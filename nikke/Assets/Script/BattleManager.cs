@@ -1,18 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    float DeckPosX=11f, DeckPoxY=-5,HandPosX=-7,HandPosY=-3f,HandPosBlank=3f,GravePosX=-12f,GravePosY=-5f;
+    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -3f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
+    float ButtonPosX = 8f, ButtonPosY = -2f, ButtonPosBlank = 1.5f;
 
     [SerializeField] Card _cardPrefab;
-    [SerializeField] SpriteRenderer _rerollButtonPrefab;
-    Vector2 DeckPos(int i)=> new Vector2(DeckPosX,DeckPoxY+0.15f*(Deck.Count-i));
+    [SerializeField] RerollButton _rerollButtonPrefab;
+    [SerializeField] RerollButton _chkButtonPrefab;
+    [SerializeField] RerollButton _attackButtonPrefab;
+    Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
-    List<Card> BaseDeck;
+    Vector2 ButtonPos(int i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
+    List<CardStruct> BaseDeck;
     List<Card> Deck;
     List<Card> Hand;
     List<Card> Grave;
@@ -21,12 +25,11 @@ public class BattleManager : MonoBehaviour
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
-        BaseDeck = new List<Card>();
-        for(int i = 0; i < 10; i++)
+        BaseDeck = new List<CardStruct>();
+        for (int i = 0; i < 10; i++)
         {
-            var tmp = _cardPrefab;
+            var tmp = (CardDatabase.Instance.RandomCard());
             BaseDeck.Add(tmp);
-            tmp.Set(CardDatabase.Instance.card("½Ã¿øÇÑ ¸ÆÁÖ"));
         }
         ChangeState(BattleState.Set);
     }
@@ -41,9 +44,10 @@ public class BattleManager : MonoBehaviour
                 DrawPhase();
                 break;
             case BattleState.WaitingReroll:
-                WatingReroll();
+                WatingRerollPhase();
                 break;
             case BattleState.Reroll:
+                RerollPhase();
                 break;
             case BattleState.Attack:
                 break;
@@ -64,80 +68,131 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
             HandPos.Add(new Vector2(HandPosX + i * HandPosBlank, HandPosY));
 
-        var cnt = 0 ;
-        foreach(var tmpCard in BaseDeck)
+        var cnt = 0;
+        Sequence sq = DOTween.Sequence();
+        foreach (var tmpCard in BaseDeck)
         {
-            var tmp = Instantiate(_cardPrefab, new Vector2(0,0), Quaternion.identity);
-            tmp.Set(tmpCard.Str);
+            var tmp = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
+            tmp.Set(tmpCard);
             Deck.Add(tmp);
             tmp.flip();
-            moveCard(tmp, DeckPos(0),0.2f, true,false);
+            moveCard(sq,tmp, DeckPos(0), 0.2f, true, false);
             cnt++;
         }
-        ShuffleDeck();
+        ShuffleDeck(sq);
 
-        ChangeState(BattleState.Draw);
+        sq.OnComplete(() => { 
+            ChangeState(BattleState.Draw);
+        });
     }
-    public void ShuffleDeck()
+    public void ShuffleDeck(Sequence sq)
     {
         var randomized = Deck.OrderBy(item => Random.value).ToList();
         Deck = randomized;
-        deckMoveCard();
+        deckMoveCard(sq);
     }
-    
+
     public void DrawPhase()
     {
+        Sequence sq = DOTween.Sequence();
         while (Hand.Count < 5)
         {
-            DrawCard();
+            DrawCard(sq);
             if (Hand.Count + Deck.Count + Grave.Count < 5) break;
         }
-        deckMoveCard();
-        ChangeState(BattleState.WaitingReroll);
+        deckMoveCard(sq);
+        sq.OnComplete(() => {
+            ChangeState(BattleState.WaitingReroll);
+        });
     }
-    public void WatingReroll()
+    private List<RerollButton> ChkButtons;
+    public void WatingRerollPhase()
     {
-        var rerollbtn = Instantiate(_rerollButtonPrefab);
+        ChkButtons = new List<RerollButton>();
+        List<RerollButton> Btns = new List<RerollButton>();
+        var attackbtn = Instantiate(_attackButtonPrefab, ButtonPos(1), Quaternion.identity);
+        attackbtn.ActionSet(() =>
+        {
+            foreach (var btn in Btns) Destroy(btn.gameObject);
+            ChangeState(BattleState.Reroll);
+        });
+        Btns.Add(attackbtn);
+        var rerollbtn = Instantiate(_rerollButtonPrefab, ButtonPos(0), Quaternion.identity);
+        rerollbtn.ActionSet(() =>
+        {
+            foreach (var btn in Btns) Destroy(btn.gameObject);
+            ChangeState(BattleState.Reroll);
+        });
+        Btns.Add(rerollbtn);
+        for (int i = 0; i < Hand.Count; i++)
+        {
+            var chkBtn = Instantiate(_chkButtonPrefab, new Vector2(HandPos[i].x, HandPos[i].y - 2.5f), Quaternion.identity);
+            chkBtn.ActionSet(() =>
+            {
+                chkBtn.SpriteChange(isBtnChk(chkBtn) ? CardDatabase.Instance.btn(1) : CardDatabase.Instance.btn(0));
+            });
+            ChkButtons.Add(chkBtn);
+            Btns.Add(chkBtn);
+        }
     }
-    public void DrawCard()
+    public bool isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
+
+    public void RerollPhase()
+    {
+        Sequence sq = DOTween.Sequence();
+        List<Card> rerollCard = new List<Card>();
+        for (int i = 0; i < Hand.Count; i++) if (isBtnChk(ChkButtons[i])) rerollCard.Add(Hand[i]);
+        foreach (var card in rerollCard)
+        {
+            Hand.Remove(card);
+            Grave.Add(card);
+            moveCard(sq,card, GravePos, 0.2f, true);
+        }
+        sq.OnComplete(() => {
+            ChangeState(BattleState.Draw);
+        });
+    }
+    public void DrawCard(Sequence sq)
     {
         Card tmpCard;
-        if (Deck.Count == 0)
+        if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(card, DeckPos(0),0.2f,true,false); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.2f, true, false); }
             Deck = Grave;
-            ShuffleDeck();
+            ShuffleDeck(sq);
             Grave.Clear();
         }
         tmpCard = Deck[0];
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
-        for (int i = 0; i < Hand.Count; i++) moveCard(Hand[i], HandPos[i],0.7f,false,true); 
+        for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.2f, false, true);
     }
-    public void moveCard(Card card,Vector2 v,float duration,bool one)
+    public void moveCard(Sequence seq,Card card, Vector2 v, float duration, bool one)
     {
-        if(one)
-            mySequence.Append(card.transform.DOMove(v, duration));
+        
+        if (one)
+            seq.Append(card.transform.DOMove(v, duration));
         else
-            mySequence.Join(card.transform.DOMove(v, duration));
+            seq.Join(card.transform.DOMove(v, duration));
     }
-    public void moveCard(Card card, Vector2 v, float duration, bool one,bool cardFlip)
+    public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one, bool cardFlip)
     {
         if (one)
-            mySequence.Append(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); }));
+            seq.Append(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); }));
         else
-            mySequence.Join(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); }));
+            seq.Join(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); })); 
     }
-    public void deckMoveCard()
+    public void deckMoveCard(Sequence sq)
     {
-
         for (int i = 0; i < Deck.Count; i++)
         {
             Deck[i].setLayer(Deck.Count - i);
-            moveCard(Deck[i], DeckPos(i), 0.05f, true);
+            moveCard(sq, Deck[i], DeckPos(i), 0.05f, true);
         }
     }
+    
 }
+public delegate void Func();
 public enum BattleState
 {
     Set, Draw, WaitingReroll, Reroll, Attack, EnemyAttack, Reward, Lose

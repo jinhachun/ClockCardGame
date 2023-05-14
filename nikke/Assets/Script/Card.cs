@@ -5,6 +5,8 @@ using TMPro;
 
 public class Card : MonoBehaviour
 {
+
+    [SerializeField] private SpriteRenderer _visual;
     [SerializeField] private SpriteRenderer _cardBody;
     [SerializeField] private SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _company;
@@ -42,8 +44,51 @@ public class Card : MonoBehaviour
     {
         _cardBack.gameObject.SetActive(a ? false:true) ;
     }
+
     public void setLayer(int a)
     {
-        _cardBack.sortingOrder = 52+a;
+        int newSortingOrder = 52;
+        _cardBack.sortingOrder = newSortingOrder + a;
+        _cardBody.sortingOrder = newSortingOrder;
+        _img.sortingOrder = newSortingOrder-1;
+        _cardBody.sortingOrder = newSortingOrder;
+        _company.sortingOrder = newSortingOrder;
+        _rank.sortingOrder = newSortingOrder;
+        MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+         meshRenderer = _text.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+        meshRenderer = _number.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+    }
+    public void setLayer()
+    {
+        int newSortingOrder = 50;
+        _cardBack.sortingOrder = newSortingOrder+1;
+        _cardBody.sortingOrder = newSortingOrder;
+        _img.sortingOrder = newSortingOrder-1;
+        _cardBody.sortingOrder = newSortingOrder;
+        _company.sortingOrder = newSortingOrder;
+        _rank.sortingOrder = newSortingOrder;
+        MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+        meshRenderer = _text.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+        meshRenderer = _number.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+    }
+    void OnMouseOver()
+    {
+        if (_cardBack.gameObject.activeInHierarchy) return;
+        _visual.transform.localScale = new Vector2(1.5f, 1.5f);
+        setLayer(1);
+
+    }
+
+    void OnMouseExit()
+    {
+        if (_cardBack.gameObject.activeInHierarchy) return;
+        _visual.transform.localScale = new Vector2(0.8f, 0.8f);
+        setLayer();
     }
 }
