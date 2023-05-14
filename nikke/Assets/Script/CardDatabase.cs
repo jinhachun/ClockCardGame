@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
+
 public class CardDatabase : MonoBehaviour
 {
     private static CardDatabase instance;
