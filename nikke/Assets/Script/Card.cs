@@ -13,20 +13,31 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _rank;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private TMP_Text _infoText;
     [SerializeField] private TMP_Text _number;
     [SerializeField] private SpriteRenderer _cardBack;
+
+
+    [SerializeField] private string Exhaust;
+    [SerializeField] private string Ethereal;
+    [SerializeField] private string Fixed;
     public CardStruct Str;
-    private COMPANY Company;
+    public COMPANY Company { get; private set; }
     private RANK Rank;
     private int Value;
     private CARDTYPE Type;
+    public int number { get; private set; }
+    public bool isExhaust { get; private set; }
+    public bool isEthereal { get; private set; }
+    public bool isFixed{ get; private set; }
 
-    public void Set(CardStruct str)
+public void Set(CardStruct str)
     {
         this.Str = str;
         this._name.text = str._name;
         this._text.text = str._text;
         this._number.text = str._number.ToString();
+        this.number = str._number;
         this._img.sprite = str._img;
         this._company.sprite = CardDatabase.Instance.companySprite(str._company);
         this._rank.sprite = CardDatabase.Instance.rankSprite(str._rank);
@@ -35,6 +46,16 @@ public class Card : MonoBehaviour
         this.Rank = str._rank;
         this.Type = str._type;
         this.Value = str._value;
+
+        this.isEthereal = str.isEthereal;
+        this.isExhaust = str.isExhaust;
+        this.isFixed = str.isFixed;
+        List<string> infoText = new List<string>();
+        if (isExhaust) infoText.Add(Exhaust);
+        if (isEthereal) infoText.Add(Ethereal);
+        if (isFixed) infoText.Add(Fixed);
+
+        this._infoText.text = string.Join(", ", infoText.ToArray());
     }
     public void flip()
     {
@@ -45,43 +66,30 @@ public class Card : MonoBehaviour
         _cardBack.gameObject.SetActive(a ? false:true) ;
     }
 
-    public void setLayer(int a)
+    public void setLayer(int a,int b)
     {
-        int newSortingOrder = 52;
-        _cardBack.sortingOrder = newSortingOrder + a;
+        int newSortingOrder = b;
+        _cardBack.sortingOrder = newSortingOrder+2 + a;
         _cardBody.sortingOrder = newSortingOrder;
         _img.sortingOrder = newSortingOrder-1;
         _cardBody.sortingOrder = newSortingOrder;
-        _company.sortingOrder = newSortingOrder;
-        _rank.sortingOrder = newSortingOrder;
+        _company.sortingOrder = newSortingOrder+1;
+        _rank.sortingOrder = newSortingOrder+1;
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
          meshRenderer = _text.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
         meshRenderer = _number.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
-    }
-    public void setLayer()
-    {
-        int newSortingOrder = 50;
-        _cardBack.sortingOrder = newSortingOrder+1;
-        _cardBody.sortingOrder = newSortingOrder;
-        _img.sortingOrder = newSortingOrder-1;
-        _cardBody.sortingOrder = newSortingOrder;
-        _company.sortingOrder = newSortingOrder;
-        _rank.sortingOrder = newSortingOrder;
-        MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
-        meshRenderer.sortingOrder = newSortingOrder;
-        meshRenderer = _text.GetComponent<MeshRenderer>();
-        meshRenderer.sortingOrder = newSortingOrder;
-        meshRenderer = _number.GetComponent<MeshRenderer>();
+        meshRenderer = _infoText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
     }
+    
     void OnMouseOver()
     {
         if (_cardBack.gameObject.activeInHierarchy) return;
         _visual.transform.localScale = new Vector2(1.5f, 1.5f);
-        setLayer(1);
+        setLayer(3,53);
 
     }
 
@@ -89,6 +97,6 @@ public class Card : MonoBehaviour
     {
         if (_cardBack.gameObject.activeInHierarchy) return;
         _visual.transform.localScale = new Vector2(0.8f, 0.8f);
-        setLayer();
+        setLayer(0,50);
     }
 }
