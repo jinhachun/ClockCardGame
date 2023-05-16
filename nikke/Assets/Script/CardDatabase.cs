@@ -102,7 +102,7 @@ public class CardDatabase : MonoBehaviour
     }
     public string ComCombinationText(List<COMPANY> list) => ComCombination(list) == 1 ? "" : "FLUSH X2";
     
-    public CardAction BeforeCardActionFunc(string a,int value)
+    public CardAction CalCardActionFunc(string a,int value)
     {
         switch (a)
         {
@@ -126,6 +126,17 @@ public class CardDatabase : MonoBehaviour
                         if(!i.name.Equals(a))
                             i.ValueChange(i.Value + value); 
                     }
+                });
+        }
+        return (() => { });
+    }
+    public CardAction BeforeCardActionFunc(string a, int value)
+    {
+        switch (a)
+        {
+            case "È­¾Æ·Â!":
+                return (() => {
+                    BattleManager.Instance.tmpRate *= 1.2;
                 });
         }
         return (() => { });

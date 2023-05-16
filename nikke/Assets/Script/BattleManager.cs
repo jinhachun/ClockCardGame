@@ -79,6 +79,7 @@ public class BattleManager : MonoBehaviour
     public void setBase()
     {
         Att = 0; Def = 0; Rate = 1;
+        tmpAtt = 0; tmpDef = 0; tmpRate = 1;
         Deck = new List<Card>();
         Hand = new List<Card>();
         Grave = new List<Card>();
@@ -117,9 +118,12 @@ public class BattleManager : MonoBehaviour
         deckMoveCard(sq);
     }
 
+    public int tmpAtt;
+    public int tmpDef;
+    public double tmpRate;
     public void DrawPhase()
     {
-        Att = 0; Def = 0; Rate = 1;
+        Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
         Sequence sq = DOTween.Sequence();
         while (Hand.Count < 5)
         {
@@ -137,7 +141,6 @@ public class BattleManager : MonoBehaviour
     private List<int> NumberCombi;
     private List<COMPANY> COMCombi;
     private List<TMP_Text> CombiText;
-    
     public void WatingRerollPhase()
     {
         ChkButtons = new List<RerollButton>();
@@ -173,6 +176,7 @@ public class BattleManager : MonoBehaviour
             Btns.Add(chkBtn);
             NumberCombi.Add(Hand[i].number);
             COMCombi.Add(Hand[i].Company);
+            CardDatabase.Instance.BeforeCardActionFunc(Hand[i].name, Hand[i].Value)();
         }
         var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x-1f, HandPos[0].y + 2.25f), Quaternion.identity);
         NumberCombiText.text = CardDatabase.Instance.NumCombinationText(NumberCombi);
@@ -215,14 +219,15 @@ public class BattleManager : MonoBehaviour
         COMCombiText.color = Color.cyan;
         CombiText.Add(COMCombiText);
 
-
-        AttDefCal();
+        Debug.Log(tmpRate);
+        AttDefCal(tmpAtt,tmpDef,tmpRate);
     }
-    public void AttDefCal()
+    
+    public void AttDefCal(int a,int b,double r)
     {
-        Att = 0;Def = 0;Rate = 1;
-        Rate = 1 * CardDatabase.Instance.ComCombination(COMCombi) * CardDatabase.Instance.NumCombiRate(NumberCombi);
-        foreach (var i in Hand) CardDatabase.Instance.BeforeCardActionFunc(i.name, i.Value)();
+        Att = 0+a; Def = 0+b; Rate = 1;
+        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.ComCombination(COMCombi) * (float)CardDatabase.Instance.NumCombiRate(NumberCombi) * (float)r * 100))/100;
+        foreach (var i in Hand) CardDatabase.Instance.CalCardActionFunc(i.name, i.Value)();
         this.Att = (int)(Rate * Att);
         this.Def = (int)(Rate * Def);
     }
@@ -236,8 +241,12 @@ public class BattleManager : MonoBehaviour
         foreach (var card in rerollCard)
         {
             Hand.Remove(card);
-            Grave.Add(card);
-            moveCard(sq, card, GravePos, 0.2f, true);
+            if (card.isEthereal) sq.Append(card.transform.DOScale(0, 0.5f).OnComplete(() => { Destroy(card.gameObject); }));
+            else
+            {
+                Grave.Add(card);
+                moveCard(sq, card, GravePos, 0.2f, true);
+            }
         }
         sq.AppendCallback(()=>
         {
@@ -248,12 +257,8 @@ public class BattleManager : MonoBehaviour
     public void AttackPhase()
     {
         Sequence sq = DOTween.Sequence();
-        foreach(var card in Hand)
-        {
-            card.Action = CardDatabase.Instance.CardActionFunc(card.name, card.Value);
-            card.Action();
-        }
-        AttDefCal();
+        foreach(var card in Hand) CardDatabase.Instance.CardActionFunc(card.name, card.Value)();
+        AttDefCal(tmpAtt, tmpDef, tmpRate);
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f,0.5f));
@@ -263,9 +268,12 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
+                Grave.Add(card);
                 moveCard(sq, card, GravePos, 0.2f, true);
             }
         }
+        Hand.Clear();
+        tmpAtt = 0;tmpDef = 0;tmpRate = 0;
     }
     public void DrawCard(Sequence sq)
     {
