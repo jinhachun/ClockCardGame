@@ -324,7 +324,7 @@ MonoBehaviour:
   - _img: {fileID: 21300000, guid: 97201fc84484c1542bc12ae3720ce73d, type: 3}
     _company: 3
     _name: "\uC2DC\uC6D0\uD55C \uB9E5\uC8FC"
-    _text: "\uCCB4\uB825\uC744 3 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+    _text: "\uBC29\uC5B4\uB3C4\uB97C [] \uD68D\uB4DD\uD569\uB2C8\uB2E4."
     _number: 2
     _value: 3
     _type: 1
@@ -335,7 +335,7 @@ MonoBehaviour:
   - _img: {fileID: 21300000, guid: bb32132a4b4d4af4c97e8f2439efd9dd, type: 3}
     _company: 0
     _name: "\uBD88\uAC00\uC0AC\uB9AC\uC758 \uC2B5\uACA9"
-    _text: "\uD53C\uD574\uB97C 4 \uC90D\uB2C8\uB2E4."
+    _text: "\uD53C\uD574\uB97C [] \uC90D\uB2C8\uB2E4."
     _number: 3
     _value: 4
     _type: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
   - _img: {fileID: 21300000, guid: 3448289a07ea38e4eb40190ee759486c, type: 3}
     _company: 3
     _name: "\uC138\uBE10\uC2A4 \uB4DC\uC6CC\uD504 : I"
-    _text: "\uD53C\uD574\uB97C 30 \uC90D\uB2C8\uB2E4."
+    _text: "\uD53C\uD574\uB97C [] \uC90D\uB2C8\uB2E4."
     _number: 1
     _value: 30
     _type: 0
@@ -354,6 +354,18 @@ MonoBehaviour:
     isExhaust: 1
     isEthereal: 0
     isFixed: 1
+  - _img: {fileID: 21300000, guid: 6370804511e8b0d4db724f107b359dbc, type: 3}
+    _company: 1
+    _name: "\uAC00\uC790\uAFB8\uB098 \uC544\uC6B0\uC6B0"
+    _text: "\uB0B4 \uC190\uACFC \uB371\uC5D0 \uC788\uB294 \uCE74\uB4DC\uB4E4\uC758
+      \uC218\uCE58\uAC00 []\uB9CC\uD07C \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    _number: 5
+    _value: 1
+    _type: 2
+    _rank: 2
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
   cardinfoSprites:
   - {fileID: 21300000, guid: dc5a712fe5fa8664db165d4ace8faaa6, type: 3}
   - {fileID: 21300000, guid: 6ad8b2faa72ea6c43b1fa17a16916894, type: 3}
@@ -383,6 +395,17 @@ MonoBehaviour:
   _chkButtonPrefab: {fileID: 1254896972569774197, guid: b73812ced7455834cafa935ed86239ad, type: 3}
   _attackButtonPrefab: {fileID: 1254896972569774197, guid: 844a677025a4d0b4b888114169dbdabe, type: 3}
   _textPrefab: {fileID: 7265562265468530343, guid: 5018229b51342904c9532eda5ade7df5, type: 3}
+  _HPbarPrefab: {fileID: 8537117602374488556, guid: 98841cfdb99e30b4dad9f48e50465e77, type: 3}
+  _AttDefCalPrefab: {fileID: 3567113526282466266, guid: e7ab5cb508128414b8903a1642ed0d03, type: 3}
+  Deck: []
+  Hand: []
+  Hp: 0
+  Mhp: 0
+  Shield: 0
+  MShield: 100
+  Att: 0
+  Def: 0
+  Rate: 0
 --- !u!1 &1383047955
 GameObject:
   m_ObjectHideFlags: 0

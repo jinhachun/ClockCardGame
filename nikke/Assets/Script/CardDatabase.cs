@@ -16,6 +16,7 @@ public class CardDatabase : MonoBehaviour
     [SerializeField] List<CardStruct> cardDatabase;
     [SerializeField] List<Sprite> cardinfoSprites;
     [SerializeField] List<Sprite> btnSprites;
+    
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
     public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
 
@@ -23,7 +24,6 @@ public class CardDatabase : MonoBehaviour
     public CardStruct RandomCard()
     {
         int a = RandomCardIndex;
-        Debug.Log(a);
         return card(a);
     }
     public Sprite btn(int i) => btnSprites[i];
@@ -58,8 +58,8 @@ public class CardDatabase : MonoBehaviour
     public int NumCombination(List<int> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
-        int combi=0;
-        foreach(var num in result)
+        int combi = 0;
+        foreach (var num in result)
         {
             if (combi < 1 && num.Value == 2) combi = 1;
             else if (combi == 1 && num.Value == 2) combi = 2;
@@ -81,14 +81,55 @@ public class CardDatabase : MonoBehaviour
         else if (combi == 5) return "FourCard X5";
         else return "FiveCard X10";
     }
+    public int NumCombiRate(List<int> list)
+    {
+        int combi = NumCombination(list);
+        if (combi == 0) return 10;
+        else if (combi == 1) return 1;
+        else if (combi == 2) return 2;
+        else if (combi == 3) return 3;
+        else if (combi == 4) return 4;
+        else if (combi == 5) return 5;
+        else return 10;
+
+    }
     public int ComCombination(List<COMPANY> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
-        int combi = 0;
-        foreach (var num in result)if (num.Value == 5) combi = 5;
+        int combi = 1;
+        foreach (var num in result) if (num.Value == 5) combi = 2;
         return combi;
     }
-    public string ComCombinationText(List<COMPANY> list) => ComCombination(list) == 0 ? "" : "FLUSH X2";
+    public string ComCombinationText(List<COMPANY> list) => ComCombination(list) == 1 ? "" : "FLUSH X2";
+    
+    public CardAction BeforeCardActionFunc(string a,int value)
+    {
+        switch (a)
+        {
+            case "시원한 맥주":
+                return(() => { BattleManager.Instance.Def += value; });
+            case "불가사리의 습격":
+                return (() => { BattleManager.Instance.Att += value; });
+            case "세븐스 드워프 : I":
+                return (() => { BattleManager.Instance.Att += value; });
+        }
+        return (() => { });
+    }
+    public CardAction CardActionFunc(string a,int value)
+    {
+        switch (a)
+        {
+            case "가자꾸나 아우우":
+                return (() => { 
+                    foreach (var i in BattleManager.Instance.Deck) i.ValueChange(i.Value + value);
+                    foreach (var i in BattleManager.Instance.Hand) {
+                        if(!i.name.Equals(a))
+                            i.ValueChange(i.Value + value); 
+                    }
+                });
+        }
+        return (() => { });
+    }
 }
 [Serializable]
 public struct CardStruct
@@ -117,3 +158,5 @@ public enum RANK
 {
     R, SR, SSR
 }
+
+public delegate void CardAction();

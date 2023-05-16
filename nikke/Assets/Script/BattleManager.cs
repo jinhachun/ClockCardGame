@@ -6,24 +6,37 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -3f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
-    float ButtonPosX = 8f, ButtonPosY = -2f, ButtonPosBlank = 1.5f;
+    private static BattleManager instance;
+    public static BattleManager Instance => instance;
+    public void Awake()
+    {
+        instance = this;
+    }
+    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
+    float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
 
     [SerializeField] Card _cardPrefab;
     [SerializeField] RerollButton _rerollButtonPrefab;
     [SerializeField] RerollButton _chkButtonPrefab;
     [SerializeField] RerollButton _attackButtonPrefab;
     [SerializeField] TMP_Text _textPrefab;
+    [SerializeField] SpriteRenderer _HPbarPrefab;
+    [SerializeField] AttDefCal _AttDefCalPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
     Vector2 ButtonPos(int i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
     List<CardStruct> BaseDeck;
-    List<Card> Deck;
-    List<Card> Hand;
+    public List<Card> Deck;
+    public List<Card> Hand;
     List<Card> Grave;
     List<Card> Cards;
     Sequence mySequence;
+
+    public int Hp, Mhp, Shield,MShield = 100;
+    public int Att;
+    public int Def;
+    public double Rate;
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
@@ -33,6 +46,7 @@ public class BattleManager : MonoBehaviour
             var tmp = (CardDatabase.Instance.RandomCard());
             BaseDeck.Add(tmp);
         }
+        Hp = 100; Mhp = 100; Shield = 100;
         ChangeState(BattleState.Set);
     }
     private void ChangeState(BattleState battleState)
@@ -52,6 +66,7 @@ public class BattleManager : MonoBehaviour
                 RerollPhase();
                 break;
             case BattleState.Attack:
+                AttackPhase();
                 break;
             case BattleState.EnemyAttack:
                 break;
@@ -63,6 +78,7 @@ public class BattleManager : MonoBehaviour
     }
     public void setBase()
     {
+        Att = 0; Def = 0; Rate = 1;
         Deck = new List<Card>();
         Hand = new List<Card>();
         Grave = new List<Card>();
@@ -70,21 +86,27 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
             HandPos.Add(new Vector2(HandPosX + i * HandPosBlank, HandPosY));
 
+        var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x-1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
+        var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity); ;
         var cnt = 0;
-        Sequence sq = DOTween.Sequence();
+        Sequence sq = DOTween.Sequence().SetAutoKill(false);
         foreach (var tmpCard in BaseDeck)
         {
             var tmp = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
+            int Layer = 50 + (BaseDeck.Count - cnt) * 3;
+            tmp.setLayer(0, Layer);
             tmp.Set(tmpCard);
             Deck.Add(tmp);
-            tmp.setLayer(0, 50 - cnt * 2);
-            moveCard(sq, tmp, DeckPos(0), 0.2f, true, false);
+            moveCard(sq, tmp, DeckPos(0), 0.1f, true, false);
             cnt++;
         }
-        ShuffleDeck(sq);
-
         sq.OnComplete(() =>
         {
+            ShuffleDeck(sq);
+        });
+        sq.OnComplete(() =>
+        {
+            sq.Kill();
             ChangeState(BattleState.Draw);
         });
     }
@@ -97,6 +119,7 @@ public class BattleManager : MonoBehaviour
 
     public void DrawPhase()
     {
+        Att = 0; Def = 0; Rate = 1;
         Sequence sq = DOTween.Sequence();
         while (Hand.Count < 5)
         {
@@ -114,6 +137,7 @@ public class BattleManager : MonoBehaviour
     private List<int> NumberCombi;
     private List<COMPANY> COMCombi;
     private List<TMP_Text> CombiText;
+    
     public void WatingRerollPhase()
     {
         ChkButtons = new List<RerollButton>();
@@ -126,7 +150,7 @@ public class BattleManager : MonoBehaviour
         {
             foreach (var btn in Btns) Destroy(btn.gameObject);
             foreach (var txt in CombiText) Destroy(txt.gameObject);
-            ChangeState(BattleState.Reroll);
+            ChangeState(BattleState.Attack);
         });
         Btns.Add(attackbtn);
         var rerollbtn = Instantiate(_rerollButtonPrefab, ButtonPos(0), Quaternion.identity);
@@ -139,7 +163,7 @@ public class BattleManager : MonoBehaviour
         Btns.Add(rerollbtn);
         for (int i = 0; i < Hand.Count; i++)
         {
-            var chkBtn = Instantiate(_chkButtonPrefab, new Vector2(HandPos[i].x, HandPos[i].y - 2.5f), Quaternion.identity);
+            var chkBtn = Instantiate(_chkButtonPrefab, new Vector2(HandPos[i].x, HandPos[i].y - 2.25f), Quaternion.identity);
             chkBtn.ActionSet(() =>
             {
                 chkBtn.SpriteChange(isBtnChk(chkBtn) ? CardDatabase.Instance.btn(1) : CardDatabase.Instance.btn(0));
@@ -150,7 +174,7 @@ public class BattleManager : MonoBehaviour
             NumberCombi.Add(Hand[i].number);
             COMCombi.Add(Hand[i].Company);
         }
-        var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x-1f, HandPos[0].y + 2.5f), Quaternion.identity);
+        var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x-1f, HandPos[0].y + 2.25f), Quaternion.identity);
         NumberCombiText.text = CardDatabase.Instance.NumCombinationText(NumberCombi);
         int numberCombi = CardDatabase.Instance.NumCombination(NumberCombi);
         switch (numberCombi)
@@ -185,14 +209,22 @@ public class BattleManager : MonoBehaviour
 
         CombiText.Add(NumberCombiText);
 
-        var COMCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x-0.5f, HandPos[0].y + 2.5f), Quaternion.identity);
+        var COMCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x-0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
         COMCombiText.text = CardDatabase.Instance.ComCombinationText(COMCombi);
         COMCombiText.fontSize = 7;
         COMCombiText.color = Color.cyan;
         CombiText.Add(COMCombiText);
 
 
-
+        AttDefCal();
+    }
+    public void AttDefCal()
+    {
+        Att = 0;Def = 0;Rate = 1;
+        Rate = 1 * CardDatabase.Instance.ComCombination(COMCombi) * CardDatabase.Instance.NumCombiRate(NumberCombi);
+        foreach (var i in Hand) CardDatabase.Instance.BeforeCardActionFunc(i.name, i.Value)();
+        this.Att = (int)(Rate * Att);
+        this.Def = (int)(Rate * Def);
     }
     public bool isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
 
@@ -213,12 +245,34 @@ public class BattleManager : MonoBehaviour
             sq.Kill();
         });
     }
+    public void AttackPhase()
+    {
+        Sequence sq = DOTween.Sequence();
+        foreach(var card in Hand)
+        {
+            card.Action = CardDatabase.Instance.CardActionFunc(card.name, card.Value);
+            card.Action();
+        }
+        AttDefCal();
+        foreach (var card in Hand)
+        {
+            sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f,0.5f));
+            if (card.isExhaust)
+            {
+                sq.Append(card.transform.DOScale(0, 0.5f).OnComplete(() => { Destroy(card.gameObject); }));
+            }
+            else
+            {
+                moveCard(sq, card, GravePos, 0.2f, true);
+            }
+        }
+    }
     public void DrawCard(Sequence sq)
     {
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.2f, true, false); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.1f, true, false); }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -226,7 +280,7 @@ public class BattleManager : MonoBehaviour
         tmpCard = Deck[0];
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
-        for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.1f, true, true);
+        for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one)
     {
@@ -251,7 +305,10 @@ public class BattleManager : MonoBehaviour
             moveCard(sq, Deck[i], DeckPos(i), 0.05f, true);
         }
     }
-
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow)) Hp -= 10;
+    }
 }
 public delegate void Func();
 public enum BattleState

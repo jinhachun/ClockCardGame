@@ -24,18 +24,29 @@ public class Card : MonoBehaviour
     public CardStruct Str;
     public COMPANY Company { get; private set; }
     private RANK Rank;
-    private int Value;
-    private CARDTYPE Type;
+    public CARDTYPE Type { get; private set; }
+    public string name { get; private set; }
+    public int Value { get; private set; }
     public int number { get; private set; }
     public bool isExhaust { get; private set; }
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }
-
+    public CardAction BeforeAction;
+    public CardAction Action;
+    public void ValueChange(int a)
+    {
+        this.Value = a;
+        this._text.text = textSet(Str._text);
+    }
+    public string textSet(string txt)
+    {
+        return txt.Replace("[]", Value.ToString());
+    }
 public void Set(CardStruct str)
     {
         this.Str = str;
         this._name.text = str._name;
-        this._text.text = str._text;
+        this.name = str._name;
         this._number.text = str._number.ToString();
         this.number = str._number;
         this._img.sprite = str._img;
@@ -46,6 +57,7 @@ public void Set(CardStruct str)
         this.Rank = str._rank;
         this.Type = str._type;
         this.Value = str._value;
+        this._text.text = textSet(str._text);
 
         this.isEthereal = str.isEthereal;
         this.isExhaust = str.isExhaust;
