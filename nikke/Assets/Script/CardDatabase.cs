@@ -153,9 +153,14 @@ public struct CardStruct
     public int _value;
     public CARDTYPE _type;
     public RANK _rank;
+    public TARGET _target;
     public bool isExhaust;
     public bool isEthereal;
     public bool isFixed;
+}
+public enum TARGET
+{
+    SOLO,RANDOM,AOE,NONE
 }
 public enum COMPANY
 {

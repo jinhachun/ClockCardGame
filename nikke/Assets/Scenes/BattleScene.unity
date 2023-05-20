@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 723614868}
   - component: {fileID: 723614870}
   - component: {fileID: 723614869}
+  - component: {fileID: 723614871}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -329,6 +330,7 @@ MonoBehaviour:
     _value: 3
     _type: 1
     _rank: 1
+    _target: 0
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
@@ -340,6 +342,7 @@ MonoBehaviour:
     _value: 4
     _type: 0
     _rank: 0
+    _target: 0
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
@@ -351,6 +354,7 @@ MonoBehaviour:
     _value: 30
     _type: 0
     _rank: 2
+    _target: 0
     isExhaust: 1
     isEthereal: 0
     isFixed: 1
@@ -363,6 +367,7 @@ MonoBehaviour:
     _value: 1
     _type: 2
     _rank: 2
+    _target: 0
     isExhaust: 1
     isEthereal: 0
     isFixed: 0
@@ -375,6 +380,7 @@ MonoBehaviour:
     _value: 1
     _type: 2
     _rank: 0
+    _target: 0
     isExhaust: 0
     isEthereal: 1
     isFixed: 0
@@ -409,8 +415,13 @@ MonoBehaviour:
   _textPrefab: {fileID: 7265562265468530343, guid: 5018229b51342904c9532eda5ade7df5, type: 3}
   _HPbarPrefab: {fileID: 8537117602374488556, guid: 98841cfdb99e30b4dad9f48e50465e77, type: 3}
   _AttDefCalPrefab: {fileID: 3567113526282466266, guid: e7ab5cb508128414b8903a1642ed0d03, type: 3}
+  _EnemyPrefab: {fileID: 5598736168256810224, guid: 57cae6346974f2b45b27f07810a792dd, type: 3}
+  _EnemyHPBarPrefab: {fileID: 1766775680982831655, guid: 14beb01407f799a4785e825cfe660f19, type: 3}
+  Enemies: []
   Deck: []
   Hand: []
+  area: 0
+  enemyType: 0
   Hp: 0
   Mhp: 0
   Shield: 0
@@ -421,6 +432,33 @@ MonoBehaviour:
   tmpAtt: 0
   tmpDef: 0
   tmpRate: 0
+--- !u!114 &723614871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723614867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ba6df8b5955a640ade6a910377cab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - _sprite: {fileID: 21300000, guid: 43b08e5b2605d9f46b23b48208d1f73b, type: 3}
+    _name: "\uB79C\uB4DC\uD06C\uB7A9"
+    _hp: 20
+    _area: 1
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _Value: 10
+  sqdList:
+  - enemySquad:
+    - "\uB79C\uB4DC\uD06C\uB7A9"
+    - "\uB79C\uB4DC\uD06C\uB7A9"
+    area: 1
+    enemyType: 0
 --- !u!1 &1383047955
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class Card : MonoBehaviour
     public COMPANY Company { get; private set; }
     private RANK Rank;
     public CARDTYPE Type { get; private set; }
+    public TARGET Target { get; private set; }
     public string name { get; private set; }
     public int Value { get; private set; }
     public int number { get; private set; }
@@ -56,6 +57,7 @@ public void Set(CardStruct str)
         this.Company = str._company;
         this.Rank = str._rank;
         this.Type = str._type;
+        this.Target = str._target;
         this.Value = str._value;
         this._text.text = textSet(str._text);
 

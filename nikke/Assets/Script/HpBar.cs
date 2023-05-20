@@ -4,19 +4,20 @@ using UnityEngine;
 using TMPro;
 public class HpBar : MonoBehaviour
 {
-    [SerializeField] GameObject _hpBarPrefab;
-    [SerializeField] GameObject _shieldPrefab;
-    [SerializeField] TMP_Text _hptxtPrefab;
-    [SerializeField] TMP_Text _shieldtxtPrefab;
-    private int Hp => BattleManager.Instance.Hp;
-    private int MHp => BattleManager.Instance.Mhp;
-    private int Shield=>BattleManager.Instance.Shield;
+    [SerializeField] protected GameObject _hpBarPrefab;
+    [SerializeField] protected GameObject _shieldPrefab;
+    [SerializeField] protected TMP_Text _hptxtPrefab;
+    [SerializeField] protected TMP_Text _shieldtxtPrefab;
+    protected virtual int Hp => BattleManager.Instance.Hp;
+    protected virtual int MHp => BattleManager.Instance.Mhp;
+    protected virtual int Shield =>BattleManager.Instance.Shield;
     public int MaxShield = 100;
 
-    private float HpScale => (float)Hp / (float)MHp;
-    private float ShieldScale => (float)Shield / (float)MaxShield;
+    protected float HpScale => (float)Hp / (float)MHp;
+    protected float ShieldScale => (float)Shield / (float)MaxShield;
+    [SerializeField] protected bool OnOff;
 
-    private void ScaleChange(GameObject g,float a)
+    protected void ScaleChange(GameObject g,float a)
     {
         g.transform.localScale = new Vector2(g.transform.localScale.x + a, g.transform.localScale.y);
     }
@@ -44,6 +45,7 @@ public class HpBar : MonoBehaviour
     
     public void FixedUpdate()
     {
+        if (!OnOff) return;
         textChange(_hptxtPrefab, Hp);
         textChange(_shieldtxtPrefab, Shield);
         ScaleSet(HpScale, _hpBarPrefab);

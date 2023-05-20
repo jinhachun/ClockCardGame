@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour
     }
     float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
     float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
+    float EnemyPosX = -6f, EnemyPosY = 3f, EnemyPosLength = 12f, EnemyPosBlank;
 
     [SerializeField] Card _cardPrefab;
     [SerializeField] RerollButton _rerollButtonPrefab;
@@ -22,21 +23,31 @@ public class BattleManager : MonoBehaviour
     [SerializeField] TMP_Text _textPrefab;
     [SerializeField] SpriteRenderer _HPbarPrefab;
     [SerializeField] AttDefCal _AttDefCalPrefab;
+    [SerializeField] Enemy _EnemyPrefab;
+    [SerializeField] EnemyHpBar _EnemyHPBarPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
-    Vector2 ButtonPos(int i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
+    Vector2 ButtonPos(float i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
+    List<Vector2> EnemyPos;
     List<CardStruct> BaseDeck;
+    public List<Enemy> Enemies;
     public List<Card> Deck;
     public List<Card> Hand;
     List<Card> Grave;
     List<Card> Cards;
     Sequence mySequence;
 
-    public int Hp, Mhp, Shield,MShield = 100;
+    public int area;
+    public EnemyType enemyType;
+
+
+    public int Hp, Mhp, Shield, MShield = 100;
     public int Att;
     public int Def;
     public double Rate;
+    public int RerollChance;
+    TMP_Text RerollText;
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
@@ -47,6 +58,8 @@ public class BattleManager : MonoBehaviour
             BaseDeck.Add(tmp);
         }
         Hp = 100; Mhp = 100; Shield = 100;
+        area = 1; enemyType = EnemyType.SERVANT;
+        RerollChance = 1;
         ChangeState(BattleState.Set);
     }
     private void ChangeState(BattleState battleState)
@@ -80,15 +93,23 @@ public class BattleManager : MonoBehaviour
     {
         Att = 0; Def = 0; Rate = 1;
         tmpAtt = 0; tmpDef = 0; tmpRate = 1;
+        Enemies = new List<Enemy>();
         Deck = new List<Card>();
         Hand = new List<Card>();
         Grave = new List<Card>();
         HandPos = new List<Vector2>();
         for (int i = 0; i < 5; i++)
             HandPos.Add(new Vector2(HandPosX + i * HandPosBlank, HandPosY));
+        EnemyPos = new List<Vector2>();
+        for(int i=0;i< EnemyManager.Instance.final_enemylist(area, enemyType).Count; i++)
+        {
 
-        var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x-1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
-        var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity); ;
+        }
+        var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x - 1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
+        var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity);
+        RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
+        RerollText.text = "Chance : " + RerollChance.ToString();
+        RerollText.fontSize = 2;
         var cnt = 0;
         Sequence sq = DOTween.Sequence().SetAutoKill(false);
         foreach (var tmpCard in BaseDeck)
@@ -100,6 +121,19 @@ public class BattleManager : MonoBehaviour
             Deck.Add(tmp);
             moveCard(sq, tmp, DeckPos(0), 0.1f, true, false);
             cnt++;
+        }
+        var final_enemylist = EnemyManager.Instance.final_enemylist(area, enemyType);
+        EnemyPosBlank = EnemyPosLength / (final_enemylist.Count + 1);
+        cnt = 0;
+        foreach (var enemy in final_enemylist)
+        {
+            cnt++;
+            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY);
+            var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
+            enemyTmp.Set(enemy);
+            var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
+            enemyHpBarTmp.Set(enemyTmp);
+            EnemyPos.Add(enemyposTmp);
         }
         sq.OnComplete(() =>
         {
@@ -159,6 +193,9 @@ public class BattleManager : MonoBehaviour
         var rerollbtn = Instantiate(_rerollButtonPrefab, ButtonPos(0), Quaternion.identity);
         rerollbtn.ActionSet(() =>
         {
+            if (RerollChance <= 0) return;
+            RerollChance -= 1;
+            RerollText.text = "Chance : " + RerollChance.ToString();
             foreach (var btn in Btns) Destroy(btn.gameObject);
             foreach (var txt in CombiText) Destroy(txt.gameObject);
             ChangeState(BattleState.Reroll);
@@ -178,7 +215,7 @@ public class BattleManager : MonoBehaviour
             COMCombi.Add(Hand[i].Company);
             CardDatabase.Instance.BeforeCardActionFunc(Hand[i].name, Hand[i].Value)();
         }
-        var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x-1f, HandPos[0].y + 2.25f), Quaternion.identity);
+        var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
         NumberCombiText.text = CardDatabase.Instance.NumCombinationText(NumberCombi);
         int numberCombi = CardDatabase.Instance.NumCombination(NumberCombi);
         switch (numberCombi)
@@ -213,20 +250,20 @@ public class BattleManager : MonoBehaviour
 
         CombiText.Add(NumberCombiText);
 
-        var COMCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x-0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
+        var COMCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x - 0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
         COMCombiText.text = CardDatabase.Instance.ComCombinationText(COMCombi);
         COMCombiText.fontSize = 7;
         COMCombiText.color = Color.cyan;
         CombiText.Add(COMCombiText);
 
         Debug.Log(tmpRate);
-        AttDefCal(tmpAtt,tmpDef,tmpRate);
+        AttDefCal(tmpAtt, tmpDef, tmpRate);
     }
-    
-    public void AttDefCal(int a,int b,double r)
+
+    public void AttDefCal(int a, int b, double r)
     {
-        Att = 0+a; Def = 0+b; Rate = 1;
-        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.ComCombination(COMCombi) * (float)CardDatabase.Instance.NumCombiRate(NumberCombi) * (float)r * 100))/100;
+        Att = 0 + a; Def = 0 + b; Rate = 1;
+        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.ComCombination(COMCombi) * (float)CardDatabase.Instance.NumCombiRate(NumberCombi) * (float)r * 100)) / 100;
         foreach (var i in Hand) CardDatabase.Instance.CalCardActionFunc(i.name, i.Value)();
         this.Att = (int)(Rate * Att);
         this.Def = (int)(Rate * Def);
@@ -248,7 +285,7 @@ public class BattleManager : MonoBehaviour
                 moveCard(sq, card, GravePos, 0.2f, true);
             }
         }
-        sq.AppendCallback(()=>
+        sq.AppendCallback(() =>
         {
             ChangeState(BattleState.Draw);
             sq.Kill();
@@ -257,11 +294,11 @@ public class BattleManager : MonoBehaviour
     public void AttackPhase()
     {
         Sequence sq = DOTween.Sequence();
-        foreach(var card in Hand) CardDatabase.Instance.CardActionFunc(card.name, card.Value)();
+        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card.name, card.Value)();
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         foreach (var card in Hand)
         {
-            sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f,0.5f));
+            sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.5f));
             if (card.isExhaust)
             {
                 sq.Append(card.transform.DOScale(0, 0.5f).OnComplete(() => { Destroy(card.gameObject); }));
@@ -273,7 +310,9 @@ public class BattleManager : MonoBehaviour
             }
         }
         Hand.Clear();
-        tmpAtt = 0;tmpDef = 0;tmpRate = 0;
+        tmpAtt = 0; tmpDef = 0; tmpRate = 0;
+        if (RerollChance <= 0) RerollChance++;
+        RerollText.text = "Chance : " + RerollChance.ToString();
     }
     public void DrawCard(Sequence sq)
     {
