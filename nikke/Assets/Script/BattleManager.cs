@@ -14,7 +14,7 @@ public class BattleManager : MonoBehaviour
     }
     float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
     float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
-    float EnemyPosX = -6f, EnemyPosY = 3f, EnemyPosLength = 12f, EnemyPosBlank;
+    float EnemyPosX = -8f, EnemyPosY = 3f, EnemyPosLength = 16f, EnemyPosBlank;
 
     [SerializeField] Card _cardPrefab;
     [SerializeField] RerollButton _rerollButtonPrefab;
@@ -38,36 +38,47 @@ public class BattleManager : MonoBehaviour
     List<Card> Cards;
     Sequence mySequence;
 
+    public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
+
     public int area;
     public EnemyType enemyType;
+    public int reward => Random.Range(50, 100) * (3 + area) / 3;
 
 
-    public int Hp, Mhp, Shield, MShield = 100;
+    public int Hp, Mhp, Shield, MShield = 50;
     public int Att;
     public int Def;
     public double Rate;
     public int RerollChance;
     TMP_Text RerollText;
+    TMP_Text DeckCntTxt;
+    TMP_Text GraveCntTxt;
+
+    public static BattleState GameState;
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
         BaseDeck = new List<CardStruct>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             var tmp = (CardDatabase.Instance.RandomCard());
             BaseDeck.Add(tmp);
         }
-        Hp = 100; Mhp = 100; Shield = 100;
+        Hp = 100; Mhp = 100; Shield = 0;
         area = 1; enemyType = EnemyType.SERVANT;
         RerollChance = 1;
         ChangeState(BattleState.Set);
     }
     private void ChangeState(BattleState battleState)
     {
+        GameState = battleState;
         switch (battleState)
         {
             case BattleState.Set:
                 setBase();
+                break;
+            case BattleState.TurnStart:
+                TurnStartPhase();
                 break;
             case BattleState.Draw:
                 DrawPhase();
@@ -82,12 +93,25 @@ public class BattleManager : MonoBehaviour
                 AttackPhase();
                 break;
             case BattleState.EnemyAttack:
+                EnemyAttackPhase();
+                break;
+            case BattleState.EndTurn:
+                EndTurnPhase();
                 break;
             case BattleState.Reward:
                 break;
             case BattleState.Lose:
                 break;
         }
+    }
+    public void FixedUpdate()
+    {
+        if (DeckCntTxt == null && GraveCntTxt == null) return;
+        if (!DeckCntTxt.text.Equals(Deck.Count.ToString()))
+            DeckCntTxt.text = Deck.Count.ToString();
+        if (!GraveCntTxt.text.Equals(Grave.Count.ToString()))
+            GraveCntTxt.text = Grave.Count.ToString();
+        
     }
     public void setBase()
     {
@@ -101,12 +125,20 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
             HandPos.Add(new Vector2(HandPosX + i * HandPosBlank, HandPosY));
         EnemyPos = new List<Vector2>();
-        for(int i=0;i< EnemyManager.Instance.final_enemylist(area, enemyType).Count; i++)
-        {
 
-        }
         var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x - 1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
         var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity);
+
+        DeckCntTxt = Instantiate(_textPrefab, new Vector2(DeckPos(0).x+0.5f,DeckPos(0).y-0.5f), Quaternion.identity);
+        DeckCntTxt.fontSize =  9;
+        MeshRenderer meshRenderer = DeckCntTxt.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = 200;
+
+        GraveCntTxt = Instantiate(_textPrefab, new Vector2(GravePosX, GravePosY-0.5f), Quaternion.identity);
+        DeckCntTxt.fontSize = 9;
+        meshRenderer = DeckCntTxt.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = 200;
+
         RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
         RerollText.text = "Chance : " + RerollChance.ToString();
         RerollText.fontSize = 2;
@@ -119,7 +151,7 @@ public class BattleManager : MonoBehaviour
             tmp.setLayer(0, Layer);
             tmp.Set(tmpCard);
             Deck.Add(tmp);
-            moveCard(sq, tmp, DeckPos(0), 0.1f, true, false);
+            moveCard(sq, tmp, DeckPos(0), 1f/(float)BaseDeck.Count, true, false);
             cnt++;
         }
         var final_enemylist = EnemyManager.Instance.final_enemylist(area, enemyType);
@@ -134,6 +166,7 @@ public class BattleManager : MonoBehaviour
             var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
             enemyHpBarTmp.Set(enemyTmp);
             EnemyPos.Add(enemyposTmp);
+            Enemies.Add(enemyTmp);
         }
         sq.OnComplete(() =>
         {
@@ -142,14 +175,28 @@ public class BattleManager : MonoBehaviour
         sq.OnComplete(() =>
         {
             sq.Kill();
-            ChangeState(BattleState.Draw);
+            ChangeState(BattleState.TurnStart);
         });
     }
+    
     public void ShuffleDeck(Sequence sq)
     {
         var randomized = Deck.OrderBy(item => Random.value).ToList();
         Deck = randomized;
         deckMoveCard(sq);
+    }
+    public void TurnStartPhase()
+    {
+        Sequence sq = DOTween.Sequence();
+        Shield = 0;
+        foreach (var enemy in Enemies)
+        {
+            enemy.SetPatternText();
+        }
+        sq.AppendCallback(() =>
+        {
+            ChangeState(BattleState.Draw);
+        });
     }
 
     public int tmpAtt;
@@ -194,6 +241,9 @@ public class BattleManager : MonoBehaviour
         rerollbtn.ActionSet(() =>
         {
             if (RerollChance <= 0) return;
+            int chk = 0;
+            for (int i = 0; i < Hand.Count; i++) if (isBtnChk(ChkButtons[i])) chk++;
+            if (chk == 0) return;
             RerollChance -= 1;
             RerollText.text = "Chance : " + RerollChance.ToString();
             foreach (var btn in Btns) Destroy(btn.gameObject);
@@ -298,10 +348,10 @@ public class BattleManager : MonoBehaviour
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         foreach (var card in Hand)
         {
-            sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.5f));
+            sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
             if (card.isExhaust)
             {
-                sq.Append(card.transform.DOScale(0, 0.5f).OnComplete(() => { Destroy(card.gameObject); }));
+                sq.Append(card.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(card.gameObject); }));
             }
             else
             {
@@ -310,9 +360,89 @@ public class BattleManager : MonoBehaviour
             }
         }
         Hand.Clear();
-        tmpAtt = 0; tmpDef = 0; tmpRate = 0;
-        if (RerollChance <= 0) RerollChance++;
-        RerollText.text = "Chance : " + RerollChance.ToString();
+        Shield = Def;
+        var AttLeft = Att;
+        var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+
+
+        int loopcnt = 0;
+        sq.AppendCallback(() =>
+        {
+            while (Enemies.Count > 0 && AttLeft > 0)
+            {
+
+                target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+                var tmpAttLeft = AttLeft - target._hp;
+
+                target._hp -= AttLeft;
+                if (target._hp <= 0)
+                {
+                    var deadEnemy = target;
+                    target._hp = 0;
+                    Enemies.Remove(deadEnemy);
+                    deadEnemy.transform.DOScale(0, 0.3f).OnComplete(() =>
+                    {
+                        Destroy(deadEnemy._hpBar.gameObject);
+                        Destroy(deadEnemy.gameObject);
+                    });
+                }
+                AttLeft = tmpAttLeft;
+
+                loopcnt++;
+                if (loopcnt > 1000)
+                {
+                    Debug.Log("????");
+                    break;
+                }
+            }
+        });
+
+        sq.AppendInterval(0.5f);
+        sq.AppendCallback(() =>
+        {
+            tmpAtt = 0; tmpDef = 0; tmpRate = 1;
+            if (RerollChance <= 0) RerollChance++;
+            RerollText.text = "Chance : " + RerollChance.ToString();
+            if (Enemies.Count == 0)
+                ChangeState(BattleState.Reward);
+            else
+                ChangeState(BattleState.EnemyAttack);
+        });
+    }
+    public int patternCnt;
+    public void EnemyAttackPhase()
+    {
+        Sequence sq = DOTween.Sequence();
+        List<int> DamageList = new List<int>();
+        foreach (var Enemy in Enemies)
+        {
+            if (Enemy.Pattern._enemyPattern == EnemyPattern.ATT)
+            {
+                var dam = Enemy.Pattern._Value;
+
+                int FinalDamage = Shield > dam ? 0 : dam - Shield;
+                Shield = Shield > dam ? Shield - dam : 0;
+                Debug.Log(dam+"/"+FinalDamage + "/" + Shield);
+                sq.AppendCallback(() =>
+                {
+                    Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
+                    Hp -= FinalDamage;
+                });
+                sq.AppendInterval(0.8f);
+            }
+        }
+        
+            
+        
+        sq.AppendCallback(() => {
+            if (Hp <= 0) ChangeState(BattleState.Lose);
+            ChangeState(BattleState.EndTurn);
+        });
+    }
+    public void EndTurnPhase()
+    {
+        foreach (var Enemy in Enemies) Enemy.TurnEnd();
+        ChangeState(BattleState.TurnStart);
     }
     public void DrawCard(Sequence sq)
     {
@@ -360,5 +490,5 @@ public class BattleManager : MonoBehaviour
 public delegate void Func();
 public enum BattleState
 {
-    Set, Draw, WaitingReroll, Reroll, Attack, EnemyAttack, Reward, Lose
+    Set, TurnStart, Draw, WaitingReroll, Reroll, Attack, EnemyAttack,EndTurn, Reward, Lose
 }

@@ -26,7 +26,6 @@ public class HpBar : MonoBehaviour
         var localscalex = b.transform.localScale.x;
         if (a != localscalex)
         {
-            Debug.Log(a + "," + localscalex);
             if (Mathf.Abs(a - localscalex) <= 0.03f)
             {
                 b.transform.localScale = new Vector2(a, b.transform.localScale.y);

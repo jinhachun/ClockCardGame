@@ -351,7 +351,7 @@ MonoBehaviour:
     _name: "\uC138\uBE10\uC2A4 \uB4DC\uC6CC\uD504 : I"
     _text: "\uD53C\uD574\uB97C [] \uC90D\uB2C8\uB2E4."
     _number: 1
-    _value: 30
+    _value: 10
     _type: 0
     _rank: 2
     _target: 0
@@ -429,9 +429,11 @@ MonoBehaviour:
   Att: 0
   Def: 0
   Rate: 0
+  RerollChance: 0
   tmpAtt: 0
   tmpDef: 0
   tmpRate: 0
+  patternCnt: 0
 --- !u!114 &723614871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,14 +449,19 @@ MonoBehaviour:
   enemyList:
   - _sprite: {fileID: 21300000, guid: 43b08e5b2605d9f46b23b48208d1f73b, type: 3}
     _name: "\uB79C\uB4DC\uD06C\uB7A9"
-    _hp: 20
+    _hp: 40
     _area: 1
     _enemyType: 0
     _enemyPatterns:
     - _enemyPattern: 0
       _Value: 10
+    - _enemyPattern: 0
+      _Value: 20
+    - _enemyPattern: 2
+      _Value: 20
   sqdList:
   - enemySquad:
+    - "\uB79C\uB4DC\uD06C\uB7A9"
     - "\uB79C\uB4DC\uD06C\uB7A9"
     - "\uB79C\uB4DC\uD06C\uB7A9"
     area: 1
