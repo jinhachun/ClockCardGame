@@ -11,6 +11,7 @@ public struct pattern
     public EnemyPattern _enemyPattern;
     public int _Value;
 }
+
 [Serializable]
 public struct EnemyStruct {
     public Sprite _sprite;
@@ -28,10 +29,10 @@ public struct EnemySquadStruct
     public EnemyType enemyType;
 }
 
-public class EnemyManager : MonoBehaviour
+public class EnemyDatabase : MonoBehaviour
 {
-    private static EnemyManager instance;
-    public static EnemyManager Instance => instance;
+    private static EnemyDatabase instance;
+    public static EnemyDatabase Instance => instance;
     public void Awake()
     {
         instance = this;

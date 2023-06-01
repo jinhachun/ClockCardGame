@@ -38,10 +38,12 @@ public class Enemy : MonoBehaviour
         if (isOver && Input.GetMouseButtonDown(0))
         {
             if (BattleManager.GameState != BattleState.WaitingReroll) return;
-            if (!isTarget && BattleManager.Instance.targetEnemy.Count > 0) return;
+            if (!isTarget && BattleManager.Instance.targetEnemy.Count > 0) BattleManager.Instance.targetEnemy[0].isTarget=false;
             isTarget = isTarget ? false : true;
-            _targetImg.gameObject.SetActive(isTarget);
         }
+        if(isTarget!=_targetImg.gameObject.activeInHierarchy)
+            _targetImg.gameObject.SetActive(isTarget);
+
     }
     public pattern Pattern => _enemyPatterns[PatternIndex];
     public void SetPatternText()

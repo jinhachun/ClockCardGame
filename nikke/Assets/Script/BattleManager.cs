@@ -12,7 +12,7 @@ public class BattleManager : MonoBehaviour
     {
         instance = this;
     }
-    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -12f, GravePosY = -5f;
+    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -11f, GravePosY = -5f;
     float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
     float EnemyPosX = -8f, EnemyPosY = 3f, EnemyPosLength = 16f, EnemyPosBlank;
 
@@ -25,6 +25,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] AttDefCal _AttDefCalPrefab;
     [SerializeField] Enemy _EnemyPrefab;
     [SerializeField] EnemyHpBar _EnemyHPBarPrefab;
+    [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
+    [SerializeField] DeckCount _deckCountPrefab;
+    [SerializeField] public GameObject _canvas;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -45,14 +48,15 @@ public class BattleManager : MonoBehaviour
     public int reward => Random.Range(50, 100) * (3 + area) / 3;
 
 
-    public int Hp, Mhp, Shield, MShield = 50;
+    public int Hp, Mhp, Shield;
     public int Att;
     public int Def;
     public double Rate;
     public int RerollChance;
     TMP_Text RerollText;
-    TMP_Text DeckCntTxt;
-    TMP_Text GraveCntTxt;
+    DeckCount DeckCntTxt;
+    DeckCount GraveCntTxt;
+    ScrollViewCardBunch scrollViewCard;
 
     public static BattleState GameState;
     public void Start()
@@ -104,15 +108,7 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    public void FixedUpdate()
-    {
-        if (DeckCntTxt == null && GraveCntTxt == null) return;
-        if (!DeckCntTxt.text.Equals(Deck.Count.ToString()))
-            DeckCntTxt.text = Deck.Count.ToString();
-        if (!GraveCntTxt.text.Equals(Grave.Count.ToString()))
-            GraveCntTxt.text = Grave.Count.ToString();
-        
-    }
+
     public void setBase()
     {
         Att = 0; Def = 0; Rate = 1;
@@ -129,15 +125,11 @@ public class BattleManager : MonoBehaviour
         var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x - 1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
         var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity);
 
-        DeckCntTxt = Instantiate(_textPrefab, new Vector2(DeckPos(0).x+0.5f,DeckPos(0).y-0.5f), Quaternion.identity);
-        DeckCntTxt.fontSize =  9;
-        MeshRenderer meshRenderer = DeckCntTxt.GetComponent<MeshRenderer>();
-        meshRenderer.sortingOrder = 200;
+        DeckCntTxt = Instantiate(_deckCountPrefab, new Vector2(DeckPos(0).x+0.85f,DeckPos(0).y-1.2f), Quaternion.identity);
+        DeckCntTxt.Set(ref Deck);
 
-        GraveCntTxt = Instantiate(_textPrefab, new Vector2(GravePosX, GravePosY-0.5f), Quaternion.identity);
-        DeckCntTxt.fontSize = 9;
-        meshRenderer = DeckCntTxt.GetComponent<MeshRenderer>();
-        meshRenderer.sortingOrder = 200;
+        GraveCntTxt = Instantiate(_deckCountPrefab, new Vector2(GravePosX + 0.85f, GravePosY-1.2f), Quaternion.identity);
+        GraveCntTxt.Set(ref Grave);
 
         RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
         RerollText.text = "Chance : " + RerollChance.ToString();
@@ -154,7 +146,7 @@ public class BattleManager : MonoBehaviour
             moveCard(sq, tmp, DeckPos(0), 1f/(float)BaseDeck.Count, true, false);
             cnt++;
         }
-        var final_enemylist = EnemyManager.Instance.final_enemylist(area, enemyType);
+        var final_enemylist = EnemyDatabase.Instance.final_enemylist(area, enemyType);
         EnemyPosBlank = EnemyPosLength / (final_enemylist.Count + 1);
         cnt = 0;
         foreach (var enemy in final_enemylist)
@@ -422,7 +414,6 @@ public class BattleManager : MonoBehaviour
 
                 int FinalDamage = Shield > dam ? 0 : dam - Shield;
                 Shield = Shield > dam ? Shield - dam : 0;
-                Debug.Log(dam+"/"+FinalDamage + "/" + Shield);
                 sq.AppendCallback(() =>
                 {
                     Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
@@ -482,9 +473,15 @@ public class BattleManager : MonoBehaviour
             moveCard(sq, Deck[i], DeckPos(i), 0.05f, true);
         }
     }
-    public void Update()
+    public void deckCntClick(List<Card> list)
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow)) Hp -= 10;
+        if (_scrollViewCardPrefab.gameObject.activeInHierarchy)
+        {
+            _scrollViewCardPrefab.delete();
+            return;
+        }
+        _scrollViewCardPrefab.gameObject.SetActive(true);
+        _scrollViewCardPrefab.Set(list);
     }
 }
 public delegate void Func();

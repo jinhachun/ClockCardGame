@@ -10,11 +10,11 @@ public class HpBar : MonoBehaviour
     [SerializeField] protected TMP_Text _shieldtxtPrefab;
     protected virtual int Hp => BattleManager.Instance.Hp;
     protected virtual int MHp => BattleManager.Instance.Mhp;
-    protected virtual int Shield =>BattleManager.Instance.Shield;
+    protected virtual int Shield => BattleManager.Instance.Shield;
     public int MaxShield = 100;
 
     protected float HpScale => (float)Hp / (float)MHp;
-    protected float ShieldScale => (float)Shield / (float)MaxShield;
+    protected float ShieldScale =>((float) Shield / (float) MaxShield)> MaxShield ? MaxShield : ((float)Shield / (float)MaxShield); 
     [SerializeField] protected bool OnOff;
 
     protected void ScaleChange(GameObject g,float a)

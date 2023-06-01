@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
     [SerializeField] private string Exhaust;
     [SerializeField] private string Ethereal;
     [SerializeField] private string Fixed;
+    Collider2D collider => this.gameObject.GetComponent<BoxCollider2D>();
     public CardStruct Str;
     public COMPANY Company { get; private set; }
     private RANK Rank;
@@ -32,6 +33,7 @@ public class Card : MonoBehaviour
     public bool isExhaust { get; private set; }
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }
+    public int layer = 0;
     public CardAction BeforeAction;
     public CardAction Action;
     public void ValueChange(int a)
@@ -79,7 +81,7 @@ public void Set(CardStruct str)
     {
         _cardBack.gameObject.SetActive(a ? false:true) ;
     }
-
+    
     public void setLayer(int a,int b)
     {
         int newSortingOrder = b;
@@ -101,16 +103,18 @@ public void Set(CardStruct str)
     
     void OnMouseOver()
     {
-        if (_cardBack.gameObject.activeInHierarchy) return;
         _visual.transform.localScale = new Vector2(1.5f, 1.5f);
-        setLayer(3,53);
+        setLayer(3,53+layer);
 
     }
 
     void OnMouseExit()
     {
-        if (_cardBack.gameObject.activeInHierarchy) return;
         _visual.transform.localScale = new Vector2(0.8f, 0.8f);
-        setLayer(0,50);
+        setLayer(0,50+ layer);
+    }
+    private void Update()
+    {
+        collider.enabled = !_cardBack.gameObject.activeInHierarchy;
     }
 }
