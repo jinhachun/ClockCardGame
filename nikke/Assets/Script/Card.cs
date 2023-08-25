@@ -15,6 +15,8 @@ public class Card : MonoBehaviour
     [SerializeField] private TMP_Text _text;
     [SerializeField] private TMP_Text _infoText;
     [SerializeField] private TMP_Text _tier;
+    [SerializeField] private TMP_Text _attText;
+    [SerializeField] private TMP_Text _defText;
     [SerializeField] private SpriteRenderer _cardBack;
 
 
@@ -32,19 +34,26 @@ public class Card : MonoBehaviour
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }
     public int layer = 0;
+    public bool Touchable = true;
     public CardAction BeforeAction;
     public CardAction Action;
-    public void ValueChange(string statVar,int a)
+    public void StatChange(string statVar,int a)
     {
         switch (statVar)
         {
             case "Attack":
                 Stat.attack = a;
+                this._attText.text = Stat.attack.ToString();
                 break;
             case "Defence":
                 Stat.defence = a;
+                this._defText.text = Stat.defence.ToString();
                 break;
         }
+    }
+    public void TouchableChange(bool a)
+    {
+        Touchable = a;
     }
 public void Set(CardStruct str)
     {
@@ -61,6 +70,8 @@ public void Set(CardStruct str)
         this.Type = str._type;
         this.Type = str._type;
         this.Stat = str._stat;
+        StatChange("Attack", this.Stat.attack);
+        StatChange("Defence", this.Stat.defence);
         this._text.text = str._text;
 
         this.isEthereal = str.isEthereal;
@@ -80,6 +91,7 @@ public void Set(CardStruct str)
     public void flip(bool a)
     {
         _cardBack.gameObject.SetActive(a ? false:true) ;
+        Touchable = a ? true : false;
     }
     
     public void setLayer(int a,int b)
@@ -99,10 +111,15 @@ public void Set(CardStruct str)
         meshRenderer.sortingOrder = newSortingOrder;
         meshRenderer = _infoText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
+        meshRenderer = _attText.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
+        meshRenderer = _defText.GetComponent<MeshRenderer>();
+        meshRenderer.sortingOrder = newSortingOrder;
     }
     
     void OnMouseOver()
     {
+        if (!Touchable) return;
         _visual.transform.localScale = new Vector2(1.5f, 1.5f);
         setLayer(3,53+layer);
 

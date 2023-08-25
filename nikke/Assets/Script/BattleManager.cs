@@ -234,7 +234,7 @@ public class BattleManager : MonoBehaviour
         {
             if (RerollChance <= 0) return;
             int chk = 0;
-            for (int i = 0; i < Hand.Count; i++) if (isBtnChk(ChkButtons[i])) chk++;
+            for (int i = 0; i < Hand.Count; i++) if (RerollPhase_isBtnChk(ChkButtons[i])) chk++;
             if (chk == 0) return;
             RerollChance -= 1;
             RerollText.text = "Chance : " + RerollChance.ToString();
@@ -248,7 +248,7 @@ public class BattleManager : MonoBehaviour
             var chkBtn = Instantiate(_chkButtonPrefab, new Vector2(HandPos[i].x, HandPos[i].y - 2.25f), Quaternion.identity);
             chkBtn.ActionSet(() =>
             {
-                chkBtn.SpriteChange(isBtnChk(chkBtn) ? CardDatabase.Instance.btn(1) : CardDatabase.Instance.btn(0));
+                chkBtn.SpriteChange(RerollPhase_isBtnChk(chkBtn) ? CardDatabase.Instance.btn(1) : CardDatabase.Instance.btn(0));
             });
             if (Hand[i].isFixed) { chkBtn.SpriteChange(CardDatabase.Instance.btn(2)); chkBtn.enabled = false; }
             ChkButtons.Add(chkBtn);
@@ -308,18 +308,21 @@ public class BattleManager : MonoBehaviour
     public void AttDefCal(int a, int b, double r)
     {
         Att = 0 + a; Def = 0 + b; Rate = 1;
-        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.TypeCombination(TypeCombi) * (float)CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi) * (float)r * 100)) / 100;
+        float typeRate = CardDatabase.Instance.TypeCombiRate(TypeCombi);
+        float speciesRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
+        float tmpRate = typeRate * speciesRate * (float)r;
+        Rate *= (double)Mathf.Round((tmpRate*100f))/100f;
         foreach (var i in Hand) { Att += i.Stat.attack; Def += i.Stat.defence; }
-        this.Att = (int)(Rate * Att);
-        this.Def = (int)(Rate * Def);
+        this.Att = (int)(Rate * (double)Att);
+        this.Def = (int)(Rate * (double)Def);
     }
-    public bool isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
+    public bool RerollPhase_isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
 
     public void RerollPhase()
     {
         Sequence sq = DOTween.Sequence();
         List<Card> rerollCard = new List<Card>();
-        for (int i = 0; i < Hand.Count; i++) if (isBtnChk(ChkButtons[i])) rerollCard.Add(Hand[i]);
+        for (int i = 0; i < Hand.Count; i++) if (RerollPhase_isBtnChk(ChkButtons[i])) rerollCard.Add(Hand[i]);
         foreach (var card in rerollCard)
         {
             Hand.Remove(card);
@@ -351,6 +354,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 Grave.Add(card);
+                card.TouchableChange(false);
                 moveCard(sq, card, GravePos, 0.2f, true);
             }
         }
@@ -417,12 +421,17 @@ public class BattleManager : MonoBehaviour
 
                 int FinalDamage = Shield > dam ? 0 : dam - Shield;
                 Shield = Shield > dam ? Shield - dam : 0;
-                sq.AppendCallback(() =>
+                if (FinalDamage > 0)
                 {
-                    Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
-                    Hp -= FinalDamage;
-                });
-                sq.AppendInterval(0.8f);
+                    sq.AppendCallback(() =>
+                    {
+                        Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
+                        Hp -= FinalDamage;
+                    });
+                    sq.AppendInterval(0.8f);
+                }
+                else
+                    sq.AppendInterval(0.2f);
             }
         }
         
@@ -443,7 +452,7 @@ public class BattleManager : MonoBehaviour
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.1f, true, false); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.05f, true, false); card.TouchableChange(true); }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -478,6 +487,7 @@ public class BattleManager : MonoBehaviour
     }
     public void deckCntClick(List<Card> list)
     {
+        foreach (var card in Hand) { card.TouchableChange(_scrollViewCardPrefab.gameObject.activeInHierarchy); }
         if (_scrollViewCardPrefab.gameObject.activeInHierarchy)
         {
             _scrollViewCardPrefab.delete();

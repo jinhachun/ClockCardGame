@@ -14,7 +14,8 @@ public class CardDatabase : MonoBehaviour
         instance = this;
     }
     [SerializeField] List<CardStruct> cardDatabase;
-    [SerializeField] List<Sprite> cardinfoSprites;
+    [SerializeField] List<SpeciesSprite> cardinfoSprites_species;
+    [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
     
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
@@ -29,33 +30,16 @@ public class CardDatabase : MonoBehaviour
     public Sprite btn(int i) => btnSprites[i];
     public Sprite speciesSprite(SPECIES c)
     {
-        switch (c)
-        {
-            case SPECIES.HUMAN:
-                return cardinfoSprites[0];
-            case SPECIES.UNDEAD:
-                return cardinfoSprites[1];
-            case SPECIES.MONSTER:
-                return cardinfoSprites[2];
-            case SPECIES.MECH:
-                return cardinfoSprites[3];
-        }
-        return null;
+        return cardinfoSprites_species.Find(g => g.species == c).sprite;
+        
     }
     public Sprite typeSprite(TYPE r)
     {
-        switch (r)
-        {
-            case TYPE.DARK:
-                return cardinfoSprites[4];
-            case TYPE.LIGHT:
-                return cardinfoSprites[5];
-        }
-        return null;
+        return cardinfoSprites_type.Find(g => g.species == r).sprite;
     }
     public int SpeciesCombination(List<SPECIES> list)
     {
-        var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
+        var result = list.GroupBy(x => x).Where(g => g.Key!=SPECIES.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
         int combi = 0;
         foreach (var num in result)
         {
@@ -71,30 +55,30 @@ public class CardDatabase : MonoBehaviour
     public string SpeciesCombinationText(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return "Straight X10";
+        if (combi == 0) return " X0.5";
         else if (combi == 1) return "OnePair X1";
-        else if (combi == 2) return "TwoPair X2";
-        else if (combi == 3) return "Triple X3";
-        else if (combi == 4) return "FullHouse X4";
-        else if (combi == 5) return "FourCard X5";
-        else return "FiveCard X10";
+        else if (combi == 2) return "TwoPair X1.5";
+        else if (combi == 3) return "Triple X2";
+        else if (combi == 4) return "FullHouse X2.5";
+        else if (combi == 5) return "FourCard X3";
+        else return "FiveCard X5";
     }
-    public int SpeciesCombiRate(List<SPECIES> list)
+    public float SpeciesCombiRate(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return 10;
+        if (combi == 0) return 0.5f;
         else if (combi == 1) return 1;
-        else if (combi == 2) return 2;
-        else if (combi == 3) return 3;
-        else if (combi == 4) return 4;
-        else if (combi == 5) return 5;
-        else return 10;
+        else if (combi == 2) return 2.5f;
+        else if (combi == 3) return 2;
+        else if (combi == 4) return 2.5f;
+        else if (combi == 5) return 3;
+        else return 5;
 
     }
     public int TypeCombination(List<TYPE> list)
     {
-        var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
-        int combi = 1;
+        var result = list.GroupBy(x => x).Where(g =>g.Key!=TYPE.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
+        int combi = 0;
         foreach (var num in result)
         {
             if (combi < 1 && num.Value == 2) combi = 1;
@@ -109,24 +93,24 @@ public class CardDatabase : MonoBehaviour
     public string TypeCombinationText(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return "Straight X10";
+        if (combi == 0) return " X0.5";
         else if (combi == 1) return "OnePair X1";
-        else if (combi == 2) return "TwoPair X2";
-        else if (combi == 3) return "Triple X3";
-        else if (combi == 4) return "FullHouse X4";
-        else if (combi == 5) return "FourCard X5";
-        else return "FiveCard X10";
+        else if (combi == 2) return "TwoPair X1.5";
+        else if (combi == 3) return "Triple X2";
+        else if (combi == 4) return "FullHouse X2.5";
+        else if (combi == 5) return "FourCard X3";
+        else return "FiveCard X5";
     }
-    public int TypeCombiRate(List<TYPE> list)
+    public float TypeCombiRate(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return 10;
+        if (combi == 0) return 0.5f;
         else if (combi == 1) return 1;
-        else if (combi == 2) return 2;
-        else if (combi == 3) return 3;
-        else if (combi == 4) return 4;
-        else if (combi == 5) return 5;
-        else return 10;
+        else if (combi == 2) return 1.5f;
+        else if (combi == 3) return 2;
+        else if (combi == 4) return 2.5f;
+        else if (combi == 5) return 3;
+        else return 5;
 
     }
     
@@ -134,8 +118,13 @@ public class CardDatabase : MonoBehaviour
     {
         switch (a)
         {
-            case "가자꾸나 아우우":
-                return (() => { 
+            case "좀비":
+                return (() => {
+                    BattleManager.Instance.Hp += 2;
+                });
+            case "먹깨비":
+                return (() => {
+                    BattleManager.Instance.Hp -= 1;
                 });
         }
         return (() => { });
@@ -172,10 +161,21 @@ public class STAT
     public int attack;
     public int defence;
 }
-
+[Serializable]
+public struct SpeciesSprite
+{
+    public SPECIES species;
+    public Sprite sprite;
+}
+[Serializable]
+public struct TypeSprite
+{
+    public TYPE species;
+    public Sprite sprite;
+}
 public enum SPECIES
 {
-    HUMAN, UNDEAD, MONSTER, MECH
+    NONE, HUMAN, UNDEAD, MONSTER, MECH
 }
 public enum TYPE
 {
