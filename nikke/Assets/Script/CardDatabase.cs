@@ -27,35 +27,33 @@ public class CardDatabase : MonoBehaviour
         return card(a);
     }
     public Sprite btn(int i) => btnSprites[i];
-    public Sprite companySprite(COMPANY c)
+    public Sprite speciesSprite(SPECIES c)
     {
         switch (c)
         {
-            case COMPANY.ELISION:
+            case SPECIES.HUMAN:
                 return cardinfoSprites[0];
-            case COMPANY.MISSILIS:
+            case SPECIES.UNDEAD:
                 return cardinfoSprites[1];
-            case COMPANY.TETRA:
+            case SPECIES.MONSTER:
                 return cardinfoSprites[2];
-            case COMPANY.PILGRIM:
+            case SPECIES.MECH:
                 return cardinfoSprites[3];
         }
         return null;
     }
-    public Sprite rankSprite(RANK r)
+    public Sprite typeSprite(TYPE r)
     {
         switch (r)
         {
-            case RANK.R:
+            case TYPE.DARK:
                 return cardinfoSprites[4];
-            case RANK.SR:
+            case TYPE.LIGHT:
                 return cardinfoSprites[5];
-            case RANK.SSR:
-                return cardinfoSprites[6];
         }
         return null;
     }
-    public int NumCombination(List<int> list)
+    public int SpeciesCombination(List<SPECIES> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
         int combi = 0;
@@ -70,9 +68,9 @@ public class CardDatabase : MonoBehaviour
         }
         return combi;
     }
-    public string NumCombinationText(List<int> list)
+    public string SpeciesCombinationText(List<SPECIES> list)
     {
-        int combi = NumCombination(list);
+        int combi = SpeciesCombination(list);
         if (combi == 0) return "Straight X10";
         else if (combi == 1) return "OnePair X1";
         else if (combi == 2) return "TwoPair X2";
@@ -81,9 +79,9 @@ public class CardDatabase : MonoBehaviour
         else if (combi == 5) return "FourCard X5";
         else return "FiveCard X10";
     }
-    public int NumCombiRate(List<int> list)
+    public int SpeciesCombiRate(List<SPECIES> list)
     {
-        int combi = NumCombination(list);
+        int combi = SpeciesCombination(list);
         if (combi == 0) return 10;
         else if (combi == 1) return 1;
         else if (combi == 2) return 2;
@@ -93,44 +91,56 @@ public class CardDatabase : MonoBehaviour
         else return 10;
 
     }
-    public int ComCombination(List<COMPANY> list)
+    public int TypeCombination(List<TYPE> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
         int combi = 1;
-        foreach (var num in result) if (num.Value == 5) combi = 2;
+        foreach (var num in result)
+        {
+            if (combi < 1 && num.Value == 2) combi = 1;
+            else if (combi == 1 && num.Value == 2) combi = 2;
+            else if (combi == 3 && num.Value == 2 || combi == 1 && num.Value == 3) combi = 4;
+            else if (combi < 3 && num.Value == 3) combi = 3;
+            else if (combi < 5 && num.Value == 4) combi = 5;
+            else if (num.Value == 5) combi = 6;
+        }
         return combi;
     }
-    public string ComCombinationText(List<COMPANY> list) => ComCombination(list) == 1 ? "" : "FLUSH X2";
-    
-    public CardAction CalCardActionFunc(string a,int value)
+    public string TypeCombinationText(List<TYPE> list)
     {
-        switch (a)
-        {
-            case "시원한 맥주":
-                return(() => { BattleManager.Instance.Def += value; });
-            case "불가사리의 습격":
-                return (() => { BattleManager.Instance.Att += value; });
-            case "세븐스 드워프 : I":
-                return (() => { BattleManager.Instance.Att += value; });
-        }
-        return (() => { });
+        int combi = TypeCombination(list);
+        if (combi == 0) return "Straight X10";
+        else if (combi == 1) return "OnePair X1";
+        else if (combi == 2) return "TwoPair X2";
+        else if (combi == 3) return "Triple X3";
+        else if (combi == 4) return "FullHouse X4";
+        else if (combi == 5) return "FourCard X5";
+        else return "FiveCard X10";
     }
-    public CardAction CardActionFunc(string a,int value)
+    public int TypeCombiRate(List<TYPE> list)
+    {
+        int combi = TypeCombination(list);
+        if (combi == 0) return 10;
+        else if (combi == 1) return 1;
+        else if (combi == 2) return 2;
+        else if (combi == 3) return 3;
+        else if (combi == 4) return 4;
+        else if (combi == 5) return 5;
+        else return 10;
+
+    }
+    
+    public CardAction CardActionFunc(string a)
     {
         switch (a)
         {
             case "가자꾸나 아우우":
                 return (() => { 
-                    foreach (var i in BattleManager.Instance.Deck) i.ValueChange(i.Value + value);
-                    foreach (var i in BattleManager.Instance.Hand) {
-                        if(!i.name.Equals(a))
-                            i.ValueChange(i.Value + value); 
-                    }
                 });
         }
         return (() => { });
     }
-    public CardAction BeforeCardActionFunc(string a, int value)
+    public CardAction BeforeCardActionFunc(string a)
     {
         switch (a)
         {
@@ -146,33 +156,30 @@ public class CardDatabase : MonoBehaviour
 public struct CardStruct
 {
     public Sprite _img;
-    public COMPANY _company;
+    public SPECIES _species;
     public string _name;
     public string _text;
-    public int _number;
-    public int _value;
-    public CARDTYPE _type;
-    public RANK _rank;
-    public TARGET _target;
+    public int _tier;
+    public STAT _stat;
+    public TYPE _type;
     public bool isExhaust;
     public bool isEthereal;
     public bool isFixed;
 }
-public enum TARGET
+[Serializable]
+public class STAT
 {
-    SOLO,RANDOM,AOE,NONE
+    public int attack;
+    public int defence;
 }
-public enum COMPANY
+
+public enum SPECIES
 {
-    ELISION, MISSILIS, TETRA, PILGRIM
+    HUMAN, UNDEAD, MONSTER, MECH
 }
-public enum CARDTYPE
+public enum TYPE
 {
-    ATT, DEF, UTIL
-}
-public enum RANK
-{
-    R, SR, SSR
+    NONE,FIRE,WATER,GRASS,LIGHT,DARK
 }
 
 public delegate void CardAction();

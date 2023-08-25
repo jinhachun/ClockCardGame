@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2090622067174275424}
   - component: {fileID: 2090622067174275425}
   m_Layer: 0
-  m_Name: Company
+  m_Name: Species
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090622067174275427}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.075, y: 1.992, z: 0}
+  m_LocalPosition: {x: 1.011, y: 1.992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -645,28 +645,30 @@ MonoBehaviour:
   _visual: {fileID: 2090622069140470371}
   _cardBody: {fileID: 2090622068194082902}
   _img: {fileID: 2090622068405680084}
-  _company: {fileID: 2090622067174275425}
-  _rank: {fileID: 2004587385147360344}
+  _species: {fileID: 2090622067174275425}
+  _type: {fileID: 2004587385147360344}
   _name: {fileID: 2090622069019286651}
   _text: {fileID: 2090622068078413686}
   _infoText: {fileID: 952525771900914192}
-  _number: {fileID: 2090622069005699316}
+  _tier: {fileID: 2090622069005699316}
   _cardBack: {fileID: 3874558782741995094}
   Exhaust: "\uC18C\uBA78"
   Ethereal: "\uD718\uBC1C\uC131"
   Fixed: "\uACE0\uC815"
   Str:
     _img: {fileID: 21300000, guid: 3448289a07ea38e4eb40190ee759486c, type: 3}
-    _company: 3
+    _species: 0
     _name: "\uC138\uBE10\uC2A4 \uB4DC\uC6CC\uD504 : I"
     _text: "\uD53C\uD574\uB97C 30 \uC90D\uB2C8\uB2E4."
-    _number: 1
-    _value: 30
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
     _type: 0
-    _rank: 2
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
+  layer: 0
 --- !u!61 &293937832869210362
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -705,7 +707,7 @@ GameObject:
   - component: {fileID: 2090622069005699317}
   - component: {fileID: 2090622069005699316}
   m_Layer: 0
-  m_Name: Number
+  m_Name: Tier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,7 +730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.224, y: 1.742}
+  m_AnchoredPosition: {x: -1.235, y: 1.726}
   m_SizeDelta: {x: 0.4486, y: 0.4825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2090622069005699317
@@ -1225,7 +1227,7 @@ GameObject:
   - component: {fileID: 480690741579687935}
   - component: {fileID: 2004587385147360344}
   m_Layer: 0
-  m_Name: Rank
+  m_Name: Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3764361756871125017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.237, y: 1.744, z: 0}
+  m_LocalPosition: {x: 1.217, y: 1.739, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

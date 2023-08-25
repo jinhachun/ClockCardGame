@@ -9,12 +9,12 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _visual;
     [SerializeField] private SpriteRenderer _cardBody;
     [SerializeField] private SpriteRenderer _img;
-    [SerializeField] private SpriteRenderer _company;
-    [SerializeField] private SpriteRenderer _rank;
+    [SerializeField] private SpriteRenderer _species;
+    [SerializeField] private SpriteRenderer _type;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private TMP_Text _infoText;
-    [SerializeField] private TMP_Text _number;
+    [SerializeField] private TMP_Text _tier;
     [SerializeField] private SpriteRenderer _cardBack;
 
 
@@ -23,45 +23,45 @@ public class Card : MonoBehaviour
     [SerializeField] private string Fixed;
     Collider2D collider => this.gameObject.GetComponent<BoxCollider2D>();
     public CardStruct Str;
-    public COMPANY Company { get; private set; }
-    private RANK Rank;
-    public CARDTYPE Type { get; private set; }
-    public TARGET Target { get; private set; }
+    public SPECIES Species { get; private set; }
+    public TYPE Type { get; private set; }
     public string name { get; private set; }
-    public int Value { get; private set; }
-    public int number { get; private set; }
+    public STAT Stat { get; private set; }
+    public int tier { get; private set; }
     public bool isExhaust { get; private set; }
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }
     public int layer = 0;
     public CardAction BeforeAction;
     public CardAction Action;
-    public void ValueChange(int a)
+    public void ValueChange(string statVar,int a)
     {
-        this.Value = a;
-        this._text.text = textSet(Str._text);
-    }
-    public string textSet(string txt)
-    {
-        return txt.Replace("[]", Value.ToString());
+        switch (statVar)
+        {
+            case "Attack":
+                Stat.attack = a;
+                break;
+            case "Defence":
+                Stat.defence = a;
+                break;
+        }
     }
 public void Set(CardStruct str)
     {
         this.Str = str;
         this._name.text = str._name;
         this.name = str._name;
-        this._number.text = str._number.ToString();
-        this.number = str._number;
+        this._tier.text = str._tier.ToString();
+        this.tier = str._tier;
         this._img.sprite = str._img;
-        this._company.sprite = CardDatabase.Instance.companySprite(str._company);
-        this._rank.sprite = CardDatabase.Instance.rankSprite(str._rank);
+        this._species.sprite = CardDatabase.Instance.speciesSprite(str._species);
+        this._type.sprite = CardDatabase.Instance.typeSprite(str._type);
 
-        this.Company = str._company;
-        this.Rank = str._rank;
+        this.Species = str._species;
         this.Type = str._type;
-        this.Target = str._target;
-        this.Value = str._value;
-        this._text.text = textSet(str._text);
+        this.Type = str._type;
+        this.Stat = str._stat;
+        this._text.text = str._text;
 
         this.isEthereal = str.isEthereal;
         this.isExhaust = str.isExhaust;
@@ -89,13 +89,13 @@ public void Set(CardStruct str)
         _cardBody.sortingOrder = newSortingOrder;
         _img.sortingOrder = newSortingOrder-1;
         _cardBody.sortingOrder = newSortingOrder;
-        _company.sortingOrder = newSortingOrder+1;
-        _rank.sortingOrder = newSortingOrder+1;
+        _species.sortingOrder = newSortingOrder+1;
+        _type.sortingOrder = newSortingOrder+1;
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
          meshRenderer = _text.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
-        meshRenderer = _number.GetComponent<MeshRenderer>();
+        meshRenderer = _tier.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
         meshRenderer = _infoText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;

@@ -211,14 +211,14 @@ public class BattleManager : MonoBehaviour
         });
     }
     private List<RerollButton> ChkButtons;
-    private List<int> NumberCombi;
-    private List<COMPANY> COMCombi;
+    private List<SPECIES> SpeciesCombi;
+    private List<TYPE> TypeCombi;
     private List<TMP_Text> CombiText;
     public void WatingRerollPhase()
     {
         ChkButtons = new List<RerollButton>();
-        NumberCombi = new List<int>();
-        COMCombi = new List<COMPANY>();
+        SpeciesCombi = new List<SPECIES>();
+        TypeCombi = new List<TYPE>();
         CombiText = new List<TMP_Text>();
         List<RerollButton> Btns = new List<RerollButton>();
         var attackbtn = Instantiate(_attackButtonPrefab, ButtonPos(1), Quaternion.identity);
@@ -253,60 +253,63 @@ public class BattleManager : MonoBehaviour
             if (Hand[i].isFixed) { chkBtn.SpriteChange(CardDatabase.Instance.btn(2)); chkBtn.enabled = false; }
             ChkButtons.Add(chkBtn);
             Btns.Add(chkBtn);
-            NumberCombi.Add(Hand[i].number);
-            COMCombi.Add(Hand[i].Company);
-            CardDatabase.Instance.BeforeCardActionFunc(Hand[i].name, Hand[i].Value)();
+            SpeciesCombi.Add(Hand[i].Species);
+            TypeCombi.Add(Hand[i].Type);
+            CardDatabase.Instance.BeforeCardActionFunc(Hand[i].name)();
         }
-        var NumberCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
-        NumberCombiText.text = CardDatabase.Instance.NumCombinationText(NumberCombi);
-        int numberCombi = CardDatabase.Instance.NumCombination(NumberCombi);
-        switch (numberCombi)
-        {
-            case 1:
-                NumberCombiText.color = Color.gray;
-                break;
-            case 2:
-                NumberCombiText.fontSize = 5;
-                break;
-            case 3:
-                NumberCombiText.fontSize = 6;
-                NumberCombiText.color = Color.green;
-                break;
-            case 4:
-                NumberCombiText.fontSize = 7;
-                NumberCombiText.color = Color.blue;
-                break;
-            case 6:
-                NumberCombiText.fontSize = 7;
-                NumberCombiText.color = Color.blue;
-                break;
-            case 5:
-                NumberCombiText.fontSize = 8;
-                NumberCombiText.color = Color.red;
-                break;
-            case 10:
-                NumberCombiText.fontSize = 8;
-                NumberCombiText.color = Color.red;
-                break;
-        }
+        var SpeciesCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
+        SpeciesCombiText.text = CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi);
+        int speciesCombi = CardDatabase.Instance.SpeciesCombination(SpeciesCombi);
+        WatingRerollPhase_TextSet(speciesCombi, SpeciesCombiText);
+        CombiText.Add(SpeciesCombiText);
 
-        CombiText.Add(NumberCombiText);
-
-        var COMCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x - 0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
-        COMCombiText.text = CardDatabase.Instance.ComCombinationText(COMCombi);
-        COMCombiText.fontSize = 7;
-        COMCombiText.color = Color.cyan;
-        CombiText.Add(COMCombiText);
+        var TypeCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x - 0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
+        TypeCombiText.text = CardDatabase.Instance.TypeCombinationText(TypeCombi);
+        int typeCombi = CardDatabase.Instance.TypeCombination(TypeCombi);
+        WatingRerollPhase_TextSet(typeCombi, TypeCombiText);
+        CombiText.Add(TypeCombiText);
 
         Debug.Log(tmpRate);
         AttDefCal(tmpAtt, tmpDef, tmpRate);
+    }
+    public void WatingRerollPhase_TextSet(int combi,TMP_Text text)
+    {
+        switch (combi)
+        {
+            case 1:
+                text.color = Color.gray;
+                break;
+            case 2:
+                text.fontSize = 5;
+                break;
+            case 3:
+                text.fontSize = 6;
+                text.color = Color.green;
+                break;
+            case 4:
+                text.fontSize = 7;
+                text.color = Color.blue;
+                break;
+            case 6:
+                text.fontSize = 7;
+                text.color = Color.blue;
+                break;
+            case 5:
+                text.fontSize = 8;
+                text.color = Color.red;
+                break;
+            case 10:
+                text.fontSize = 8;
+                text.color = Color.red;
+                break;
+        }
     }
 
     public void AttDefCal(int a, int b, double r)
     {
         Att = 0 + a; Def = 0 + b; Rate = 1;
-        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.ComCombination(COMCombi) * (float)CardDatabase.Instance.NumCombiRate(NumberCombi) * (float)r * 100)) / 100;
-        foreach (var i in Hand) CardDatabase.Instance.CalCardActionFunc(i.name, i.Value)();
+        Rate = (double)Mathf.Round(((float)CardDatabase.Instance.TypeCombination(TypeCombi) * (float)CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi) * (float)r * 100)) / 100;
+        foreach (var i in Hand) { Att += i.Stat.attack; Def += i.Stat.defence; }
         this.Att = (int)(Rate * Att);
         this.Def = (int)(Rate * Def);
     }
@@ -336,7 +339,7 @@ public class BattleManager : MonoBehaviour
     public void AttackPhase()
     {
         Sequence sq = DOTween.Sequence();
-        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card.name, card.Value)();
+        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card.name)();
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         foreach (var card in Hand)
         {
