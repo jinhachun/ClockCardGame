@@ -34,7 +34,7 @@ public class Card : MonoBehaviour
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }
     public int layer = 0;
-    public bool Touchable = true;
+    public bool Touchable = false;
     public CardAction BeforeAction;
     public CardAction Action;
     public void StatChange(string statVar,int a)
@@ -127,6 +127,7 @@ public void Set(CardStruct str)
 
     void OnMouseExit()
     {
+        if (!Touchable && _visual.transform.localScale.x == 0.8f) return;
         _visual.transform.localScale = new Vector2(0.8f, 0.8f);
         setLayer(0,50+ layer);
     }

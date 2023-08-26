@@ -62,6 +62,9 @@ MonoBehaviour:
   _area: 0
   _enemyType: 0
   _enemyPatterns: []
+  _hpBar: {fileID: 0}
+  isTarget: 0
+  attackBuff: 0
 --- !u!61 &6274761336225301047
 BoxCollider2D:
   m_ObjectHideFlags: 0

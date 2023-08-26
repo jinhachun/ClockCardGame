@@ -20,8 +20,9 @@ public class Enemy : MonoBehaviour
     bool isOver = false;
     public bool isTarget = false;
     int PatternIndex;
-
-    
+    private double attackBuff = 0;
+    public int damage => (int)attackBuff + Pattern._Value;
+    public void setAttackBuff() { attackBuff += Pattern._Value; }
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;
@@ -29,7 +30,10 @@ public class Enemy : MonoBehaviour
         this._hp = enemyStruct._hp;
         this._mhp = this._hp;
         this._area = enemyStruct._area;
+        this._img.sprite = enemyStruct._sprite;
         this._enemyType = enemyStruct._enemyType;
+        Debug.Log(this._enemyType + " " + EnemyDatabase.Instance.spriteSize(this._enemyType));
+        this._img.transform.parent.localScale = EnemyDatabase.Instance.spriteSize(this._enemyType);
         this._enemyPatterns = enemyStruct._enemyPatterns;
         PatternIndex = 0;
     }
@@ -48,10 +52,16 @@ public class Enemy : MonoBehaviour
     public pattern Pattern => _enemyPatterns[PatternIndex];
     public void SetPatternText()
     {
-        if(Pattern._enemyPattern==EnemyPattern.ATT)
-            this._hpBar.setText_Pattern(Pattern._Value.ToString(),Color.red);
+        if (Pattern._enemyPattern == EnemyPattern.ATT)
+        {
+            string dammTxt = Pattern._Value + (attackBuff==0?"":"+"+attackBuff);
+            this._hpBar.setText_Pattern(dammTxt, Color.red);
+        }
+        else if (Pattern._enemyPattern == EnemyPattern.BUFF)
+            this._hpBar.setText_Pattern("+", Color.blue);
         else
-            this._hpBar.setText_Pattern("?",Color.green);
+            this._hpBar.setText_Pattern("?", Color.green);
+
     }
     public void TurnEnd()
     {

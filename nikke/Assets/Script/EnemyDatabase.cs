@@ -47,7 +47,8 @@ public class EnemyDatabase : MonoBehaviour
     public List<EnemyStruct> final_enemylist(int area,EnemyType type)
     {
         var sqdListByArea = sqdList.Where(x => x.area == area).ToList().Where(x=>x.enemyType==type).ToList();
-        var sqdByArea = sqdListByArea[Random.Range(0, sqdListByArea.Count)];
+        int randomNum = Random.Range(0, sqdListByArea.Count);
+        var sqdByArea = sqdListByArea[randomNum];
 
         List<EnemyStruct> enemyStructs = new List<EnemyStruct>();
         foreach(var enemy in sqdByArea.enemySquad)
@@ -55,6 +56,13 @@ public class EnemyDatabase : MonoBehaviour
             enemyStructs.Add(enemylist(enemyList,enemy));
         }
         return enemyStructs;
+    }
+    public Vector2 spriteSize(EnemyType et)
+    {
+        if (et == EnemyType.Mini) return new Vector2(1, 1);
+        else if (et == EnemyType.Normal) return new Vector2(1.5f, 1.5f);
+        else if (et == EnemyType.Giga) return new Vector2(2, 2);
+        return new Vector2(1,1);
     }
 }
 [Serializable]
@@ -65,5 +73,5 @@ public enum EnemyPattern
 [Serializable]
 public enum EnemyType
 {
-    SERVANT,EXCEED,MASTER,LORD,TYRANT,QUEEN
+    Mini,Normal,Giga
 }

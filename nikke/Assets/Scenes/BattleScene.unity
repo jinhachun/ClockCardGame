@@ -364,7 +364,7 @@ MonoBehaviour:
     _text: "\uCCB4\uB825\uC744 1 \uC783\uC2B5\uB2C8\uB2E4."
     _tier: 2
     _stat:
-      attack: 5
+      attack: 6
       defence: 1
     _type: 0
     isExhaust: 0
@@ -384,6 +384,14 @@ MonoBehaviour:
   cardinfoSprites_type:
   - species: 5
     sprite: {fileID: 21300000, guid: bf6e3689cde2ac44aae0b338b3dc3627, type: 3}
+  - species: 4
+    sprite: {fileID: 21300000, guid: 9883113bef6c6b649aeb29dae181c5bb, type: 3}
+  - species: 1
+    sprite: {fileID: 21300000, guid: 209d50af982acfd4a946fc0df2cd4e31, type: 3}
+  - species: 2
+    sprite: {fileID: 21300000, guid: 03763ec3c0f6c9f49a2c9a36a997e94c, type: 3}
+  - species: 3
+    sprite: {fileID: 21300000, guid: d8573aac179c7114cbf50ff2f3602518, type: 3}
   btnSprites:
   - {fileID: -1065807899, guid: 360c1c881561e0a4e887a3241bd01c93, type: 3}
   - {fileID: -824669891, guid: 360c1c881561e0a4e887a3241bd01c93, type: 3}
@@ -451,13 +459,36 @@ MonoBehaviour:
       _Value: 5
     - _enemyPattern: 0
       _Value: 10
+    - _enemyPattern: 1
+      _Value: 2
+  - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
+    _name: "\uB625\uAC1C"
+    _hp: 60
+    _area: 1
+    _enemyType: 1
+    _enemyPatterns:
     - _enemyPattern: 0
-      _Value: 1
+      _Value: 2
+    - _enemyPattern: 0
+      _Value: 4
+    - _enemyPattern: 0
+      _Value: 8
+    - _enemyPattern: 0
+      _Value: 16
+    - _enemyPattern: 0
+      _Value: 32
+    - _enemyPattern: 0
+      _Value: 64
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
     - "\uBBF8\uB2C8\uC751\uAC00"
     - "\uBBF8\uB2C8\uC751\uAC00"
+    area: 1
+    enemyType: 0
+  - enemySquad:
+    - "\uB625\uAC1C"
+    - "\uB625\uAC1C"
     area: 1
     enemyType: 0
 --- !u!1 &1383047955

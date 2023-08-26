@@ -69,7 +69,7 @@ public class BattleManager : MonoBehaviour
             BaseDeck.Add(tmp);
         }
         Hp = 100; Mhp = 100; Shield = 0;
-        area = 1; enemyType = EnemyType.SERVANT;
+        area = 1; enemyType = EnemyType.Mini;
         RerollChance = 1;
         ChangeState(BattleState.Set);
     }
@@ -144,6 +144,7 @@ public class BattleManager : MonoBehaviour
             tmp.Set(tmpCard);
             Deck.Add(tmp);
             moveCard(sq, tmp, DeckPos(0), 1f/(float)BaseDeck.Count, true, false);
+            
             cnt++;
         }
         var final_enemylist = EnemyDatabase.Instance.final_enemylist(area, enemyType);
@@ -154,7 +155,9 @@ public class BattleManager : MonoBehaviour
             cnt++;
             var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY);
             var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
+            
             enemyTmp.Set(enemy);
+
             var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
             enemyHpBarTmp.Set(enemyTmp);
             EnemyPos.Add(enemyposTmp);
@@ -206,9 +209,11 @@ public class BattleManager : MonoBehaviour
         deckMoveCard(sq);
         sq.AppendCallback(() =>
         {
+            foreach(var card in Hand) card.setLayer(0, 50);
             ChangeState(BattleState.WaitingReroll);
             sq.Kill();
         });
+
     }
     private List<RerollButton> ChkButtons;
     private List<SPECIES> SpeciesCombi;
@@ -276,8 +281,10 @@ public class BattleManager : MonoBehaviour
     {
         switch (combi)
         {
-            case 1:
+            case 0:
                 text.color = Color.gray;
+                break;
+            case 1:
                 break;
             case 2:
                 text.fontSize = 5;
@@ -290,15 +297,11 @@ public class BattleManager : MonoBehaviour
                 text.fontSize = 7;
                 text.color = Color.blue;
                 break;
-            case 6:
+            case 5:
                 text.fontSize = 7;
                 text.color = Color.blue;
                 break;
-            case 5:
-                text.fontSize = 8;
-                text.color = Color.red;
-                break;
-            case 10:
+            case 6:
                 text.fontSize = 8;
                 text.color = Color.red;
                 break;
@@ -356,6 +359,7 @@ public class BattleManager : MonoBehaviour
                 Grave.Add(card);
                 card.TouchableChange(false);
                 moveCard(sq, card, GravePos, 0.2f, true);
+                card.setLayer(0, 50 + Grave.Count*3);
             }
         }
         Hand.Clear();
@@ -417,7 +421,7 @@ public class BattleManager : MonoBehaviour
         {
             if (Enemy.Pattern._enemyPattern == EnemyPattern.ATT)
             {
-                var dam = Enemy.Pattern._Value;
+                var dam = Enemy.damage;
 
                 int FinalDamage = Shield > dam ? 0 : dam - Shield;
                 Shield = Shield > dam ? Shield - dam : 0;
@@ -431,7 +435,21 @@ public class BattleManager : MonoBehaviour
                     sq.AppendInterval(0.8f);
                 }
                 else
+                {
+                    sq.AppendCallback(() =>
+                    {
+                        Enemy.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
+                    });
                     sq.AppendInterval(0.2f);
+                }
+            }else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
+            {
+                Enemy.setAttackBuff();
+                sq.AppendCallback(() =>
+                {
+                    Enemy.transform.DOMoveY(Enemy.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
+                });
+                sq.AppendInterval(0.8f);
             }
         }
         

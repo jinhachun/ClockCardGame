@@ -55,24 +55,24 @@ public class CardDatabase : MonoBehaviour
     public string SpeciesCombinationText(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return " X0.5";
-        else if (combi == 1) return "OnePair X1";
-        else if (combi == 2) return "TwoPair X1.5";
-        else if (combi == 3) return "Triple X2";
-        else if (combi == 4) return "FullHouse X2.5";
-        else if (combi == 5) return "FourCard X3";
-        else return "FiveCard X5";
+        if (combi == 0) return " X1";
+        else if (combi == 1) return "OnePair X1.2";
+        else if (combi == 2) return "TwoPair X1.4";
+        else if (combi == 3) return "Triple X1.6";
+        else if (combi == 4) return "FullHouse X1.8";
+        else if (combi == 5) return "FourCard X2";
+        else return "FiveCard X3";
     }
     public float SpeciesCombiRate(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return 0.5f;
-        else if (combi == 1) return 1;
-        else if (combi == 2) return 2.5f;
-        else if (combi == 3) return 2;
-        else if (combi == 4) return 2.5f;
-        else if (combi == 5) return 3;
-        else return 5;
+        if (combi == 0) return 1f;
+        else if (combi == 1) return 1.2f;
+        else if (combi == 2) return 1.4f;
+        else if (combi == 3) return 1.6f;
+        else if (combi == 4) return 1.8f;
+        else if (combi == 5) return 2;
+        else return 3;
 
     }
     public int TypeCombination(List<TYPE> list)
@@ -93,24 +93,24 @@ public class CardDatabase : MonoBehaviour
     public string TypeCombinationText(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return " X0.5";
-        else if (combi == 1) return "OnePair X1";
-        else if (combi == 2) return "TwoPair X1.5";
-        else if (combi == 3) return "Triple X2";
-        else if (combi == 4) return "FullHouse X2.5";
-        else if (combi == 5) return "FourCard X3";
-        else return "FiveCard X5";
+        if (combi == 0) return " X1";
+        else if (combi == 1) return "OnePair X1.2";
+        else if (combi == 2) return "TwoPair X1.4";
+        else if (combi == 3) return "Triple X1.6";
+        else if (combi == 4) return "FullHouse X1.8";
+        else if (combi == 5) return "FourCard X2";
+        else return "FiveCard X3";
     }
     public float TypeCombiRate(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return 0.5f;
-        else if (combi == 1) return 1;
-        else if (combi == 2) return 1.5f;
-        else if (combi == 3) return 2;
-        else if (combi == 4) return 2.5f;
-        else if (combi == 5) return 3;
-        else return 5;
+        if (combi == 0) return 1f;
+        else if (combi == 1) return 1.2f;
+        else if (combi == 2) return 1.4f;
+        else if (combi == 3) return 1.6f;
+        else if (combi == 4) return 1.8f;
+        else if (combi == 5) return 2;
+        else return 3;
 
     }
     
