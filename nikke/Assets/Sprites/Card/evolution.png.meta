@@ -200,6 +200,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 4_Canmon
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 869
+        width: 285
+        height: 253
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08181efd246a43f4d893a2f6838f44e3
+      internalID: 269951699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -215,6 +236,7 @@ TextureImporter:
       1_RecruitDong: -1345653317
       2_zombie: -1461477941
       3_Goblin: -602355744
+      4_Canmon: 269951699
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

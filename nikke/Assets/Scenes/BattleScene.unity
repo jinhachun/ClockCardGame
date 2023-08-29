@@ -370,6 +370,19 @@ MonoBehaviour:
     isExhaust: 0
     isEthereal: 0
     isFixed: 1
+  - _img: {fileID: 269951699, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 4
+    _name: "\uAE61\uD1B5\uBAAC"
+    _text: "\uACF5\uACA9\uB825\uC774  -2~+2\uB9CC\uD07C \uBB34\uC791\uC704\uB85C
+      \uBCC0\uD654\uD569\uB2C8\uB2E4."
+    _tier: 2
+    _stat:
+      attack: 4
+      defence: 3
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
@@ -420,6 +433,7 @@ MonoBehaviour:
   _scrollViewCardPrefab: {fileID: 3549474181225641723}
   _deckCountPrefab: {fileID: 4613941522894815512, guid: f053aa53365d86a47976f7f3ccd2ade6, type: 3}
   _canvas: {fileID: 1383047955}
+  _damagePopupPrefab: {fileID: 1104535163446031739, guid: 55e48c9349dc51d40b91c4fc12e3cd78, type: 3}
   Enemies: []
   Deck: []
   Hand: []

@@ -29,6 +29,8 @@ public class Card : MonoBehaviour
     public TYPE Type { get; private set; }
     public string name { get; private set; }
     public STAT Stat { get; private set; }
+    private int attack_before;
+    private int defence_before;
     public int tier { get; private set; }
     public bool isExhaust { get; private set; }
     public bool isEthereal { get; private set; }
@@ -39,14 +41,22 @@ public class Card : MonoBehaviour
     public CardAction Action;
     public void StatChange(string statVar,int a)
     {
+        int b = a;
+        if (b < 0) b = 0;
         switch (statVar)
         {
             case "Attack":
-                Stat.attack = a;
+                Stat.attack = b;
+                if (Stat.attack > Str._stat.attack) this._attText.color = Color.red;
+                else if (Stat.attack < Str._stat.attack) this._attText.color = Color.gray;
+                else this._attText.color = Color.white;
                 this._attText.text = Stat.attack.ToString();
                 break;
             case "Defence":
-                Stat.defence = a;
+                Stat.defence = b;
+                if (Stat.defence > Str._stat.defence) this._defText.color = Color.red;
+                else if (Stat.defence < Str._stat.defence) this._defText.color = Color.gray;
+                else this._defText.color = Color.white;
                 this._defText.text = Stat.defence.ToString();
                 break;
         }
@@ -69,7 +79,11 @@ public void Set(CardStruct str)
         this.Species = str._species;
         this.Type = str._type;
         this.Type = str._type;
-        this.Stat = str._stat;
+
+        this.Stat = new STAT();
+        this.Stat.attack = str._stat.attack;
+        this.Stat.defence = str._stat.defence;
+
         StatChange("Attack", this.Stat.attack);
         StatChange("Defence", this.Stat.defence);
         this._text.text = str._text;

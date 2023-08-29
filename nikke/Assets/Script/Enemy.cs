@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _img;
+    [SerializeField] public SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _targetImg;
 
     public EnemyStruct Str;

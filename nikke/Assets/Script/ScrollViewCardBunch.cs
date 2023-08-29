@@ -33,7 +33,6 @@ public class ScrollViewCardBunch : MonoBehaviour
     {
         this.cardBunch = cards.OrderBy(item => Random.value).ToList();
         var xpos = x; var ypos = y;
-        int cnt;
         foreach(var card in cards)
         {
             var cardTmp = Instantiate(_card,new Vector2(xpos, ypos),Quaternion.identity);
@@ -47,6 +46,7 @@ public class ScrollViewCardBunch : MonoBehaviour
 
             cardsMade.Add(cardTmp);
         }
-        _backGround.localScale = new Vector2(1100, y-ypos+100);
+        _backGround.localScale = new Vector2(1100, ((cards.Count-1)/5+1)*yBlank + 150);
+
     }
 }

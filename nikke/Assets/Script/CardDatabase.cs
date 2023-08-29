@@ -114,8 +114,9 @@ public class CardDatabase : MonoBehaviour
 
     }
     
-    public CardAction CardActionFunc(string a)
+    public CardAction CardActionFunc(Card b)
     {
+        string a = b.name;
         switch (a)
         {
             case "Á»ºñ":
@@ -125,6 +126,10 @@ public class CardDatabase : MonoBehaviour
             case "¸Ô±úºñ":
                 return (() => {
                     BattleManager.Instance.Hp -= 1;
+                });
+            case "±øÅë¸ó":
+                return (() => {
+                    b.StatChange("Attack", Random.Range(b.Stat.attack-2,b.Stat.attack+3));
                 });
         }
         return (() => { });

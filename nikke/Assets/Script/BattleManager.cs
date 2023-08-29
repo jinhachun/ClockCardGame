@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
     [SerializeField] DeckCount _deckCountPrefab;
     [SerializeField] public GameObject _canvas;
+    [SerializeField] public Transform _damagePopupPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -178,6 +179,8 @@ public class BattleManager : MonoBehaviour
     {
         var randomized = Deck.OrderBy(item => Random.value).ToList();
         Deck = randomized;
+        DeckCntTxt.Set(ref Deck);
+        GraveCntTxt.Set(ref Grave);
         deckMoveCard(sq);
     }
     public void TurnStartPhase()
@@ -345,7 +348,7 @@ public class BattleManager : MonoBehaviour
     public void AttackPhase()
     {
         Sequence sq = DOTween.Sequence();
-        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card.name)();
+        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card)();
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         foreach (var card in Hand)
         {
@@ -380,14 +383,19 @@ public class BattleManager : MonoBehaviour
                 target._hp -= AttLeft;
                 if (target._hp <= 0)
                 {
+                    DamagePopup.Create(target.transform.position, AttLeft+target._hp, true);
                     var deadEnemy = target;
                     target._hp = 0;
                     Enemies.Remove(deadEnemy);
-                    deadEnemy.transform.DOScale(0, 0.3f).OnComplete(() =>
+                    deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                     {
                         Destroy(deadEnemy._hpBar.gameObject);
                         Destroy(deadEnemy.gameObject);
                     });
+                }
+                else
+                {
+                    DamagePopup.Create(target.transform.position, AttLeft, false);
                 }
                 AttLeft = tmpAttLeft;
 

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _img: {fileID: 2826967773068614649}
   _targetImg: {fileID: 487275882510298127}
+  _particleSys: {fileID: 0}
   Str:
     _sprite: {fileID: 0}
     _name: 
@@ -64,7 +65,6 @@ MonoBehaviour:
   _enemyPatterns: []
   _hpBar: {fileID: 0}
   isTarget: 0
-  attackBuff: 0
 --- !u!61 &6274761336225301047
 BoxCollider2D:
   m_ObjectHideFlags: 0
