@@ -45,7 +45,7 @@ public class HpBar : MonoBehaviour
     public void FixedUpdate()
     {
         if (!OnOff) return;
-        if(MHp<Hp) BattleManager.Instance.Hp = BattleManager.Instance.Mhp;
+        
         textChange(_hptxtPrefab, Hp);
         textChange(_shieldtxtPrefab, Shield);
         ScaleSet(HpScale, _hpBarPrefab);

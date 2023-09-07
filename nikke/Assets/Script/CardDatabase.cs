@@ -12,6 +12,7 @@ public class CardDatabase : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
     [SerializeField] List<CardStruct> cardDatabase;
     [SerializeField] List<SpeciesSprite> cardinfoSprites_species;

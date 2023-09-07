@@ -15,6 +15,7 @@ public class BattleManager : MonoBehaviour
     float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -11f, GravePosY = -5f;
     float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
     float EnemyPosX = -8f, EnemyPosY = 3f, EnemyPosLength = 16f, EnemyPosBlank;
+ 
 
     [SerializeField] Card _cardPrefab;
     [SerializeField] RerollButton _rerollButtonPrefab;
@@ -63,16 +64,16 @@ public class BattleManager : MonoBehaviour
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
-        BaseDeck = new List<CardStruct>();
-        for (int i = 0; i < 20; i++)
-        {
-            var tmp = (CardDatabase.Instance.RandomCard());
-            BaseDeck.Add(tmp);
-        }
-        Hp = 100; Mhp = 100; Shield = 0;
-        area = 1; enemyType = EnemyType.Mini;
+        BaseDeck = Resource.Instance.Deck;
+        
+        Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
+        area = Resource.Instance.Area; enemyType = EnemyType.Mini;
         RerollChance = 1;
         ChangeState(BattleState.Set);
+    }
+    public void FixedUpdate()
+    {
+        if (Mhp < Hp) Hp = Mhp;
     }
     private void ChangeState(BattleState battleState)
     {
