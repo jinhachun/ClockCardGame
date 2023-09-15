@@ -10,14 +10,19 @@ public class Resource : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        
+        
+    }
+    public void Start()
+    {
+        Hp = 100; mHp = 100; Area = 1; Stage = 1;
+        money = 0;
         Deck = new List<CardStruct>();
         for (int i = 0; i < 20; i++)
         {
             var tmp = (CardDatabase.Instance.RandomCard());
             Deck.Add(tmp);
         }
-        Hp = 100; mHp = 100; Area = 1; Stage = 1;
-        money = 0;
     }
     public List<CardStruct> Deck;
     public int Hp, mHp;

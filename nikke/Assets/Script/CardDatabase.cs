@@ -160,6 +160,7 @@ public struct CardStruct
     public bool isExhaust;
     public bool isEthereal;
     public bool isFixed;
+    public List<String> evol;
 }
 [Serializable]
 public class STAT

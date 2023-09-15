@@ -16,12 +16,22 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] TMP_Text _MoneyText;
     [SerializeField] Card _cardPrefab;
-    
+
+    List<GameObject> MenuList;
+    [SerializeField] GameObject _Main;
+    [SerializeField] GameObject _Shop;
+
     private static MainMenu instance;
     public static MainMenu Instance => instance;
     public void Awake()
     {
         instance = this;
+    }
+    public void Start()
+    {
+        MenuList = new List<GameObject>();
+        MenuList.Add(_Main);
+        MenuList.Add(_Shop);
     }
     public void FixedUpdate()
     {
@@ -51,5 +61,13 @@ public class MainMenu : MonoBehaviour
     public void battleStart()
     {
         SceneManager.LoadScene("BattleScene");
+    }
+    public void ButtonAction(int n)
+    {
+        for(int i = 1; i <= MenuList.Count; i++)
+        {
+            if (i == n) MenuList[i - 1].SetActive(true);
+            else MenuList[i - 1].SetActive(false);
+        }
     }
 }

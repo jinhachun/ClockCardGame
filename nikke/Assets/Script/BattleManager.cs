@@ -472,7 +472,14 @@ public class BattleManager : MonoBehaviour
     public void EndTurnPhase()
     {
         foreach (var Enemy in Enemies) Enemy.TurnEnd();
-        ChangeState(BattleState.TurnStart);
+        if (Hp <= 0) ChangeState(BattleState.Lose);
+        else if (Enemies.Count == 0) ChangeState(BattleState.Reward);
+        else
+            ChangeState(BattleState.TurnStart);
+    }
+    public void RewardPhase()
+    {
+
     }
     public void DrawCard(Sequence sq)
     {
