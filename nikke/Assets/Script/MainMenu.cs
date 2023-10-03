@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     List<GameObject> MenuList;
     [SerializeField] GameObject _Main;
     [SerializeField] GameObject _Shop;
+    [SerializeField] GameObject _Village;
 
     private static MainMenu instance;
     public static MainMenu Instance => instance;
@@ -32,6 +33,7 @@ public class MainMenu : MonoBehaviour
         MenuList = new List<GameObject>();
         MenuList.Add(_Main);
         MenuList.Add(_Shop);
+        MenuList.Add(_Village);
     }
     public void FixedUpdate()
     {
