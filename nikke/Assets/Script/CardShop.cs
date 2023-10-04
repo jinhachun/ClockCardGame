@@ -17,10 +17,10 @@ public class CardShop : MonoBehaviour
         get
         {
             if (card == null) return 0;
-            else return BuyPrice * card.tier * card.tier;
+            else return BuyPrice * card.tier * card.tier * (100 - Resource.Instance.VillageLevel["House"]*4)/100;
         }
     }
-    public Card card;
+    [SerializeField] public Card card;
     public Card card_evol;
     public Card card_evol2;
     public int evolPer;
@@ -44,10 +44,10 @@ public class CardShop : MonoBehaviour
     }
     public void Buy()
     {
-        if (card != null) return;
+        if (card.gameObject.activeInHierarchy) return;
         if (Resource.Instance.money >= BuyPrice) Resource.Instance.money -= BuyPrice;
         else return;
-        card = Instantiate(_CardPrefab, new Vector2(BackGround.transform.position.x, BackGround.transform.position.y),Quaternion.identity);
+        card.gameObject.SetActive(true);
         evolve(CardDatabase.Instance.card("동글이"));
         evolveUI(true);
         card.setLayer(1,5);
@@ -71,9 +71,11 @@ public class CardShop : MonoBehaviour
     }
     public void Evolve()
     {
-        if (card == null) return;
-        if (Resource.Instance.money >= EvolPrice) Resource.Instance.money -= BuyPrice;
-        else return;
+        if (!card.gameObject.activeInHierarchy) return;
+        if (Resource.Instance.money < EvolPrice) return;
+        if (card.Str.evol.Count == 0) return;
+
+        Resource.Instance.money -= BuyPrice;
         int random = Random.Range(0, 101);
         if (random <= evolPer) evolve(card_evol.Str);
         else evolve(card_evol2.Str);
@@ -103,14 +105,14 @@ public class CardShop : MonoBehaviour
     }
     public void Recruit()
     {
-        if (card == null) return;
+        if (!card.gameObject.activeInHierarchy) return;
         Resource.Instance.Deck.Add(card.Str);
         Delete();
     }
     public void Delete()
     {
-        if (card == null) return;
-        Destroy(card.gameObject);
+        if (!card.gameObject.activeInHierarchy) return;
+        card.gameObject.SetActive(false);
         card_evol.Set(CardDatabase.Instance.card("동글이"));
         card_evol2.Set(CardDatabase.Instance.card("동글이"));
         percentTxt(100);

@@ -35,10 +35,14 @@ public class MainMenu : MonoBehaviour
         MenuList.Add(_Shop);
         MenuList.Add(_Village);
     }
-    public void FixedUpdate()
+    public void TextUpdate()
     {
         __BattleButtonText.text = __BattleButtonText_Stage_Full;
         _MoneyText.text = Resource.Instance.money.ToString();
+    }
+    public void FixedUpdate()
+    {
+        Invoke("TextUpdate",0.5f);
     }
     public void showDeck()
     {

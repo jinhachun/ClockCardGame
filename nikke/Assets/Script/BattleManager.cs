@@ -368,7 +368,8 @@ public class BattleManager : MonoBehaviour
         }
         Hand.Clear();
         Shield = Def;
-        var AttLeft = Att;
+        bool critical = Resource.Instance.VillageLevel["Church"] * 30 >= Random.Range(0, 100);
+        var AttLeft = !critical?Att:Att*2;
         var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
 
 
@@ -382,9 +383,10 @@ public class BattleManager : MonoBehaviour
                 var tmpAttLeft = AttLeft - target._hp;
 
                 target._hp -= AttLeft;
-                if (target._hp <= 0)
+                bool lethal = (target._hp <= 0);
+                if (lethal)
                 {
-                    DamagePopup.Create(target.transform.position, AttLeft+target._hp, true);
+                    DamagePopup.Create(target.transform.position, AttLeft + target._hp, critical, lethal);
                     var deadEnemy = target;
                     target._hp = 0;
                     Enemies.Remove(deadEnemy);
@@ -393,11 +395,8 @@ public class BattleManager : MonoBehaviour
                         Destroy(deadEnemy._hpBar.gameObject);
                         Destroy(deadEnemy.gameObject);
                     });
-                }
-                else
-                {
-                    DamagePopup.Create(target.transform.position, AttLeft, false);
-                }
+                }else
+                    DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
                 AttLeft = tmpAttLeft;
 
                 loopcnt++;
