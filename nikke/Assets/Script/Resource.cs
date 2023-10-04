@@ -20,7 +20,7 @@ public class Resource : MonoBehaviour
         VillageLevel.Add("House", 0);
         VillageLevel.Add("Church", 0);
         VillageLevel.Add("Bath", 0);
-        Hp = 100; mHp = 100; Area = 1; Stage = 1;
+        Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
         money = 100; jewel = 1;
         Deck = new List<CardStruct>();
         for (int i = 0; i < 20; i++)
@@ -30,7 +30,9 @@ public class Resource : MonoBehaviour
         }
     }
     public List<CardStruct> Deck;
-    public int Hp, mHp;
+    public int Hp;
+    public int tmpMhp;
+    public int mHp => tmpMhp * (100 + 5 * VillageLevel["Bath"]) / 100;
     public int Area; public int Stage;
     public int money;
     public Dictionary<string,int> VillageLevel;

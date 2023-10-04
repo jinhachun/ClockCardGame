@@ -368,7 +368,7 @@ public class BattleManager : MonoBehaviour
         }
         Hand.Clear();
         Shield = Def;
-        bool critical = Resource.Instance.VillageLevel["Church"] * 30 >= Random.Range(0, 100);
+        bool critical = Resource.Instance.VillageLevel["Church"] * 3 >= Random.Range(0, 100);
         var AttLeft = !critical?Att:Att*2;
         var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
 
