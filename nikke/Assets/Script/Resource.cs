@@ -21,7 +21,7 @@ public class Resource : MonoBehaviour
         VillageLevel.Add("Church", 0);
         VillageLevel.Add("Bath", 0);
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
-        money = 100; jewel = 1;
+        money = 100; jewel = 10;
         Deck = new List<CardStruct>();
         for (int i = 0; i < 20; i++)
         {
@@ -37,6 +37,14 @@ public class Resource : MonoBehaviour
     public int money;
     public Dictionary<string,int> VillageLevel;
     public int jewel;
-    
-    
+
+    public void StageUp()
+    {
+        Stage++;
+        if (Stage > 10)
+        {
+            Area++;
+            Stage = 0;
+        }
+    }
 }

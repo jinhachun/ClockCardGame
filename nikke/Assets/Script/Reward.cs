@@ -35,7 +35,6 @@ public class Reward : MonoBehaviour
         for (int i = 0; i < units.Count; i++)
         {
             var rewardUnit = Instantiate(_rewardPrefab, new Vector2(0f, 2.33f - 1.5f * i), Quaternion.identity);
-            rewardUnit.Set(units[i]);
         }
     }
 }

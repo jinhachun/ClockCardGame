@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
+public delegate void rewardAction();
 public class RewardUnitSprite : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _prefab;
-    [SerializeField] SpriteRenderer sprite;
     [SerializeField] TMP_Text text;
+    rewardAction Action;
     bool isOver;
     bool get = false;
-    public void Set(RewardUnit unit)
+    public void Set(string a, rewardAction ac)
     {
-        sprite.sprite = unit.sprite;
-        text.text = unit._name;
+        text.text = a;
+        Action = ac;
     }
     void Update()
     {
-        if (isOver && Input.GetMouseButtonDown(0))
+        if (isOver && Input.GetMouseButtonDown(0)&&!get)
         {
+            Action();
             get = true;
             _prefab.color = Color.black;
         }
@@ -26,7 +29,6 @@ public class RewardUnitSprite : MonoBehaviour
 
     void OnMouseOver()
     {
-        if (get) return;
         isOver = true;
         _prefab.color = Color.gray;
 
@@ -34,7 +36,6 @@ public class RewardUnitSprite : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (get) return;
         isOver = false;
         _prefab.color = Color.white;
     }

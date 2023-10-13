@@ -374,6 +374,7 @@ MonoBehaviour:
       _Value: 10
     - _enemyPattern: 1
       _Value: 2
+    _reward: 5
   - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
     _name: "\uB625\uAC1C"
     _hp: 60
@@ -392,6 +393,7 @@ MonoBehaviour:
       _Value: 32
     - _enemyPattern: 0
       _Value: 64
+    _reward: 10
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"

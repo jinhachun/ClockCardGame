@@ -3,6 +3,7 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class BattleManager : MonoBehaviour
 
     public int area;
     public EnemyType enemyType;
-    public int reward => Random.Range(50, 100) * (3 + area) / 3;
+    public int reward =>  Random.Range(10*area+30,30*area+90);
 
 
     public int Hp, Mhp, Shield;
@@ -105,6 +106,7 @@ public class BattleManager : MonoBehaviour
                 EndTurnPhase();
                 break;
             case BattleState.Reward:
+                RewardPhase();
                 break;
             case BattleState.Lose:
                 break;
@@ -411,6 +413,10 @@ public class BattleManager : MonoBehaviour
         sq.AppendInterval(0.5f);
         sq.AppendCallback(() =>
         {
+            foreach(var enem in Enemies)
+            {
+                if (enem._hp <= 0) Enemies.Remove(enem);
+            }
             tmpAtt = 0; tmpDef = 0; tmpRate = 1;
             if (RerollChance <= 0) RerollChance++;
             RerollText.text = "Chance : " + RerollChance.ToString();
@@ -478,6 +484,11 @@ public class BattleManager : MonoBehaviour
     }
     public void RewardPhase()
     {
+        Resource.Instance.money += reward;
+        Resource.Instance.StageUp();
+        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("BattleScene");
 
     }
     public void DrawCard(Sequence sq)

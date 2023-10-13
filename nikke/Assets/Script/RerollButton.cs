@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void buttonAction();
+
 public class RerollButton : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _rerollButtonPrefab;
     [SerializeField] string _Name;
     bool isOver = false;
+    public delegate void buttonAction();
     buttonAction Action;
     public Sprite btnSprite => _rerollButtonPrefab.sprite;
     public void SpriteChange(Sprite s)
