@@ -8077,7 +8077,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &1792990734
 MonoBehaviour:
@@ -8098,6 +8098,14 @@ MonoBehaviour:
   Stage: 0
   money: 0
   jewel: 0
+  combiRate:
+  - 1
+  - 1.2
+  - 1.5
+  - 2
+  - 2.5
+  - 3
+  - 4
 --- !u!4 &1792990735
 Transform:
   m_ObjectHideFlags: 0

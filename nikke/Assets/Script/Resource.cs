@@ -8,6 +8,11 @@ public class Resource : MonoBehaviour
     public static Resource Instance => instance;
     public void Awake()
     {
+        if (instance != this && instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         
@@ -37,6 +42,7 @@ public class Resource : MonoBehaviour
     public int money;
     public Dictionary<string,int> VillageLevel;
     public int jewel;
+    public List<float> combiRate;
 
     public void StageUp()
     {
@@ -44,7 +50,17 @@ public class Resource : MonoBehaviour
         if (Stage > 10)
         {
             Area++;
-            Stage = 0;
+            Stage = 1;
         }
+    }
+    public void Event_Heal(int a)
+    {
+        Hp += a;
+        if (Hp >= mHp) Hp = mHp;
+    }
+    public void Event_Damage(int a)
+    {
+        Hp -= a;
+        if (Hp <= 0) Hp = 1;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public delegate void rewardAction();
@@ -24,6 +25,10 @@ public class RewardUnitSprite : MonoBehaviour
             Action();
             get = true;
             _prefab.color = Color.black;
+        }
+        if (get)
+        {
+            SceneManager.UnloadSceneAsync("EventScene");
         }
     }
 

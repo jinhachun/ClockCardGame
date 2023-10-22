@@ -28,7 +28,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Hp -= 10;
+                            Resource.Instance.Event_Damage(10);
                             Resource.Instance.money += 20;
                         });
                     }
@@ -36,7 +36,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Hp += 10;
+                            Resource.Instance.Event_Heal(10);
                         });
                     }
                     return null;

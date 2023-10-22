@@ -30,12 +30,10 @@ public class Event : MonoBehaviour
             _ExitButton.SpriteChange(ExitButtonSprites(exit));
             exit = !exit;
         });
-        OnEnable();
+        Invoke("EventSet",0.1f);
     }
-    public void OnEnable()
+    public void EventSet()
     {
-        Debug.Log(Resource.Instance.Area);
-        Debug.Log(EventDatabase.Instance.EventList_area(Resource.Instance.Area).Count);
         EventSet(EventDatabase.Instance.Event_area(Resource.Instance.Area));
     }
     public void EventSet(EventStruct a)

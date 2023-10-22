@@ -43,7 +43,6 @@ public class BattleManager : MonoBehaviour
     List<Card> Grave;
     List<Card> Cards;
     Sequence mySequence;
-
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
 
     public int area;
@@ -65,8 +64,10 @@ public class BattleManager : MonoBehaviour
     public void Start()
     {
         mySequence = DOTween.Sequence().SetAutoKill(false);
-        BaseDeck = Resource.Instance.Deck;
-        
+        Random.InitState(System.DateTime.Now.Millisecond);
+        var randomized = Resource.Instance.Deck.OrderBy(item => Random.Range(0,999)).ToList();
+        BaseDeck = randomized;
+
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = EnemyType.Mini;
         RerollChance = 1;
@@ -488,7 +489,6 @@ public class BattleManager : MonoBehaviour
         Resource.Instance.StageUp();
         SceneManager.LoadScene("MainScene");
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync("BattleScene");
 
     }
     public void DrawCard(Sequence sq)

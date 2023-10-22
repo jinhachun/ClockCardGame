@@ -56,24 +56,24 @@ public class CardDatabase : MonoBehaviour
     public string SpeciesCombinationText(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return " X1";
-        else if (combi == 1) return "OnePair X1.2";
-        else if (combi == 2) return "TwoPair X1.4";
-        else if (combi == 3) return "Triple X1.6";
-        else if (combi == 4) return "FullHouse X1.8";
-        else if (combi == 5) return "FourCard X2";
-        else return "FiveCard X3";
+        if (combi == 0) return " X"+Resource.Instance.combiRate[0];
+        else if (combi == 1) return "OnePair X"+Resource.Instance.combiRate[1];
+        else if (combi == 2) return "TwoPair X"+Resource.Instance.combiRate[2];
+        else if (combi == 3) return "Triple X" + Resource.Instance.combiRate[3];
+        else if (combi == 4) return "FullHouse X" + Resource.Instance.combiRate[4];
+        else if (combi == 5) return "FourCard X" + Resource.Instance.combiRate[5];
+        else return "FiveCard X" + Resource.Instance.combiRate[6];
     }
     public float SpeciesCombiRate(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return 1f;
-        else if (combi == 1) return 1.2f;
-        else if (combi == 2) return 1.4f;
-        else if (combi == 3) return 1.6f;
-        else if (combi == 4) return 1.8f;
-        else if (combi == 5) return 2;
-        else return 3;
+        if (combi == 0) return Resource.Instance.combiRate[0];
+        else if (combi == 1) return Resource.Instance.combiRate[1];
+        else if (combi == 2) return Resource.Instance.combiRate[2];
+        else if (combi == 3) return Resource.Instance.combiRate[3];
+        else if (combi == 4) return Resource.Instance.combiRate[4];
+        else if (combi == 5) return Resource.Instance.combiRate[5];
+        else return Resource.Instance.combiRate[6];
 
     }
     public int TypeCombination(List<TYPE> list)
