@@ -228,6 +228,7 @@ public class BattleManager : MonoBehaviour
     private List<TMP_Text> CombiText;
     public void WatingRerollPhase()
     {
+        
         ChkButtons = new List<RerollButton>();
         SpeciesCombi = new List<SPECIES>();
         TypeCombi = new List<TYPE>();
@@ -267,7 +268,7 @@ public class BattleManager : MonoBehaviour
             Btns.Add(chkBtn);
             SpeciesCombi.Add(Hand[i].Species);
             TypeCombi.Add(Hand[i].Type);
-            CardDatabase.Instance.BeforeCardActionFunc(Hand[i].name)();
+            CardDatabase.Instance.BeforeCardActionFunc(Hand[i])();
         }
         var SpeciesCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
         SpeciesCombiText.text = CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi);
@@ -280,8 +281,7 @@ public class BattleManager : MonoBehaviour
         int typeCombi = CardDatabase.Instance.TypeCombination(TypeCombi);
         WatingRerollPhase_TextSet(typeCombi, TypeCombiText);
         CombiText.Add(TypeCombiText);
-
-        Debug.Log(tmpRate);
+        
         AttDefCal(tmpAtt, tmpDef, tmpRate);
     }
     public void WatingRerollPhase_TextSet(int combi,TMP_Text text)
@@ -487,6 +487,7 @@ public class BattleManager : MonoBehaviour
     {
         Resource.Instance.money += reward;
         Resource.Instance.StageUp();
+        Resource.Instance.setHp(Hp);
         SceneManager.LoadScene("MainScene");
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
 

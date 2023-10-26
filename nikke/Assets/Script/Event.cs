@@ -30,11 +30,12 @@ public class Event : MonoBehaviour
             _ExitButton.SpriteChange(ExitButtonSprites(exit));
             exit = !exit;
         });
-        Invoke("EventSet",0.1f);
+        Invoke("EventSet",0.02f);
     }
     public void EventSet()
     {
-        EventSet(EventDatabase.Instance.Event_area(Resource.Instance.Area));
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        EventSet(EventDatabase.Instance.Event_area(Resource.Instance.Area,Resource.Instance.Stage==1));
     }
     public void EventSet(EventStruct a)
     {

@@ -17,7 +17,7 @@ public class CardShop : MonoBehaviour
         get
         {
             if (card == null) return 0;
-            else return BuyPrice * card.tier * card.tier * (100 - Resource.Instance.VillageLevel["House"]*4)/100;
+            else return BuyPrice * card.tier * card.tier * card.tier * (50 - Resource.Instance.VillageLevel["House"]*4)/100;
         }
     }
     [SerializeField] public Card card;

@@ -47,11 +47,15 @@ public class Resource : MonoBehaviour
     public void StageUp()
     {
         Stage++;
-        if (Stage > 10)
+        if (Stage > 5)
         {
             Area++;
             Stage = 1;
         }
+    }
+    public void setHp(int a)
+    {
+        Hp = a;
     }
     public void Event_Heal(int a)
     {

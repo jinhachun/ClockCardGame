@@ -14,8 +14,8 @@ public class EventDatabase : MonoBehaviour
     {
         instance = this;
     }
-    public List<EventStruct> EventList_area(int area) => EventList.Where(x => x._area.Equals(area)).ToList();
-    public EventStruct Event_area(int area) => EventList_area(area)[Random.Range(0, EventList_area(area).Count)];
+    public List<EventStruct> EventList_area(int area,bool boss) => EventList.Where(x => x._area.Equals(area) && x._boss==boss).ToList();
+    public EventStruct Event_area(int area,bool boss) => EventList_area(area,boss)[Random.Range(0, EventList_area(area,boss).Count)];
 
     
     public rewardAction eventSelect(string eventName, int selectIndex)
@@ -28,20 +28,36 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Event_Damage(10);
-                            Resource.Instance.money += 20;
+                            Resource.Instance.Event_Damage(20);
+                            Resource.Instance.money += 40;
                         });
                     }
                     else if (selectIndex == 1)
                     {
                         return (() =>
                         {
-                            Resource.Instance.Event_Heal(10);
+                            Resource.Instance.Event_Heal(20);
                         });
                     }
                     return null;
                 }
-           
+            case "신병받아라!":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck.Add(CardDatabase.Instance.card("기사돌이"));
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                        });
+                    }
+                    return null;
+                }
         }
         return null;
 
@@ -56,6 +72,7 @@ public struct EventStruct
     public string _eventText;
     public Sprite _eventSprite;
     public List<EventSelection> _eventSelect;
+    public bool _boss;
 }
 [Serializable]
 public struct EventSelection

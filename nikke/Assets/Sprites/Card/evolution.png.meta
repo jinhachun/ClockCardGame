@@ -221,6 +221,279 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 5_knightdol
+      rect:
+        serializedVersion: 2
+        x: 2441
+        y: 3927
+        width: 305
+        height: 300
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eee58c0e0919014685e9e1fcf86b4a1
+      internalID: 1702036209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 6_crusadol
+      rect:
+        serializedVersion: 2
+        x: 3518
+        y: 4431
+        width: 345
+        height: 343
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb51a8df37bf5a74783bb829644e1add
+      internalID: -531305191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 7_KIdongleNG
+      rect:
+        serializedVersion: 2
+        x: 4557
+        y: 4919
+        width: 354
+        height: 332
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07bbd17f444cc8a4f950cea19ada3eab
+      internalID: -377451114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 8_Baudongle
+      rect:
+        serializedVersion: 2
+        x: 4571
+        y: 4411
+        width: 330
+        height: 350
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6dd4336971bf34290244b9ebdf08a8
+      internalID: 2092307353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 9_darkknightdol
+      rect:
+        serializedVersion: 2
+        x: 3550
+        y: 3940
+        width: 316
+        height: 292
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9e714838151ba1468a78fa99bea8ee3
+      internalID: -1068784308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 10_rottenknightdol
+      rect:
+        serializedVersion: 2
+        x: 4552
+        y: 3930
+        width: 404
+        height: 339
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36a5917e4cc9c0a4b815e3583e9362d5
+      internalID: 1336874911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 11_kingzombie
+      rect:
+        serializedVersion: 2
+        x: 2416
+        y: 3039
+        width: 314
+        height: 261
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf70456608078d44f998aa0dc90d0df9
+      internalID: -540715397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 12_kingkingzombie
+      rect:
+        serializedVersion: 2
+        x: 3558
+        y: 3008
+        width: 317
+        height: 295
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42431974a686a0a46864c235a674014b
+      internalID: -1701955638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 13_reaper
+      rect:
+        serializedVersion: 2
+        x: 3558
+        y: 2633
+        width: 330
+        height: 292
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb42fd6723083504cac23812f1e6a38f
+      internalID: -1792447714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 14_hades
+      rect:
+        serializedVersion: 2
+        x: 4545
+        y: 2584
+        width: 411
+        height: 423
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff22a2333cea9c44a2be1f615e88f66
+      internalID: 1988763040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 15_janissadol
+      rect:
+        serializedVersion: 2
+        x: 2447
+        y: 3499
+        width: 293
+        height: 306
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adb3e38f542c5584e98282d5bc4c6453
+      internalID: -332545350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 16_sultandol
+      rect:
+        serializedVersion: 2
+        x: 3561
+        y: 3500
+        width: 305
+        height: 312
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e9c8b1b440af23469b3cae3b68dfa68
+      internalID: 1556840480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 17_saladol
+      rect:
+        serializedVersion: 2
+        x: 4533
+        y: 3440
+        width: 393
+        height: 408
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 4, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e70e6d165a3204d82a386c5819a897
+      internalID: -73524960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -233,10 +506,23 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       0_Dongle: -207859412
+      10_rottenknightdol: 1336874911
+      11_kingzombie: -540715397
+      12_kingkingzombie: -1701955638
+      13_reaper: -1792447714
+      14_hades: 1988763040
+      15_janissadol: -332545350
+      16_sultandol: 1556840480
+      17_saladol: -73524960
       1_RecruitDong: -1345653317
       2_zombie: -1461477941
       3_Goblin: -602355744
       4_Canmon: 269951699
+      5_knightdol: 1702036209
+      6_crusadol: -531305191
+      7_KIdongleNG: -377451114
+      8_Baudongle: 2092307353
+      9_darkknightdol: -1068784308
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -20,7 +20,7 @@ public class VillageContent : MonoBehaviour
     }
     public void Upgrade()
     {
-        if (Resource.Instance.jewel > 0)
+        if (Resource.Instance.jewel > 0 && level<=5)
         {
             Resource.Instance.jewel--;
             Resource.Instance.VillageLevel[this.gameObject.name]++;

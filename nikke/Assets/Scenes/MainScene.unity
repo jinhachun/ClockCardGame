@@ -8163,7 +8163,9 @@ MonoBehaviour:
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
-    evol: []
+    evol:
+    - "\uAE30\uC0AC\uB3CC\uC774"
+    - "\uC608\uB2C8\uCCB4\uB3CC\uC774"
   - _img: {fileID: -1461477941, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uC880\uBE44"
@@ -8172,11 +8174,12 @@ MonoBehaviour:
     _stat:
       attack: 0
       defence: 3
-    _type: 5
+    _type: 3
     isExhaust: 1
     isEthereal: 0
     isFixed: 0
-    evol: []
+    evol:
+    - "\uC655\uC880\uBE44"
   - _img: {fileID: -602355744, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBA39\uAE68\uBE44"
@@ -8193,13 +8196,199 @@ MonoBehaviour:
   - _img: {fileID: 269951699, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 4
     _name: "\uAE61\uD1B5\uBAAC"
-    _text: "\uACF5\uACA9\uD558\uAE30 \uC804\uC5D0 \uACF5\uACA9\uB825\uC774  -2~+2\uB9CC\uD07C
-      \uBB34\uC791\uC704\uB85C \uBCC0\uD654\uD569\uB2C8\uB2E4."
+    _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744\uB54C\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC774 
+      -2~+2\uB9CC\uD07C \uBB34\uC791\uC704\uB85C \uBCC0\uD654\uD569\uB2C8\uB2E4."
     _tier: 2
     _stat:
       attack: 2
       defence: 2
     _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+  - _img: {fileID: 1702036209, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uAE30\uC0AC\uB3CC\uC774"
+    _text: "\uAE30\uC0AC\uC791\uC704\uB97C \uBC1B\uC740 \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
+    _tier: 3
+    _stat:
+      attack: 6
+      defence: 0
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uD06C\uB8E8\uC138\uB3CC\uC774"
+    - "\uD751\uAE30\uC0AC\uB3CC\uC774"
+  - _img: {fileID: -531305191, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uD06C\uB8E8\uC138\uB3CC\uC774"
+    _text: "\uC131\uC804\uC5D0 \uAE30\uAEBC\uC774 \uCC38\uC5EC\uD558\uB294 \uBA85\uC608\uB85C\uC6B4
+      \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 8
+      defence: 0
+    _type: 4
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "KI\uB3D9\uAE00NG"
+    - "\uBCF4\uB450\uC575\uB3CC\uC774"
+  - _img: {fileID: -377451114, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "KI\uB3D9\uAE00NG"
+    _text: "\uC720\uC544\uB3C5\uC874 \uB3D9\uAE00\uC774\uC758 \uC655\uC785\uB2C8\uB2E4"
+    _tier: 5
+    _stat:
+      attack: 15
+      defence: 0
+    _type: 4
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+  - _img: {fileID: 2092307353, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uBCF4\uB450\uC575\uB3CC\uC774"
+    _text: "\uACF5\uACA9\uD560\uB54C\uB9C8\uB2E4 \uB0B4 \uB371\uC758 \uCE74\uB4DC\uB4E4\uC758
+      \uACF5\uACA9\uB825\uC774 1 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 5
+      defence: 5
+    _type: 4
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+  - _img: {fileID: -1068784308, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uD751\uAE30\uC0AC\uB3CC\uC774"
+    _text: "\uAC15\uD55C \uD798\uC744 \uCD94\uAD6C\uD558\uB2E4 \uC0AC\uC545\uD574\uC9C4
+      \uAE30\uC0AC\uB3CC\uC774\uC785\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 10
+      defence: 0
+    _type: 5
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 1
+    evol:
+    - "\uBD80\uD328\uD55C\uAE30\uC0AC"
+  - _img: {fileID: 1336874911, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 3
+    _name: "\uBD80\uD328\uD55C\uAE30\uC0AC"
+    _text: "\uB108\uBB34 \uC0AC\uC545\uD574\uC838 \uB3D9\uAE00\uC774\uC758 \uD615\uD0DC\uB97C
+      \uC720\uC9C0\uD558\uC9C0 \uBABB\uD558\uACE0 \uAD34\uBB3C\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 20
+      defence: 0
+    _type: 5
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 1
+    evol: []
+  - _img: {fileID: -540715397, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 2
+    _name: "\uC655\uC880\uBE44"
+    _text: "\uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
+    _tier: 3
+    _stat:
+      attack: 0
+      defence: 4
+    _type: 3
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC655\uC655\uC880\uBE44"
+    - "\uC0AC\uC2E0"
+  - _img: {fileID: -1701955638, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 2
+    _name: "\uC655\uC655\uC880\uBE44"
+    _text: "\uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
+    _tier: 3
+    _stat:
+      attack: 0
+      defence: 5
+    _type: 3
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+  - _img: {fileID: -1792447714, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 2
+    _name: "\uC0AC\uC2E0"
+    _text: "\uAE30\uBCF8\uBC30\uC728\uC774 1.2\uAC00 \uB429\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 1
+      defence: 0
+    _type: 5
+    isExhaust: 0
+    isEthereal: 1
+    isFixed: 0
+    evol:
+    - "\uB9C8\uACC4\uC655"
+  - _img: {fileID: 1988763040, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 2
+    _name: "\uB9C8\uACC4\uC655"
+    _text: "\uAE30\uBCF8\uBC30\uC728\uC774 1.5\uAC00 \uB429\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 2
+      defence: 2
+    _type: 5
+    isExhaust: 0
+    isEthereal: 1
+    isFixed: 0
+    evol: []
+  - _img: {fileID: -332545350, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uC608\uB2C8\uCCB4\uB3CC\uC774"
+    _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
+      1 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 3
+    _stat:
+      attack: 3
+      defence: 0
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC220\uD0C4\uB3CC\uC774"
+  - _img: {fileID: 1556840480, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uC220\uD0C4\uB3CC\uC774"
+    _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
+      2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 5
+      defence: 0
+    _type: 1
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC0B4\uB77C\uB518\uB3CC\uC774"
+  - _img: {fileID: -73524960, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+    _species: 1
+    _name: "\uC0B4\uB77C\uB518\uB3CC\uC774"
+    _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
+      2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 3
+      defence: 5
+    _type: 1
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
@@ -8253,8 +8442,19 @@ MonoBehaviour:
       \uCE5C\uAD6C\uAC00 \uB420\uAE4C\uC694?"
     _eventSprite: {fileID: 21300000, guid: 3c8c6245d563c2f4484a5c658adf6824, type: 3}
     _eventSelect:
-    - _text: "\uC9D1\uC744 \uD134\uB2E4.(\uCCB4\uB825-10, \uB3C8+20)"
-    - _text: "\uCE5C\uAD6C\uAC00 \uB41C\uB2E4.(\uCCB4\uB825+10)"
+    - _text: "\uC9D1\uC744 \uD134\uB2E4.(\uCCB4\uB825-20, \uB3C8+40)"
+    - _text: "\uCE5C\uAD6C\uAC00 \uB41C\uB2E4.(\uCCB4\uB825+20)"
+    _boss: 0
+  - _area: 1
+    _eventName: "\uC2E0\uBCD1\uBC1B\uC544\uB77C!"
+    _eventText: "\uAE30\uC0AC\uB3CC\uC774 \uD55C \uBA85\uC774 \uB2F9\uC2E0\uC758
+      \uB371\uC5D0 \uC601\uC785\uB418\uACE0 \uC2F6\uC5B4\uD569\uB2C8\uB2E4."
+    _eventSprite: {fileID: 21300000, guid: 5f2cc8cac460f2143b147f67e9c1e0ee, type: 3}
+    _eventSelect:
+    - _text: "\uC601\uC785\uD55C\uB2E4. (\uB371\uC5D0 \uAE30\uC0AC\uB3CC\uC774 \uCD94\uAC00)"
+    - _text: "\uBB34\uC2DC\uD55C\uB2E4. (\uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0
+        \uC54A\uC74C)"
+    _boss: 0
 --- !u!1 &1813648926
 GameObject:
   m_ObjectHideFlags: 0

@@ -124,24 +124,58 @@ public class CardDatabase : MonoBehaviour
                 return (() => {
                     BattleManager.Instance.Hp += 2;
                 });
+            case "¿ÕÁ»ºñ":
+                return (() => {
+                    BattleManager.Instance.Hp += 4;
+                });
+            case "¿Õ¿ÕÁ»ºñ":
+                return (() => {
+                    BattleManager.Instance.Hp += 4;
+                });
             case "¸Ô±úºñ":
                 return (() => {
                     BattleManager.Instance.Hp -= 1;
                 });
-            case "±øÅë¸ó":
+            case "º¸µÎ¾Şµ¹ÀÌ":
                 return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack-2,b.Stat.attack+3));
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                    }
+                });
+            case "¿¹´ÏÃ¼µ¹ÀÌ":
+                return (() => {
+                    b.StatChange("Attack", b.Stat.attack+1);
+                });
+            case "¼úÅºµ¹ÀÌ":
+                return (() => {
+                    b.StatChange("Attack", b.Stat.attack + 2);
+                });
+            case "»ì¶óµòµ¹ÀÌ":
+                return (() => {
+                    b.StatChange("Attack", b.Stat.attack * 2);
                 });
         }
         return (() => { });
     }
-    public CardAction BeforeCardActionFunc(string a)
+    public CardAction BeforeCardActionFunc(Card b)
     {
+        string a = b.name;
         switch (a)
         {
-            case "È­¾Æ·Â!":
+            case "±øÅë¸ó":
                 return (() => {
-                    BattleManager.Instance.tmpRate *= 1.2;
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
+                });
+            case "»ç½Å":
+                return (() => {
+                    if(BattleManager.Instance.tmpRate<1.2)
+                        BattleManager.Instance.tmpRate = 1.2;
+                });
+            case "¸¶°è¿Õ":
+                return (() => {
+                    if (BattleManager.Instance.tmpRate < 1.5)
+                        BattleManager.Instance.tmpRate = 1.5;
                 });
         }
         return (() => { });
