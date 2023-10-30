@@ -44,3 +44,6 @@ TagManager:
   - name: event
     uniqueID: 30083335
     locked: 0
+  - name: card
+    uniqueID: 2686681011
+    locked: 0

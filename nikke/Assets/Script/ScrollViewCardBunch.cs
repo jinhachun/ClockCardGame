@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class ScrollViewCardBunch : MonoBehaviour
 {
-    [SerializeField] GameObject _contents;
+    [SerializeField] RectTransform _contents;
     [SerializeField] RectTransform _backGround;
+    [SerializeField] RectTransform _Cards;
     [SerializeField] Card _card;
     List<Card> cardBunch;
     List<Card> cardsMade;
-    int x = -450;
-    int y = 100;
+    int x = -400;
+    int y = -175;
     int xBlank = 200;
     int yBlank = 250;
-    public void Awake()
+    public void OnEnable()
     {
         cardsMade = new List<Card>();
     }
@@ -36,6 +37,7 @@ public class ScrollViewCardBunch : MonoBehaviour
         foreach(var card in cards)
         {
             var cardTmp = Instantiate(_card,new Vector2(xpos, ypos),Quaternion.identity);
+            cardTmp.transform.localPosition = new Vector2(xpos, ypos);
             cardTmp.transform.localScale = new Vector2(70f, 70f);
             cardTmp.transform.SetParent(_contents.transform,false);
             xpos += xBlank;
@@ -43,10 +45,12 @@ public class ScrollViewCardBunch : MonoBehaviour
             cardTmp.Set(card.Str);
             cardTmp.layer = 505;
             cardTmp.setLayer(1,505);
+            cardTmp.transform.parent = _Cards.transform;
 
             cardsMade.Add(cardTmp);
         }
         _backGround.localScale = new Vector2(1100, ((cards.Count-1)/5+1)*yBlank + 150);
+        _contents.sizeDelta = new Vector2(_contents.rect.height,_backGround.transform.localScale.y);
 
     }
 }

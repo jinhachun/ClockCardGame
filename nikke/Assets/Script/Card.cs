@@ -64,6 +64,7 @@ public class Card : MonoBehaviour
     public void TouchableChange(bool a)
     {
         Touchable = a;
+        collider.enabled = a;
     }
 public void Set(CardStruct str)
     {
@@ -101,11 +102,12 @@ public void Set(CardStruct str)
     public void flip()
     {
         _cardBack.gameObject.SetActive(_cardBack.gameObject.activeInHierarchy?false:true);
+        TouchableChange(_cardBack.gameObject.activeInHierarchy ? false : true);
     }
     public void flip(bool a)
     {
         _cardBack.gameObject.SetActive(a ? false:true) ;
-        Touchable = a ? true : false;
+        TouchableChange(a);
     }
     
     public void setLayer(int a,int b)
@@ -134,7 +136,7 @@ public void Set(CardStruct str)
     void OnMouseOver()
     {
         if (!Touchable) return;
-        _visual.transform.localScale = new Vector2(1.5f, 1.5f);
+        _visual.transform.localScale = new Vector2(1.8f, 1.8f);
         setLayer(3,53+layer);
 
     }
@@ -144,9 +146,5 @@ public void Set(CardStruct str)
         if (!Touchable && _visual.transform.localScale.x == 0.8f) return;
         _visual.transform.localScale = new Vector2(0.8f, 0.8f);
         setLayer(0,50+ layer);
-    }
-    private void Update()
-    {
-        collider.enabled = !_cardBack.gameObject.activeInHierarchy;
     }
 }

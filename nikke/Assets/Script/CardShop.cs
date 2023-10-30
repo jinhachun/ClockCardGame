@@ -10,7 +10,6 @@ public class CardShop : MonoBehaviour
     [SerializeField] Card _CardPrefab;
     [SerializeField] TMP_Text _evolPer;
     [SerializeField] TMP_Text _evolPer2;
-    // Start is called before the first frame update
     public int BuyPrice;
     public int EvolPrice
     {
@@ -39,8 +38,16 @@ public class CardShop : MonoBehaviour
 
     public void Start()
     {
-        evolveUI(false);
+        evolveUI(1);
+        card_evol.Set(CardDatabase.Instance.card("동글이"));
+        percentTxt(100);
         UpdateTxt();
+        card.setLayer(1, 5);
+        card_evol.setLayer(1, 5);
+        card_evol2.setLayer(1, 5);
+        card.Touchable = false;
+        card_evol.Touchable = false;
+        card_evol2.Touchable = false;
     }
     public void Buy()
     {
@@ -48,17 +55,14 @@ public class CardShop : MonoBehaviour
         if (Resource.Instance.money >= BuyPrice) Resource.Instance.money -= BuyPrice;
         else return;
         card.gameObject.SetActive(true);
-        evolve(CardDatabase.Instance.card("동글이"));
-        evolveUI(true);
-        card.setLayer(1,5);
-        card_evol.setLayer(1, 5);
-        card_evol2.setLayer(1, 5);
-        card.Touchable = false;
-        card_evol.Touchable = false;
-        card_evol2.Touchable = false;
+        var tmp = CardDatabase.Instance.card("동글이");
+        evolve(tmp);
+        evolveUI(tmp.evol.Count);
         
 
         int random = Random.Range(0, 100);
+        if (card.Str.evol.Count == 1)
+            random = 100;
         percentTxt(random);
         UpdateTxt();
     }
@@ -75,17 +79,23 @@ public class CardShop : MonoBehaviour
         if (Resource.Instance.money < EvolPrice) return;
         if (card.Str.evol.Count == 0) return;
 
-        Resource.Instance.money -= BuyPrice;
+        Resource.Instance.money -= EvolPrice;
         int random = Random.Range(0, 101);
         if (random <= evolPer) evolve(card_evol.Str);
         else evolve(card_evol2.Str);
+
+        random = Random.Range(0, 100);
+        if (card.Str.evol.Count == 1)
+            random = 100;
+        percentTxt(random);
+        evolveUI(card.Str.evol.Count);
         UpdateTxt();
     }
     private void evolve(CardStruct c)
     {
         card.Set(c);
         if (card.Str.evol.Count == 0) {
-            evolveUI(false);
+            evolveUI(0);
             return ;
         }
         int random = Random.Range(0, card.Str.evol.Count);
@@ -94,13 +104,18 @@ public class CardShop : MonoBehaviour
         while (card.Str.evol.Count > 1 && random == tmp)
             random = Random.Range(0, card.Str.evol.Count);
         card_evol2.Set(CardDatabase.Instance.card(card.Str.evol[random]));
+
     }
-    private void evolveUI(bool a)
+    private void evolveUI(int n)
     {
+        bool a = false;
+        bool b = false;
+        if (n >= 1) a = true;
+        if (n >= 2) b = true;
         card_evol.gameObject.SetActive(a);
-        card_evol2.gameObject.SetActive(a);
+        card_evol2.gameObject.SetActive(b);
         _evolPer.enabled = a;
-        _evolPer2.enabled = a;
+        _evolPer2.enabled = b;
 
     }
     public void Recruit()

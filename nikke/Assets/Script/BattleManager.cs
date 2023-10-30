@@ -117,7 +117,7 @@ public class BattleManager : MonoBehaviour
     public void setBase()
     {
         Att = 0; Def = 0; Rate = 1;
-        tmpAtt = 0; tmpDef = 0; tmpRate = 1;
+        tmpAtt = 0; tmpDef = 0; tmpRate = 1; tmpReroll = 0;
         Enemies = new List<Enemy>();
         Deck = new List<Card>();
         Hand = new List<Card>();
@@ -145,10 +145,11 @@ public class BattleManager : MonoBehaviour
         {
             var tmp = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
             int Layer = 50 + (BaseDeck.Count - cnt) * 3;
+            tmp.TouchableChange(false);
             tmp.setLayer(0, Layer);
             tmp.Set(tmpCard);
             Deck.Add(tmp);
-            moveCard(sq, tmp, DeckPos(0), 1f/(float)BaseDeck.Count, true, false);
+            moveCard(sq, tmp, DeckPos(0), 0.5f/(float)BaseDeck.Count, true, false);
             
             cnt++;
         }
@@ -204,6 +205,7 @@ public class BattleManager : MonoBehaviour
     public int tmpAtt;
     public int tmpDef;
     public double tmpRate;
+    public int tmpReroll;
     public void DrawPhase()
     {
         Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
@@ -314,6 +316,15 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
+    
+    public void rerolladd(int n,bool tmp)
+    {
+        if (tmp)
+            tmpReroll++;
+        else
+            RerollChance++;
+        RerollText.text = "Chance : " + RerollChance.ToString();
+    }
 
     public void AttDefCal(int a, int b, double r)
     {
@@ -372,42 +383,12 @@ public class BattleManager : MonoBehaviour
         Hand.Clear();
         Shield = Def;
         bool critical = Resource.Instance.VillageLevel["Church"] * 3 >= Random.Range(0, 100);
-        var AttLeft = !critical?Att:Att*2;
-        var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-
-
-        int loopcnt = 0;
         sq.AppendCallback(() =>
         {
-            while (Enemies.Count > 0 && AttLeft > 0)
+            if (Enemies.Count > 0)
             {
-
-                target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-                var tmpAttLeft = AttLeft - target._hp;
-
-                target._hp -= AttLeft;
-                bool lethal = (target._hp <= 0);
-                if (lethal)
-                {
-                    DamagePopup.Create(target.transform.position, AttLeft + target._hp, critical, lethal);
-                    var deadEnemy = target;
-                    target._hp = 0;
-                    Enemies.Remove(deadEnemy);
-                    deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
-                    {
-                        Destroy(deadEnemy._hpBar.gameObject);
-                        Destroy(deadEnemy.gameObject);
-                    });
-                }else
-                    DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
-                AttLeft = tmpAttLeft;
-
-                loopcnt++;
-                if (loopcnt > 1000)
-                {
-                    Debug.Log("????");
-                    break;
-                }
+                var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+                enemyDamage(Att, critical, target);
             }
         });
 
@@ -419,13 +400,52 @@ public class BattleManager : MonoBehaviour
                 if (enem._hp <= 0) Enemies.Remove(enem);
             }
             tmpAtt = 0; tmpDef = 0; tmpRate = 1;
-            if (RerollChance <= 0) RerollChance++;
+            if(RerollChance<=0) RerollChance++;
+            RerollChance += tmpReroll;
+            tmpReroll = 0;
             RerollText.text = "Chance : " + RerollChance.ToString();
             if (Enemies.Count == 0)
                 ChangeState(BattleState.Reward);
             else
                 ChangeState(BattleState.EnemyAttack);
         });
+    }
+    public void enemyDamage(int dam,bool critical,Enemy target)
+    {
+        var AttLeft = !critical ? dam : dam * 2;
+        int loopcnt = 0;
+
+        while (Enemies.Count > 0 && AttLeft > 0)
+        {
+
+            target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+            var tmpAttLeft = AttLeft - target._hp;
+
+            target._hp -= AttLeft;
+            bool lethal = (target._hp <= 0);
+            if (lethal)
+            {
+                DamagePopup.Create(target.transform.position, AttLeft + target._hp, critical, lethal);
+                var deadEnemy = target;
+                target._hp = 0;
+                Enemies.Remove(deadEnemy);
+                deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
+                {
+                    Destroy(deadEnemy._hpBar.gameObject);
+                    Destroy(deadEnemy.gameObject);
+                });
+            }
+            else
+                DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
+            AttLeft = tmpAttLeft;
+
+            loopcnt++;
+            if (loopcnt > 1000)
+            {
+                Debug.Log("????");
+                break;
+            }
+        }
     }
     public int patternCnt;
     public void EnemyAttackPhase()
@@ -436,27 +456,7 @@ public class BattleManager : MonoBehaviour
         {
             if (Enemy.Pattern._enemyPattern == EnemyPattern.ATT)
             {
-                var dam = Enemy.damage;
-
-                int FinalDamage = Shield > dam ? 0 : dam - Shield;
-                Shield = Shield > dam ? Shield - dam : 0;
-                if (FinalDamage > 0)
-                {
-                    sq.AppendCallback(() =>
-                    {
-                        Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
-                        Hp -= FinalDamage;
-                    });
-                    sq.AppendInterval(0.8f);
-                }
-                else
-                {
-                    sq.AppendCallback(() =>
-                    {
-                        Enemy.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
-                    });
-                    sq.AppendInterval(0.2f);
-                }
+                takeDamage(sq, Enemy);
             }else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
             {
                 Enemy.setAttackBuff();
@@ -475,6 +475,40 @@ public class BattleManager : MonoBehaviour
             ChangeState(BattleState.EndTurn);
         });
     }
+    public void takeDamage(int dam)
+    {
+        int FinalDamage = Shield > dam ? 0 : dam - Shield;
+        Shield = Shield > dam ? Shield - dam : 0;
+        if (FinalDamage > 0)
+        {
+             Hp -= FinalDamage;
+        }
+        if (Hp <= 0) ChangeState(BattleState.Lose);
+    }
+    public void takeDamage(Sequence sq, Enemy Enemy)
+    {
+        var dam = Enemy.damage;
+
+        int FinalDamage = Shield > dam ? 0 : dam - Shield;
+        Shield = Shield > dam ? Shield - dam : 0;
+        if (FinalDamage > 0)
+        {
+            sq.AppendCallback(() =>
+            {
+                Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
+                Hp -= FinalDamage;
+            });
+            sq.AppendInterval(0.8f);
+        }
+        else
+        {
+            sq.AppendCallback(() =>
+            {
+                Enemy.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
+            });
+            sq.AppendInterval(0.2f);
+        }
+    }
     public void EndTurnPhase()
     {
         foreach (var Enemy in Enemies) Enemy.TurnEnd();
@@ -492,12 +526,26 @@ public class BattleManager : MonoBehaviour
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
 
     }
+    public void AddCard(Sequence sq, Card card, bool deck)
+    {
+        if (deck)
+        {
+            Deck.Add(card);
+            moveCard(sq, card, DeckPos(0), 0.1f, true, false);
+            ShuffleDeck(sq);
+        }
+        else
+        {
+            Grave.Add(card);
+            moveCard(sq, card, GravePos, 0.1f, true, false);
+        }
+    }
     public void DrawCard(Sequence sq)
     {
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.05f, true, false); card.TouchableChange(true); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.03f, true, false); card.TouchableChange(true); }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -527,7 +575,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < Deck.Count; i++)
         {
             Deck[i].setLayer(Deck.Count - i, 50);
-            moveCard(sq, Deck[i], DeckPos(i), 0.05f, true);
+            moveCard(sq, Deck[i], DeckPos(i), 0.02f, true);
         }
     }
     public void deckCntClick(List<Card> list)

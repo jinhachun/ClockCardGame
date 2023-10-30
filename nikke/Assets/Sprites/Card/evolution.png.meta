@@ -494,6 +494,153 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 18_lizard
+      rect:
+        serializedVersion: 2
+        x: 2449
+        y: 2143
+        width: 275
+        height: 283
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf6f42431e912543bae0e8e88466bf9
+      internalID: -1743205979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 19_T-rex
+      rect:
+        serializedVersion: 2
+        x: 3544
+        y: 2117
+        width: 342
+        height: 349
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b403ff11514c2e040b067c6f73e569a6
+      internalID: -2057773683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 20_blackT-Rex
+      rect:
+        serializedVersion: 2
+        x: 4610
+        y: 2113
+        width: 355
+        height: 348
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a996434e21e5f1349ae9a6c764379f02
+      internalID: -1202528877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 21_Shroomblin
+      rect:
+        serializedVersion: 2
+        x: 2445
+        y: 1689
+        width: 285
+        height: 294
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7cf7e90b00c9984b83b528167cc58dc
+      internalID: 1503569921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 22_Quadshroomblin
+      rect:
+        serializedVersion: 2
+        x: 3583
+        y: 1672
+        width: 361
+        height: 325
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06cf17ccbb4d81644b66d4de2a4f170e
+      internalID: -394952563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 23_Shroovely
+      rect:
+        serializedVersion: 2
+        x: 4625
+        y: 1641
+        width: 322
+        height: 366
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5688cfe84a1bb43b7eff1e31f4a56c
+      internalID: -70427969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 24_Fatmon
+      rect:
+        serializedVersion: 2
+        x: 4596
+        y: 1193
+        width: 343
+        height: 338
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d43d71b05d29524f869323ebe9d4477
+      internalID: -1939962707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -514,7 +661,14 @@ TextureImporter:
       15_janissadol: -332545350
       16_sultandol: 1556840480
       17_saladol: -73524960
+      18_lizard: -1743205979
+      19_T-rex: -2057773683
       1_RecruitDong: -1345653317
+      20_blackT-Rex: -1202528877
+      21_Shroomblin: 1503569921
+      22_Quadshroomblin: -394952563
+      23_Shroovely: -70427969
+      24_Fatmon: -1939962707
       2_zombie: -1461477941
       3_Goblin: -602355744
       4_Canmon: 269951699

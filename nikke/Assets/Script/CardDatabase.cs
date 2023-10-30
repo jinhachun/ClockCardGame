@@ -28,6 +28,8 @@ public class CardDatabase : MonoBehaviour
         int a = RandomCardIndex;
         return card(a);
     }
+    public List<CardStruct> cardByTierList(int a) => cardDatabase.Where(x => x._tier <= a).ToList();
+    public CardStruct cardByTier(int a) => cardByTierList(a)[Random.Range(0,cardByTierList(a).Count)];
     public Sprite btn(int i) => btnSprites[i];
     public Sprite speciesSprite(SPECIES c)
     {
@@ -134,7 +136,7 @@ public class CardDatabase : MonoBehaviour
                 });
             case "¸Ô±úºñ":
                 return (() => {
-                    BattleManager.Instance.Hp -= 1;
+                    BattleManager.Instance.takeDamage(1);
                 });
             case "º¸µÎ¾Şµ¹ÀÌ":
                 return (() => {
@@ -154,6 +156,38 @@ public class CardDatabase : MonoBehaviour
             case "»ì¶óµòµ¹ÀÌ":
                 return (() => {
                     b.StatChange("Attack", b.Stat.attack * 2);
+                });
+            case "¸®ÀÚµå":
+                return (() => {
+                    BattleManager.Instance.takeDamage(2);
+                });
+            case "Æ¼¶ó³ë":
+                return (() => {
+                    BattleManager.Instance.takeDamage(3);
+                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100) 
+                        foreach (Enemy tmp in BattleManager.Instance.Enemies)
+                         BattleManager.Instance.enemyDamage(5,false, tmp);
+                });
+            case "ºí·¢Æ¼¶ó³ë":
+                return (() => {
+                    BattleManager.Instance.takeDamage(5);
+                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
+                        foreach (Enemy tmp in BattleManager.Instance.Enemies)
+                        BattleManager.Instance.enemyDamage(10, false, tmp);
+                });
+
+            case "¹ö¼¸±úºñ":
+                return (() => {
+                    BattleManager.Instance.rerolladd(1,true);
+                });
+            case "Äõµå¹ö¼¸±úºñ":
+                return (() => {
+                    BattleManager.Instance.rerolladd(1,true);
+                });
+            case "¸Ôº¸±«¼ö":
+                return (() => {
+                    var target = BattleManager.Instance.targetEnemy.Count == 0 ? BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)] : BattleManager.Instance.targetEnemy[0];
+                    BattleManager.Instance.enemyDamage(BattleManager.Instance.Def, false, target);
                 });
         }
         return (() => { });
@@ -176,6 +210,10 @@ public class CardDatabase : MonoBehaviour
                 return (() => {
                     if (BattleManager.Instance.tmpRate < 1.5)
                         BattleManager.Instance.tmpRate = 1.5;
+                });
+            case "¹ö¼¸¼øÀÌ":
+                return (() => {
+                    BattleManager.Instance.rerolladd(1,false);
                 });
         }
         return (() => { });

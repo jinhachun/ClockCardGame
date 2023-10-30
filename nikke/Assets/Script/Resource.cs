@@ -6,6 +6,7 @@ public class Resource : MonoBehaviour
 {
     private static Resource instance;
     public static Resource Instance => instance;
+    public int startDeckTier;
     public void Awake()
     {
         if (instance != this && instance != null)
@@ -30,7 +31,7 @@ public class Resource : MonoBehaviour
         Deck = new List<CardStruct>();
         for (int i = 0; i < 20; i++)
         {
-            var tmp = (CardDatabase.Instance.RandomCard());
+            var tmp = (CardDatabase.Instance.cardByTier(startDeckTier));
             Deck.Add(tmp);
         }
     }
