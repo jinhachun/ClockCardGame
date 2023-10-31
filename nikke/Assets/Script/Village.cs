@@ -5,6 +5,10 @@ using TMPro;
 public class Village : MonoBehaviour
 {
     [SerializeField] TMP_Text _jewel;
+    public void Start()
+    {
+        TextUpdate();
+    }
     private void FixedUpdate()
     {
         Invoke("TextUpdate", 0.5f);

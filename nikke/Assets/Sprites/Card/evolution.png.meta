@@ -641,6 +641,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 25_goldmon
+      rect:
+        serializedVersion: 2
+        x: 2481
+        y: 834
+        width: 280
+        height: 279
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bf26f47871877d4991a9c862bf6cd90
+      internalID: -185403328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 26_parvenudon
+      rect:
+        serializedVersion: 2
+        x: 3601
+        y: 825
+        width: 265
+        height: 253
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b1a4bc8af48c048ac1ac1ded41b2ad
+      internalID: 756823788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 27_kingMidons
+      rect:
+        serializedVersion: 2
+        x: 4548
+        y: 783
+        width: 410
+        height: 318
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594f2ab8368fc2941a9267f8200802bc
+      internalID: -1437287443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 28_canbot
+      rect:
+        serializedVersion: 2
+        x: 2506
+        y: 449
+        width: 256
+        height: 224
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ade787b5e5b1384aa7c3224db4cc3b3
+      internalID: 1736501266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 29_punchbot
+      rect:
+        serializedVersion: 2
+        x: 3632
+        y: 389
+        width: 266
+        height: 264
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c43e92f9d683da4cbf549bd629fb858
+      internalID: -1473496071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -669,6 +774,11 @@ TextureImporter:
       22_Quadshroomblin: -394952563
       23_Shroovely: -70427969
       24_Fatmon: -1939962707
+      25_goldmon: -185403328
+      26_parvenudon: 756823788
+      27_kingMidons: -1437287443
+      28_canbot: 1736501266
+      29_punchbot: -1473496071
       2_zombie: -1461477941
       3_Goblin: -602355744
       4_Canmon: 269951699

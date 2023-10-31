@@ -189,6 +189,47 @@ public class CardDatabase : MonoBehaviour
                     var target = BattleManager.Instance.targetEnemy.Count == 0 ? BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)] : BattleManager.Instance.targetEnemy[0];
                     BattleManager.Instance.enemyDamage(BattleManager.Instance.Def, false, target);
                 });
+
+            case "È²±Ý¸ó":
+                return (() => {
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        if(tmp.name.Equals("È²±Ý¸ó"))
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                    }
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        if (tmp.name.Equals("È²±Ý¸ó"))
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                    }
+                });
+            case "µ·º­¶ôµ¿±Û":
+                return (() => {
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        if (tmp.name.Equals("È²±Ý¸ó"))
+
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                        }
+                    
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        if (tmp.name.Equals("È²±Ý¸ó"))
+                        {
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                        }
+
+                    }
+                });
+            case "¸¶ÀÌµ¿½º¿Õ":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card("È²±Ý¸ó"));
+                    queue.Enqueue(CardDatabase.instance.card("È²±Ý¸ó"));
+                    BattleManager.Instance.AddCard(queue,false);
+                });
         }
         return (() => { });
     }
@@ -199,8 +240,17 @@ public class CardDatabase : MonoBehaviour
         {
             case "±øÅë¸ó":
                 return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 2));
                 });
+            case "±øÅëº¿":
+                return (() => {
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 2));
+                });
+            case "ÆÝÄ¡º¿":
+                return (() => {
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 3));
+                });
+            
             case "»ç½Å":
                 return (() => {
                     if(BattleManager.Instance.tmpRate<1.2)

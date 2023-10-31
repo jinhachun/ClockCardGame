@@ -29,21 +29,22 @@ public class DamagePopup : MonoBehaviour
     // Update is called once per frame
     public void Setup(int dam,bool critical,bool lethal)
     {
+        float randomScale = Random.Range(80, 120);
         if (textMesh == null) Debug.Log("??");
         textMesh.text = (dam+"");
         if (critical)
         {
-            textMesh.fontSize = 10f;
+            textMesh.fontSize = 10f*randomScale/100;
             txtColor = Color.red;
         }
         else if (lethal)
         {
-            textMesh.fontSize = 5f;
+            textMesh.fontSize = 5f * randomScale / 100; ;
             txtColor = Color.blue;
         }
         else
         {
-            textMesh.fontSize = 5f;
+            textMesh.fontSize = 5f * randomScale / 100; ;
             txtColor = Color.white;
         }
         textMesh.color = txtColor;

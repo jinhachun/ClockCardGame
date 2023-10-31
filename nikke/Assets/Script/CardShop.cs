@@ -36,11 +36,24 @@ public class CardShop : MonoBehaviour
     public string recruitButtonTxt;
     public string delButtonTxt;
 
+    CardStruct FIRSTCARD => CardDatabase.Instance.card("동글이");
     public void Start()
     {
         evolveUI(1);
-        card_evol.Set(CardDatabase.Instance.card("동글이"));
-        percentTxt(100);
+        if (Resource.Instance.shopcard._name.Equals(FIRSTCARD._name))
+        {
+            card_evol.Set(Resource.Instance.shopcard);
+            percentTxt(100);
+        }
+        else
+        {
+            setCard(Resource.Instance.shopcard);
+            int random = Random.Range(0, 100);
+            if (card.Str.evol.Count == 1)
+                random = 100;
+            percentTxt(random);
+            evolveUI(card.Str.evol.Count);
+        }
         UpdateTxt();
         card.setLayer(1, 5);
         card_evol.setLayer(1, 5);
@@ -55,9 +68,8 @@ public class CardShop : MonoBehaviour
         if (Resource.Instance.money >= BuyPrice) Resource.Instance.money -= BuyPrice;
         else return;
         card.gameObject.SetActive(true);
-        var tmp = CardDatabase.Instance.card("동글이");
-        evolve(tmp);
-        evolveUI(tmp.evol.Count);
+        var tmp = FIRSTCARD;
+        setCard(tmp);
         
 
         int random = Random.Range(0, 100);
@@ -81,8 +93,8 @@ public class CardShop : MonoBehaviour
 
         Resource.Instance.money -= EvolPrice;
         int random = Random.Range(0, 101);
-        if (random <= evolPer) evolve(card_evol.Str);
-        else evolve(card_evol2.Str);
+        if (random <= evolPer) setCard(card_evol.Str);
+        else setCard(card_evol2.Str);
 
         random = Random.Range(0, 100);
         if (card.Str.evol.Count == 1)
@@ -122,14 +134,15 @@ public class CardShop : MonoBehaviour
     {
         if (!card.gameObject.activeInHierarchy) return;
         Resource.Instance.Deck.Add(card.Str);
+        Resource.Instance.shopcard = FIRSTCARD;
         Delete();
     }
     public void Delete()
     {
         if (!card.gameObject.activeInHierarchy) return;
         card.gameObject.SetActive(false);
-        card_evol.Set(CardDatabase.Instance.card("동글이"));
-        card_evol2.Set(CardDatabase.Instance.card("동글이"));
+        card_evol.Set(FIRSTCARD);
+        card_evol2.Set(FIRSTCARD);
         percentTxt(100);
         UpdateTxt();
     }
@@ -140,6 +153,14 @@ public class CardShop : MonoBehaviour
         _evolButtonTxt.text = evolButtonTxt + $" (${EvolPrice})";
         _recruitButtonTxt.text = recruitButtonTxt;
         _delButtonTxt.text = delButtonTxt;
+    }
+    public void setCard(CardStruct cardStruct)
+    {
+        card.gameObject.SetActive(true);
+        Resource.Instance.shopcard = cardStruct;
+        evolve(cardStruct);
+        evolveUI(cardStruct.evol.Count);
+
     }
 
 }

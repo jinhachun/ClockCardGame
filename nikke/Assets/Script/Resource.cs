@@ -28,6 +28,7 @@ public class Resource : MonoBehaviour
         VillageLevel.Add("Bath", 0);
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
         money = 100; jewel = 10;
+        shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
         for (int i = 0; i < 20; i++)
         {
@@ -44,6 +45,7 @@ public class Resource : MonoBehaviour
     public Dictionary<string,int> VillageLevel;
     public int jewel;
     public List<float> combiRate;
+    public CardStruct shopcard;
 
     public void StageUp()
     {
@@ -67,5 +69,13 @@ public class Resource : MonoBehaviour
     {
         Hp -= a;
         if (Hp <= 0) Hp = 1;
+    }
+
+    [Space(10f)]
+    public int cardNum;
+    [ContextMenu("addCard")]
+    public void addCard()
+    {
+        Deck.Add(CardDatabase.Instance.card(cardNum));
     }
 }

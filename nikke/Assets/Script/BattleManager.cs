@@ -40,7 +40,7 @@ public class BattleManager : MonoBehaviour
     public List<Enemy> Enemies;
     public List<Card> Deck;
     public List<Card> Hand;
-    List<Card> Grave;
+    public List<Card> Grave;
     List<Card> Cards;
     Sequence mySequence;
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
@@ -59,6 +59,7 @@ public class BattleManager : MonoBehaviour
     DeckCount DeckCntTxt;
     DeckCount GraveCntTxt;
     ScrollViewCardBunch scrollViewCard;
+    Sequence cardAddSequence;
 
     public static BattleState GameState;
     public void Start()
@@ -71,11 +72,28 @@ public class BattleManager : MonoBehaviour
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = EnemyType.Mini;
         RerollChance = 1;
+        addcardQueue_Deck = new Queue<CardStruct>();
         ChangeState(BattleState.Set);
     }
     public void FixedUpdate()
     {
         if (Mhp < Hp) Hp = Mhp;
+
+        while (addcardQueue_Deck.Count > 0)
+        {
+            cardAddSequence = DOTween.Sequence().SetAutoKill(false);
+            CardStruct str = addcardQueue_Deck.Dequeue();
+            var card = Instantiate(_cardPrefab, new Vector2(Random.Range(-3f,3f), Random.Range(-3f,3f)), Quaternion.Euler(0,0,Random.Range(-90,90)));
+            card.flip(true);
+            card.TouchableChange(false);
+            card.Set(str);
+            cardAddSequence.AppendInterval(0.3f);
+            int Layer = 50 + Deck.Count;
+            card.setLayer(0, Layer);
+            Deck.Add(card);
+            moveCard(cardAddSequence, card, DeckPos(0), 0.4f, true, false);
+            cardAddSequence.AppendInterval(0.3f);
+        }
     }
     private void ChangeState(BattleState battleState)
     {
@@ -184,6 +202,8 @@ public class BattleManager : MonoBehaviour
     {
         var randomized = Deck.OrderBy(item => Random.value).ToList();
         Deck = randomized;
+        foreach (Card tmp in Deck)
+            tmp.flip(false);
         DeckCntTxt.Set(ref Deck);
         GraveCntTxt.Set(ref Grave);
         deckMoveCard(sq);
@@ -333,8 +353,7 @@ public class BattleManager : MonoBehaviour
         float speciesRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
         float tmpRate = typeRate * speciesRate * (float)r;
         Rate *= (double)Mathf.Round((tmpRate*100f))/100f;
-        foreach (var i in Hand) { Att += i.Stat.attack; Def += i.Stat.defence; }
-        this.Att = (int)(Rate * (double)Att);
+        foreach (var i in Hand) { Att += (int)(Rate*i.Stat.attack); Def += i.Stat.defence; }
         this.Def = (int)(Rate * (double)Def);
     }
     public bool RerollPhase_isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
@@ -351,6 +370,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 Grave.Add(card);
+                card.setLayer(0,50 + Grave.Count*3);
                 moveCard(sq, card, GravePos, 0.2f, true);
             }
         }
@@ -368,6 +388,17 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
+            bool critical = (10+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 100);
+            
+                sq.AppendCallback(() =>
+                {
+                if (Enemies.Count > 0)
+                    {
+                         var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+                        enemyDamage((int)(card.Stat.attack * Rate), critical, target);
+                    }
+                });
+            
             if (card.isExhaust)
             {
                 sq.Append(card.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(card.gameObject); }));
@@ -379,18 +410,11 @@ public class BattleManager : MonoBehaviour
                 moveCard(sq, card, GravePos, 0.2f, true);
                 card.setLayer(0, 50 + Grave.Count*3);
             }
+            
         }
         Hand.Clear();
         Shield = Def;
-        bool critical = Resource.Instance.VillageLevel["Church"] * 3 >= Random.Range(0, 100);
-        sq.AppendCallback(() =>
-        {
-            if (Enemies.Count > 0)
-            {
-                var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-                enemyDamage(Att, critical, target);
-            }
-        });
+        
 
         sq.AppendInterval(0.5f);
         sq.AppendCallback(() =>
@@ -526,19 +550,15 @@ public class BattleManager : MonoBehaviour
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
 
     }
-    public void AddCard(Sequence sq, Card card, bool deck)
+    Queue<CardStruct> addcardQueue_Deck;
+    public void AddCard(Queue<CardStruct> list, bool deck)
     {
-        if (deck)
+        Sequence sq = DOTween.Sequence();
+        while (list.Count > 0)
         {
-            Deck.Add(card);
-            moveCard(sq, card, DeckPos(0), 0.1f, true, false);
-            ShuffleDeck(sq);
+            addcardQueue_Deck.Enqueue(list.Dequeue());
         }
-        else
-        {
-            Grave.Add(card);
-            moveCard(sq, card, GravePos, 0.1f, true, false);
-        }
+        
     }
     public void DrawCard(Sequence sq)
     {
@@ -562,11 +582,24 @@ public class BattleManager : MonoBehaviour
             seq.Append(card.transform.DOMove(v, duration));
         else
             seq.Join(card.transform.DOMove(v, duration));
+        if (v.Equals(GravePos))
+        {
+            seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-90,90)), 0.2f));
+        }
+        else {
+            if (card.transform.rotation.z != 0)
+                card.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one, bool cardFlip)
     {
-        if (one)
-            seq.Append(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); })).AppendInterval(0.1f);
+        if (one) {
+            seq.Append(card.transform.DOMove(v, duration));
+            if(card.transform.rotation.z!=0)
+                seq.Join(card.transform.DORotate(new Vector3(0,0,0), 0.2f));
+            seq.AppendCallback(()=>card.flip(cardFlip));
+            seq.AppendInterval(0.05f);
+        }
         else
             seq.Join(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); }));
     }

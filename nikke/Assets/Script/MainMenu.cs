@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
         MenuList.Add(_Main);
         MenuList.Add(_Shop);
         MenuList.Add(_Village);
+        TextUpdate();
     }
     public void TextUpdate()
     {
