@@ -371,7 +371,11 @@ public class BattleManager : MonoBehaviour
             {
                 Grave.Add(card);
                 card.setLayer(0,50 + Grave.Count*3);
-                moveCard(sq, card, GravePos, 0.2f, true);
+                card.TouchableChange(false);
+                float ranTmpx = Random.Range(-30, 30) / 100f+ GravePosX;
+                float ranTmpy = Random.Range(-30, 30) / 100f+ GravePosY;
+                moveCard(sq, card, new Vector2(ranTmpx, ranTmpy), 0.2f, true);
+                sq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60, 60)), 0.2f));
             }
         }
         sq.AppendCallback(() =>
@@ -565,7 +569,7 @@ public class BattleManager : MonoBehaviour
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.03f, true, false); card.TouchableChange(true); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.5f, false, false); card.TouchableChange(true); }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -584,7 +588,7 @@ public class BattleManager : MonoBehaviour
             seq.Join(card.transform.DOMove(v, duration));
         if (v.Equals(GravePos))
         {
-            seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-90,90)), 0.2f));
+            seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60,60)), 0.2f));
         }
         else {
             if (card.transform.rotation.z != 0)
