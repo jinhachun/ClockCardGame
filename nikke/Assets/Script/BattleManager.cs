@@ -88,7 +88,7 @@ public class BattleManager : MonoBehaviour
             card.TouchableChange(false);
             card.Set(str);
             cardAddSequence.AppendInterval(0.3f);
-            int Layer = 50 + Deck.Count;
+            int Layer = 50 + Deck.Count*3;
             card.setLayer(0, Layer);
             Deck.Add(card);
             moveCard(cardAddSequence, card, DeckPos(0), 0.4f, true, false);

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Resource : MonoBehaviour
 {
     private static Resource instance;
     public static Resource Instance => instance;
+    [SerializeField] Card _cardPrefab;
     public int startDeckTier;
     public void Awake()
     {
@@ -69,6 +71,34 @@ public class Resource : MonoBehaviour
     {
         Hp -= a;
         if (Hp <= 0) Hp = 1;
+    }
+    public void Deck_Remove(string name)
+    {
+        foreach(CardStruct tmp in Deck)
+            if (tmp._name.Equals(name))
+            {
+                Deck.Remove(tmp);
+                var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
+                card.transform.localScale = new Vector2(2f, 2f);
+                card.Set(tmp);
+                card.setLayer(0, 500);
+                card.TouchableChange(false);
+                card.transform.DOScale(0, 1f).OnComplete(() => { Destroy(card.gameObject); });
+                return;
+            }
+    }
+    public void Deck_Add(string name)
+    {
+        CardStruct tmp = CardDatabase.Instance.card(name);
+        Deck.Add(tmp);
+
+        var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
+        card.transform.localScale = new Vector2(0f, 0f);
+        card.Set(tmp);
+        card.setLayer(0,500);
+        card.TouchableChange(false);
+        card.transform.DOScale(2, 1f).OnComplete(() => { Destroy(card.gameObject); });
+
     }
 
     [Space(10f)]

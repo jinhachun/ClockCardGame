@@ -16,7 +16,7 @@ public class CardShop : MonoBehaviour
         get
         {
             if (card == null) return 0;
-            else return BuyPrice * card.tier * card.tier * card.tier * (50 - Resource.Instance.VillageLevel["House"]*4)/100;
+            else return BuyPrice * card.tier * card.tier * card.tier ;
         }
     }
     [SerializeField] public Card card;
@@ -108,14 +108,19 @@ public class CardShop : MonoBehaviour
         card.Set(c);
         if (card.Str.evol.Count == 0) {
             evolveUI(0);
-            return ;
+            return;
         }
+        
         int random = Random.Range(0, card.Str.evol.Count);
         int tmp = random;
         card_evol.Set(CardDatabase.Instance.card(card.Str.evol[random]));
         while (card.Str.evol.Count > 1 && random == tmp)
             random = Random.Range(0, card.Str.evol.Count);
         card_evol2.Set(CardDatabase.Instance.card(card.Str.evol[random]));
+        if (3*Resource.Instance.VillageLevel["House"] > Random.Range(0, 101))
+        {
+            evolve(CardDatabase.Instance.card(card.Str.evol[random]));
+        }
 
     }
     private void evolveUI(int n)
@@ -133,7 +138,7 @@ public class CardShop : MonoBehaviour
     public void Recruit()
     {
         if (!card.gameObject.activeInHierarchy) return;
-        Resource.Instance.Deck.Add(card.Str);
+        Resource.Instance.Deck_Add(card.Str._name);
         Resource.Instance.shopcard = FIRSTCARD;
         Delete();
     }

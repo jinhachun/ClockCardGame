@@ -18,6 +18,7 @@ public class Event : MonoBehaviour
     [SerializeField] RewardUnitSprite _ButtonPrefab;
     [SerializeField] Transform _ButtonParent;
     List<RewardUnitSprite> buttonList;
+    
     bool exit;
     float blank = 0.6f;
     public void Start()
@@ -52,5 +53,13 @@ public class Event : MonoBehaviour
 
             buttonList.Add(Button);
         }
+    }
+
+    [Space(10f)]
+    public int eventNum;
+    [ContextMenu("eventChange")]
+    public void addCard()
+    {
+        EventSet(EventDatabase.Instance.eventNum(eventNum));
     }
 }

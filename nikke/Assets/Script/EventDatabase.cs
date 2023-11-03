@@ -14,9 +14,10 @@ public class EventDatabase : MonoBehaviour
     {
         instance = this;
     }
+    public EventStruct eventNum(int num)=>EventList[num];
     public List<EventStruct> EventList_area(int area,bool boss) => EventList.Where(x => x._area.Equals(area) && x._boss==boss).ToList();
     public EventStruct Event_area(int area,bool boss) => EventList_area(area,boss)[Random.Range(0, EventList_area(area,boss).Count)];
-
+    
     
     public rewardAction eventSelect(string eventName, int selectIndex)
     {
@@ -47,7 +48,24 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck.Add(CardDatabase.Instance.card("기사돌이"));
+                            Resource.Instance.Deck_Add("기사돌이");
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                        });
+                    }
+                    return null;
+                }
+            case "너 해고야!":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove("동글이");
                         });
                     }
                     else if (selectIndex == 1)
@@ -61,7 +79,7 @@ public class EventDatabase : MonoBehaviour
         }
         return null;
 
-
+        
     }
 }
 [Serializable]
@@ -69,6 +87,7 @@ public struct EventStruct
 {
     public int _area;
     public string _eventName;
+    [Multiline(4)]
     public string _eventText;
     public Sprite _eventSprite;
     public List<EventSelection> _eventSelect;

@@ -240,15 +240,15 @@ public class CardDatabase : MonoBehaviour
         {
             case "±øÅë¸ó":
                 return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 2));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
                 });
             case "±øÅëº¿":
                 return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 2));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
                 });
             case "ÆÝÄ¡º¿":
                 return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 3));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 4));
                 });
             
             case "»ç½Å":
@@ -275,6 +275,7 @@ public struct CardStruct
     public Sprite _img;
     public SPECIES _species;
     public string _name;
+    [Multiline(3)]
     public string _text;
     public int _tier;
     public STAT _stat;
