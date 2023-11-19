@@ -20,6 +20,7 @@ public struct EnemyStruct {
     public int _area;
     public EnemyType _enemyType;
     public List<pattern> _enemyPatterns;
+    public string _statusStruct;
 };
 [Serializable]
 public struct EnemySquadStruct

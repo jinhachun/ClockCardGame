@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] StatusUnit _status;
     [SerializeField] public SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _targetImg;
+    
 
     public EnemyStruct Str;
     public string _name;
@@ -16,13 +18,15 @@ public class Enemy : MonoBehaviour
     
     public EnemyType _enemyType;
     public List<pattern> _enemyPatterns;
+    public string _statusName;
     public EnemyHpBar _hpBar;
     bool isOver = false;
     public bool isTarget = false;
     int PatternIndex;
-    private double attackBuff = 0;
+    public double attackBuff = 0;
     public int damage => (int)attackBuff + Pattern._Value;
     public void setAttackBuff() { attackBuff += Pattern._Value; }
+    public void setAttackBuff(int a) { attackBuff += a; }
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;
@@ -35,8 +39,20 @@ public class Enemy : MonoBehaviour
         Debug.Log(this._enemyType + " " + EnemyDatabase.Instance.spriteSize(this._enemyType));
         this._img.transform.parent.localScale = EnemyDatabase.Instance.spriteSize(this._enemyType);
         this._enemyPatterns = enemyStruct._enemyPatterns;
+        if (!enemyStruct._statusStruct.Equals("¾øÀ½"))
+        {
+            this._statusName = enemyStruct._statusStruct;
+            this._status.set(StatusDatabase.Instance.Status(_statusName));
+        }
+        else
+        {
+            this._status.gameObject.SetActive(false);
+        }
+
+
         PatternIndex = 0;
     }
+    
     void Update()
     {
         if (isOver && Input.GetMouseButtonDown(0))

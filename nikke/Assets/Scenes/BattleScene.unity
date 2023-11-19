@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 723614868}
   - component: {fileID: 723614870}
   - component: {fileID: 723614871}
+  - component: {fileID: 723614872}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -413,6 +414,7 @@ MonoBehaviour:
       _Value: 10
     - _enemyPattern: 1
       _Value: 2
+    _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
     _name: "\uB625\uAC1C"
     _hp: 60
@@ -431,6 +433,7 @@ MonoBehaviour:
       _Value: 32
     - _enemyPattern: 0
       _Value: 64
+    _statusStruct: "\uBD84\uB178"
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -443,6 +446,22 @@ MonoBehaviour:
     - "\uB625\uAC1C"
     area: 1
     enemyType: 0
+--- !u!114 &723614872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723614867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5820efeb7d8ef1646a1bfc9b04950832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatusList:
+  - _name: "\uBD84\uB178"
+    sprite: {fileID: 21300000, guid: 209d50af982acfd4a946fc0df2cd4e31, type: 3}
+    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0

@@ -104,6 +104,7 @@ public class BattleManager : MonoBehaviour
                 setBase();
                 break;
             case BattleState.TurnStart:
+                EnemyStatus_TurnStart();
                 TurnStartPhase();
                 break;
             case BattleState.Draw:
@@ -122,6 +123,7 @@ public class BattleManager : MonoBehaviour
                 EnemyAttackPhase();
                 break;
             case BattleState.EndTurn:
+                EnemyStatus_TurnEnd();
                 EndTurnPhase();
                 break;
             case BattleState.Reward:
@@ -625,6 +627,33 @@ public class BattleManager : MonoBehaviour
         }
         _scrollViewCardPrefab.gameObject.SetActive(true);
         _scrollViewCardPrefab.Set(list);
+    }
+
+    public void EnemyStatus_TurnStart()
+    {
+        foreach(Enemy enemy in Enemies)
+        {
+            if(!enemy._statusName.Equals("없음"))
+                StatusDatabase.Instance.Action_TurnStart(enemy._statusName, enemy);
+        }
+    }
+    public void EnemyStatus_WhileAttack()
+    {
+        foreach (Enemy enemy in Enemies)
+        {
+            if (!enemy._statusName.Equals("없음"))
+                StatusDatabase.Instance.Action_WhileAttack(enemy._statusName, enemy);
+        }
+    }
+    public void EnemyStatus_TurnEnd()
+    {
+        foreach (Enemy enemy in Enemies)
+        {
+            if (!enemy._statusName.Equals("없음"))
+            {
+                StatusDatabase.Instance.Action_TurnEnd(enemy._statusName, enemy);
+            }
+        }
     }
 }
 public delegate void Func();

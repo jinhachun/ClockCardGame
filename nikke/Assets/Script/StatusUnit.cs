@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class StatusUnit : MonoBehaviour
 {
-    string _name;
-    Sprite _sprite;
-    int _value;
-    public void Set(StatusStruct struc,int value)
+    [SerializeField] AlarmSprite _alarmSprite;
+    [SerializeField] InfoAlarm _infoAlarm;
+    public StatusStruct _statusStruct;
+
+    public void set(StatusStruct statusStruct)
     {
-        this._name = struc._name;
-        this._sprite = struc.sprite;
-        this._value = value;
+        _statusStruct = statusStruct;
+        _alarmSprite.set(statusStruct);
+        _infoAlarm.set(_statusStruct._info,_statusStruct._name);
+        
     }
 }
