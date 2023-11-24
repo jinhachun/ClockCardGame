@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
@@ -67,6 +68,7 @@ public class MainMenu : MonoBehaviour
     }
     public void battleStart()
     {
+        DOTween.KillAll();
         SceneManager.LoadScene("BattleScene");
     }
     public void ButtonAction(int n)

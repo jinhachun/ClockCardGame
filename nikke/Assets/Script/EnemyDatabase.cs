@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public struct pattern
 {
     public EnemyPattern _enemyPattern;
+    public string _CardName;
     public int _Value;
 }
 
@@ -61,15 +62,15 @@ public class EnemyDatabase : MonoBehaviour
     public Vector2 spriteSize(EnemyType et)
     {
         if (et == EnemyType.Mini) return new Vector2(1, 1);
-        else if (et == EnemyType.Normal) return new Vector2(1.5f, 1.5f);
-        else if (et == EnemyType.Giga) return new Vector2(2, 2);
+        else if (et == EnemyType.Normal) return new Vector2(1.3f, 1.3f);
+        else if (et == EnemyType.Giga) return new Vector2(1.6f, 1.6f);
         return new Vector2(1,1);
     }
 }
 [Serializable]
 public enum EnemyPattern
 {
-    ATT, BUFF, deBUFF, CARDINSRT
+    ATT, BUFF, deBUFF, CARDINSRT, SLEEP
 }
 [Serializable]
 public enum EnemyType

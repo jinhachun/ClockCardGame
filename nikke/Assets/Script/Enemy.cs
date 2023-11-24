@@ -68,15 +68,29 @@ public class Enemy : MonoBehaviour
     public pattern Pattern => _enemyPatterns[PatternIndex];
     public void SetPatternText()
     {
-        if (Pattern._enemyPattern == EnemyPattern.ATT)
+        switch (Pattern._enemyPattern)
         {
-            string dammTxt = Pattern._Value + (attackBuff==0?"":"+"+attackBuff);
-            this._hpBar.setText_Pattern(dammTxt, Color.red);
+            case EnemyPattern.ATT:
+                {
+                    string dammTxt = Pattern._Value + (attackBuff == 0 ? "" : "+" + attackBuff);
+                    this._hpBar.setText_Pattern(dammTxt, Color.red);
+                    return;
+                }
+            case EnemyPattern.BUFF:
+                {
+                    this._hpBar.setText_Pattern("+", Color.blue);
+                    return;
+                }
+            case EnemyPattern.SLEEP:
+                {
+                    this._hpBar.setText_Pattern("Zzz", Color.green);
+                    return;
+                }
+              
+            default:
+                this._hpBar.setText_Pattern("?", Color.green);
+                return;
         }
-        else if (Pattern._enemyPattern == EnemyPattern.BUFF)
-            this._hpBar.setText_Pattern("+", Color.blue);
-        else
-            this._hpBar.setText_Pattern("?", Color.green);
 
     }
     public void TurnEnd()

@@ -42,12 +42,12 @@ public class BattleManager : MonoBehaviour
     public List<Card> Hand;
     public List<Card> Grave;
     List<Card> Cards;
-    Sequence mySequence;
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
 
+    public int turn;
     public int area;
     public EnemyType enemyType;
-    public int reward =>  Random.Range(10*area+30,30*area+90);
+    public int reward =>  enemyType==EnemyType.Mini?30:(enemyType==EnemyType.Normal?50:100)+Random.Range(10*area,60*area);
 
 
     public int Hp, Mhp, Shield;
@@ -59,41 +59,26 @@ public class BattleManager : MonoBehaviour
     DeckCount DeckCntTxt;
     DeckCount GraveCntTxt;
     ScrollViewCardBunch scrollViewCard;
-    Sequence cardAddSequence;
 
     public static BattleState GameState;
     public void Start()
     {
-        mySequence = DOTween.Sequence().SetAutoKill(false);
         Random.InitState(System.DateTime.Now.Millisecond);
         var randomized = Resource.Instance.Deck.OrderBy(item => Random.Range(0,999)).ToList();
         BaseDeck = randomized;
 
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
-        area = Resource.Instance.Area; enemyType = EnemyType.Mini;
+        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=5?(Random.Range(0,2)==0?EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
         RerollChance = 1;
         addcardQueue_Deck = new Queue<CardStruct>();
+        addcardQueue_Grave = new Queue<CardStruct>();
         ChangeState(BattleState.Set);
     }
     public void FixedUpdate()
     {
         if (Mhp < Hp) Hp = Mhp;
 
-        while (addcardQueue_Deck.Count > 0)
-        {
-            cardAddSequence = DOTween.Sequence().SetAutoKill(false);
-            CardStruct str = addcardQueue_Deck.Dequeue();
-            var card = Instantiate(_cardPrefab, new Vector2(Random.Range(-3f,3f), Random.Range(-3f,3f)), Quaternion.Euler(0,0,Random.Range(-90,90)));
-            card.flip(true);
-            card.TouchableChange(false);
-            card.Set(str);
-            cardAddSequence.AppendInterval(0.3f);
-            int Layer = 50 + Deck.Count*3;
-            card.setLayer(0, Layer);
-            Deck.Add(card);
-            moveCard(cardAddSequence, card, DeckPos(0), 0.4f, true, false);
-            cardAddSequence.AppendInterval(0.3f);
-        }
+        
     }
     private void ChangeState(BattleState battleState)
     {
@@ -104,6 +89,7 @@ public class BattleManager : MonoBehaviour
                 setBase();
                 break;
             case BattleState.TurnStart:
+                turn++;
                 EnemyStatus_TurnStart();
                 TurnStartPhase();
                 break;
@@ -136,7 +122,7 @@ public class BattleManager : MonoBehaviour
 
     public void setBase()
     {
-        Att = 0; Def = 0; Rate = 1;
+        Att = 0; Def = 0; Rate = 1; turn = 0;
         tmpAtt = 0; tmpDef = 0; tmpRate = 1; tmpReroll = 0;
         Enemies = new List<Enemy>();
         Deck = new List<Card>();
@@ -492,9 +478,15 @@ public class BattleManager : MonoBehaviour
                 Enemy.setAttackBuff();
                 sq.AppendCallback(() =>
                 {
-                    Enemy.transform.DOMoveY(Enemy.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
+                    Enemy.transform.DOMoveY(Enemy._img.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 });
                 sq.AppendInterval(0.8f);
+            }else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
+            {
+                Queue<CardStruct> queue = new Queue<CardStruct>();
+                queue.Enqueue(CardDatabase.Instance.card_token("°í¾çÀÌÅÐ"));
+                AddCard(queue, true);
+                sq.AppendInterval(1.2f);
             }
         }
         
@@ -525,7 +517,7 @@ public class BattleManager : MonoBehaviour
         {
             sq.AppendCallback(() =>
             {
-                Enemy.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
+                Enemy._img.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
                 Hp -= FinalDamage;
             });
             sq.AppendInterval(0.8f);
@@ -534,7 +526,7 @@ public class BattleManager : MonoBehaviour
         {
             sq.AppendCallback(() =>
             {
-                Enemy.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
+                Enemy._img.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
             });
             sq.AppendInterval(0.2f);
         }
@@ -552,19 +544,40 @@ public class BattleManager : MonoBehaviour
         Resource.Instance.money += reward;
         Resource.Instance.StageUp();
         Resource.Instance.setHp(Hp);
+        DOTween.KillAll();
         SceneManager.LoadScene("MainScene");
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
 
     }
     Queue<CardStruct> addcardQueue_Deck;
+    Queue<CardStruct> addcardQueue_Grave;
     public void AddCard(Queue<CardStruct> list, bool deck)
     {
-        Sequence sq = DOTween.Sequence();
+        Sequence cardAddSequence = DOTween.Sequence();
         while (list.Count > 0)
         {
-            addcardQueue_Deck.Enqueue(list.Dequeue());
+            if (deck)
+                addcardQueue_Deck.Enqueue(list.Dequeue());
+            else
+                addcardQueue_Grave.Enqueue(list.Dequeue());
         }
-        
+        while (addcardQueue_Deck.Count > 0 || addcardQueue_Grave.Count > 0)
+        {
+            CardStruct str = (deck ? addcardQueue_Deck : addcardQueue_Grave).Dequeue();
+            var card = Instantiate(_cardPrefab, new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f)), Quaternion.Euler(0, 0, Random.Range(-90, 90)));
+            card.flip(true);
+            card.TouchableChange(false);
+            card.Set(str);
+            cardAddSequence.AppendInterval(0.3f);
+            int Layer = 50 + (deck ? Deck.Count : Grave.Count) * 3;
+            card.setLayer(0, Layer);
+            (deck ? Deck : Grave).Add(card);
+            moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.4f, true);
+            if (deck)
+                cardAddSequence.AppendCallback(() => { card.flip(false); });
+            
+            cardAddSequence.AppendInterval(0.3f);
+        }
     }
     public void DrawCard(Sequence sq)
     {

@@ -15,12 +15,14 @@ public class CardDatabase : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
     [SerializeField] List<CardStruct> cardDatabase;
+    [SerializeField] List<CardStruct> cardDatabase_token;
     [SerializeField] List<SpeciesSprite> cardinfoSprites_species;
     [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
     
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
     public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
+    public CardStruct card_token(string a) => cardDatabase_token.Where(x => x._name.Equals(a)).FirstOrDefault();
 
     public CardStruct card(int a) => cardDatabase[a];
     public CardStruct RandomCard()
@@ -228,7 +230,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
-                    BattleManager.Instance.AddCard(queue,false);
+                    BattleManager.Instance.AddCard(queue,true);
                 });
         }
         return (() => { });

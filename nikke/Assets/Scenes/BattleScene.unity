@@ -375,6 +375,7 @@ MonoBehaviour:
   Deck: []
   Hand: []
   Grave: []
+  turn: 0
   area: 0
   enemyType: 0
   Hp: 0
@@ -409,10 +410,13 @@ MonoBehaviour:
     _enemyType: 0
     _enemyPatterns:
     - _enemyPattern: 0
+      _CardName: 
       _Value: 5
     - _enemyPattern: 0
+      _CardName: 
       _Value: 10
     - _enemyPattern: 1
+      _CardName: 
       _Value: 2
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
@@ -422,18 +426,73 @@ MonoBehaviour:
     _enemyType: 1
     _enemyPatterns:
     - _enemyPattern: 0
+      _CardName: 
       _Value: 2
     - _enemyPattern: 0
+      _CardName: 
       _Value: 4
     - _enemyPattern: 0
+      _CardName: 
       _Value: 8
     - _enemyPattern: 0
+      _CardName: 
       _Value: 16
     - _enemyPattern: 0
+      _CardName: 
       _Value: 32
+    _statusStruct: "\uC5C6\uC74C"
+  - _sprite: {fileID: 21300000, guid: 665336ab9d7a15549ba1d2ded698066e, type: 3}
+    _name: "\uC655\uC751\uAC00"
+    _hp: 120
+    _area: 1
+    _enemyType: 1
+    _enemyPatterns:
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
     - _enemyPattern: 0
-      _Value: 64
+      _CardName: 
+      _Value: 20
+    _statusStruct: "\uC5C6\uC74C"
+  - _sprite: {fileID: 21300000, guid: 39d983c0475f6b44ba51048b04ebf47b, type: 3}
+    _name: "\uD654\uB09C\uD45C\uC9C0\uD310"
+    _hp: 55
+    _area: 1
+    _enemyType: 1
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 10
     _statusStruct: "\uBD84\uB178"
+  - _sprite: {fileID: 21300000, guid: f49df4d974de8d249a637091d8eecb21, type: 3}
+    _name: "\uB458\uAE30"
+    _hp: 30
+    _area: 1
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 4
+    - _enemyPattern: 1
+      _CardName: 
+      _Value: 4
+    _statusStruct: "\uC5C6\uC74C"
+  - _sprite: {fileID: 21300000, guid: 11bcca7b2814c7743a2d9ee7577bcb0c, type: 3}
+    _name: "\uB6B1\uB0E5\uC774"
+    _hp: 90
+    _area: 1
+    _enemyType: 1
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uACE0\uC591\uC774\uD138"
+      _Value: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 12
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 15
+    _statusStruct: "\uC5C6\uC74C"
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -446,6 +505,27 @@ MonoBehaviour:
     - "\uB625\uAC1C"
     area: 1
     enemyType: 0
+  - enemySquad:
+    - "\uC655\uC751\uAC00"
+    area: 1
+    enemyType: 1
+  - enemySquad:
+    - "\uB625\uAC1C"
+    - "\uD654\uB09C\uD45C\uC9C0\uD310"
+    area: 1
+    enemyType: 1
+  - enemySquad:
+    - "\uB458\uAE30"
+    - "\uB458\uAE30"
+    - "\uB458\uAE30"
+    - "\uB458\uAE30"
+    area: 1
+    enemyType: 0
+  - enemySquad:
+    - "\uB6B1\uB0E5\uC774"
+    - "\uB458\uAE30"
+    area: 1
+    enemyType: 1
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
