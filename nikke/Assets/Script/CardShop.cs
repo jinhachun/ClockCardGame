@@ -48,7 +48,7 @@ public class CardShop : MonoBehaviour
         else
         {
             setCard(Resource.Instance.shopcard);
-            int random = Random.Range(0, 100);
+            int random = Random.Range(50, 100);
             if (card.Str.evol.Count == 1)
                 random = 100;
             percentTxt(random);
@@ -72,7 +72,7 @@ public class CardShop : MonoBehaviour
         setCard(tmp);
         
 
-        int random = Random.Range(0, 100);
+        int random = Random.Range(50, 100);
         if (card.Str.evol.Count == 1)
             random = 100;
         percentTxt(random);
@@ -96,7 +96,7 @@ public class CardShop : MonoBehaviour
         if (random <= evolPer) setCard(card_evol.Str);
         else setCard(card_evol2.Str);
 
-        random = Random.Range(0, 100);
+        random = Random.Range(50, 100);
         if (card.Str.evol.Count == 1)
             random = 100;
         percentTxt(random);

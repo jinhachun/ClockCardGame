@@ -30,7 +30,7 @@ public class CardDatabase : MonoBehaviour
         int a = RandomCardIndex;
         return card(a);
     }
-    public List<CardStruct> cardByTierList(int a) => cardDatabase.Where(x => x._tier <= a).ToList();
+    public List<CardStruct> cardByTierList(int a) => cardDatabase.Where(x => x._tier == a).ToList();
     public CardStruct cardByTier(int a) => cardByTierList(a)[Random.Range(0,cardByTierList(a).Count)];
     public Sprite btn(int i) => btnSprites[i];
     public Sprite speciesSprite(SPECIES c)

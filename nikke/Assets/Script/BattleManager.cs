@@ -37,6 +37,7 @@ public class BattleManager : MonoBehaviour
     Vector2 ButtonPos(float i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
     List<Vector2> EnemyPos;
     List<CardStruct> BaseDeck;
+    List<EnemyStruct> final_enemylist;
     public List<Enemy> Enemies;
     public List<Card> Deck;
     public List<Card> Hand;
@@ -47,7 +48,7 @@ public class BattleManager : MonoBehaviour
     public int turn;
     public int area;
     public EnemyType enemyType;
-    public int reward =>  enemyType==EnemyType.Mini?30:(enemyType==EnemyType.Normal?50:100)+Random.Range(10*area,60*area);
+    public int reward;
 
 
     public int Hp, Mhp, Shield;
@@ -68,8 +69,9 @@ public class BattleManager : MonoBehaviour
         BaseDeck = randomized;
 
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
-        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=5?(Random.Range(0,2)==0?EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
+        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=6?(Random.Range(0,2)==0?EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
         RerollChance = 1;
+        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5,10)*area;
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
         ChangeState(BattleState.Set);
@@ -110,6 +112,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.EndTurn:
                 EnemyStatus_TurnEnd();
+
                 EndTurnPhase();
                 break;
             case BattleState.Reward:
@@ -159,13 +162,13 @@ public class BattleManager : MonoBehaviour
             
             cnt++;
         }
-        var final_enemylist = EnemyDatabase.Instance.final_enemylist(area, enemyType);
+        final_enemylist = EnemyDatabase.Instance.final_enemylist(area, enemyType);
         EnemyPosBlank = EnemyPosLength / (final_enemylist.Count + 1);
         cnt = 0;
         foreach (var enemy in final_enemylist)
         {
             cnt++;
-            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY);
+            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY+(enemy._enemyType==EnemyType.Mini?0:(enemy._enemyType == EnemyType.Normal?0.5f:1f)));
             var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
             
             enemyTmp.Set(enemy);
@@ -204,6 +207,7 @@ public class BattleManager : MonoBehaviour
         {
             enemy.SetPatternText();
         }
+        ShuffleDeck(sq);
         sq.AppendCallback(() =>
         {
             ChangeState(BattleState.Draw);
@@ -484,8 +488,9 @@ public class BattleManager : MonoBehaviour
             }else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
             {
                 Queue<CardStruct> queue = new Queue<CardStruct>();
-                queue.Enqueue(CardDatabase.Instance.card_token("고양이털"));
-                AddCard(queue, true);
+                for(int i=0;i<Enemy.Pattern._Value;i++)
+                    queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
+                AddCard(queue, Enemy.Pattern._Bool);
                 sq.AppendInterval(1.2f);
             }
         }
@@ -569,15 +574,16 @@ public class BattleManager : MonoBehaviour
             card.TouchableChange(false);
             card.Set(str);
             cardAddSequence.AppendInterval(0.3f);
+            (deck ? Deck : Grave).Add(card);
             int Layer = 50 + (deck ? Deck.Count : Grave.Count) * 3;
             card.setLayer(0, Layer);
-            (deck ? Deck : Grave).Add(card);
             moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.4f, true);
             if (deck)
                 cardAddSequence.AppendCallback(() => { card.flip(false); });
             
-            cardAddSequence.AppendInterval(0.3f);
+            cardAddSequence.AppendInterval(0.15f);
         }
+
     }
     public void DrawCard(Sequence sq)
     {
@@ -660,13 +666,37 @@ public class BattleManager : MonoBehaviour
     }
     public void EnemyStatus_TurnEnd()
     {
-        foreach (Enemy enemy in Enemies)
+        var tmpEnemies = Enemies.ToList();
+        foreach (Enemy enemy in tmpEnemies)
         {
             if (!enemy._statusName.Equals("없음"))
             {
                 StatusDatabase.Instance.Action_TurnEnd(enemy._statusName, enemy);
             }
         }
+    }
+    public void summonEnemy(EnemyStruct enemystruct)
+    {
+        if (EnemyPos.Count == Enemies.Count) return;
+        Vector2 enemyposTmp = new Vector2(0,0);
+        foreach (Vector2 enemyPosTmp in EnemyPos)
+        {
+            bool chk = false;
+            foreach(Enemy EnemyTmp in Enemies)
+            {
+                if (enemyPosTmp.Equals(EnemyTmp.transform.position))
+                    chk = true;
+            }
+            if (!chk) enemyposTmp = enemyPosTmp;
+        }
+
+        var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
+
+        enemyTmp.Set(enemystruct);
+
+        var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
+        enemyHpBarTmp.Set(enemyTmp);
+        Enemies.Add(enemyTmp);
     }
 }
 public delegate void Func();

@@ -30,7 +30,7 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Event_Damage(20);
-                            Resource.Instance.money += 40;
+                            Resource.Instance.money += 100;
                         });
                     }
                     else if (selectIndex == 1)
@@ -72,6 +72,53 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
+                        });
+                    }
+                    return null;
+                }
+            case "동전수집가":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.money += 50;
+                        });
+                    }
+                    return null;
+                }
+            case "드르렁~":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(30);
+                        });
+                    }
+                    return null;
+                }
+            case "빅둘기 격파!":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.money += 300;
+                        });
+                    }
+                    else if (selectIndex == 2)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(4)._name);
                         });
                     }
                     return null;

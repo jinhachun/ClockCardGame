@@ -13,7 +13,8 @@ public class MainMenu : MonoBehaviour
     public string _DeckShowText_not_showdeck;
     [SerializeField] TMP_Text __BattleButtonText;
     public string __BattleButtonText_Stage;
-    string __BattleButtonText_Stage_Full => Resource.Instance.Area + " -" + Resource.Instance.Stage + "\n" + __BattleButtonText_Stage;
+    string __BattleButtonText_Stage_Full => Resource.Instance.Stage != 6 ? (Resource.Instance.Area + " -" + Resource.Instance.Stage + "\n" + __BattleButtonText_Stage):  "BOSS - "+Resource.Instance.Area;
+
 
     [SerializeField] TMP_Text _MoneyText;
     [SerializeField] Card _cardPrefab;
@@ -69,6 +70,8 @@ public class MainMenu : MonoBehaviour
     public void battleStart()
     {
         DOTween.KillAll();
+        if (Resource.Instance.Area == 2)
+            Resource.Instance.Area = 1;
         SceneManager.LoadScene("BattleScene");
     }
     public void ButtonAction(int n)

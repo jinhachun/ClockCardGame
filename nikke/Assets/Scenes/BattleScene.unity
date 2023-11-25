@@ -378,6 +378,7 @@ MonoBehaviour:
   turn: 0
   area: 0
   enemyType: 0
+  reward: 0
   Hp: 0
   Mhp: 0
   Shield: 0
@@ -412,12 +413,15 @@ MonoBehaviour:
     - _enemyPattern: 0
       _CardName: 
       _Value: 5
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 10
+      _Bool: 0
     - _enemyPattern: 1
       _CardName: 
       _Value: 2
+      _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
     _name: "\uB625\uAC1C"
@@ -428,18 +432,23 @@ MonoBehaviour:
     - _enemyPattern: 0
       _CardName: 
       _Value: 2
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 4
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 8
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 16
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 32
+      _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 665336ab9d7a15549ba1d2ded698066e, type: 3}
     _name: "\uC655\uC751\uAC00"
@@ -450,9 +459,11 @@ MonoBehaviour:
     - _enemyPattern: 4
       _CardName: 
       _Value: 0
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 20
+      _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 39d983c0475f6b44ba51048b04ebf47b, type: 3}
     _name: "\uD654\uB09C\uD45C\uC9C0\uD310"
@@ -463,6 +474,7 @@ MonoBehaviour:
     - _enemyPattern: 0
       _CardName: 
       _Value: 10
+      _Bool: 0
     _statusStruct: "\uBD84\uB178"
   - _sprite: {fileID: 21300000, guid: f49df4d974de8d249a637091d8eecb21, type: 3}
     _name: "\uB458\uAE30"
@@ -473,9 +485,11 @@ MonoBehaviour:
     - _enemyPattern: 0
       _CardName: 
       _Value: 4
+      _Bool: 0
     - _enemyPattern: 1
       _CardName: 
       _Value: 4
+      _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 11bcca7b2814c7743a2d9ee7577bcb0c, type: 3}
     _name: "\uB6B1\uB0E5\uC774"
@@ -485,14 +499,40 @@ MonoBehaviour:
     _enemyPatterns:
     - _enemyPattern: 3
       _CardName: "\uACE0\uC591\uC774\uD138"
-      _Value: 0
+      _Value: 1
+      _Bool: 1
     - _enemyPattern: 0
       _CardName: 
       _Value: 12
+      _Bool: 0
     - _enemyPattern: 0
       _CardName: 
       _Value: 15
+      _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
+  - _sprite: {fileID: 21300000, guid: 7309613071481a646913558b20fcac00, type: 3}
+    _name: "\uBE45\uB458\uAE30"
+    _hp: 200
+    _area: 1
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 40
+      _Bool: 0
+    - _enemyPattern: 3
+      _CardName: "\uC751\uAC00"
+      _Value: 3
+      _Bool: 0
+    _statusStruct: "\uB450\uBAA9"
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -526,6 +566,12 @@ MonoBehaviour:
     - "\uB458\uAE30"
     area: 1
     enemyType: 1
+  - enemySquad:
+    - "\uB458\uAE30"
+    - "\uBE45\uB458\uAE30"
+    - "\uB458\uAE30"
+    area: 1
+    enemyType: 2
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +588,10 @@ MonoBehaviour:
   - _name: "\uBD84\uB178"
     sprite: {fileID: 21300000, guid: 209d50af982acfd4a946fc0df2cd4e31, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  - _name: "\uB450\uBAA9"
+    sprite: {fileID: 21300000, guid: 18a262800362a9848b7d8b621785318a, type: 3}
+    _info: "\uD134\uC774 \uC2DC\uC791\uB420 \uB54C, \uB79C\uB364\uD55C \uD655\uB960\uB85C
+      \uBD80\uD558\uB97C \uC0DD\uC131\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,10 +1302,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1900, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -34,7 +34,7 @@ public class ScrollViewCardBunch : MonoBehaviour
     {
         this.cardBunch = cards.OrderBy(item => Random.value).ToList();
         var xpos = x; var ypos = y;
-        foreach(var card in cards)
+        foreach(var card in cardBunch)
         {
             var cardTmp = Instantiate(_card,new Vector2(xpos, ypos),Quaternion.identity);
             cardTmp.transform.localPosition = new Vector2(xpos, ypos);

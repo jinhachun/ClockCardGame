@@ -11,6 +11,7 @@ public struct pattern
     public EnemyPattern _enemyPattern;
     public string _CardName;
     public int _Value;
+    public bool _Bool;
 }
 
 [Serializable]
@@ -41,6 +42,7 @@ public class EnemyDatabase : MonoBehaviour
     }
     [SerializeField] List<EnemyStruct> enemyList;
     [SerializeField] List<EnemySquadStruct> sqdList;
+    public EnemyStruct enemy(String a) => enemyList.Where(x => x._name.Equals(a)).FirstOrDefault();
 
     public List<EnemyStruct> enemylist(List<EnemyStruct> enemyStructs, int area) => enemyStructs.Where(x => x._area == area).ToList();
     public EnemyStruct enemylist(List<EnemyStruct> enemyStructs, string name) => enemyStructs.Where(x => x._name.Equals(name)).FirstOrDefault();

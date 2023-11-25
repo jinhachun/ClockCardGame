@@ -41,10 +41,15 @@ public class StatusDatabase : MonoBehaviour
         {
             case "분노":
                 { 
-                    Debug.Log("ㅎㅇ2");
                     enemy.setAttackBuff(enemy._area*enemy._area);
                     return;
-                } 
+                }
+            case "두목":
+                {
+                    if(UnityEngine.Random.Range(0,10)<3)
+                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("둘기"));
+                    return;
+                }
         }
     }
 }

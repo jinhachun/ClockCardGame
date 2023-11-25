@@ -29,10 +29,16 @@ public class Resource : MonoBehaviour
         VillageLevel.Add("Church", 0);
         VillageLevel.Add("Bath", 0);
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
-        money = 100; jewel = 10;
+        money = 100; jewel = 5;
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
-        for (int i = 0; i < 20; i++)
+        for(int i = 0; i < 5; i++)
+        {
+            var tmp = (CardDatabase.Instance.cardByTier(1));
+            Deck.Add(tmp);
+
+        }
+        for (int i = 0; i < 15; i++)
         {
             var tmp = (CardDatabase.Instance.cardByTier(startDeckTier));
             Deck.Add(tmp);
@@ -52,11 +58,12 @@ public class Resource : MonoBehaviour
     public void StageUp()
     {
         Stage++;
-        if (Stage > 5)
+        if (Stage > 6)
         {
             Area++;
             Stage = 1;
         }
+        
     }
     public void setHp(int a)
     {
@@ -104,8 +111,13 @@ public class Resource : MonoBehaviour
     [Space(10f)]
     public int cardNum;
     [ContextMenu("addCard")]
-    public void addCard()
+    public void cont_addCard()
     {
         Deck.Add(CardDatabase.Instance.card(cardNum));
+    }
+    [ContextMenu("stageUp")]
+    public void cont_stageUp()
+    {
+        StageUp();
     }
 }
