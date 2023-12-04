@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] DeckCount _deckCountPrefab;
     [SerializeField] public GameObject _canvas;
     [SerializeField] public Transform _damagePopupPrefab;
+    [SerializeField] public Transform _fracturePrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -69,7 +70,7 @@ public class BattleManager : MonoBehaviour
         BaseDeck = randomized;
 
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
-        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=6?(Random.Range(0,2)==0?EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
+        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=6?(Resource.Instance.Stage >= 4 ? EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
         RerollChance = 1;
         reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5,10)*area;
         addcardQueue_Deck = new Queue<CardStruct>();
@@ -237,8 +238,8 @@ public class BattleManager : MonoBehaviour
 
     }
     private List<RerollButton> ChkButtons;
-    private List<SPECIES> SpeciesCombi;
-    private List<TYPE> TypeCombi;
+    public List<SPECIES> SpeciesCombi;
+    public List<TYPE> TypeCombi;
     private List<TMP_Text> CombiText;
     public void WatingRerollPhase()
     {
@@ -282,7 +283,6 @@ public class BattleManager : MonoBehaviour
             Btns.Add(chkBtn);
             SpeciesCombi.Add(Hand[i].Species);
             TypeCombi.Add(Hand[i].Type);
-            CardDatabase.Instance.BeforeCardActionFunc(Hand[i])();
         }
         var SpeciesCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
         SpeciesCombiText.text = CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi);
@@ -449,11 +449,14 @@ public class BattleManager : MonoBehaviour
                 var deadEnemy = target;
                 target._hp = 0;
                 Enemies.Remove(deadEnemy);
+                var Particle = Instantiate(_fracturePrefab, new Vector2(deadEnemy.transform.position.x, deadEnemy.transform.position.y), Quaternion.identity);
+                Particle.transform.localScale *= deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f;
                 deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                 {
                     Destroy(deadEnemy._hpBar.gameObject);
                     Destroy(deadEnemy.gameObject);
                 });
+
             }
             else
                 DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
@@ -596,6 +599,7 @@ public class BattleManager : MonoBehaviour
             Grave.Clear();
         }
         tmpCard = Deck[0];
+        CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
         for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);

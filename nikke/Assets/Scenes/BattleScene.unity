@@ -371,6 +371,7 @@ MonoBehaviour:
   _deckCountPrefab: {fileID: 4613941522894815512, guid: f053aa53365d86a47976f7f3ccd2ade6, type: 3}
   _canvas: {fileID: 1116294880}
   _damagePopupPrefab: {fileID: 1104535163446031739, guid: 55e48c9349dc51d40b91c4fc12e3cd78, type: 3}
+  _fracturePrefab: {fileID: 901564528819172047, guid: b01de0a4357d66f44877478340b04a36, type: 3}
   Enemies: []
   Deck: []
   Hand: []

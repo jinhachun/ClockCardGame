@@ -136,6 +136,10 @@ public class CardDatabase : MonoBehaviour
                 return (() => {
                     BattleManager.Instance.Hp += 4;
                 });
+            case "초대형좀비":
+                return (() => {
+                    BattleManager.Instance.Hp += 4;
+                });
             case "먹깨비":
                 return (() => {
                     BattleManager.Instance.takeDamage(1);
@@ -168,14 +172,14 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.takeDamage(3);
                     if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100) 
                         foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                         BattleManager.Instance.enemyDamage(5,false, tmp);
+                         BattleManager.Instance.enemyDamage(15,false, tmp);
                 });
             case "블랙티라노":
                 return (() => {
                     BattleManager.Instance.takeDamage(5);
                     if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
                         foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                        BattleManager.Instance.enemyDamage(10, false, tmp);
+                        BattleManager.Instance.enemyDamage(40, false, tmp);
                 });
 
             case "버섯깨비":
@@ -232,6 +236,24 @@ public class CardDatabase : MonoBehaviour
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
                     BattleManager.Instance.AddCard(queue,true);
                 });
+            case "삼두라":
+                return (() =>
+                {
+                    if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
+                        b.StatChange("Attack", b.Stat.attack * 2);
+                });
+            case "케르베로삼":
+                return (() =>
+                {
+                    if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
+                        b.StatChange("Attack", b.Stat.attack * 2);
+                });
+            case "킹삼도라":
+                return (() =>
+                {
+                    if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
+                        b.StatChange("Attack", b.Stat.attack * 3);
+                });
         }
         return (() => { });
     }
@@ -252,7 +274,11 @@ public class CardDatabase : MonoBehaviour
                 return (() => {
                     b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 4));
                 });
-            
+            case "건당글이":
+                return (() => {
+                    b.StatChange("Attack", Random.Range(b.Stat.attack, b.Stat.attack + 6));
+                });
+
             case "사신":
                 return (() => {
                     if(BattleManager.Instance.tmpRate<1.2)
