@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public GameObject _canvas;
     [SerializeField] public Transform _damagePopupPrefab;
     [SerializeField] public Transform _fracturePrefab;
+    [SerializeField] public Transform _attEffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -440,6 +441,8 @@ public class BattleManager : MonoBehaviour
 
             target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
             var tmpAttLeft = AttLeft - target._hp;
+            var AttEffect = Instantiate(_attEffectPrefab, new Vector2(target._img.transform.position.x*Random.Range(85,115)/100f, (target._img.transform.position.y-1.5f) * Random.Range(85, 115) / 100f), Quaternion.identity);
+            AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f)*(0.25f+((float)AttLeft/(float)target.Str._hp));
 
             target._hp -= AttLeft;
             bool lethal = (target._hp <= 0);
@@ -450,7 +453,7 @@ public class BattleManager : MonoBehaviour
                 target._hp = 0;
                 Enemies.Remove(deadEnemy);
                 var Particle = Instantiate(_fracturePrefab, new Vector2(deadEnemy.transform.position.x, deadEnemy.transform.position.y), Quaternion.identity);
-                Particle.transform.localScale *= deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f;
+                Particle.transform.localScale *= (deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f);
                 deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                 {
                     Destroy(deadEnemy._hpBar.gameObject);

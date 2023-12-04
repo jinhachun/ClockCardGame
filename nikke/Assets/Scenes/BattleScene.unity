@@ -372,6 +372,7 @@ MonoBehaviour:
   _canvas: {fileID: 1116294880}
   _damagePopupPrefab: {fileID: 1104535163446031739, guid: 55e48c9349dc51d40b91c4fc12e3cd78, type: 3}
   _fracturePrefab: {fileID: 901564528819172047, guid: b01de0a4357d66f44877478340b04a36, type: 3}
+  _attEffectPrefab: {fileID: 2730325015434321086, guid: ed06b57df529d8349acfefa333383840, type: 3}
   Enemies: []
   Deck: []
   Hand: []
@@ -391,6 +392,8 @@ MonoBehaviour:
   tmpDef: 0
   tmpRate: 0
   tmpReroll: 0
+  SpeciesCombi: 
+  TypeCombi: 
   patternCnt: 0
 --- !u!114 &723614871
 MonoBehaviour:
