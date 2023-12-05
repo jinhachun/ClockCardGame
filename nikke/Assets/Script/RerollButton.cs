@@ -7,6 +7,7 @@ public class RerollButton : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _rerollButtonPrefab;
     [SerializeField] string _Name;
+    public int index;
     bool isOver = false;
     public delegate void buttonAction();
     buttonAction Action;
@@ -14,6 +15,19 @@ public class RerollButton : MonoBehaviour
     public void SpriteChange(Sprite s)
     {
         _rerollButtonPrefab.sprite = s;
+    }
+    public void rerollEnable(bool a)
+    {
+        if (a)
+        {
+            this.enabled = true;
+            _rerollButtonPrefab.enabled = true;
+        }
+        else
+        {
+            this.enabled = false;
+            _rerollButtonPrefab.enabled = false;
+        }
     }
     public void ActionSet(buttonAction bt)
     {

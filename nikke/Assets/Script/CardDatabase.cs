@@ -211,23 +211,9 @@ public class CardDatabase : MonoBehaviour
                 });
             case "돈벼락동글":
                 return (() => {
-                    foreach (Card tmp in BattleManager.Instance.Deck)
-                    {
-                        if (tmp.name.Equals("황금몬"))
-
-                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
-                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
-                        }
-                    
-                    foreach (Card tmp in BattleManager.Instance.Grave)
-                    {
-                        if (tmp.name.Equals("황금몬"))
-                        {
-                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
-                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
-                        }
-
-                    }
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card("황금몬"));
+                    BattleManager.Instance.AddCard(queue, false);
                 });
             case "마이동스왕":
                 return (() => {
@@ -254,6 +240,67 @@ public class CardDatabase : MonoBehaviour
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
                         b.StatChange("Attack", b.Stat.attack * 3);
                 });
+            case "골목대장동글":
+                return (() => {
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        if (tmp.name.Equals("동글이"))
+
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                        tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                    }
+
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        if (tmp.name.Equals("동글이"))
+                        {
+                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                        }
+
+                    }
+                });
+            case "민병대동글":
+                return (() => {
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        if (tmp.name.Equals("동글이"))
+
+                            tmp.StatChange("Attack", tmp.Stat.attack + 2);
+                        tmp.StatChange("Defence", tmp.Stat.defence + 2);
+                    }
+
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        if (tmp.name.Equals("동글이"))
+                        {
+                            tmp.StatChange("Attack", tmp.Stat.attack + 2);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 2);
+                        }
+
+                    }
+                });
+            case "동글의사당":
+                return (() => {
+                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    {
+                        if (tmp.name.Equals("동글이"))
+
+                            tmp.StatChange("Attack", tmp.Stat.attack + 5);
+                        tmp.StatChange("Defence", tmp.Stat.defence + 5);
+                    }
+
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        if (tmp.name.Equals("동글이"))
+                        {
+                            tmp.StatChange("Attack", tmp.Stat.attack + 5);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 5);
+                        }
+
+                    }
+                });
+
         }
         return (() => { });
     }
@@ -312,6 +359,7 @@ public struct CardStruct
     public bool isEthereal;
     public bool isFixed;
     public List<String> evol;
+    public bool isRare;
 }
 [Serializable]
 public class STAT

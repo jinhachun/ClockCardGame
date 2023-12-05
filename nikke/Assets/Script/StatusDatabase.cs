@@ -40,7 +40,8 @@ public class StatusDatabase : MonoBehaviour
         switch (name)
         {
             case "ºÐ³ë":
-                { 
+                {
+                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._area*enemy._area);
                     return;
                 }

@@ -30,9 +30,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
     [SerializeField] DeckCount _deckCountPrefab;
     [SerializeField] public GameObject _canvas;
+
     [SerializeField] public Transform _damagePopupPrefab;
     [SerializeField] public Transform _fracturePrefab;
     [SerializeField] public Transform _attEffectPrefab;
+    [SerializeField] public Transform _summonEffectPrefab;
+    [SerializeField] public Transform _rageEffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -149,7 +152,7 @@ public class BattleManager : MonoBehaviour
 
         RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
         RerollText.text = "Chance : " + RerollChance.ToString();
-        RerollText.fontSize = 2;
+        RerollText.fontSize = 3f;
         var cnt = 0;
         Sequence sq = DOTween.Sequence().SetAutoKill(false);
         foreach (var tmpCard in BaseDeck)
@@ -272,12 +275,29 @@ public class BattleManager : MonoBehaviour
             ChangeState(BattleState.Reroll);
         });
         Btns.Add(rerollbtn);
+        rerollbtn.rerollEnable(false);
+        int chkN = 0;
         for (int i = 0; i < Hand.Count; i++)
         {
             var chkBtn = Instantiate(_chkButtonPrefab, new Vector2(HandPos[i].x, HandPos[i].y - 2.25f), Quaternion.identity);
+            chkBtn.index = i;
             chkBtn.ActionSet(() =>
             {
+
                 chkBtn.SpriteChange(RerollPhase_isBtnChk(chkBtn) ? CardDatabase.Instance.btn(1) : CardDatabase.Instance.btn(0));
+                if (RerollPhase_isBtnChk(chkBtn))
+                {
+                    moveCard(DOTween.Sequence(), Hand[chkBtn.index], new Vector2(HandPos[chkBtn.index].x, HandPos[chkBtn.index].y + 1f), 0.1f, true);
+                    chkN++;
+                }
+                else { 
+                    moveCard(DOTween.Sequence(), Hand[chkBtn.index], HandPos[chkBtn.index], 0.1f, true);
+                    chkN--;
+                }
+                if (chkN > 0)
+                    rerollbtn.rerollEnable(true);
+                else
+                    rerollbtn.rerollEnable(false);
             });
             if (Hand[i].isFixed) { chkBtn.SpriteChange(CardDatabase.Instance.btn(2)); chkBtn.enabled = false; }
             ChkButtons.Add(chkBtn);
@@ -313,7 +333,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case 3:
                 text.fontSize = 6;
-                text.color = Color.green;
+                text.color = new Color(0,100,0);
                 break;
             case 4:
                 text.fontSize = 7;
@@ -385,7 +405,7 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
-            bool critical = (10+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 100);
+            bool critical = (10+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 101);
             
                 sq.AppendCallback(() =>
                 {
@@ -452,7 +472,7 @@ public class BattleManager : MonoBehaviour
                 var deadEnemy = target;
                 target._hp = 0;
                 Enemies.Remove(deadEnemy);
-                var Particle = Instantiate(_fracturePrefab, new Vector2(deadEnemy.transform.position.x, deadEnemy.transform.position.y), Quaternion.identity);
+                var Particle = effectOn(_fracturePrefab, deadEnemy);
                 Particle.transform.localScale *= (deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f);
                 deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                 {
@@ -488,6 +508,7 @@ public class BattleManager : MonoBehaviour
                 Enemy.setAttackBuff();
                 sq.AppendCallback(() =>
                 {
+                    var sunEffect = effectOn(_rageEffectPrefab, Enemy);
                     Enemy.transform.DOMoveY(Enemy._img.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 });
                 sq.AppendInterval(0.8f);
@@ -698,12 +719,18 @@ public class BattleManager : MonoBehaviour
         }
 
         var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
+        effectOn(_summonEffectPrefab,enemyTmp);
 
         enemyTmp.Set(enemystruct);
 
         var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
         enemyHpBarTmp.Set(enemyTmp);
         Enemies.Add(enemyTmp);
+    }
+    public Transform effectOn(Transform effectPrefab, Enemy enemy)
+    {
+        var Effect = Instantiate(effectPrefab, new Vector2(enemy._img.transform.position.x, (enemy._img.transform.position.y - 2f)), Quaternion.identity);
+        return Effect;
     }
 }
 public delegate void Func();

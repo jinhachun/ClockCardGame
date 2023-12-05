@@ -25,8 +25,14 @@ public class Enemy : MonoBehaviour
     int PatternIndex;
     public double attackBuff = 0;
     public int damage => (int)attackBuff + Pattern._Value;
-    public void setAttackBuff() { attackBuff += Pattern._Value; }
-    public void setAttackBuff(int a) { attackBuff += a; }
+    public void setAttackBuff()
+    {
+        attackBuff += Pattern._Value; 
+    }
+    public void setAttackBuff(int a)
+    {
+        attackBuff += a; 
+    }
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;

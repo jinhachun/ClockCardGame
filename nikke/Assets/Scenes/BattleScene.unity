@@ -373,6 +373,8 @@ MonoBehaviour:
   _damagePopupPrefab: {fileID: 1104535163446031739, guid: 55e48c9349dc51d40b91c4fc12e3cd78, type: 3}
   _fracturePrefab: {fileID: 901564528819172047, guid: b01de0a4357d66f44877478340b04a36, type: 3}
   _attEffectPrefab: {fileID: 2730325015434321086, guid: ed06b57df529d8349acfefa333383840, type: 3}
+  _summonEffectPrefab: {fileID: 2730325015434321086, guid: 487eb23ca7716624a9bb55886bba12aa, type: 3}
+  _rageEffectPrefab: {fileID: 2730325015434321086, guid: c79176d5934ea744b8ae7a3b06056269, type: 3}
   Enemies: []
   Deck: []
   Hand: []
@@ -429,7 +431,7 @@ MonoBehaviour:
     _statusStruct: "\uC5C6\uC74C"
   - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
     _name: "\uB625\uAC1C"
-    _hp: 60
+    _hp: 55
     _area: 1
     _enemyType: 1
     _enemyPatterns:
@@ -576,6 +578,15 @@ MonoBehaviour:
     - "\uB458\uAE30"
     area: 1
     enemyType: 2
+  - enemySquad:
+    - "\uB6B1\uB0E5\uC774"
+    area: 1
+    enemyType: 0
+  - enemySquad:
+    - "\uD654\uB09C\uD45C\uC9C0\uD310"
+    - "\uB458\uAE30"
+    area: 1
+    enemyType: 0
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,7 +1346,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1608286285
+  m_SortingLayerID: 30083335
   m_SortingOrder: 500
   m_TargetDisplay: 0
 --- !u!224 &1116294884

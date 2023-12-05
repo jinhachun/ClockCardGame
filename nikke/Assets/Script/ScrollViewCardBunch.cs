@@ -43,6 +43,7 @@ public class ScrollViewCardBunch : MonoBehaviour
             xpos += xBlank;
             if (xpos >= x+5*xBlank) { xpos = x; ypos -= yBlank; }
             cardTmp.Set(card.Str);
+            cardTmp.setLayer("event");
             cardTmp.layer = 505;
             cardTmp.setLayer(1,505);
             cardTmp.transform.parent = _Cards.transform;

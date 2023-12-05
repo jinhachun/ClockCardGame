@@ -98,6 +98,12 @@ public void Set(CardStruct str)
         if (isFixed) infoText.Add(Fixed);
 
         this._infoText.text = string.Join(", ", infoText.ToArray());
+
+        if(str.isRare)
+            this._tier.color = Color.red;
+        else
+            this._tier.color = Color.black;
+
     }
     public void flip()
     {
@@ -132,7 +138,27 @@ public void Set(CardStruct str)
         meshRenderer = _defText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
     }
-    
+    public void setLayer(string A)
+    {
+        _cardBack.sortingLayerName = A;
+        _cardBody.sortingLayerName = A;
+        _img.sortingLayerName = A;
+        _species.sortingLayerName = A;
+        _type.sortingLayerName = A;
+        MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+        meshRenderer = _text.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+        meshRenderer = _tier.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+        meshRenderer = _infoText.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+        meshRenderer = _attText.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+        meshRenderer = _defText.GetComponent<MeshRenderer>();
+        meshRenderer.sortingLayerName = A;
+
+    }
     void OnMouseOver()
     {
         if (!Touchable) return;

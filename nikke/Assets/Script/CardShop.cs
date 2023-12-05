@@ -5,6 +5,7 @@ using TMPro;
 
 public class CardShop : MonoBehaviour
 {
+    [SerializeField] Transform _evolveEffectPrefab;
     [SerializeField] GameObject BackGround;
     [SerializeField] GameObject BackGround_evol;
     [SerializeField] Card _CardPrefab;
@@ -59,8 +60,6 @@ public class CardShop : MonoBehaviour
         card_evol.setLayer(1, 5);
         card_evol2.setLayer(1, 5);
         card.Touchable = false;
-        card_evol.Touchable = false;
-        card_evol2.Touchable = false;
     }
     public void Buy()
     {
@@ -110,7 +109,7 @@ public class CardShop : MonoBehaviour
             evolveUI(0);
             return;
         }
-        
+        var EvolveEffect = Instantiate(_evolveEffectPrefab, new Vector2(card.transform.position.x, card.transform.position.y-2f), Quaternion.identity);
         int random = Random.Range(0, card.Str.evol.Count);
         int tmp = random;
         card_evol.Set(CardDatabase.Instance.card(card.Str.evol[random]));
@@ -146,10 +145,7 @@ public class CardShop : MonoBehaviour
     {
         if (!card.gameObject.activeInHierarchy) return;
         card.gameObject.SetActive(false);
-        card_evol.Set(FIRSTCARD);
-        card_evol2.Set(FIRSTCARD);
-        percentTxt(100);
-        UpdateTxt();
+        setFirstCard();
     }
     public void UpdateTxt()
     {
@@ -166,6 +162,15 @@ public class CardShop : MonoBehaviour
         evolve(cardStruct);
         evolveUI(cardStruct.evol.Count);
 
+    }
+    public void setFirstCard()
+    {
+        evolveUI(1);
+        card_evol.Set(FIRSTCARD);
+        percentTxt(100);
+        
+        
+        UpdateTxt();
     }
 
 }
