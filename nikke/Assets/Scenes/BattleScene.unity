@@ -539,6 +539,36 @@ MonoBehaviour:
       _Value: 3
       _Bool: 0
     _statusStruct: "\uB450\uBAA9"
+  - _sprite: {fileID: 21300000, guid: 84c3eec99c8a74c44b1171ef79ace3ae, type: 3}
+    _name: "\uC560\uBC8C"
+    _hp: 60
+    _area: 2
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 12
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: "\uC5C6\uC74C"
+  - _sprite: {fileID: 21300000, guid: 7058d013c4b3d0e4797e035590710d1a, type: 3}
+    _name: "\uBC8C\uB808"
+    _hp: 60
+    _area: 2
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 12
+      _Bool: 0
+    _statusStruct: "\uC5C6\uC74C"
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -586,6 +616,26 @@ MonoBehaviour:
     - "\uD654\uB09C\uD45C\uC9C0\uD310"
     - "\uB458\uAE30"
     area: 1
+    enemyType: 0
+  - enemySquad:
+    - "\uBBF8\uB2C8\uC751\uAC00"
+    - "\uB458\uAE30"
+    - "\uBBF8\uB2C8\uC751\uAC00"
+    - "\uB458\uAE30"
+    area: 1
+    enemyType: 0
+  - enemySquad:
+    - "\uBBF8\uB2C8\uC751\uAC00"
+    - "\uD654\uB09C\uD45C\uC9C0\uD310"
+    - "\uBBF8\uB2C8\uC751\uAC00"
+    area: 1
+    enemyType: 1
+  - enemySquad:
+    - "\uC560\uBC8C"
+    - "\uBC8C\uB808"
+    - "\uC560\uBC8C"
+    - "\uBC8C\uB808"
+    area: 2
     enemyType: 0
 --- !u!114 &723614872
 MonoBehaviour:

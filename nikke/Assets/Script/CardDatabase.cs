@@ -170,16 +170,26 @@ public class CardDatabase : MonoBehaviour
             case "티라노":
                 return (() => {
                     BattleManager.Instance.takeDamage(3);
-                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100) 
+                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
+                    {
+                        var tmpEnemyList = new List<Enemy>();
                         foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                         BattleManager.Instance.enemyDamage(15,false, tmp);
+                            tmpEnemyList.Add(tmp);
+                        foreach(Enemy tmp in tmpEnemyList)
+                            BattleManager.Instance.enemyDamage(15, false, tmp);
+                    }
                 });
             case "블랙티라노":
                 return (() => {
                     BattleManager.Instance.takeDamage(5);
                     if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
+                    {
+                        var tmpEnemyList = new List<Enemy>();
                         foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                        BattleManager.Instance.enemyDamage(40, false, tmp);
+                            tmpEnemyList.Add(tmp);
+                        foreach (Enemy tmp in tmpEnemyList)
+                            BattleManager.Instance.enemyDamage(40, false, tmp);
+                    }
                 });
 
             case "버섯깨비":

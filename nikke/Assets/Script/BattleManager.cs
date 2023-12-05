@@ -573,7 +573,7 @@ public class BattleManager : MonoBehaviour
     }
     public void RewardPhase()
     {
-        Resource.Instance.money += reward;
+        Resource.Instance.money += reward*(Resource.Instance.VillageLevel["Farm"]+100)/100;
         Resource.Instance.StageUp();
         Resource.Instance.setHp(Hp);
         DOTween.KillAll();

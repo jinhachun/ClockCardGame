@@ -36,6 +36,10 @@ public class CardShop : MonoBehaviour
     public string evolButtonTxt;
     public string recruitButtonTxt;
     public string delButtonTxt;
+    [SerializeField] GameObject _buyButton;
+    [SerializeField] GameObject _evolButton;
+    [SerializeField] GameObject _recruitButton;
+    [SerializeField] GameObject _delButton;
 
     CardStruct FIRSTCARD => CardDatabase.Instance.card("µ¿±ÛÀÌ");
     public void Start()
@@ -116,7 +120,7 @@ public class CardShop : MonoBehaviour
         while (card.Str.evol.Count > 1 && random == tmp)
             random = Random.Range(0, card.Str.evol.Count);
         card_evol2.Set(CardDatabase.Instance.card(card.Str.evol[random]));
-        if (3*Resource.Instance.VillageLevel["House"] > Random.Range(0, 101))
+        if (2*Resource.Instance.VillageLevel["House"] > Random.Range(0, 101))
         {
             evolve(CardDatabase.Instance.card(card.Str.evol[random]));
         }
@@ -154,6 +158,23 @@ public class CardShop : MonoBehaviour
         _evolButtonTxt.text = evolButtonTxt + $" (${EvolPrice})";
         _recruitButtonTxt.text = recruitButtonTxt;
         _delButtonTxt.text = delButtonTxt;
+
+        if (!card.gameObject.activeInHierarchy)
+        {
+            _recruitButton.SetActive(false);
+            _delButton.SetActive(false);
+            _evolButton.SetActive(false);
+            _buyButton.SetActive(true);
+        }
+        else
+        {
+            _recruitButton.SetActive(true);
+            _delButton.SetActive(true);
+            _evolButton.SetActive(true);
+            if (card.tier == 5) _evolButton.SetActive(false);
+            _buyButton.SetActive(false);
+        }
+        
     }
     public void setCard(CardStruct cardStruct)
     {

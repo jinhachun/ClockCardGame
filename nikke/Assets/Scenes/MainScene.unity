@@ -5167,6 +5167,10 @@ MonoBehaviour:
   evolButtonTxt: "\uC9C4\uD654"
   recruitButtonTxt: "\uC601\uC785"
   delButtonTxt: "\uC81C\uAC70"
+  _buyButton: {fileID: 1595442370}
+  _evolButton: {fileID: 52365901}
+  _recruitButton: {fileID: 676823635}
+  _delButton: {fileID: 826421837}
 --- !u!1 &603383269
 GameObject:
   m_ObjectHideFlags: 0
@@ -14584,8 +14588,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uC8FC\uAC70\uD658\uACBD\uC774 \uC88B\uC544\uC838 \uBCD1\uC0AC\uB4E4\uC758
-    \uACF5\uAE09\uC774 \uC26C\uC6CC\uC9D1\uB2C8\uB2E4. \uBCD1\uC0AC\uB4E4\uC774 (\uB808\uBCA8*3)%\uB85C
-    \uC9C4\uD654\uB97C \uD55C \uBC88 \uB354 \uD569\uB2C8\uB2E4."
+    \uACF5\uAE09\uC774 \uC26C\uC6CC\uC9D1\uB2C8\uB2E4. \uBCD1\uC0AC\uB4E4\uC774 (\uB808\uBCA8*2)%
+    \uD655\uB960\uB85C \uC9C4\uD654\uB97C \uD55C \uBC88 \uB354 \uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
   m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
