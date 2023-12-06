@@ -17,6 +17,16 @@ public class DamagePopup : MonoBehaviour
 
         return damagePopup;
     }
+    public static DamagePopup Create(Vector3 position, string damage, Color color)
+    {
+        Vector3 pos = new Vector3(position.x + Random.Range(-2, 2), position.y + Random.Range(-1, 1), 0f);
+        Transform damagePopupTransform = Instantiate(BattleManager.Instance._damagePopupPrefab, pos, Quaternion.identity);
+
+        DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
+        damagePopup.Setup(damage, color);
+
+        return damagePopup;
+    }
     private TMP_Text textMesh;
     private float disappearTimer;
     private Color txtColor;
@@ -47,6 +57,17 @@ public class DamagePopup : MonoBehaviour
             textMesh.fontSize = 5f * randomScale / 100; ;
             txtColor = Color.white;
         }
+        textMesh.color = txtColor;
+        disappearTimer = 0.5f;
+    }
+    public void Setup(string dam, Color color)
+    {
+        float randomScale = Random.Range(80, 120);
+        if (textMesh == null) Debug.Log("??");
+        textMesh.text = (dam);
+        
+        textMesh.fontSize = 5f * randomScale / 100; ;
+        txtColor = color;
         textMesh.color = txtColor;
         disappearTimer = 0.5f;
     }

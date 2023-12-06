@@ -28,6 +28,12 @@ public class Resource : MonoBehaviour
         VillageLevel.Add("House", 0);
         VillageLevel.Add("Church", 0);
         VillageLevel.Add("Bath", 0);
+
+        SupportPrice = new Dictionary<string, int>();
+        SupportPrice.Add("Evolve", 0);
+        SupportPrice.Add("Add", 0);
+        SupportPrice.Add("Delete", 0);
+        SupportPrice.Add("Heal", 0);
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
         money = 100; jewel = 5;
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
@@ -51,9 +57,11 @@ public class Resource : MonoBehaviour
     public int Area; public int Stage;
     public int money;
     public Dictionary<string,int> VillageLevel;
+    public Dictionary<string, int> SupportPrice;
     public int jewel;
     public List<float> combiRate;
     public CardStruct shopcard;
+
 
     public void StageUp()
     {
@@ -71,11 +79,13 @@ public class Resource : MonoBehaviour
     }
     public void Event_Heal(int a)
     {
+        DamagePopup.Create(new Vector2(-2,-3), "+"+a, Color.green);
         Hp += a;
         if (Hp >= mHp) Hp = mHp;
     }
     public void Event_Damage(int a)
     {
+        DamagePopup.Create(new Vector2(-2, -3), "" + a, Color.white);
         Hp -= a;
         if (Hp <= 0) Hp = 1;
     }

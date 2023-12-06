@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] StatusUnit _status;
     [SerializeField] public SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _targetImg;
-    
+    [SerializeField] private TMP_Text _statusText;
+
 
     public EnemyStruct Str;
     public string _name;
@@ -15,6 +17,7 @@ public class Enemy : MonoBehaviour
     public int _mhp;
     public int _shield;
     public int _area;
+    public int _statusValue;
     
     public EnemyType _enemyType;
     public List<pattern> _enemyPatterns;
@@ -33,6 +36,15 @@ public class Enemy : MonoBehaviour
     {
         attackBuff += a; 
     }
+    public void gainShield(int a)
+    {
+        _shield += a;
+    }
+    public void lossShield(int a)
+    {
+        _shield -= a;
+        if (_shield <= 0) _shield = 0;
+    }
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;
@@ -45,6 +57,9 @@ public class Enemy : MonoBehaviour
         Debug.Log(this._enemyType + " " + EnemyDatabase.Instance.spriteSize(this._enemyType));
         this._img.transform.parent.localScale = EnemyDatabase.Instance.spriteSize(this._enemyType);
         this._enemyPatterns = enemyStruct._enemyPatterns;
+        this._statusValue = enemyStruct._statusValue;
+        if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
+        _statusText.text = this._statusValue+"";
         if (!enemyStruct._statusStruct.Equals("¾øÀ½"))
         {
             this._statusName = enemyStruct._statusStruct;

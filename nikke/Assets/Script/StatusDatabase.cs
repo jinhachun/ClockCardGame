@@ -21,8 +21,11 @@ public class StatusDatabase : MonoBehaviour
     {
         switch (name)
         {
-            case ("이름"):
-                return;
+            case ("단단함"):
+                {
+                    enemy.gainShield(enemy._statusValue);
+                    return;
+                }
         }
         return;
     }
@@ -42,7 +45,7 @@ public class StatusDatabase : MonoBehaviour
             case "분노":
                 {
                     BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
-                    enemy.setAttackBuff(enemy._area*enemy._area);
+                    enemy.setAttackBuff(enemy._statusValue);
                     return;
                 }
             case "두목":

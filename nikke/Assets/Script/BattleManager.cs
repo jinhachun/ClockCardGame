@@ -99,6 +99,7 @@ public class BattleManager : MonoBehaviour
                 turn++;
                 EnemyStatus_TurnStart();
                 TurnStartPhase();
+                DeckCountCheck();
                 break;
             case BattleState.Draw:
                 DrawPhase();
@@ -211,22 +212,35 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in Enemies)
         {
             enemy.SetPatternText();
+            enemy._shield = 0;
         }
         ShuffleDeck(sq);
-        sq.AppendCallback(() =>
-        {
-            ChangeState(BattleState.Draw);
-        });
     }
 
     public int tmpAtt;
     public int tmpDef;
     public double tmpRate;
     public int tmpReroll;
+    public void DeckCountCheck()
+    {
+        Sequence sq = DOTween.Sequence();
+        while (Deck.Count + Grave.Count < 5)
+        {
+            var queue = new Queue<CardStruct>();
+            queue.Enqueue(CardDatabase.Instance.card_token("눅눅한동글이"));
+            AddCard(queue, true);
+            sq.AppendInterval(0.5f);
+        }
+        sq.AppendCallback(() =>
+        {
+            ChangeState(BattleState.Draw);
+        });
+    }
     public void DrawPhase()
     {
         Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
         Sequence sq = DOTween.Sequence();
+        
         while (Hand.Count < 5)
         {
             DrawCard(sq);
@@ -460,6 +474,14 @@ public class BattleManager : MonoBehaviour
         {
 
             target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+            var afterShieldAttLeft = AttLeft - target._shield;
+            target.lossShield(AttLeft);
+            if (afterShieldAttLeft < 0)
+            {
+                DamagePopup.Create(target.transform.position, "Block", Color.gray);
+                return;
+            }
+            AttLeft = afterShieldAttLeft;
             var tmpAttLeft = AttLeft - target._hp;
             var AttEffect = Instantiate(_attEffectPrefab, new Vector2(target._img.transform.position.x*Random.Range(85,115)/100f, (target._img.transform.position.y-1.5f) * Random.Range(85, 115) / 100f), Quaternion.identity);
             AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f)*(0.25f+((float)AttLeft/(float)target.Str._hp));
@@ -531,11 +553,17 @@ public class BattleManager : MonoBehaviour
     }
     public void takeDamage(int dam)
     {
-        int FinalDamage = Shield > dam ? 0 : dam - Shield;
-        Shield = Shield > dam ? Shield - dam : 0;
+        var ShieldDamageCompare = Shield > dam;
+        int FinalDamage = ShieldDamageCompare ? 0 : dam - Shield;
+        Shield = ShieldDamageCompare ? Shield - dam : 0;
         if (FinalDamage > 0)
         {
-             Hp -= FinalDamage;
+            DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage+"", Color.white);
+            Hp -= FinalDamage;
+        }
+        else
+        {
+            DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
         }
         if (Hp <= 0) ChangeState(BattleState.Lose);
     }
@@ -549,6 +577,7 @@ public class BattleManager : MonoBehaviour
         {
             sq.AppendCallback(() =>
             {
+                DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage + "", Color.white);
                 Enemy._img.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
                 Hp -= FinalDamage;
             });
@@ -558,10 +587,16 @@ public class BattleManager : MonoBehaviour
         {
             sq.AppendCallback(() =>
             {
+                DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
                 Enemy._img.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
             });
             sq.AppendInterval(0.2f);
         }
+    }
+    public void takeHeal(int value)
+    {
+        DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+"+value, Color.green);
+        Hp += value;
     }
     public void EndTurnPhase()
     {
@@ -624,6 +659,7 @@ public class BattleManager : MonoBehaviour
         }
         tmpCard = Deck[0];
         CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
+        tmpCard.flip(true);
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
         for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);

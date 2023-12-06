@@ -23,6 +23,7 @@ public struct EnemyStruct {
     public EnemyType _enemyType;
     public List<pattern> _enemyPatterns;
     public string _statusStruct;
+    public int _statusValue;
 };
 [Serializable]
 public struct EnemySquadStruct
@@ -52,6 +53,7 @@ public class EnemyDatabase : MonoBehaviour
     {
         var sqdListByArea = sqdList.Where(x => x.area == area).ToList().Where(x=>x.enemyType==type).ToList();
         int randomNum = Random.Range(0, sqdListByArea.Count);
+        Debug.Log(randomNum);
         var sqdByArea = sqdListByArea[randomNum];
 
         List<EnemyStruct> enemyStructs = new List<EnemyStruct>();

@@ -126,19 +126,19 @@ public class CardDatabase : MonoBehaviour
         {
             case "Á»ºñ":
                 return (() => {
-                    BattleManager.Instance.Hp += 2;
+                    BattleManager.Instance.takeHeal(2);
                 });
             case "¿ÕÁ»ºñ":
                 return (() => {
-                    BattleManager.Instance.Hp += 4;
+                    BattleManager.Instance.takeHeal(4);
                 });
             case "¿Õ¿ÕÁ»ºñ":
                 return (() => {
-                    BattleManager.Instance.Hp += 4;
+                    BattleManager.Instance.takeHeal(4);
                 });
             case "ÃÊ´ëÇüÁ»ºñ":
                 return (() => {
-                    BattleManager.Instance.Hp += 4;
+                    BattleManager.Instance.takeHeal(4);
                 });
             case "¸Ô±úºñ":
                 return (() => {
