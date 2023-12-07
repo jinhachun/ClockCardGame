@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 92eacbc7d01d9c746ba9fe7920461162
+guid: ef0512b5c01a48742bd67c4f405ea4f1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 35_kidleader_dongle
+      name: 41_LivingArmor
       rect:
         serializedVersion: 2
-        x: 0
-        y: 444
-        width: 327
-        height: 287
+        x: 5
+        y: 545
+        width: 212
+        height: 179
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4814f8fc97c402d408ec42ae17879830
-      internalID: 839359140
+      spriteID: abeac37bc31f50e48a6a2a4eb21bccb6
+      internalID: 63189997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 36_militia_dongle
+      name: 42_Durahan
       rect:
         serializedVersion: 2
-        x: 449
-        y: 382
-        width: 461
-        height: 341
+        x: 242
+        y: 460
+        width: 290
+        height: 260
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bad76ceb0372ab747b1d2391eddc6577
-      internalID: 1930695562
+      spriteID: 7fe1869da1bc68a49b60256bfee2657f
+      internalID: -1054682757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 37_the_Capidongle
+      name: 43_CountDongle
       rect:
         serializedVersion: 2
-        x: 1001
-        y: 439
-        width: 399
-        height: 289
+        x: 543
+        y: 505
+        width: 304
+        height: 211
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09118f89d8bf7714bbe659535f6708a3
-      internalID: 285401327
+      spriteID: 39d98bcaeb9c3b24ab0c886f2f7ae540
+      internalID: 1414500401
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 38_shieldDongle
+      name: 44_donglepole
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 344
-        height: 347
+        x: 16
+        y: 236
+        width: 249
+        height: 211
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96de3d1f99f79b0488aed9b823b86ff8
-      internalID: 1768206966
+      spriteID: 1e23e8e97d31662479ca6c011b8386e3
+      internalID: 1354592784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 39_riotPoliceDongle
+      name: 45_dongrog
       rect:
         serializedVersion: 2
-        x: 470
-        y: 0
-        width: 391
-        height: 369
+        x: 268
+        y: 243
+        width: 256
+        height: 210
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ee05809403ffe345b9a433ee1436c25
-      internalID: -1997732876
+      spriteID: 0c41b84cdaf81494b8036a4903859c30
+      internalID: -690333526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 40_CaptainDongle
+      name: 47_Ness dongle
       rect:
         serializedVersion: 2
-        x: 968
-        y: 0
-        width: 415
-        height: 396
+        x: 596
+        y: 29
+        width: 276
+        height: 241
       alignment: 2
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,8 +236,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88ce45d98c9b9394b97ab8401f246f83
-      internalID: -579831666
+      spriteID: 056f26b2f74cf5340b6bf6fb7c7a2ad6
+      internalID: 953438256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 46_amphibiousdongle
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 281
+        width: 287
+        height: 210
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db38503bd8c79d24ba10d62326923ec2
+      internalID: 2132780417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 48_Twingle
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 521
+        width: 273
+        height: 197
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ca2778564e7a547b4a4fac8daaab4d
+      internalID: -1191905597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 49_tridongle
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 291
+        width: 285
+        height: 222
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c49c19504ec314ba87447d5cfcb11f
+      internalID: -248539101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 50_chimeradongle
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 11
+        width: 330
+        height: 268
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dee41cb0bdb0c54589e68fd62ba2d6a
+      internalID: 695139168
       vertices: []
       indices: 
       edges: []
@@ -253,12 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      35_kidleader_dongle: 839359140
-      36_militia_dongle: 1930695562
-      37_the_Capidongle: 285401327
-      38_shieldDongle: 1768206966
-      39_riotPoliceDongle: -1997732876
-      40_CaptainDongle: -579831666
+      41_LivingArmor: 63189997
+      42_Durahan: -1054682757
+      43_CountDongle: 1414500401
+      44_donglepole: 1354592784
+      45_dongrog: -690333526
+      46_amphibiousdongle: 2132780417
+      47_Ness dongle: 953438256
+      48_Twingle: -1191905597
+      49_tridongle: -248539101
+      50_chimeradongle: 695139168
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

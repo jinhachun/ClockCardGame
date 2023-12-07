@@ -488,7 +488,7 @@ MonoBehaviour:
     _statusValue: 1
   - _sprite: {fileID: 21300000, guid: f49df4d974de8d249a637091d8eecb21, type: 3}
     _name: "\uB458\uAE30"
-    _hp: 30
+    _hp: 25
     _area: 1
     _enemyType: 0
     _enemyPatterns:
@@ -524,7 +524,7 @@ MonoBehaviour:
     _statusValue: 0
   - _sprite: {fileID: 21300000, guid: 7309613071481a646913558b20fcac00, type: 3}
     _name: "\uBE45\uB458\uAE30"
-    _hp: 200
+    _hp: 220
     _area: 1
     _enemyType: 2
     _enemyPatterns:
@@ -613,7 +613,7 @@ MonoBehaviour:
     - "\uB625\uAC1C"
     - "\uB625\uAC1C"
     area: 1
-    enemyType: 0
+    enemyType: 1
   - enemySquad:
     - "\uC655\uC751\uAC00"
     area: 1
@@ -674,6 +674,11 @@ MonoBehaviour:
     - "\uBC11\uB3D9\uC774"
     - "\uBC11\uB3D9\uC774"
     area: 2
+    enemyType: 0
+  - enemySquad:
+    - "\uB625\uAC1C"
+    - "\uB458\uAE30"
+    area: 1
     enemyType: 0
 --- !u!114 &723614872
 MonoBehaviour:

@@ -71,7 +71,7 @@ public class Resource : MonoBehaviour
             Area++;
             Stage = 1;
         }
-        
+        Debug.Log(Area + "-" + Stage);   
     }
     public void setHp(int a)
     {

@@ -129,20 +129,10 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.takeHeal(2);
                 });
             case "¿ÕÁ»ºñ":
-                return (() => {
-                    BattleManager.Instance.takeHeal(4);
-                });
             case "¿Õ¿ÕÁ»ºñ":
-                return (() => {
-                    BattleManager.Instance.takeHeal(4);
-                });
             case "ÃÊ´ëÇüÁ»ºñ":
                 return (() => {
                     BattleManager.Instance.takeHeal(4);
-                });
-            case "¸Ô±úºñ":
-                return (() => {
-                    BattleManager.Instance.takeDamage(1);
                 });
             case "º¸µÎ¾Þµ¹ÀÌ":
                 return (() => {
@@ -193,9 +183,6 @@ public class CardDatabase : MonoBehaviour
                 });
 
             case "¹ö¼¸±úºñ":
-                return (() => {
-                    BattleManager.Instance.rerolladd(1,true);
-                });
             case "Äõµå¹ö¼¸±úºñ":
                 return (() => {
                     BattleManager.Instance.rerolladd(1,true);
@@ -233,11 +220,6 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.AddCard(queue,true);
                 });
             case "»ïµÎ¶ó":
-                return (() =>
-                {
-                    if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
-                        b.StatChange("Attack", b.Stat.attack * 2);
-                });
             case "ÄÉ¸£º£·Î»ï":
                 return (() =>
                 {
@@ -255,9 +237,11 @@ public class CardDatabase : MonoBehaviour
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("µ¿±ÛÀÌ"))
+                        {
 
                             tmp.StatChange("Attack", tmp.Stat.attack + 1);
-                        tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
+                        }
                     }
 
                     foreach (Card tmp in BattleManager.Instance.Grave)
@@ -275,9 +259,11 @@ public class CardDatabase : MonoBehaviour
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("µ¿±ÛÀÌ"))
+                        {
 
                             tmp.StatChange("Attack", tmp.Stat.attack + 2);
-                        tmp.StatChange("Defence", tmp.Stat.defence + 2);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 2);
+                        }
                     }
 
                     foreach (Card tmp in BattleManager.Instance.Grave)
@@ -295,9 +281,11 @@ public class CardDatabase : MonoBehaviour
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("µ¿±ÛÀÌ"))
+                        {
 
                             tmp.StatChange("Attack", tmp.Stat.attack + 5);
-                        tmp.StatChange("Defence", tmp.Stat.defence + 5);
+                            tmp.StatChange("Defence", tmp.Stat.defence + 5);
+                        }
                     }
 
                     foreach (Card tmp in BattleManager.Instance.Grave)
@@ -310,6 +298,48 @@ public class CardDatabase : MonoBehaviour
 
                     }
                 });
+            case "µ¿Ã¬ÀÌ":
+            case "µ¿±¸¸®":
+                return (() => {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
+                        a.StatChange("Attack", a.Stat.attack + 1);
+                        a.StatChange("Defence", a.Stat.defence + 1);
+                    }
+                });
+            case "¼ö·ú¾ç¿ëµ¿±Û":
+                return (() => {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
+                        a.StatChange("Attack", b.Stat.attack + a.Stat.attack);
+                        a.StatChange("Defence", b.Stat.defence + a.Stat.defence);
+                    }
+                });
+            case "µ¿±Û³×½Ã":
+                return (() => {
+                    foreach (Card a in BattleManager.Instance.Hand)
+                    {
+                        a.StatChange("Attack", a.Stat.attack + 1);
+                        a.StatChange("Defence", a.Stat.attack + 1);
+                    }
+                });
+            case "¼¤µ¿±ÛÀÌ":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card("¼¤µ¿±ÛÀÌ"));
+                    BattleManager.Instance.AddCard(queue, false);
+                });
+
+            case "»ïµ¿±ÛÀÌ":
+            case "µ¿±ÛÅ°¸Þ¶ó":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card("»ïµ¿±ÛÀÌ"));
+                    queue.Enqueue(CardDatabase.instance.card("»ïµ¿±ÛÀÌ"));
+                    BattleManager.Instance.AddCard(queue, false);
+                });
 
         }
         return (() => { });
@@ -320,9 +350,6 @@ public class CardDatabase : MonoBehaviour
         switch (a)
         {
             case "±øÅë¸ó":
-                return (() => {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
-                });
             case "±øÅëº¿":
                 return (() => {
                     b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
@@ -350,6 +377,34 @@ public class CardDatabase : MonoBehaviour
                 return (() => {
                     BattleManager.Instance.rerolladd(1,false);
                 });
+            case "¸®ºù¾Æ¸Ó":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count==0?null:BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                });
+            case "µà¶óÇÑ":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                });
+            case "¹éÀÛµ¿±ÛÀÌ":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                });
+            case "µ¿±ÛÅ°¸Þ¶ó":
+                return (() => {
+                    b.StatChange("Attack", BattleManager.Instance.Grave.Count);
+                });
+
         }
         return (() => { });
     }

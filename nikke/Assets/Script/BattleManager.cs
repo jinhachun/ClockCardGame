@@ -332,6 +332,7 @@ public class BattleManager : MonoBehaviour
         CombiText.Add(TypeCombiText);
         
         AttDefCal(tmpAtt, tmpDef, tmpRate);
+        battleEndChk();
     }
     public void WatingRerollPhase_TextSet(int combi,TMP_Text text)
     {
@@ -419,7 +420,7 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
-            bool critical = (10+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 101);
+            bool critical = (5+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 101);
             
                 sq.AppendCallback(() =>
                 {
@@ -450,20 +451,28 @@ public class BattleManager : MonoBehaviour
         sq.AppendInterval(0.5f);
         sq.AppendCallback(() =>
         {
-            foreach(var enem in Enemies)
-            {
-                if (enem._hp <= 0) Enemies.Remove(enem);
-            }
+            
+
             tmpAtt = 0; tmpDef = 0; tmpRate = 1;
             if(RerollChance<=0) RerollChance++;
             RerollChance += tmpReroll;
             tmpReroll = 0;
             RerollText.text = "Chance : " + RerollChance.ToString();
-            if (Enemies.Count == 0)
-                ChangeState(BattleState.Reward);
-            else
+            if(!battleEndChk())
                 ChangeState(BattleState.EnemyAttack);
         });
+    }
+    public bool battleEndChk()
+    {
+        foreach (var enem in Enemies)
+        {
+            if (enem._hp <= 0) Enemies.Remove(enem);
+        }
+        var chk = Enemies.Count == 0;
+        if (chk)
+            ChangeState(BattleState.EndTurn);
+        return chk;
+
     }
     public void enemyDamage(int dam,bool critical,Enemy target)
     {
@@ -658,10 +667,10 @@ public class BattleManager : MonoBehaviour
             Grave.Clear();
         }
         tmpCard = Deck[0];
-        CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
         tmpCard.flip(true);
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
+        CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
         for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one)
@@ -766,6 +775,11 @@ public class BattleManager : MonoBehaviour
     public Transform effectOn(Transform effectPrefab, Enemy enemy)
     {
         var Effect = Instantiate(effectPrefab, new Vector2(enemy._img.transform.position.x, (enemy._img.transform.position.y - 2f)), Quaternion.identity);
+        return Effect;
+    }
+    public Transform effectOn(Transform effectPrefab, Card card)
+    {
+        var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
         return Effect;
     }
 }

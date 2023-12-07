@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 using DG.Tweening;
 
@@ -23,8 +24,8 @@ public class Support : MonoBehaviour
     public int RerollPrice => Price;
     public int HealPrice => Price* (Resource.Instance.SupportPrice["Heal"]+2);
     public int AddPrice => Price* (Resource.Instance.SupportPrice["Add"] + 2);
-    public int DeletePrice => Price  * (Resource.Instance.SupportPrice["Delete"]* Resource.Instance.SupportPrice["Delete"] + 4);
-    public int EvolvePrice => Price  * (Resource.Instance.SupportPrice["Evolve"]* Resource.Instance.SupportPrice["Evolve"] + 4);
+    public int DeletePrice => Price  * (Resource.Instance.SupportPrice["Delete"]* 2 + 3);
+    public int EvolvePrice => Price  * (Resource.Instance.SupportPrice["Evolve"]+ _cardEvolvePrefab.Str._tier*2 + 2);
     void Start()
     {
         Set();
@@ -33,7 +34,16 @@ public class Support : MonoBehaviour
     {
         _cardAddPrefab.Set(CardDatabase.Instance.cardByTier(3));
         _cardDeletePrefab.Set(Resource.Instance.Deck[Random.Range(0, Resource.Instance.Deck.Count)]);
-        _cardEvolvePrefab.Set(Resource.Instance.Deck[Random.Range(0, Resource.Instance.Deck.Count)]);
+        var rare = Random.Range(0, 101) > 70;
+        if (rare) {
+            var rareCardDeck = Resource.Instance.Deck.Where(x => x.isRare).ToList();
+            if(rareCardDeck.Count!=0)
+                _cardEvolvePrefab.Set(rareCardDeck[Random.Range(0,rareCardDeck.Count)]);
+            else
+                _cardEvolvePrefab.Set(Resource.Instance.Deck[Random.Range(0, Resource.Instance.Deck.Count)]);
+        }
+        else
+            _cardEvolvePrefab.Set(Resource.Instance.Deck[Random.Range(0, Resource.Instance.Deck.Count)]);
         UpdateText();
     }
     public void UpdateText()
@@ -73,9 +83,9 @@ public class Support : MonoBehaviour
     }
     public void ButtonAction_Delete()
     {
-        if (Resource.Instance.money >= RerollPrice)
+        if (Resource.Instance.money >= DeletePrice)
         {
-            Resource.Instance.money -= RerollPrice;
+            Resource.Instance.money -= DeletePrice;
             Resource.Instance.Deck_Remove(_cardDeletePrefab.name);
             Resource.Instance.SupportPrice["Delete"]++;
             Quit();
@@ -83,9 +93,9 @@ public class Support : MonoBehaviour
     }
     public void ButtonAction_Heal()
     {
-        if (Resource.Instance.money >= RerollPrice)
+        if (Resource.Instance.money >= HealPrice)
         {
-            Resource.Instance.money -= RerollPrice;
+            Resource.Instance.money -= HealPrice;
             var HealValue = Random.Range(30, 71);
             Resource.Instance.Event_Heal(HealValue);
             Resource.Instance.SupportPrice["Heal"]++;
