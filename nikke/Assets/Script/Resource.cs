@@ -130,4 +130,9 @@ public class Resource : MonoBehaviour
     {
         StageUp();
     }
+    [ContextMenu("areaUp")]
+    public void cont_areaUp()
+    {
+        Area++;
+    }
 }

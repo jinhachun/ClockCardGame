@@ -45,6 +45,11 @@ public class Enemy : MonoBehaviour
         _shield -= a;
         if (_shield <= 0) _shield = 0;
     }
+    public void heal(int a)
+    {
+        _hp += a;
+        if (_hp > _mhp) _hp = _mhp;
+    }
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;

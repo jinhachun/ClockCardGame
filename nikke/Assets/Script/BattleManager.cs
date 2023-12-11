@@ -36,6 +36,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public Transform _attEffectPrefab;
     [SerializeField] public Transform _summonEffectPrefab;
     [SerializeField] public Transform _rageEffectPrefab;
+    [SerializeField] public Transform _healEffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -97,8 +98,8 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.TurnStart:
                 turn++;
-                EnemyStatus_TurnStart();
                 TurnStartPhase();
+                EnemyStatus_TurnStart();
                 DeckCountCheck();
                 break;
             case BattleState.Draw:
@@ -212,7 +213,6 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in Enemies)
         {
             enemy.SetPatternText();
-            enemy._shield = 0;
         }
         ShuffleDeck(sq);
     }
@@ -725,8 +725,10 @@ public class BattleManager : MonoBehaviour
     {
         foreach(Enemy enemy in Enemies)
         {
-            if(!enemy._statusName.Equals("없음"))
+            if (!enemy._statusName.Equals("없음"))
+            {
                 StatusDatabase.Instance.Action_TurnStart(enemy._statusName, enemy);
+            }
         }
     }
     public void EnemyStatus_WhileAttack()
@@ -734,7 +736,9 @@ public class BattleManager : MonoBehaviour
         foreach (Enemy enemy in Enemies)
         {
             if (!enemy._statusName.Equals("없음"))
+            {
                 StatusDatabase.Instance.Action_WhileAttack(enemy._statusName, enemy);
+            }
         }
     }
     public void EnemyStatus_TurnEnd()
@@ -772,6 +776,26 @@ public class BattleManager : MonoBehaviour
         enemyHpBarTmp.Set(enemyTmp);
         Enemies.Add(enemyTmp);
     }
+    public void healEnemy(int a,Enemy enemy)
+    {
+        effectOn(_healEffectPrefab, enemy);
+        enemy.heal(a);
+        DamagePopup.Create(enemy.transform.position, "+" + a, Color.green);
+
+
+    }
+    public void moveCardGraveToDeck(Card card)
+    {
+        if (card == null) return;
+        Sequence cardMoveSequence = DOTween.Sequence();
+        card.TouchableChange(false);
+        Grave.Remove(card);
+        Deck.Add(card);
+        int Layer = 50 + (Deck.Count) * 3;
+        card.setLayer(0, Layer);
+        BattleManager.Instance.moveCard(cardMoveSequence, card, DeckPos(0), 0.5f,false);
+        cardMoveSequence.AppendCallback(() => { card.flip(false); });
+    }
     public Transform effectOn(Transform effectPrefab, Enemy enemy)
     {
         var Effect = Instantiate(effectPrefab, new Vector2(enemy._img.transform.position.x, (enemy._img.transform.position.y - 2f)), Quaternion.identity);
@@ -781,6 +805,12 @@ public class BattleManager : MonoBehaviour
     {
         var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
         return Effect;
+    }
+
+    [ContextMenu("stageUp")]
+    public void cont_stageEnd()
+    {
+        ChangeState(BattleState.Reward);
     }
 }
 public delegate void Func();

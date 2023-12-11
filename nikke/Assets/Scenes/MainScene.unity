@@ -10748,6 +10748,7 @@ MonoBehaviour:
   _AddPrice: {fileID: 602836415}
   _DeletePrice: {fileID: 261904540}
   _EvolvePrice: {fileID: 1286375340}
+  RerollPrice: 0
 --- !u!1 &1150775076
 GameObject:
   m_ObjectHideFlags: 0
@@ -15422,6 +15423,7 @@ MonoBehaviour:
     evol:
     - "\uD669\uAE08\uBAAC"
     - "\uAE61\uD1B5\uBD07"
+    - "\uBD04\uAE00\uC774"
     isRare: 0
   - _img: {fileID: 1702036209, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
@@ -15429,7 +15431,7 @@ MonoBehaviour:
     _text: "\uAE30\uC0AC\uC791\uC704\uB97C \uBC1B\uC740 \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
     _tier: 3
     _stat:
-      attack: 6
+      attack: 7
       defence: 0
     _type: 0
     isExhaust: 0
@@ -15446,7 +15448,7 @@ MonoBehaviour:
       \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
     _tier: 4
     _stat:
-      attack: 8
+      attack: 10
       defence: 0
     _type: 4
     isExhaust: 0
@@ -15508,7 +15510,7 @@ MonoBehaviour:
       \uC720\uC9C0\uD558\uC9C0 \uBABB\uD558\uACE0 \uAD34\uBB3C\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
     _tier: 5
     _stat:
-      attack: 20
+      attack: 25
       defence: 0
     _type: 5
     isExhaust: 1
@@ -15554,7 +15556,7 @@ MonoBehaviour:
     _tier: 4
     _stat:
       attack: 1
-      defence: 0
+      defence: 1
     _type: 5
     isExhaust: 0
     isEthereal: 1
@@ -15583,7 +15585,7 @@ MonoBehaviour:
       1 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     _tier: 3
     _stat:
-      attack: 3
+      attack: 4
       defence: 0
     _type: 0
     isExhaust: 0
@@ -15599,7 +15601,7 @@ MonoBehaviour:
       2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     _tier: 4
     _stat:
-      attack: 5
+      attack: 7
       defence: 0
     _type: 1
     isExhaust: 0
@@ -15821,7 +15823,7 @@ MonoBehaviour:
     _tier: 3
     _stat:
       attack: 3
-      defence: 2
+      defence: 3
     _type: 0
     isExhaust: 0
     isEthereal: 0
@@ -15837,7 +15839,7 @@ MonoBehaviour:
     _tier: 4
     _stat:
       attack: 5
-      defence: 2
+      defence: 3
     _type: 0
     isExhaust: 0
     isEthereal: 0
@@ -16056,7 +16058,7 @@ MonoBehaviour:
       \uBC1C\uB3D9\uD569\uB2C8\uB2E4."
     _tier: 4
     _stat:
-      attack: 6
+      attack: 5
       defence: 0
     _type: 2
     isExhaust: 0
@@ -16143,6 +16145,146 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
+  - _img: {fileID: 552041209, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uBD04\uAE00\uC774"
+    _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 30 \uC8FC\uB294 \uD3ED\uD0C4\uC744
+      \uC11E\uC5B4\uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 3
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uB3D9\uAE00\uB108\uB9C8\uC774\uD2B8"
+    isRare: 0
+  - _img: {fileID: 1233210112, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uB3D9\uAE00\uB108\uB9C8\uC774\uD2B8"
+    _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 60 \uC8FC\uB294 \uD3ED\uD0C4\uC744
+      \uC11E\uC5B4\uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 1
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uD575\uB3D9\uAE00"
+    isRare: 0
+  - _img: {fileID: -224248228, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uD575\uB3D9\uAE00"
+    _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 120 \uC8FC\uB294 \uD3ED\uD0C4\uC744
+      \uC11E\uC5B4\uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 5
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
+  - _img: {fileID: -1344627752, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 2
+    _name: "\uC720\uB839"
+    _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uC5B8\uB370\uB4DC
+      \uC885\uC871 \uCE74\uB4DC\uB97C \uB371\uC5D0 \uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 3
+    _stat:
+      attack: 0
+      defence: 4
+    _type: 5
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uD3F4\uD130\uAC00\uC774\uC2A4\uD2B8"
+    isRare: 1
+  - _img: {fileID: -62071097, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 2
+    _name: "\uD3F4\uD130\uAC00\uC774\uC2A4\uD2B8"
+    _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uC5B8\uB370\uB4DC
+      \uC885\uC871 \uCE74\uB4DC\uB97C \uB371\uC5D0 \uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 0
+      defence: 6
+    _type: 5
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC9C0\uB2C8"
+    isRare: 1
+  - _img: {fileID: 1845578137, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 2
+    _name: "\uC9C0\uB2C8"
+    _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBAA8\uB4E0 \uC5B8\uB370\uB4DC
+      \uC885\uC871 \uCE74\uB4DC\uB97C \uB371\uC5D0 \uB123\uC2B5\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 0
+      defence: 9
+    _type: 5
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
+  - _img: {fileID: 89849843, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 4
+    _name: "\uC2AC\uB86F\uBA38\uC2E0"
+    _text: "\uB0B4 \uB371\uC5D0 \uBB34\uC791\uC704 \uCE74\uB4DC\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 3
+    _stat:
+      attack: 3
+      defence: 3
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC2AC\uB86F\uBA38\uC2E0+"
+    isRare: 1
+  - _img: {fileID: -334357377, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 4
+    _name: "\uC2AC\uB86F\uBA38\uC2E0+"
+    _text: "\uB0B4 \uB371\uC5D0 3\uD2F0\uC5B4 \uC774\uC0C1\uC758 \uBB34\uC791\uC704
+      \uCE74\uB4DC\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 4
+    _stat:
+      attack: 5
+      defence: 5
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol:
+    - "\uC2AC\uB86F\uBA38\uC2E0++"
+    isRare: 1
+  - _img: {fileID: 763320457, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+    _species: 4
+    _name: "\uC2AC\uB86F\uBA38\uC2E0++"
+    _text: "\uB0B4 \uB371\uC5D0 5\uD2F0\uC5B4 \uBB34\uC791\uC704 \uCE74\uB4DC\uB97C
+      \uCD94\uAC00\uD569\uB2C8\uB2E4."
+    _tier: 5
+    _stat:
+      attack: 7
+      defence: 7
+    _type: 4
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
   cardDatabase_token:
   - _img: {fileID: 21300000, guid: 5c1e67bef2f30f14fb23005975a67483, type: 3}
     _species: 0
@@ -16187,6 +16329,76 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
+  - _img: {fileID: -1893115464, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uD3ED\uD0C4"
+    _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 30 \uC90D\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 0
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
+  - _img: {fileID: 1078065320, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uB2E4\uC774\uB108\uB9C8\uC774\uD2B8"
+    _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 60 \uC90D\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 1
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
+  - _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uD575\uD3ED\uD0C4"
+    _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 120 \uC90D\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 5
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
+  - _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+    _species: 4
+    _name: "\uD575\uD3ED\uD0C4"
+    _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 120 \uC90D\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 5
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 1
+  - _img: {fileID: 21300000, guid: 1c4f51079ebc0a4458ddf885373f854f, type: 3}
+    _species: 0
+    _name: X
+    _text: "\uB354 \uC774\uC0C1 \uCE74\uB4DC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4!"
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
@@ -16228,7 +16440,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventList:
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 0
+    _isAreaThree: 0
+    _isAreaFour: 0
     _eventName: "\uB3D9\uAE00\uC774\uC640 \uB450\uB354\uC9C0\uC528"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB545\uC744 \uD30C\uB2E4\uAC00 \uB450\uB354\uC9C0\uC528\uB97C
       \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4. \uAC15\uB3C4\uAC00 \uB418\uC5B4 \uB450\uB354\uC9C0\uC528\uC758
@@ -16239,7 +16454,10 @@ MonoBehaviour:
     - _text: "\uC9D1\uC744 \uD134\uB2E4.(\uCCB4\uB825-20, \uB3C8+100)"
     - _text: "\uCE5C\uAD6C\uAC00 \uB41C\uB2E4.(\uCCB4\uB825+20)"
     _boss: 0
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 0
+    _isAreaThree: 0
+    _isAreaFour: 0
     _eventName: "\uC2E0\uBCD1\uBC1B\uC544\uB77C!"
     _eventText: "\uAE30\uC0AC\uB3CC\uC774 \uD55C \uBA85\uC774 \uB2F9\uC2E0\uC758
       \uB371\uC5D0 \uC601\uC785\uB418\uACE0 \uC2F6\uC5B4\uD569\uB2C8\uB2E4."
@@ -16249,7 +16467,10 @@ MonoBehaviour:
     - _text: "\uBB34\uC2DC\uD55C\uB2E4. (\uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0
         \uC54A\uC74C)"
     _boss: 0
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 1
+    _isAreaThree: 1
+    _isAreaFour: 0
     _eventName: "\uB108 \uD574\uACE0\uC57C!"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB098\uD0DC\uD558\uAC8C \uD589\uB3D9\uD569\uB2C8\uB2E4.\n\uD655
       \uD574\uACE0\uD574\uC11C \uB2E4\uB978 \uB3D9\uAE00\uC774\uB4E4\uC5D0\uAC8C
@@ -16261,7 +16482,10 @@ MonoBehaviour:
     - _text: "\uBB34\uC2DC\uD55C\uB2E4. (\uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0
         \uC54A\uC74C)"
     _boss: 0
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 0
+    _isAreaThree: 0
+    _isAreaFour: 0
     _eventName: "\uB108 \uD574\uACE0\uC57C!"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB098\uD0DC\uD558\uAC8C \uD589\uB3D9\uD569\uB2C8\uB2E4.\n\uD655
       \uD574\uACE0\uD574\uC11C \uB2E4\uB978 \uB3D9\uAE00\uC774\uB4E4\uC5D0\uAC8C
@@ -16273,7 +16497,10 @@ MonoBehaviour:
     - _text: "\uBB34\uC2DC\uD55C\uB2E4. (\uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0
         \uC54A\uC74C)"
     _boss: 0
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 0
+    _isAreaThree: 0
+    _isAreaFour: 0
     _eventName: "\uB3D9\uC804\uC218\uC9D1\uAC00"
     _eventText: "\uB3D9\uAE00\uC774\uAC00  \uC790\uD310\uAE30\uC5D0\uC11C \uB3D9\uC804\uC744
       \uC90D\uACE0\uB2E4\uB2D9\uB2C8\uB2E4.\n\uBE44\uB85D \uC801\uC740 \uC591\uC758
@@ -16282,7 +16509,10 @@ MonoBehaviour:
     _eventSelect:
     - _text: "\uB3C8\uC744 \uC90D\uB294\uB2E4.(\uB3C8+50)"
     _boss: 0
-  - _area: 1
+  - _isAreaOne: 1
+    _isAreaTwo: 1
+    _isAreaThree: 1
+    _isAreaFour: 0
     _eventName: "\uB4DC\uB974\uB801~"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB0AE\uC7A0\uC744 \uC7A1\uB2C8\uB2E4.\n\uBAB8\uC758
       \uD53C\uB85C\uAC00 \uCE58\uC720\uB418\uB294 \uB4EF \uD569\uB2C8\uB2E4..."
@@ -16290,7 +16520,10 @@ MonoBehaviour:
     _eventSelect:
     - _text: "\uC7A0\uC744 \uC794\uB2E4.(\uCCB4\uB825+30)"
     _boss: 0
-  - _area: 2
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
     _eventName: "\uBE45\uB458\uAE30 \uACA9\uD30C!"
     _eventText: "\uBABB\uB41C \uBE45\uB458\uAE30\uB97C \uC4F0\uB7EC\uB728\uB824 \uC8FC\uBBFC\uB4E4\uC774
       \uAC10\uC0AC\uC758 \uB73B\uC73C\uB85C\n\uB3D9\uAE00\uC774 \uC11D\uC0C1\uC744
@@ -16305,6 +16538,22 @@ MonoBehaviour:
     - _text: "\uC0C8\uB85C\uC6B4 \uB3D9\uB8CC\uB97C \uBAA8\uC9D1\uD55C\uB2E4.(\uBB34\uC791\uC704
         4\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
     _boss: 1
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
+    _eventName: "\uC704\uD5D8\uD55C \uB3C4\uBC15"
+    _eventText: "\uB3C4\uBC15\uC655 \uAE40\uB3C4\uBC15\uC528\uAC00 \uB2F9\uC2E0\uC758
+      \uBCD1\uB825\uC744 \uC0C1\uB300\uB85C \uB3C4\uBC15\uC744 \uC81C\uC548\uD569\uB2C8\uB2E4.\n\uB2F9\uC2E0\uC758
+      \uC120\uD0DD\uC740?"
+    _eventSprite: {fileID: 21300000, guid: ffcaf09c4873a1141a014e87c4cf1661, type: 3}
+    _eventSelect:
+    - _text: "\uB3D9\uAE00\uC774\uB97C \uAC78\uACE0 \uB3C4\uBC15\uC744 \uD55C\uB2E4.(\uB371\uC758
+        \uBB34\uC791\uC704 \uB3D9\uAE00\uC774\uB97C \uC81C\uAC70\uD569\uB2C8\uB2E4.)"
+    - _text: "\uB3C8\uC744 \uAC78\uACE0 \uB3C4\uBC15\uC744 \uD55C\uB2E4.(\uB3C8 100\uC6D0\uC744
+        \uC783\uACE0 0~200\uC6D0\uB9CC\uD07C \uC5BB\uC2B5\uB2C8\uB2E4.)"
+    - _text: "\uB3C4\uBC15\uC548\uD574!"
+    _boss: 0
 --- !u!1 &1813648926
 GameObject:
   m_ObjectHideFlags: 0

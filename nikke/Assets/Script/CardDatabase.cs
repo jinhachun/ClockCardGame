@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 using Random = UnityEngine.Random;
 
 
@@ -20,6 +21,7 @@ public class CardDatabase : MonoBehaviour
     [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
     
+    
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
     public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
     public CardStruct card_token(string a) => cardDatabase_token.Where(x => x._name.Equals(a)).FirstOrDefault();
@@ -31,6 +33,7 @@ public class CardDatabase : MonoBehaviour
         return card(a);
     }
     public List<CardStruct> cardByTierList(int a) => cardDatabase.Where(x => x._tier == a).ToList();
+    public List<CardStruct> cardByRareTierList(int a) => cardDatabase.Where(x =>x.isRare && x._tier == a).ToList();
     public CardStruct cardByTier(int a) => cardByTierList(a)[Random.Range(0,cardByTierList(a).Count)];
     public Sprite btn(int i) => btnSprites[i];
     public Sprite speciesSprite(SPECIES c)
@@ -340,6 +343,79 @@ public class CardDatabase : MonoBehaviour
                     queue.Enqueue(CardDatabase.instance.card("»ïµ¿±ÛÀÌ"));
                     BattleManager.Instance.AddCard(queue, false);
                 });
+            case "º½±ÛÀÌ":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card_token("ÆøÅº"));
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+            case "ÆøÅº":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(30, false, target);
+                });
+            case "µ¿±Û³Ê¸¶ÀÌÆ®":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card_token("´ÙÀÌ³Ê¸¶ÀÌÆ®"));
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+            case "´ÙÀÌ³Ê¸¶ÀÌÆ®":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(60, false, target);
+                });
+            case "ÇÙµ¿±Û":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card_token("ÇÙÆøÅº"));
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+            case "ÇÙÆøÅº":
+                return (() => {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                    BattleManager.Instance.enemyDamage(120, false, target);
+                });
+            case "À¯·É":
+            case "ÆúÅÍ°¡ÀÌ½ºÆ®":
+                return (() => {
+                    var cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
+                    var card = cardList.Count==0?null:cardList[Random.Range(0, cardList.Count)];
+                    BattleManager.Instance.moveCardGraveToDeck(card);
+                });
+            case "Áö´Ï":
+                return (() => {
+                    var cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
+                    int loopCnt = 0;
+                    while (cardList.Count > 0 && ++loopCnt <=1000)
+                    {
+                        cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
+                        var card = cardList.Count == 0 ? null : cardList[Random.Range(0, cardList.Count)];
+                        BattleManager.Instance.moveCardGraveToDeck(card);
+                    }
+
+                });
+            case "½½·Ô¸Ó½Å":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(RandomCard());
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+            case "½½·Ô¸Ó½Å+":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    var tier = Random.Range(3, 6);
+                    queue.Enqueue(cardByTier(tier));
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+            case "½½·Ô¸Ó½Å++":
+                return (() => {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    var tier = 5;
+                    queue.Enqueue(cardByTier(tier));
+                    BattleManager.Instance.AddCard(queue, true);
+                });
+
 
         }
         return (() => { });

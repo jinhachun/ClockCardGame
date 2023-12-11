@@ -15,7 +15,17 @@ public class EventDatabase : MonoBehaviour
         instance = this;
     }
     public EventStruct eventNum(int num)=>EventList[num];
-    public List<EventStruct> EventList_area(int area,bool boss) => EventList.Where(x => x._area.Equals(area) && x._boss==boss).ToList();
+    bool isArea(int area,EventStruct eventStruct)
+    {
+        if (area == 1)
+            return Resource.Instance.Area == 1 && eventStruct._isAreaOne;
+        else if (area == 2)
+            return Resource.Instance.Area == 2 && eventStruct._isAreaTwo;
+        if (area == 3)
+            return Resource.Instance.Area == 3 && eventStruct._isAreaThree;
+        else return true;
+    }
+    public List<EventStruct> EventList_area(int area,bool boss) => EventList.Where(x => (isArea(area,x)) && x._boss==boss).ToList();
     public EventStruct Event_area(int area,bool boss) => EventList_area(area,boss)[Random.Range(0, EventList_area(area,boss).Count)];
     
     
@@ -123,6 +133,34 @@ public class EventDatabase : MonoBehaviour
                     }
                     return null;
                 }
+            case "위험한 도박":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove(Resource.Instance.Deck[Random.Range(0,Resource.Instance.Deck.Count)]._name);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            if (Resource.Instance.money >= 100)
+                            {
+                                Resource.Instance.money -= 100;
+                                Resource.Instance.money += Random.Range(0, 200);
+                            }
+                        });
+                    }
+                    else if (selectIndex == 2)
+                    {
+                        return (() =>
+                        {
+                        });
+                    }
+                    return null;
+                }
         }
         return null;
 
@@ -132,7 +170,10 @@ public class EventDatabase : MonoBehaviour
 [Serializable]
 public struct EventStruct
 {
-    public int _area;
+    public bool _isAreaOne;
+    public bool _isAreaTwo;
+    public bool _isAreaThree;
+    public bool _isAreaFour;
     public string _eventName;
     [Multiline(4)]
     public string _eventText;

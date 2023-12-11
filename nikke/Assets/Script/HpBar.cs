@@ -14,7 +14,7 @@ public class HpBar : MonoBehaviour
     public int MaxShield = 100;
 
     protected float HpScale => (float)Hp / (float)MHp;
-    protected float ShieldScale =>((float) Shield / (float) MaxShield)> MaxShield ? MaxShield : ((float)Shield / (float)MaxShield); 
+    protected float ShieldScale =>((float) Shield / (float) MaxShield)> 1 ? 1f : ((float)Shield / (float)MaxShield); 
     [SerializeField] protected bool OnOff;
 
     protected void ScaleChange(GameObject g,float a)
