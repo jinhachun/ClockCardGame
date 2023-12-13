@@ -37,6 +37,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public Transform _summonEffectPrefab;
     [SerializeField] public Transform _rageEffectPrefab;
     [SerializeField] public Transform _healEffectPrefab;
+    [SerializeField] public Transform _shieldEffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -483,6 +484,7 @@ public class BattleManager : MonoBehaviour
         {
 
             target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+            EnemyStatus_WhileAttack(target);
             var afterShieldAttLeft = AttLeft - target._shield;
             target.lossShield(AttLeft);
             if (afterShieldAttLeft < 0)
@@ -529,12 +531,17 @@ public class BattleManager : MonoBehaviour
     {
         Sequence sq = DOTween.Sequence();
         List<int> DamageList = new List<int>();
-        foreach (var Enemy in Enemies)
+
+        var tmpEnemyList = new List<Enemy>();
+        foreach (Enemy tmp in BattleManager.Instance.Enemies)
+            tmpEnemyList.Add(tmp);
+        foreach (var Enemy in tmpEnemyList)
         {
             if (Enemy.Pattern._enemyPattern == EnemyPattern.ATT)
             {
                 takeDamage(sq, Enemy);
-            }else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
+            }
+            else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
             {
                 Enemy.setAttackBuff();
                 sq.AppendCallback(() =>
@@ -543,13 +550,18 @@ public class BattleManager : MonoBehaviour
                     Enemy.transform.DOMoveY(Enemy._img.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 });
                 sq.AppendInterval(0.8f);
-            }else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
+            }
+            else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
             {
                 Queue<CardStruct> queue = new Queue<CardStruct>();
                 for(int i=0;i<Enemy.Pattern._Value;i++)
                     queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
                 AddCard(queue, Enemy.Pattern._Bool);
                 sq.AppendInterval(1.2f);
+            }
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
+            {
+                summonEnemy(EnemyDatabase.Instance.enemy(Enemy.Pattern._CardName));
             }
         }
         
@@ -706,6 +718,8 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < Deck.Count; i++)
         {
             Deck[i].setLayer(Deck.Count - i, 50);
+            if (Deck[i].transform.rotation.z != 0)
+                Deck[i].transform.rotation = Quaternion.Euler(0, 0, 0);
             moveCard(sq, Deck[i], DeckPos(i), 0.02f, true);
         }
     }
@@ -731,15 +745,13 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
-    public void EnemyStatus_WhileAttack()
+    public void EnemyStatus_WhileAttack(Enemy enemy)
     {
-        foreach (Enemy enemy in Enemies)
-        {
-            if (!enemy._statusName.Equals("없음"))
+           if (!enemy._statusName.Equals("없음"))
             {
                 StatusDatabase.Instance.Action_WhileAttack(enemy._statusName, enemy);
             }
-        }
+        
     }
     public void EnemyStatus_TurnEnd()
     {

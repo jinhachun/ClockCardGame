@@ -18,12 +18,14 @@ public class EventDatabase : MonoBehaviour
     bool isArea(int area,EventStruct eventStruct)
     {
         if (area == 1)
-            return Resource.Instance.Area == 1 && eventStruct._isAreaOne;
+            return eventStruct._isAreaOne;
         else if (area == 2)
-            return Resource.Instance.Area == 2 && eventStruct._isAreaTwo;
-        if (area == 3)
-            return Resource.Instance.Area == 3 && eventStruct._isAreaThree;
-        else return true;
+            return eventStruct._isAreaTwo;
+        else if (area == 3)
+            return eventStruct._isAreaThree;
+        else if (area == 4)
+            return eventStruct._isAreaThree;
+        else return false;
     }
     public List<EventStruct> EventList_area(int area,bool boss) => EventList.Where(x => (isArea(area,x)) && x._boss==boss).ToList();
     public EventStruct Event_area(int area,bool boss) => EventList_area(area,boss)[Random.Range(0, EventList_area(area,boss).Count)];
@@ -157,6 +159,67 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
+                        });
+                    }
+                    return null;
+                }
+            case "숲의 지배자":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.money += 600;
+                        });
+                    }
+                    else if (selectIndex == 2)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(5)._name);
+                        });
+                    }
+                    return null;
+                }
+            case "케르베로삼의 간택":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.combiRate[3] = 2.5f;
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Add("케르베로삼");
+                        });
+                    }
+                    return null;
+                }
+            case "치명적인 고백":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(30);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove("좀비");
                         });
                     }
                     return null;

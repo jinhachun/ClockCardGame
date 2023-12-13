@@ -532,6 +532,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8388477018229714881}
     m_Modifications:
+    - target: {fileID: 863592051747743034, guid: 77703d9d0acd3054db3ac9ae2c1f5acd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01181b33f429c144d97fc738550ae64f, type: 3}
+    - target: {fileID: 863592051747743034, guid: 77703d9d0acd3054db3ac9ae2c1f5acd, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 863592051747743034, guid: 77703d9d0acd3054db3ac9ae2c1f5acd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ca61d77761202944f81080e30a80e1be, type: 2}
     - target: {fileID: 1109670612804074114, guid: 77703d9d0acd3054db3ac9ae2c1f5acd, type: 3}
       propertyPath: m_RootOrder
       value: 0

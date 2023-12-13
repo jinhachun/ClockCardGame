@@ -36,8 +36,13 @@ public class StatusDatabase : MonoBehaviour
     {
         switch (name)
         {
-            case ("이름"):
-                return ;
+            case ("폭주"):
+                {
+                    DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
+                    enemy.setAttackBuff(enemy._statusValue);
+                    return;
+                }
         }
         return ;
     }
@@ -68,14 +73,19 @@ public class StatusDatabase : MonoBehaviour
                     Debug.Log(RandomValue);
                     if (RandomValue == 0)
                     {
-                        Action_TurnStart("단단함", enemy);
+                        enemy.gainShield(enemy._statusValue);
                     }
                     else if (RandomValue == 1)
-                        Action_TurnEnd("분노", enemy);
+                    {
+                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
+                        enemy.setAttackBuff(enemy._statusValue);
+                    }
                     else if (RandomValue == 2)
                         BattleManager.Instance.enemyDamage(enemy._statusValue, false, enemy);
                     else if (RandomValue == 3)
-                        enemy._statusValue = Random.Range(0, 11);
+                    {
+                        enemy.statusValueChange(enemy._statusValue+Random.Range(1, 11));
+                    }
                     else if (RandomValue == 4)
                     {
                         BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
@@ -83,6 +93,19 @@ public class StatusDatabase : MonoBehaviour
 
                     return;
                 }
+            case "고혈압":
+                {
+                    if ((float)enemy._hp*100/(float)enemy._mhp<50)
+                    {
+                        DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
+                        enemy.setAttackBuff(enemy._statusValue);
+                        enemy.statusValueChange(enemy._statusValue+5);
+
+                    }
+                    return;
+                }
+                    
         }
     }
 }

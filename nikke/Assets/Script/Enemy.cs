@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     }
     public void gainShield(int a)
     {
+        BattleManager.Instance.effectOn(BattleManager.Instance._shieldEffectPrefab, this);
         _shield += a;
     }
     public void lossShield(int a)
@@ -49,6 +50,13 @@ public class Enemy : MonoBehaviour
     {
         _hp += a;
         if (_hp > _mhp) _hp = _mhp;
+    }
+    public void statusValueChange(int a)
+    {
+        this._statusValue = a;
+        if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
+        else _statusText.gameObject.SetActive(true);
+        _statusText.text = this._statusValue + "";
     }
     public void Set(EnemyStruct enemyStruct)
     {

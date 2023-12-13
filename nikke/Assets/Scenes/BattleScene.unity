@@ -376,6 +376,7 @@ MonoBehaviour:
   _summonEffectPrefab: {fileID: 2730325015434321086, guid: 487eb23ca7716624a9bb55886bba12aa, type: 3}
   _rageEffectPrefab: {fileID: 2730325015434321086, guid: c79176d5934ea744b8ae7a3b06056269, type: 3}
   _healEffectPrefab: {fileID: 2730325015434321086, guid: 2e2a01159f6d21e4c8893c64840089b2, type: 3}
+  _shieldEffectPrefab: {fileID: 2730325015434321086, guid: d2d137453acc207428167437bfc69d09, type: 3}
   Enemies: []
   Deck: []
   Hand: []
@@ -605,7 +606,7 @@ MonoBehaviour:
     _statusValue: 6
   - _sprite: {fileID: 21300000, guid: f89ff8bcb7812a549892e2705442d946, type: 3}
     _name: "\uB3C4\uAE68\uBE44"
-    _hp: 200
+    _hp: 220
     _area: 2
     _enemyType: 1
     _enemyPatterns:
@@ -629,7 +630,7 @@ MonoBehaviour:
     _statusValue: 5
   - _sprite: {fileID: 21300000, guid: 2814092e18259fb469d3bc18623e0d40, type: 3}
     _name: "\uD648\uB7F0\uB3C4\uAE68\uBE44"
-    _hp: 150
+    _hp: 180
     _area: 2
     _enemyType: 1
     _enemyPatterns:
@@ -669,29 +670,29 @@ MonoBehaviour:
       _CardName: 
       _Value: 8
       _Bool: 0
-    _statusStruct: "\uBD84\uB178"
+    _statusStruct: "\uD3ED\uC8FC"
     _statusValue: 3
   - _sprite: {fileID: 21300000, guid: 94962754723b7434c8ab0c62d49f27c1, type: 3}
     _name: "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    _hp: 80
+    _hp: 30
     _area: 2
     _enemyType: 0
     _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 7
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 10
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 2
+      _CardName: "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
       _Value: 1
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 10
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 2
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 14
-      _Value: 0
       _Bool: 0
     _statusStruct: "\uC5C6\uC74C"
     _statusValue: 0
@@ -700,9 +701,41 @@ MonoBehaviour:
     _hp: 500
     _area: 2
     _enemyType: 2
-    _enemyPatterns: []
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
+    _enemyPatterns:
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 25
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 35
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 0
+      _Value: 5
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 0
+      _Value: 10
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 45
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 45
+      _Bool: 0
+    _statusStruct: "\uACE0\uD608\uC555"
+    _statusValue: 5
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -827,9 +860,11 @@ MonoBehaviour:
     area: 2
     enemyType: 1
   - enemySquad:
+    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
     - "\uC232\uC655\uC624\uB9AC\uB108\uAD6C\uB9AC"
+    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
     area: 2
-    enemyType: 1
+    enemyType: 2
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +891,14 @@ MonoBehaviour:
   - _name: "\uB3C4\uAE68\uBE44\uC694\uC220"
     sprite: {fileID: 21300000, guid: 01181b33f429c144d97fc738550ae64f, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uC774\uC0C1\uD55C \uC77C\uC744 \uC800\uC9C0\uB985\uB2C8\uB2E4."
+  - _name: "\uD3ED\uC8FC"
+    sprite: {fileID: 21300000, guid: 545ee13d61299ae42975306a05e05d5b, type: 3}
+    _info: "\uACF5\uACA9\uC744 \uBC1B\uC73C\uBA74, \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  - _name: "\uACE0\uD608\uC555"
+    sprite: {fileID: 21300000, guid: 5ed045e77f1085c4199bdd473487ec1f, type: 3}
+    _info: "\uCCB4\uB825\uC774 \uC808\uBC18 \uC774\uD558\uB85C \uB0B4\uB824\uAC00\uBA74
+      \uD134\uC774 \uB05D\uB0A0 \uB54C, \uACF5\uACA9\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4.
+      \uC99D\uAC00\uB7C9 \uB610\uD55C \uC99D\uAC00\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0

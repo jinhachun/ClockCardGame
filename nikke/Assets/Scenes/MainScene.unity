@@ -16554,6 +16554,68 @@ MonoBehaviour:
         \uC783\uACE0 0~200\uC6D0\uB9CC\uD07C \uC5BB\uC2B5\uB2C8\uB2E4.)"
     - _text: "\uB3C4\uBC15\uC548\uD574!"
     _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 0
+    _isAreaThree: 1
+    _isAreaFour: 0
+    _eventName: "\uC232\uC758 \uC9C0\uBC30\uC790"
+    _eventText: "\uC624\uB9AC\uB108\uAD6C\uB9AC\uB97C \uC4F0\uB7EC\uB728\uB9AC\uACE0
+      \uB2F9\uC2E0\uC740 \uC232\uC758 \uC655\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!\n\uB3D9\uAE00\uC774\uB4E4\uACFC
+      \uD568\uAED8\uD558\uB294 \uC138\uACC4\uC815\uBCF5\uC774 \uBA40\uC9C0 \uC54A\uC558\uB294\uB370\uC694?"
+    _eventSprite: {fileID: 21300000, guid: c33ca4288f8164d4190ce73e7c79d174, type: 3}
+    _eventSelect:
+    - _text: "\uB9F9\uC218\uC778\uCC99 \uCD08\uC2DD\uB3D9\uBB3C\uC744 \uC7A1\uC544\uBA39\uB294\uB2E4.(\uCCB4\uB825
+        \uBAA8\uB450 \uD68C\uBCF5)"
+    - _text: "\uC232\uC5D0 \uC0AC\uB294 \uC8FC\uBBFC\uB4E4\uC5D0\uAC8C \uC138\uAE08\uC744
+        \uAC77\uB294\uB2E4(\uB3C8 +600)"
+    - _text: "\uC0C8\uB85C\uC6B4 \uB3D9\uB8CC\uB97C \uBAA8\uC9D1\uD55C\uB2E4.(\uBB34\uC791\uC704
+        5\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
+    _boss: 1
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 1
+    _isAreaFour: 0
+    _eventName: "\uC232\uC758 \uC9C0\uBC30\uC790"
+    _eventText: "\uC624\uB9AC\uB108\uAD6C\uB9AC\uB97C \uC4F0\uB7EC\uB728\uB9AC\uACE0
+      \uB2F9\uC2E0\uC740 \uC232\uC758 \uC655\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!\n\uB3D9\uAE00\uC774\uB4E4\uACFC
+      \uD568\uAED8\uD558\uB294 \uC138\uACC4\uC815\uBCF5\uC774 \uBA40\uC9C0 \uC54A\uC558\uB294\uB370\uC694?"
+    _eventSprite: {fileID: 21300000, guid: c33ca4288f8164d4190ce73e7c79d174, type: 3}
+    _eventSelect:
+    - _text: "\uB9F9\uC218\uC778\uCC99 \uCD08\uC2DD\uB3D9\uBB3C\uC744 \uC7A1\uC544\uBA39\uB294\uB2E4.(\uCCB4\uB825
+        \uBAA8\uB450 \uD68C\uBCF5)"
+    - _text: "\uC232\uC5D0 \uC0AC\uB294 \uC8FC\uBBFC\uB4E4\uC5D0\uAC8C \uC138\uAE08\uC744
+        \uAC77\uB294\uB2E4(\uB3C8 +600)"
+    - _text: "\uC0C8\uB85C\uC6B4 \uB3D9\uB8CC\uB97C \uBAA8\uC9D1\uD55C\uB2E4.(\uBB34\uC791\uC704
+        5\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
+    _boss: 1
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
+    _eventName: "\uCF00\uB974\uBCA0\uB85C\uC0BC\uC758 \uAC04\uD0DD"
+    _eventText: "\uC57C\uC0DD \uCF00\uB974\uBCA0\uB85C\uC0BC\uC744 \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4.\n\uCF00\uB974\uBCA0\uB85C\uC0BC\uC740
+      \uB3D9\uAE00\uC774\uC758 \uB9E8\uB4E4\uB9E8\uB4E4\uD55C \uB450\uD53C\uAC00
+      \uB9D8\uC5D0 \uB4E4\uC5C8\uB098 \uBD05\uB2C8\uB2E4."
+    _eventSprite: {fileID: 21300000, guid: 4c1249b67afa35e499ebb4d2208c7cce, type: 3}
+    _eventSelect:
+    - _text: "\uACC4\uC18D \uD565\uC544\uC9C4\uB2E4. (\uC885\uC871 \uC870\uD569 \uD2B8\uB9AC\uD50C\uC758
+        \uBC30\uC728 2.5\uBC30)"
+    - _text: "\uB3D9\uB8CC\uB85C \uCC38\uAC00\uC2DC\uD0A8\uB2E4. (\uB371\uC5D0 \uCF00\uB974\uBCA0\uB85C\uC0BC
+        \uCD94\uAC00)"
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
+    _eventName: "\uCE58\uBA85\uC801\uC778 \uACE0\uBC31"
+    _eventText: "\uC880\uBE44\uAC00 \uC0AC\uC2E4 \uB2F9\uC2E0\uC744 \uC88B\uC544\uD55C\uB2E4\uACE0
+      \uACE0\uBC31\uD588\uC2B5\uB2C8\uB2E4.\n\uACE0\uBC31\uC744 \uBC1B\uC544\uC8FC\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+    _eventSprite: {fileID: 21300000, guid: 8b880640e85b694448f02c5d144d2ca8, type: 3}
+    _eventSelect:
+    - _text: "\uACE0\uBC31\uC744 \uBC1B\uC544\uC900\uB2E4.(\uCCB4\uB825+30)"
+    - _text: "\uACE0\uBC31\uC744 \uAC70\uC808\uD55C\uB2E4.(\uB371\uC5D0\uC11C \uC880\uBE44
+        \uD558\uB098 \uC81C\uAC70)"
+    _boss: 0
 --- !u!1 &1813648926
 GameObject:
   m_ObjectHideFlags: 0

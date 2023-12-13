@@ -74,7 +74,7 @@ public class EnemyDatabase : MonoBehaviour
 [Serializable]
 public enum EnemyPattern
 {
-    ATT, BUFF, deBUFF, CARDINSRT, SLEEP
+    ATT, BUFF, SUMMON, CARDINSRT, SLEEP
 }
 [Serializable]
 public enum EnemyType
