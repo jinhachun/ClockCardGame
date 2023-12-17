@@ -865,6 +865,11 @@ MonoBehaviour:
     - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
     area: 2
     enemyType: 2
+  - enemySquad:
+    - "\uB3C4\uAE68\uBE44"
+    - "\uB3C4\uAE68\uBE44"
+    area: 2
+    enemyType: 1
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0

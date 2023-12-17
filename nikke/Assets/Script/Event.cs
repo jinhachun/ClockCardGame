@@ -50,6 +50,8 @@ public class Event : MonoBehaviour
             var Button = Instantiate(_ButtonPrefab,new Vector2(_ButtonParent.position.x,_ButtonParent.position.y-blank*(i+1)),Quaternion.identity);
             Button.transform.SetParent(_ButtonParent);
             Button.Set(es._text,EventDatabase.Instance.eventSelect(a._eventName,i));
+            if (!EventDatabase.Instance.eventCondition(a._eventName, i))
+                Button.active = false;
 
             buttonList.Add(Button);
         }
@@ -60,6 +62,8 @@ public class Event : MonoBehaviour
     [ContextMenu("eventChange")]
     public void addCard()
     {
+        foreach (var a in buttonList)
+            Destroy(a);
         EventSet(EventDatabase.Instance.eventNum(eventNum));
     }
 }

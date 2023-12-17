@@ -77,7 +77,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 30083335
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 102
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2100142457196619302
@@ -246,7 +246,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 30083335
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 6a6cc48bac9f8f942be776b1bb7e9486, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 2100142457530207876}
   text: {fileID: 2100142457196619302}
+  active: 0
 --- !u!65 &1149788355537701490
 BoxCollider:
   m_ObjectHideFlags: 0

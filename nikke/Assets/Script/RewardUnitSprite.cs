@@ -13,14 +13,16 @@ public class RewardUnitSprite : MonoBehaviour
     rewardAction Action;
     bool isOver;
     bool get = false;
+    public bool active;
     public void Set(string a, rewardAction ac)
     {
         text.text = a;
         Action = ac;
+        active = true;
     }
     void Update()
     {
-        if (isOver && Input.GetMouseButtonDown(0)&&!get)
+        if (active && isOver && Input.GetMouseButtonDown(0)&&!get)
         {
             Action();
             get = true;
@@ -34,9 +36,15 @@ public class RewardUnitSprite : MonoBehaviour
 
     void OnMouseOver()
     {
-        isOver = true;
-        _prefab.color = Color.gray;
+        if (!active) {
+            _prefab.color = Color.red;
+        }
+        else
+        {
+            isOver = true;
+            _prefab.color = Color.gray;
 
+        }
     }
 
     void OnMouseExit()

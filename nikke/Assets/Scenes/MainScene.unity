@@ -3915,6 +3915,7 @@ MonoBehaviour:
   _img: {fileID: 603383271}
   _species: {fileID: 1551507085}
   _type: {fileID: 854841215}
+  _outLine: {fileID: 0}
   _name: {fileID: 261264215}
   _text: {fileID: 1192105807}
   _infoText: {fileID: 151150006}
@@ -3942,6 +3943,8 @@ MonoBehaviour:
     isRare: 0
   layer: 0
   Touchable: 1
+  combiSpeices: 0
+  combiType: 0
 --- !u!1 &399394813
 GameObject:
   m_ObjectHideFlags: 0
@@ -8828,6 +8831,7 @@ MonoBehaviour:
   _img: {fileID: 417739480}
   _species: {fileID: 828850628}
   _type: {fileID: 1580633691}
+  _outLine: {fileID: 0}
   _name: {fileID: 1925721746}
   _text: {fileID: 915498101}
   _infoText: {fileID: 984070881}
@@ -8855,6 +8859,8 @@ MonoBehaviour:
     isRare: 0
   layer: 0
   Touchable: 1
+  combiSpeices: 0
+  combiType: 0
 --- !u!1 &891095536
 GameObject:
   m_ObjectHideFlags: 0
@@ -16494,8 +16500,7 @@ MonoBehaviour:
     _eventSelect:
     - _text: "\uD574\uACE0\uD55C\uB2E4.(\uB371\uC5D0\uC11C \uB3D9\uAE00\uC774 \uD558\uB098
         \uC81C\uAC70)"
-    - _text: "\uBB34\uC2DC\uD55C\uB2E4. (\uC544\uBB34 \uC77C\uB3C4 \uC77C\uC5B4\uB098\uC9C0
-        \uC54A\uC74C)"
+    - _text: "\uBB34\uC2DC\uD55C\uB2E4."
     _boss: 0
   - _isAreaOne: 1
     _isAreaTwo: 0
@@ -16572,7 +16577,7 @@ MonoBehaviour:
         5\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
     _boss: 1
   - _isAreaOne: 0
-    _isAreaTwo: 1
+    _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
     _eventName: "\uC232\uC758 \uC9C0\uBC30\uC790"
@@ -16603,7 +16608,7 @@ MonoBehaviour:
     - _text: "\uB3D9\uB8CC\uB85C \uCC38\uAC00\uC2DC\uD0A8\uB2E4. (\uB371\uC5D0 \uCF00\uB974\uBCA0\uB85C\uC0BC
         \uCD94\uAC00)"
     _boss: 0
-  - _isAreaOne: 0
+  - _isAreaOne: 1
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
@@ -16615,6 +16620,35 @@ MonoBehaviour:
     - _text: "\uACE0\uBC31\uC744 \uBC1B\uC544\uC900\uB2E4.(\uCCB4\uB825+30)"
     - _text: "\uACE0\uBC31\uC744 \uAC70\uC808\uD55C\uB2E4.(\uB371\uC5D0\uC11C \uC880\uBE44
         \uD558\uB098 \uC81C\uAC70)"
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
+    _eventName: "\uACE0\uCCA0\uC0C1"
+    _eventText: "\uB3D9\uAE00\uC774\uAC00 \uAE61\uD1B5\uBAAC\uC744 \uD314\uC544\uC11C
+      \uAE4C\uAE4C\uB97C \uC0AC\uBA39\uC73C\uB824\uD569\uB2C8\uB2E4!\n\uC774\uB97C
+      \uB9C9\uC544\uC57C\uD560\uAE4C\uC694?"
+    _eventSprite: {fileID: 21300000, guid: 7706f92cc34da17459449c4d6a4b3e58, type: 3}
+    _eventSelect:
+    - _text: "\uAE4C\uAE4C\uB97C \uC0AC\uBA39\uB294\uB2E4.(\uB371\uC5D0\uC11C \uAE61\uD1B5\uBAAC
+        \uC81C\uAC70 / \uCCB4\uB825+15)"
+    - _text: "\uAE4C\uAE4C\uB97C \uBABB\uC0AC\uBA39\uAC8C \uD55C\uB2E4.(\uB371\uC5D0\uC11C
+        \uAE61\uD1B5\uBAAC \uC81C\uAC70 / \uB3C8+150)"
+    - _text: "\uAE61\uD1B5\uBAAC\uC744 \uBABB \uD314\uAC8C \uD55C\uB2E4."
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 1
+    _isAreaThree: 0
+    _isAreaFour: 0
+    _eventName: "\uADF9\uC801\uC778 \uC9C4\uD654"
+    _eventText: "\uBA39\uAE68\uBE44\uC758 \uC0C1\uD0DC\uAC00 \uC774\uC0C1\uD569\uB2C8\uB2E4.\n\uC9C4\uD654\uB97C
+      \uC55E\uB450\uACE0 \uC788\uB294 \uAC83\uC774 \uBD84\uBA85\uD569\uB2C8\uB2E4!"
+    _eventSprite: {fileID: 21300000, guid: dd9541ba654f97241b128eb40d57f8f2, type: 3}
+    _eventSelect:
+    - _text: "\uBA4B\uC9C0\uAC8C \uC9C4\uD654\uD55C\uB2E4!(\uBA39\uAE68\uBE44\uAC00
+        \uC9C4\uD654\uD569\uB2C8\uB2E4.)"
+    - _text: "\uC9C4\uD654\uD558\uC9C0 \uC54A\uB294\uB2E4."
     _boss: 0
 --- !u!1 &1813648926
 GameObject:
@@ -19174,6 +19208,7 @@ MonoBehaviour:
   _img: {fileID: 580747110}
   _species: {fileID: 2119390961}
   _type: {fileID: 1875871946}
+  _outLine: {fileID: 0}
   _name: {fileID: 830945366}
   _text: {fileID: 1150775078}
   _infoText: {fileID: 2130215115}
@@ -19201,6 +19236,8 @@ MonoBehaviour:
     isRare: 0
   layer: 0
   Touchable: 1
+  combiSpeices: 0
+  combiType: 0
 --- !u!1 &2055000978
 GameObject:
   m_ObjectHideFlags: 0
@@ -21471,6 +21508,7 @@ MonoBehaviour:
   _img: {fileID: 2090622067916696454}
   _species: {fileID: 2090622068871537971}
   _type: {fileID: 2004587385666263050}
+  _outLine: {fileID: 0}
   _name: {fileID: 2090622067288391721}
   _text: {fileID: 2090622068495604516}
   _infoText: {fileID: 952525773596710466}
@@ -21498,6 +21536,8 @@ MonoBehaviour:
     isRare: 0
   layer: 0
   Touchable: 1
+  combiSpeices: 0
+  combiType: 0
 --- !u!4 &2090622067444049456
 Transform:
   m_ObjectHideFlags: 0
@@ -21896,6 +21936,7 @@ MonoBehaviour:
   _img: {fileID: 2090622068683947622}
   _species: {fileID: 2090622067955593427}
   _type: {fileID: 2004587384886660586}
+  _outLine: {fileID: 0}
   _name: {fileID: 2090622068204410313}
   _text: {fileID: 2090622067266162372}
   _infoText: {fileID: 952525772144837538}
@@ -21923,6 +21964,8 @@ MonoBehaviour:
     isRare: 0
   layer: 0
   Touchable: 1
+  combiSpeices: 0
+  combiType: 0
 --- !u!224 &2090622068204410312
 RectTransform:
   m_ObjectHideFlags: 0

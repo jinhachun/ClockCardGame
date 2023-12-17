@@ -62,7 +62,19 @@ public class Resource : MonoBehaviour
     public List<float> combiRate;
     public CardStruct shopcard;
 
-
+    public bool haveCard(string a)
+    {
+        bool chk = false;
+        foreach (CardStruct cs in Deck)
+        {
+            if (cs._name.Equals(a))
+            {
+                chk = true;
+                return chk;
+            }
+        }
+        return chk;
+    }
     public void StageUp()
     {
         Stage++;

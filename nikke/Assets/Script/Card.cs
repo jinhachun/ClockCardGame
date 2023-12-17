@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _species;
     [SerializeField] private SpriteRenderer _type;
+    [SerializeField] private SpriteRenderer _outLine;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private TMP_Text _infoText;
@@ -39,6 +40,9 @@ public class Card : MonoBehaviour
     public bool Touchable = false;
     public CardAction BeforeAction;
     public CardAction Action;
+
+    public bool combiSpeices;
+    public bool combiType;
     public void StatChange(string statVar,int a)
     {
         int b = a;
@@ -112,6 +116,13 @@ public void Set(CardStruct str)
         else
             this._tier.color = Color.black;
 
+        combiReset();
+
+    }
+    public void combiReset()
+    {
+        combiSpeices = false;
+        combiType = false;
     }
     public void flip()
     {
@@ -123,13 +134,31 @@ public void Set(CardStruct str)
         _cardBack.gameObject.SetActive(a ? false:true) ;
         TouchableChange(a);
     }
-    
+    public void glow(bool a)
+    {
+        if (a)
+        {
+            if (!combiSpeices && !combiType) return;
+            _outLine.transform.localScale = new Vector2(1.05f, 1.05f);
+            if (combiSpeices && combiType) _outLine.color = new Color32(255, 0, 255, 255);
+            else if (combiSpeices) _outLine.color = Color.cyan;
+            else if (combiType) _outLine.color = Color.red;
+        }
+        else
+        {
+            _outLine.transform.localScale = new Vector2(1f, 1f);
+            combiReset();
+            _outLine.color = Color.black; 
+        }
+    }
     public void setLayer(int a,int b)
     {
         int newSortingOrder = b;
         _cardBack.sortingOrder = newSortingOrder+2 + a;
         _cardBody.sortingOrder = newSortingOrder;
         _img.sortingOrder = newSortingOrder-1;
+        if(_outLine!=null)
+            _outLine.sortingOrder = newSortingOrder - 2;
         _cardBody.sortingOrder = newSortingOrder;
         _species.sortingOrder = newSortingOrder+1;
         _type.sortingOrder = newSortingOrder+1;
@@ -151,6 +180,8 @@ public void Set(CardStruct str)
         _cardBack.sortingLayerName = A;
         _cardBody.sortingLayerName = A;
         _img.sortingLayerName = A;
+        if (_outLine != null)
+            _outLine.sortingLayerName = A;
         _species.sortingLayerName = A;
         _type.sortingLayerName = A;
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();

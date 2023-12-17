@@ -331,7 +331,9 @@ public class BattleManager : MonoBehaviour
         int typeCombi = CardDatabase.Instance.TypeCombination(TypeCombi);
         WatingRerollPhase_TextSet(typeCombi, TypeCombiText);
         CombiText.Add(TypeCombiText);
-        
+
+        foreach (Card card in Hand)
+            card.glow(true);
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         battleEndChk();
     }
@@ -399,6 +401,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 Grave.Add(card);
+                card.glow(false);
                 card.setLayer(0,50 + Grave.Count*3);
                 card.TouchableChange(false);
                 float ranTmpx = Random.Range(-30, 30) / 100f+ GravePosX;
@@ -438,6 +441,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
+                card.glow(false);
                 Grave.Add(card);
                 card.TouchableChange(false);
                 moveCard(sq, card, GravePos, 0.2f, true);
