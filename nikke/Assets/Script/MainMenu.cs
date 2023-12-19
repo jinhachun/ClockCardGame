@@ -72,7 +72,6 @@ public class MainMenu : MonoBehaviour
     public void battleStart()
     {
         DOTween.KillAll();
-        if (Resource.Instance.Area == 3) Resource.Instance.Area = 2;
         SceneManager.LoadScene("BattleScene");
     }
     public void ButtonAction(int n)

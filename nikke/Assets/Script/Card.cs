@@ -78,12 +78,15 @@ public class Card : MonoBehaviour
         Touchable = a;
         collider.enabled = a;
     }
+    
 public void Set(CardStruct str)
     {
         this.Str = str;
         this._name.text = str._name;
         this.name = str._name;
-        this._tier.text = str._tier.ToString();
+
+        string[] RomanNumeral = {"I","II","III","IV","V"};
+        this._tier.text = RomanNumeral[str._tier-1];
         this.tier = str._tier;
         this._img.sprite = str._img;
         this._species.sprite = CardDatabase.Instance.speciesSprite(str._species);
@@ -112,9 +115,9 @@ public void Set(CardStruct str)
         this._infoText.text = string.Join(", ", infoText.ToArray());
 
         if(str.isRare)
-            this._tier.color = Color.red;
+            this._tier.color = Color.yellow;
         else
-            this._tier.color = Color.black;
+            this._tier.color = Color.white;
 
         combiReset();
 

@@ -16,7 +16,7 @@ public class BattleManager : MonoBehaviour
     float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -11f, GravePosY = -5f;
     float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
     float EnemyPosX = -8f, EnemyPosY = 3f, EnemyPosLength = 16f, EnemyPosBlank;
- 
+
 
     [SerializeField] Card _cardPrefab;
     [SerializeField] RerollButton _rerollButtonPrefab;
@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public GameObject _canvas;
 
     [SerializeField] public Transform _damagePopupPrefab;
+    [SerializeField] public Transform _rewardPopupPrefab;
     [SerializeField] public Transform _fracturePrefab;
     [SerializeField] public Transform _attEffectPrefab;
     [SerializeField] public Transform _summonEffectPrefab;
@@ -72,22 +73,23 @@ public class BattleManager : MonoBehaviour
     public void Start()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        var randomized = Resource.Instance.Deck.OrderBy(item => Random.Range(0,999)).ToList();
+        var randomized = Resource.Instance.Deck.OrderBy(item => Random.Range(0, 999)).ToList();
         BaseDeck = randomized;
 
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
-        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage!=6?(Resource.Instance.Stage >= 4 ? EnemyType.Normal:EnemyType.Mini):EnemyType.Giga;
-        RerollChance = 1;
-        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5,10)*area;
+        area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
+        RerollChance = 0;
+        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 10) * area;
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
+        pureAttack = false;
         ChangeState(BattleState.Set);
     }
     public void FixedUpdate()
     {
         if (Mhp < Hp) Hp = Mhp;
 
-        
+
     }
     private void ChangeState(BattleState battleState)
     {
@@ -95,43 +97,49 @@ public class BattleManager : MonoBehaviour
         switch (battleState)
         {
             case BattleState.Set:
-                setBase();
+                PHASE_Set();
                 break;
             case BattleState.TurnStart:
                 turn++;
-                TurnStartPhase();
+                PHASE_TurnStart();
                 EnemyStatus_TurnStart();
                 DeckCountCheck();
                 break;
             case BattleState.Draw:
-                DrawPhase();
+                PHASE_Draw();
                 break;
             case BattleState.WaitingReroll:
-                WatingRerollPhase();
+                PHASE_WaitingReroll();
                 break;
             case BattleState.Reroll:
-                RerollPhase();
+                PHASE_Reroll();
                 break;
             case BattleState.Attack:
-                AttackPhase();
+                PHASE_Attack();
                 break;
             case BattleState.EnemyAttack:
-                EnemyAttackPhase();
+                PHASE_EnemyAttack();
                 break;
             case BattleState.EndTurn:
                 EnemyStatus_TurnEnd();
-
-                EndTurnPhase();
+                PHASE_EndTurn();
                 break;
             case BattleState.Reward:
-                RewardPhase();
+                PHASE_Reward();
                 break;
             case BattleState.Lose:
                 break;
         }
     }
 
-    public void setBase()
+    public List<Enemy> EnemiesClone()
+    {
+        var tmpList = new List<Enemy>();
+        foreach (Enemy tmp in Enemies)
+            tmpList.Add(tmp);
+        return tmpList;
+    }
+    public void PHASE_Set()
     {
         Att = 0; Def = 0; Rate = 1; turn = 0;
         tmpAtt = 0; tmpDef = 0; tmpRate = 1; tmpReroll = 0;
@@ -147,10 +155,10 @@ public class BattleManager : MonoBehaviour
         var HpBar = Instantiate(_HPbarPrefab, new Vector2(HandPos[0].x - 1.5f, HandPos[0].y - 3.5f), Quaternion.identity);
         var AttDef = Instantiate(_AttDefCalPrefab, ButtonPos(3), Quaternion.identity);
 
-        DeckCntTxt = Instantiate(_deckCountPrefab, new Vector2(DeckPos(0).x+0.85f,DeckPos(0).y-1.2f), Quaternion.identity);
+        DeckCntTxt = Instantiate(_deckCountPrefab, new Vector2(DeckPos(0).x + 0.85f, DeckPos(0).y - 1.2f), Quaternion.identity);
         DeckCntTxt.Set(ref Deck);
 
-        GraveCntTxt = Instantiate(_deckCountPrefab, new Vector2(GravePosX + 0.85f, GravePosY-1.2f), Quaternion.identity);
+        GraveCntTxt = Instantiate(_deckCountPrefab, new Vector2(GravePosX + 0.85f, GravePosY - 1.2f), Quaternion.identity);
         GraveCntTxt.Set(ref Grave);
 
         RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
@@ -166,8 +174,8 @@ public class BattleManager : MonoBehaviour
             tmp.setLayer(0, Layer);
             tmp.Set(tmpCard);
             Deck.Add(tmp);
-            moveCard(sq, tmp, DeckPos(0), 0.5f/(float)BaseDeck.Count, true, false);
-            
+            moveCard(sq, tmp, DeckPos(0), 0.5f / (float)BaseDeck.Count, true, false);
+
             cnt++;
         }
         final_enemylist = EnemyDatabase.Instance.final_enemylist(area, enemyType);
@@ -176,9 +184,9 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in final_enemylist)
         {
             cnt++;
-            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY+(enemy._enemyType==EnemyType.Mini?0:(enemy._enemyType == EnemyType.Normal?0.5f:1f)));
+            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY + (enemy._enemyType == EnemyType.Mini ? 0 : (enemy._enemyType == EnemyType.Normal ? 0.5f : 1f)));
             var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
-            
+
             enemyTmp.Set(enemy);
 
             var enemyHpBarTmp = Instantiate(_EnemyHPBarPrefab, enemyposTmp, Quaternion.identity);
@@ -196,7 +204,7 @@ public class BattleManager : MonoBehaviour
             ChangeState(BattleState.TurnStart);
         });
     }
-    
+
     public void ShuffleDeck(Sequence sq)
     {
         var randomized = Deck.OrderBy(item => Random.value).ToList();
@@ -207,11 +215,13 @@ public class BattleManager : MonoBehaviour
         GraveCntTxt.Set(ref Grave);
         deckMoveCard(sq);
     }
-    public void TurnStartPhase()
+    public void PHASE_TurnStart()
     {
         Sequence sq = DOTween.Sequence();
+
         Shield = 0;
-        foreach (var enemy in Enemies)
+        rerolladd(1);
+        foreach (var enemy in EnemiesClone())
         {
             enemy.SetPatternText();
         }
@@ -225,23 +235,25 @@ public class BattleManager : MonoBehaviour
     public void DeckCountCheck()
     {
         Sequence sq = DOTween.Sequence();
+        var queue = new Queue<CardStruct>();
+        float loopCnt = 0;
         while (Deck.Count + Grave.Count < 5)
         {
-            var queue = new Queue<CardStruct>();
             queue.Enqueue(CardDatabase.Instance.card_token("눅눅한동글이"));
-            AddCard(queue, true);
-            sq.AppendInterval(0.5f);
+            loopCnt++;
         }
+        AddCard(queue, true);
+        sq.AppendInterval(0.5f * loopCnt);
         sq.AppendCallback(() =>
         {
             ChangeState(BattleState.Draw);
         });
     }
-    public void DrawPhase()
+    public void PHASE_Draw()
     {
         Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
         Sequence sq = DOTween.Sequence();
-        
+
         while (Hand.Count < 5)
         {
             DrawCard(sq);
@@ -250,7 +262,7 @@ public class BattleManager : MonoBehaviour
         deckMoveCard(sq);
         sq.AppendCallback(() =>
         {
-            foreach(var card in Hand) card.setLayer(0, 50);
+            foreach (var card in Hand) card.setLayer(0, 50);
             ChangeState(BattleState.WaitingReroll);
             sq.Kill();
         });
@@ -260,9 +272,9 @@ public class BattleManager : MonoBehaviour
     public List<SPECIES> SpeciesCombi;
     public List<TYPE> TypeCombi;
     private List<TMP_Text> CombiText;
-    public void WatingRerollPhase()
+    public void PHASE_WaitingReroll()
     {
-        
+
         ChkButtons = new List<RerollButton>();
         SpeciesCombi = new List<SPECIES>();
         TypeCombi = new List<TYPE>();
@@ -305,7 +317,7 @@ public class BattleManager : MonoBehaviour
                     moveCard(DOTween.Sequence(), Hand[chkBtn.index], new Vector2(HandPos[chkBtn.index].x, HandPos[chkBtn.index].y + 1f), 0.1f, true);
                     chkN++;
                 }
-                else { 
+                else {
                     moveCard(DOTween.Sequence(), Hand[chkBtn.index], HandPos[chkBtn.index], 0.1f, true);
                     chkN--;
                 }
@@ -337,7 +349,7 @@ public class BattleManager : MonoBehaviour
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         battleEndChk();
     }
-    public void WatingRerollPhase_TextSet(int combi,TMP_Text text)
+    public void WatingRerollPhase_TextSet(int combi, TMP_Text text)
     {
         switch (combi)
         {
@@ -351,7 +363,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case 3:
                 text.fontSize = 6;
-                text.color = new Color(0,100,0);
+                text.color = new Color(0, 100, 0);
                 break;
             case 4:
                 text.fontSize = 7;
@@ -367,13 +379,10 @@ public class BattleManager : MonoBehaviour
                 break;
         }
     }
-    
-    public void rerolladd(int n,bool tmp)
+
+    public void rerolladd(int n)
     {
-        if (tmp)
-            tmpReroll++;
-        else
-            RerollChance++;
+        RerollChance++;
         RerollText.text = "Chance : " + RerollChance.ToString();
     }
 
@@ -383,13 +392,13 @@ public class BattleManager : MonoBehaviour
         float typeRate = CardDatabase.Instance.TypeCombiRate(TypeCombi);
         float speciesRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
         float tmpRate = typeRate * speciesRate * (float)r;
-        Rate *= (double)Mathf.Round((tmpRate*100f))/100f;
-        foreach (var i in Hand) { Att += (int)(Rate*i.Stat.attack); Def += i.Stat.defence; }
+        Rate *= (double)Mathf.Round((tmpRate * 100f)) / 100f;
+        foreach (var i in Hand) { Att += (int)(Rate * i.Stat.attack); Def += i.Stat.defence; }
         this.Def = (int)(Rate * (double)Def);
     }
     public bool RerollPhase_isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
 
-    public void RerollPhase()
+    public void PHASE_Reroll()
     {
         Sequence sq = DOTween.Sequence();
         List<Card> rerollCard = new List<Card>();
@@ -402,10 +411,10 @@ public class BattleManager : MonoBehaviour
             {
                 Grave.Add(card);
                 card.glow(false);
-                card.setLayer(0,50 + Grave.Count*3);
+                card.setLayer(0, 50 + Grave.Count * 3);
                 card.TouchableChange(false);
-                float ranTmpx = Random.Range(-30, 30) / 100f+ GravePosX;
-                float ranTmpy = Random.Range(-30, 30) / 100f+ GravePosY;
+                float ranTmpx = Random.Range(-30, 30) / 100f + GravePosX;
+                float ranTmpy = Random.Range(-30, 30) / 100f + GravePosY;
                 moveCard(sq, card, new Vector2(ranTmpx, ranTmpy), 0.2f, true);
                 sq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60, 60)), 0.2f));
             }
@@ -416,7 +425,8 @@ public class BattleManager : MonoBehaviour
             sq.Kill();
         });
     }
-    public void AttackPhase()
+    public bool pureAttack;
+    public void PHASE_Attack()
     {
         Sequence sq = DOTween.Sequence();
         foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card)();
@@ -424,17 +434,18 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
-            bool critical = (5+Resource.Instance.VillageLevel["Church"] * 2 )>= Random.Range(0, 101);
-            
-                sq.AppendCallback(() =>
-                {
+            bool critical = (5 + Resource.Instance.VillageLevel["Church"] * 2) >= Random.Range(0, 101);
+
+            sq.AppendCallback(() =>
+            {
                 if (Enemies.Count > 0)
-                    {
-                         var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-                        enemyDamage((int)(card.Stat.attack * Rate), critical, target);
-                    }
-                });
-            
+                {
+                    pureAttack = true;
+                    var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
+                    enemyDamage((int)(card.Stat.attack * Rate), critical, target);
+                }
+            });
+
             if (card.isExhaust)
             {
                 sq.Append(card.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(card.gameObject); }));
@@ -445,25 +456,21 @@ public class BattleManager : MonoBehaviour
                 Grave.Add(card);
                 card.TouchableChange(false);
                 moveCard(sq, card, GravePos, 0.2f, true);
-                card.setLayer(0, 50 + Grave.Count*3);
+                card.setLayer(0, 50 + Grave.Count * 3);
             }
-            
+
         }
         Hand.Clear();
         Shield = Def;
-        
+
 
         sq.AppendInterval(0.5f);
         sq.AppendCallback(() =>
         {
-            
+
 
             tmpAtt = 0; tmpDef = 0; tmpRate = 1;
-            if(RerollChance<=0) RerollChance++;
-            RerollChance += tmpReroll;
-            tmpReroll = 0;
-            RerollText.text = "Chance : " + RerollChance.ToString();
-            if(!battleEndChk())
+            if (!battleEndChk())
                 ChangeState(BattleState.EnemyAttack);
         });
     }
@@ -479,8 +486,9 @@ public class BattleManager : MonoBehaviour
         return chk;
 
     }
-    public void enemyDamage(int dam,bool critical,Enemy target)
+    public void enemyDamage(int dam, bool critical, Enemy target)
     {
+        if (target == null) return;
         var AttLeft = !critical ? dam : dam * 2;
         int loopcnt = 0;
 
@@ -498,10 +506,11 @@ public class BattleManager : MonoBehaviour
             }
             AttLeft = afterShieldAttLeft;
             var tmpAttLeft = AttLeft - target._hp;
-            var AttEffect = Instantiate(_attEffectPrefab, new Vector2(target._img.transform.position.x*Random.Range(85,115)/100f, (target._img.transform.position.y-1.5f) * Random.Range(85, 115) / 100f), Quaternion.identity);
-            AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f)*(0.25f+((float)AttLeft/(float)target.Str._hp));
+            var AttEffect = Instantiate(_attEffectPrefab, new Vector2(target._img.transform.position.x * Random.Range(85, 115) / 100f, (target._img.transform.position.y - 1.5f) * Random.Range(85, 115) / 100f), Quaternion.identity);
+            AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f) * (0.25f + ((float)AttLeft / (float)target.Str._hp));
 
             target._hp -= AttLeft;
+            pureAttack = false;
             bool lethal = (target._hp <= 0);
             if (lethal)
             {
@@ -513,6 +522,7 @@ public class BattleManager : MonoBehaviour
                 Particle.transform.localScale *= (deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f);
                 deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                 {
+                    EnemyStatus_WhileDying(deadEnemy);
                     Destroy(deadEnemy._hpBar.gameObject);
                     Destroy(deadEnemy.gameObject);
                 });
@@ -530,8 +540,16 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+    public void enemyWideDamage(int dam)
+    {
+        var tmpList = new List<Enemy>();
+        foreach (Enemy tmp in Enemies)
+            tmpList.Add(tmp);
+        foreach (Enemy tmp in tmpList)
+            BattleManager.Instance.enemyDamage(dam, false, tmp);
+    }
     public int patternCnt;
-    public void EnemyAttackPhase()
+    public void PHASE_EnemyAttack()
     {
         Sequence sq = DOTween.Sequence();
         List<int> DamageList = new List<int>();
@@ -623,7 +641,7 @@ public class BattleManager : MonoBehaviour
         DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+"+value, Color.green);
         Hp += value;
     }
-    public void EndTurnPhase()
+    public void PHASE_EndTurn()
     {
         foreach (var Enemy in Enemies) Enemy.TurnEnd();
         if (Hp <= 0) ChangeState(BattleState.Lose);
@@ -631,15 +649,20 @@ public class BattleManager : MonoBehaviour
         else
             ChangeState(BattleState.TurnStart);
     }
-    public void RewardPhase()
+    public void PHASE_Reward()
     {
-        Resource.Instance.money += reward*(Resource.Instance.VillageLevel["Farm"]+100)/100;
+        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"] + 100) / 100;
+        RewardPopup.Create(finalReward).OnComplete(()=> {
+            endgame_win(finalReward);
+        });
+    }
+    public void endgame_win(int finalReward) {
+        Resource.Instance.money += finalReward;
         Resource.Instance.StageUp();
         Resource.Instance.setHp(Hp);
         DOTween.KillAll();
         SceneManager.LoadScene("MainScene");
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
-
     }
     Queue<CardStruct> addcardQueue_Deck;
     Queue<CardStruct> addcardQueue_Grave;
@@ -741,7 +764,7 @@ public class BattleManager : MonoBehaviour
 
     public void EnemyStatus_TurnStart()
     {
-        foreach(Enemy enemy in Enemies)
+        foreach(Enemy enemy in EnemiesClone())
         {
             if (!enemy._statusName.Equals("없음"))
             {
@@ -753,19 +776,25 @@ public class BattleManager : MonoBehaviour
     {
            if (!enemy._statusName.Equals("없음"))
             {
-                StatusDatabase.Instance.Action_WhileAttack(enemy._statusName, enemy);
+                StatusDatabase.Instance.Action_WhileAttacked(enemy._statusName, enemy);
             }
         
     }
     public void EnemyStatus_TurnEnd()
     {
-        var tmpEnemies = Enemies.ToList();
-        foreach (Enemy enemy in tmpEnemies)
+        foreach (Enemy enemy in EnemiesClone())
         {
             if (!enemy._statusName.Equals("없음"))
             {
                 StatusDatabase.Instance.Action_TurnEnd(enemy._statusName, enemy);
             }
+        }
+    }
+    public void EnemyStatus_WhileDying(Enemy enemy)
+    {
+        if (!enemy._statusName.Equals("없음"))
+        {
+            StatusDatabase.Instance.Action_WhileDying(enemy._statusName, enemy);
         }
     }
     public void summonEnemy(EnemyStruct enemystruct)

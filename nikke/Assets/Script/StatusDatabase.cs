@@ -25,22 +25,52 @@ public class StatusDatabase : MonoBehaviour
         {
             case ("단단함"):
                 {
-                    DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                    StatusPopup(enemy);
                     enemy.gainShield(enemy._statusValue);
+                    return;
+                }
+            case ("보급형폭탄"):
+                {
+                    enemy.statusValueChange(enemy._statusValue-1);
+                    if (enemy._statusValue == 0)
+                    {
+                        enemy.statusValueChange(2);
+                        StatusPopup(enemy);
+                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("공성용슬라임"));
+                    }
+                    return;
+                }
+            case ("자폭병"):
+                {
+                    enemy.statusValueChange(enemy._statusValue - 1);
+                    if (enemy._statusValue == 0)
+                    {
+                        StatusPopup(enemy);
+                        BattleManager.Instance.takeDamage(30);
+                        BattleManager.Instance.enemyDamage(enemy._hp, false, enemy);
+
+                    }
                     return;
                 }
         }
         return;
     }
-    public void Action_WhileAttack(string name, Enemy enemy)
+    public void Action_WhileAttacked(string name, Enemy enemy)
     {
         switch (name)
         {
             case ("폭주"):
                 {
-                    DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                    StatusPopup(enemy);
                     BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._statusValue);
+                    return;
+                }
+            case ("반격"):
+                {
+                    if (BattleManager.Instance.pureAttack == false) return;
+                    StatusPopup(enemy);
+                    BattleManager.Instance.takeDamage(enemy._statusValue);
                     return;
                 }
         }
@@ -52,7 +82,7 @@ public class StatusDatabase : MonoBehaviour
         {
             case "분노":
                 {
-                    DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                    StatusPopup(enemy);
                     BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._statusValue);
                     return;
@@ -61,14 +91,14 @@ public class StatusDatabase : MonoBehaviour
                 {
                     if (UnityEngine.Random.Range(0, 10) < 2)
                     {
-                        DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                        StatusPopup(enemy);
                         BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("둘기"));
                     }
                     return;
                 }
             case "도깨비요술":
                 {
-                    DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                    StatusPopup(enemy);
                     int RandomValue = Random.Range(0, 5);
                     Debug.Log(RandomValue);
                     if (RandomValue == 0)
@@ -97,7 +127,7 @@ public class StatusDatabase : MonoBehaviour
                 {
                     if ((float)enemy._hp*100/(float)enemy._mhp<50)
                     {
-                        DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
+                        StatusPopup(enemy);
                         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                         enemy.setAttackBuff(enemy._statusValue);
                         enemy.statusValueChange(enemy._statusValue+5);
@@ -105,8 +135,49 @@ public class StatusDatabase : MonoBehaviour
                     }
                     return;
                 }
-                    
+            case "정찰병":
+                {
+                    if (BattleManager.Instance.RerollChance != 0) return;
+                    StatusPopup(enemy);
+                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
+                    enemy.setAttackBuff(enemy._statusValue);
+                    return;
+                }
+            case "초재생":
+                {
+                    if (enemy._statusValue == 0) return;
+                    StatusPopup(enemy);
+                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    enemy.statusValueChange(enemy._statusValue - 1);
+                    return;
+                }
+            case "투석기":
+                {
+                    StatusPopup(enemy);
+                    BattleManager.Instance.takeDamage(enemy._statusValue);
+                    enemy.statusValueChange(enemy._statusValue + 1);
+                    return;
+                }
+
         }
+
+    }
+    public void Action_WhileDying(string name, Enemy enemy)
+    {
+        switch (name)
+        {
+            case ("보급형폭탄"):
+                {
+                    StatusPopup(enemy);
+                    BattleManager.Instance.enemyWideDamage(20);
+                    return;
+                }
+        }
+        return;
+    }
+    public void StatusPopup(Enemy enemy)
+    {
+        DamagePopup.Create(enemy.transform.position, enemy._statusName, Color.white);
     }
 }
 [Serializable]

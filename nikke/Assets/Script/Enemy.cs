@@ -57,6 +57,7 @@ public class Enemy : MonoBehaviour
         if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
         else _statusText.gameObject.SetActive(true);
         _statusText.text = this._statusValue + "";
+        this._status.infoChange(this._statusValue);
     }
     public void Set(EnemyStruct enemyStruct)
     {
@@ -76,7 +77,7 @@ public class Enemy : MonoBehaviour
         if (!enemyStruct._statusStruct.Equals("¾øÀ½"))
         {
             this._statusName = enemyStruct._statusStruct;
-            this._status.set(StatusDatabase.Instance.Status(_statusName));
+            this._status.set(StatusDatabase.Instance.Status(_statusName),this._statusValue);
         }
         else
         {

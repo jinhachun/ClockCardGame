@@ -10587,7 +10587,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10604,8 +10604,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 3.2
+  m_fontSizeBase: 3.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -12403,7 +12403,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12420,8 +12420,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 3.2
+  m_fontSizeBase: 3.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -15149,7 +15149,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -15166,8 +15166,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 3.2
+  m_fontSizeBase: 3.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -15500,7 +15500,7 @@ MonoBehaviour:
       \uAE30\uC0AC\uB3CC\uC774\uC785\uB2C8\uB2E4."
     _tier: 4
     _stat:
-      attack: 10
+      attack: 12
       defence: 0
     _type: 5
     isExhaust: 1
@@ -15752,7 +15752,7 @@ MonoBehaviour:
       attack: 1
       defence: 1
     _type: 4
-    isExhaust: 1
+    isExhaust: 0
     isEthereal: 0
     isFixed: 0
     evol:
@@ -16405,6 +16405,20 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _species: 0
+    _name: "\uC548\uB3D9\uAE00\uC774"
+    _text: "\uC774\uB807\uAC8C \uB124\uBAA8\uB09C \uB140\uC11D\uC740 \uCC98\uC74C\uC785\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 8
+      defence: 8
+    _type: 0
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
@@ -16515,8 +16529,8 @@ MonoBehaviour:
     - _text: "\uB3C8\uC744 \uC90D\uB294\uB2E4.(\uB3C8+50)"
     _boss: 0
   - _isAreaOne: 1
-    _isAreaTwo: 1
-    _isAreaThree: 1
+    _isAreaTwo: 0
+    _isAreaThree: 0
     _isAreaFour: 0
     _eventName: "\uB4DC\uB974\uB801~"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB0AE\uC7A0\uC744 \uC7A1\uB2C8\uB2E4.\n\uBAB8\uC758
@@ -16576,23 +16590,20 @@ MonoBehaviour:
     - _text: "\uC0C8\uB85C\uC6B4 \uB3D9\uB8CC\uB97C \uBAA8\uC9D1\uD55C\uB2E4.(\uBB34\uC791\uC704
         5\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
     _boss: 1
-  - _isAreaOne: 0
+  - _isAreaOne: 1
     _isAreaTwo: 0
-    _isAreaThree: 1
+    _isAreaThree: 0
     _isAreaFour: 0
-    _eventName: "\uC232\uC758 \uC9C0\uBC30\uC790"
-    _eventText: "\uC624\uB9AC\uB108\uAD6C\uB9AC\uB97C \uC4F0\uB7EC\uB728\uB9AC\uACE0
-      \uB2F9\uC2E0\uC740 \uC232\uC758 \uC655\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!\n\uB3D9\uAE00\uC774\uB4E4\uACFC
-      \uD568\uAED8\uD558\uB294 \uC138\uACC4\uC815\uBCF5\uC774 \uBA40\uC9C0 \uC54A\uC558\uB294\uB370\uC694?"
-    _eventSprite: {fileID: 21300000, guid: c33ca4288f8164d4190ce73e7c79d174, type: 3}
+    _eventName: "\uC548\uB3D9\uAE00\uC774\uC640\uC758 \uB9CC\uB0A8"
+    _eventText: "\uB3D9\uAE00\uD558\uC9C0 \uC54A\uACE0 \uAC01\uC838\uC788\uB294 \uC548\uB3D9\uAE00\uC774
+      \uBB34\uB9AC\uB97C \uB9C8\uC8FC\uD588\uC2B5\uB2C8\uB2E4.\n\uC5B4\uB5BB\uAC8C
+      \uD589\uB3D9\uD560\uAE4C\uC694?"
+    _eventSprite: {fileID: 21300000, guid: 16138adeeb32bd54889be08b10b75adb, type: 3}
     _eventSelect:
-    - _text: "\uB9F9\uC218\uC778\uCC99 \uCD08\uC2DD\uB3D9\uBB3C\uC744 \uC7A1\uC544\uBA39\uB294\uB2E4.(\uCCB4\uB825
-        \uBAA8\uB450 \uD68C\uBCF5)"
-    - _text: "\uC232\uC5D0 \uC0AC\uB294 \uC8FC\uBBFC\uB4E4\uC5D0\uAC8C \uC138\uAE08\uC744
-        \uAC77\uB294\uB2E4(\uB3C8 +600)"
-    - _text: "\uC0C8\uB85C\uC6B4 \uB3D9\uB8CC\uB97C \uBAA8\uC9D1\uD55C\uB2E4.(\uBB34\uC791\uC704
-        5\uD2F0\uC5B4 \uCE74\uB4DC \uC601\uC785)"
-    _boss: 1
+    - _text: "\uB3D9\uAE00\uD558\uC9C0 \uC54A\uC73C\uB2C8 \uACF5\uACA9\uD55C\uB2E4.(\uCCB4\uB825-10)"
+    - _text: "\uCE5C\uD558\uAC8C \uC9C0\uB0B8\uB2E4.(\uB371\uC5D0 \uC548\uB3D9\uAE00\uC774
+        \uCD94\uAC00)"
+    _boss: 0
   - _isAreaOne: 0
     _isAreaTwo: 1
     _isAreaThree: 0
@@ -18716,7 +18727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -21352,8 +21363,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -21370,8 +21381,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 3.2
+  m_fontSizeBase: 3.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -22205,8 +22216,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22223,8 +22234,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.5
-  m_fontSizeBase: 3.5
+  m_fontSize: 3.2
+  m_fontSizeBase: 3.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1

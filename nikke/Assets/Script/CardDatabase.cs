@@ -173,11 +173,7 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.takeDamage(3);
                     if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
                     {
-                        var tmpEnemyList = new List<Enemy>();
-                        foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                            tmpEnemyList.Add(tmp);
-                        foreach(Enemy tmp in tmpEnemyList)
-                            BattleManager.Instance.enemyDamage(15, false, tmp);
+                        BattleManager.Instance.enemyWideDamage(15);
                     }
                 });
             case "ºí·¢Æ¼¶ó³ë":
@@ -185,18 +181,14 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.takeDamage(5);
                     if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
                     {
-                        var tmpEnemyList = new List<Enemy>();
-                        foreach (Enemy tmp in BattleManager.Instance.Enemies)
-                            tmpEnemyList.Add(tmp);
-                        foreach (Enemy tmp in tmpEnemyList)
-                            BattleManager.Instance.enemyDamage(40, false, tmp);
+                        BattleManager.Instance.enemyWideDamage(40);
                     }
                 });
 
             case "¹ö¼¸±úºñ":
             case "Äõµå¹ö¼¸±úºñ":
                 return (() => {
-                    BattleManager.Instance.rerolladd(1,true);
+                    BattleManager.Instance.rerolladd(1);
                 });
             case "¸Ôº¸±«¼ö":
                 return (() => {
@@ -459,7 +451,7 @@ public class CardDatabase : MonoBehaviour
                 });
             case "¹ö¼¸¼øÀÌ":
                 return (() => {
-                    BattleManager.Instance.rerolladd(1,false);
+                    BattleManager.Instance.rerolladd(1);
                 });
             case "¸®ºù¾Æ¸Ó":
                 return (() => {
