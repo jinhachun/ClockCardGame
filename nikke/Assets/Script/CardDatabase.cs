@@ -325,7 +325,7 @@ public class CardDatabase : MonoBehaviour
                     foreach (Card a in BattleManager.Instance.Hand)
                     {
                         a.StatChange("Attack", a.Stat.attack + 1);
-                        a.StatChange("Defence", a.Stat.attack + 1);
+                        a.StatChange("Defence", a.Stat.defence + 1);
                     }
                 });
             case "º§µø±€¿Ã":

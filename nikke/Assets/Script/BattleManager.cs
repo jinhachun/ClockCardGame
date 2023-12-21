@@ -39,6 +39,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public Transform _rageEffectPrefab;
     [SerializeField] public Transform _healEffectPrefab;
     [SerializeField] public Transform _shieldEffectPrefab;
+
+    [SerializeField] public Transform _fireAttackffectPrefab;
+    [SerializeField] public Transform _waterAttackffectPrefab;
+    [SerializeField] public Transform _grassAttackffectPrefab;
+    [SerializeField] public Transform _lightAttackffectPrefab;
+    [SerializeField] public Transform _darkAttackffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -79,7 +85,7 @@ public class BattleManager : MonoBehaviour
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
         RerollChance = 0;
-        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 10) * area;
+        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 9) * (area+1)/2;
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
         pureAttack = false;
@@ -442,7 +448,22 @@ public class BattleManager : MonoBehaviour
                 {
                     pureAttack = true;
                     var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-                    enemyDamage((int)(card.Stat.attack * Rate), critical, target);
+                    var damage = (int)(card.Stat.attack * Rate);
+                    enemyDamage(damage, critical, target);
+                    if(damage>0)
+                        switch (card.Str._type)
+                        {
+                            case (TYPE.FIRE):
+                                {effectOn(_fireAttackffectPrefab, target); return; }
+                            case (TYPE.WATER):
+                                { effectOn(_waterAttackffectPrefab, target); return; }
+                            case (TYPE.GRASS):
+                                { effectOn(_grassAttackffectPrefab, target); return; }
+                            case (TYPE.LIGHT):
+                                { effectOn(_lightAttackffectPrefab, target); return; }
+                            case (TYPE.DARK):
+                                { effectOn(_darkAttackffectPrefab, target); return; }
+                        }
                 }
             });
 
@@ -568,7 +589,6 @@ public class BattleManager : MonoBehaviour
                 Enemy.setAttackBuff();
                 sq.AppendCallback(() =>
                 {
-                    var sunEffect = effectOn(_rageEffectPrefab, Enemy);
                     Enemy.transform.DOMoveY(Enemy._img.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 });
                 sq.AppendInterval(0.8f);
@@ -579,11 +599,18 @@ public class BattleManager : MonoBehaviour
                 for(int i=0;i<Enemy.Pattern._Value;i++)
                     queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
                 AddCard(queue, Enemy.Pattern._Bool);
-                sq.AppendInterval(1.2f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
             {
                 summonEnemy(EnemyDatabase.Instance.enemy(Enemy.Pattern._CardName));
+            }
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
+            {
+                Enemy.gainShield(Enemy.Pattern._Value);
+            }
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.HEAL)
+            {
+                healEnemy(Enemy.Pattern._Value, Enemy);
             }
         }
         
@@ -700,7 +727,7 @@ public class BattleManager : MonoBehaviour
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.5f, false, false); card.TouchableChange(true); }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.5f, false, false);  }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -710,7 +737,10 @@ public class BattleManager : MonoBehaviour
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
         CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
-        for (int i = 0; i < Hand.Count; i++) moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
+        for (int i = 0; i < Hand.Count; i++){
+            moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
+            Hand[i].TouchableChange(true);
+        }
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one)
     {

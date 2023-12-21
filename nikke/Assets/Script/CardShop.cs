@@ -17,7 +17,16 @@ public class CardShop : MonoBehaviour
         get
         {
             if (card == null) return 0;
-            else return BuyPrice * card.tier * card.tier * card.tier ;
+            switch (card.tier)
+            {
+                case (0): return BuyPrice;
+                case (1): return BuyPrice*2;
+                case (2): return BuyPrice*7;
+                case (3): return BuyPrice*20;
+                case (4): return BuyPrice*60;
+
+                default:  return 0;
+            }
         }
     }
     [SerializeField] public Card card;

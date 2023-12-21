@@ -30,10 +30,12 @@ public class Enemy : MonoBehaviour
     public int damage => (int)attackBuff + Pattern._Value;
     public void setAttackBuff()
     {
+        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
         attackBuff += Pattern._Value; 
     }
     public void setAttackBuff(int a)
     {
+        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
         attackBuff += a; 
     }
     public void gainShield(int a)

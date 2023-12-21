@@ -85,8 +85,8 @@ public void Set(CardStruct str)
         this._name.text = str._name;
         this.name = str._name;
 
-        string[] RomanNumeral = {"I","II","III","IV","V"};
-        this._tier.text = RomanNumeral[str._tier-1];
+        string[] RomanNumeral = {"0","I","II","III","IV","V"};
+        this._tier.text = RomanNumeral[str._tier];
         this.tier = str._tier;
         this._img.sprite = str._img;
         this._species.sprite = CardDatabase.Instance.speciesSprite(str._species);

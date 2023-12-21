@@ -62,7 +62,6 @@ public class StatusDatabase : MonoBehaviour
             case ("폭주"):
                 {
                     StatusPopup(enemy);
-                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._statusValue);
                     return;
                 }
@@ -71,6 +70,11 @@ public class StatusDatabase : MonoBehaviour
                     if (BattleManager.Instance.pureAttack == false) return;
                     StatusPopup(enemy);
                     BattleManager.Instance.takeDamage(enemy._statusValue);
+                    return;
+                }
+            case ("불사의몸"):
+                {
+                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
                     return;
                 }
         }
@@ -83,7 +87,6 @@ public class StatusDatabase : MonoBehaviour
             case "분노":
                 {
                     StatusPopup(enemy);
-                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._statusValue);
                     return;
                 }
@@ -107,7 +110,6 @@ public class StatusDatabase : MonoBehaviour
                     }
                     else if (RandomValue == 1)
                     {
-                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                         enemy.setAttackBuff(enemy._statusValue);
                     }
                     else if (RandomValue == 2)
@@ -128,7 +130,6 @@ public class StatusDatabase : MonoBehaviour
                     if ((float)enemy._hp*100/(float)enemy._mhp<50)
                     {
                         StatusPopup(enemy);
-                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                         enemy.setAttackBuff(enemy._statusValue);
                         enemy.statusValueChange(enemy._statusValue+5);
 
@@ -139,7 +140,6 @@ public class StatusDatabase : MonoBehaviour
                 {
                     if (BattleManager.Instance.RerollChance != 0) return;
                     StatusPopup(enemy);
-                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, enemy);
                     enemy.setAttackBuff(enemy._statusValue);
                     return;
                 }
@@ -170,6 +170,12 @@ public class StatusDatabase : MonoBehaviour
                 {
                     StatusPopup(enemy);
                     BattleManager.Instance.enemyWideDamage(20);
+                    return;
+                }
+            case ("목마"):
+                {
+                    StatusPopup(enemy);
+                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("영웅오킬레스"));
                     return;
                 }
         }

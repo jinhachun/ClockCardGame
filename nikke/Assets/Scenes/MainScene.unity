@@ -16419,6 +16419,20 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
+  - _img: {fileID: 21300000, guid: 639a8838ada7abc478100e55082b1ef0, type: 3}
+    _species: 0
+    _name: "\uC0C1\uCC98"
+    _text: "\uC0C1\uCC98\uC5C6\uC774 \uB05D\uB098\uB294 \uC804\uD22C\uB294 \uC5C6\uC2B5\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 8
+      defence: 8
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
