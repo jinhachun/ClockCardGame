@@ -21,6 +21,11 @@ public class Resource : MonoBehaviour
         
         
     }
+    public void reset()
+    {
+        Destroy(this.gameObject);
+
+    }
     public void Start()
     {
         VillageLevel = new Dictionary<string, int>();
@@ -78,7 +83,7 @@ public class Resource : MonoBehaviour
     public void StageUp()
     {
         Stage++;
-        if (Stage > 6)
+        if (Stage > 6||Area==4)
         {
             Area++;
             Stage = 1;

@@ -40,6 +40,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public Transform _rageEffectPrefab;
     [SerializeField] public Transform _healEffectPrefab;
     [SerializeField] public Transform _shieldEffectPrefab;
+    [SerializeField] public Transform _deBuffEffectPrefab;
 
     [SerializeField] public Transform _fireAttackffectPrefab;
     [SerializeField] public Transform _waterAttackffectPrefab;
@@ -133,6 +134,7 @@ public class BattleManager : MonoBehaviour
                 PHASE_Reward();
                 break;
             case BattleState.Lose:
+                PHASE_LOSE();
                 break;
         }
     }
@@ -224,11 +226,6 @@ public class BattleManager : MonoBehaviour
     {
          
         Sequence sq = DOTween.Sequence();
-        if (waitDelay)
-        {
-            sq.AppendInterval(1f);
-            ChangeState(BattleState.TurnStart);
-        }
 
         Shield = 0;
         rerolladd(1);
@@ -248,7 +245,7 @@ public class BattleManager : MonoBehaviour
         Sequence sq = DOTween.Sequence();
         var queue = new Queue<CardStruct>();
         float loopCnt = 0;
-        while (Deck.Count + Grave.Count < 5)
+        while (Deck.Count + Grave.Count +loopCnt < 5)
         {
             queue.Enqueue(CardDatabase.Instance.card_token("눅눅한동글이"));
             loopCnt++;
@@ -264,7 +261,15 @@ public class BattleManager : MonoBehaviour
     {
         Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
         Sequence sq = DOTween.Sequence();
-
+        Debug.Log("기다리는중! : "+waitDelay);
+        if (waitDelay)
+        {
+            sq.AppendInterval(1f)
+            .AppendCallback(() => {
+                ChangeState(BattleState.Draw);
+            });
+            return;
+        }
         while (Hand.Count < 5)
         {
             DrawCard(sq);
@@ -522,7 +527,6 @@ public class BattleManager : MonoBehaviour
         {
 
             target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-            EnemyStatus_WhileAttack(target);
             var afterShieldAttLeft = AttLeft - target._shield;
             target.lossShield(AttLeft);
             if (afterShieldAttLeft < 0)
@@ -555,7 +559,10 @@ public class BattleManager : MonoBehaviour
 
             }
             else
+            {
+                EnemyStatus_WhileAttack(target);
                 DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
+            }
             AttLeft = tmpAttLeft;
 
             loopcnt++;
@@ -622,9 +629,17 @@ public class BattleManager : MonoBehaviour
             
         
         sq.AppendCallback(() => {
-            if (Hp <= 0) ChangeState(BattleState.Lose);
+            deadChk();
             ChangeState(BattleState.EndTurn);
         });
+    }
+    public void deadChk()
+    {
+        if (Hp <= 0) {
+            Hp = 0;
+            ChangeState(BattleState.Lose); 
+        }
+
     }
     public void takeDamage(int dam)
     {
@@ -640,7 +655,7 @@ public class BattleManager : MonoBehaviour
         {
             DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
         }
-        if (Hp <= 0) ChangeState(BattleState.Lose);
+        if (Hp <= 0) deadChk();
     }
     public void takeDamage(Sequence sq, Enemy Enemy)
     {
@@ -697,10 +712,17 @@ public class BattleManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
         SceneManager.LoadScene("EventScene", LoadSceneMode.Additive);
     }
+
+    public void PHASE_LOSE()
+    {
+        Resource.Instance.reset();
+        SceneManager.LoadScene("MainScene");
+    }
     Queue<CardStruct> addcardQueue_Deck;
     Queue<CardStruct> addcardQueue_Grave;
     public void AddCard(Queue<CardStruct> list, bool deck)
     {
+        if (list.Count == 0) return;
         waitDelay = true;
         Sequence cardAddSequence = DOTween.Sequence();
         while (list.Count > 0)

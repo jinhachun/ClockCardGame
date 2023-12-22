@@ -378,6 +378,7 @@ MonoBehaviour:
   _rageEffectPrefab: {fileID: 2730325015434321086, guid: c79176d5934ea744b8ae7a3b06056269, type: 3}
   _healEffectPrefab: {fileID: 2730325015434321086, guid: 2e2a01159f6d21e4c8893c64840089b2, type: 3}
   _shieldEffectPrefab: {fileID: 2730325015434321086, guid: d2d137453acc207428167437bfc69d09, type: 3}
+  _deBuffEffectPrefab: {fileID: 2730325015434321086, guid: 934877af98003824aaada94e008aea33, type: 3}
   _fireAttackffectPrefab: {fileID: 2730325015434321086, guid: 8013029826c449840a3afad55fa7617f, type: 3}
   _waterAttackffectPrefab: {fileID: 2730325015434321086, guid: 2568c42133352654182852cee763058b, type: 3}
   _grassAttackffectPrefab: {fileID: 2730325015434321086, guid: 7886bf83693c5934f81b20033d60298e, type: 3}
@@ -387,7 +388,6 @@ MonoBehaviour:
   Deck: []
   Hand: []
   Grave: []
-  turn: 0
   area: 0
   enemyType: 0
   reward: 0
@@ -927,38 +927,82 @@ MonoBehaviour:
     _enemyPatterns:
     - _enemyPattern: 0
       _CardName: 
-      _Value: 25
+      _Value: 20
       _Bool: 0
     - _enemyPattern: 1
       _CardName: 
-      _Value: 25
+      _Value: 20
       _Bool: 0
     _statusStruct: "\uBD88\uC0AC\uC758\uBAB8"
-    _statusValue: 100
+    _statusValue: 50
   - _sprite: {fileID: 21300000, guid: c37cb3d10d88259498adfaebc8bbf606, type: 3}
     _name: "\uD3ED\uAD70\uBC1C\uB85D"
     _hp: 1000
     _area: 4
-    _enemyType: 2
+    _enemyType: 3
     _enemyPatterns:
     - _enemyPattern: 0
-      _CardName: 
-      _Value: 25
+      _CardName: 0
+      _Value: 50
       _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 25
+    - _enemyPattern: 0
+      _CardName: 0
+      _Value: 40
       _Bool: 0
-    _statusStruct: "\uBD88\uC0AC\uC758\uBAB8"
-    _statusValue: 100
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 40
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 80
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 2
+      _CardName: "\uC751\uC6D0\uB2E8\uC784\uD504"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 90
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 100
+      _Bool: 0
+    - _enemyPattern: 2
+      _CardName: "\uC751\uC6D0\uB2E8\uC784\uD504"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 100
+      _Bool: 0
+    _statusStruct: "\uD3ED\uAD70"
+    _statusValue: 1000
   - _sprite: {fileID: 21300000, guid: 54985d4ae393f75449da445607f42678, type: 3}
     _name: "\uC751\uC6D0\uB2E8\uC784\uD504"
     _hp: 150
     _area: 4
     _enemyType: 0
-    _enemyPatterns: []
-    _statusStruct: "\uBD88\uC0AC\uC758\uBAB8"
-    _statusValue: 100
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uC800\uC8FC"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: "\uC751\uC6D0"
+    _statusValue: 10
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -1159,6 +1203,12 @@ MonoBehaviour:
     - "\uD53C\uB098\uD0C0\uBAA9\uB9C8"
     area: 3
     enemyType: 2
+  - enemySquad:
+    - "\uC751\uC6D0\uB2E8\uC784\uD504"
+    - "\uD3ED\uAD70\uBC1C\uB85D"
+    - "\uC751\uC6D0\uB2E8\uC784\uD504"
+    area: 4
+    enemyType: 0
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,7 +1246,7 @@ MonoBehaviour:
   - _name: "\uBCF4\uAE09\uD615\uD3ED\uD0C4"
     sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
     _info: "@\uD134 \uB4A4,  \uC9C0\uC6D0\uAD70\uC774 \uACF5\uAE09\uB429\uB2C8\uB2E4.
-      \uC8FD\uC744\uB54C, \uB3D9\uB8CC\uC5D0\uAC8C \uD53C\uD574\uB97C 20 \uC90D\uB2C8\uB2E4."
+      \uC8FD\uC744\uB54C, \uBAA8\uB4E0 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 20 \uC90D\uB2C8\uB2E4."
   - _name: "\uC815\uCC30\uBCD1"
     sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB0B4 \uB0A8\uC740 \uB9AC\uB864\uD69F\uC218\uAC00
@@ -1223,6 +1273,15 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
     _info: "\uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4, \uCCB4\uB825\uC744
       @ \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  - _name: "\uC751\uC6D0"
+    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    _info: "\uC8FD\uC744 \uB54C, \uBAA8\uB4E0 \uC801\uC758 \uACF5\uACA9\uB825\uC774
+      @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  - _name: "\uD3ED\uAD70"
+    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    _info: "\uCCB4\uB825\uC774 @ \uC544\uB798\uB85C \uB0B4\uB824\uAC00\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.
+      @\uB294 \uB9E4\uD134 \uCCB4\uB825\uC5D0 200\uC744 \uBE80 \uAC12\uC73C\uB85C
+      \uBCC0\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0

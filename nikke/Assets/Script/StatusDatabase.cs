@@ -52,6 +52,11 @@ public class StatusDatabase : MonoBehaviour
                     }
                     return;
                 }
+            case ("Æø±º"):
+                {
+                    enemy.statusValueChange(enemy._hp-200);
+                    return;
+                }
         }
         return;
     }
@@ -74,7 +79,16 @@ public class StatusDatabase : MonoBehaviour
                 }
             case ("ºÒ»çÀÇ¸ö"):
                 {
+                    StatusPopup(enemy);
                     BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    return;
+                }
+            case ("Æø±º"):
+                {
+                    if (enemy._hp >= enemy._statusValue) return;
+                    StatusPopup(enemy);
+                    BattleManager.Instance.healEnemy(enemy._statusValue-enemy._hp, enemy);
+
                     return;
                 }
         }
@@ -176,6 +190,12 @@ public class StatusDatabase : MonoBehaviour
                 {
                     StatusPopup(enemy);
                     BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("¿µ¿õ¿ÀÅ³·¹½º"));
+                    return;
+                }
+            case ("ÀÀ¿ø"):
+                {
+                    foreach(var tmpEnemy in BattleManager.Instance.Enemies)
+                        tmpEnemy.setAttackBuff(enemy._statusValue);
                     return;
                 }
         }

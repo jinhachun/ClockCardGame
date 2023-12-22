@@ -16436,12 +16436,12 @@ MonoBehaviour:
   - _img: {fileID: 21300000, guid: 10b95c86405a60146aa19e7b01266973, type: 3}
     _species: 0
     _name: "\uC800\uC8FC"
-    _text: "\uB0B4 \uD328\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uCE74\uB4DC\uC5D0\uAC8C
-      -4/-4\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    _text: "\uB0B4 \uD328\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uCE74\uB4DC \uD55C
+      \uC7A5\uC5D0\uAC8C -4/-4\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
     _tier: 0
     _stat:
-      attack: 8
-      defence: 8
+      attack: 0
+      defence: 0
     _type: 0
     isExhaust: 1
     isEthereal: 0
@@ -16518,7 +16518,7 @@ MonoBehaviour:
     _boss: 0
   - _isAreaOne: 1
     _isAreaTwo: 1
-    _isAreaThree: 1
+    _isAreaThree: 0
     _isAreaFour: 0
     _eventName: "\uB108 \uD574\uACE0\uC57C!"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB098\uD0DC\uD558\uAC8C \uD589\uB3D9\uD569\uB2C8\uB2E4.\n\uD655

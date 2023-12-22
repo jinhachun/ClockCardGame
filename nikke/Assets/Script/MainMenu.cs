@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] TMP_Text __BattleButtonText;
     public string __BattleButtonText_Stage;
     string __BattleButtonText_Stage_Full => Resource.Instance.Stage != 6 ? (Resource.Instance.Area + " -" + Resource.Instance.Stage + "\n" + __BattleButtonText_Stage):  "BOSS - "+Resource.Instance.Area;
+    string _BattleButtonText_Area4 => "FINAL BOSS";
 
 
     [SerializeField] TMP_Text _MoneyText;
@@ -42,8 +43,13 @@ public class MainMenu : MonoBehaviour
     }
     public void TextUpdate()
     {
-        __BattleButtonText.text = __BattleButtonText_Stage_Full;
         _MoneyText.text = Resource.Instance.money.ToString();
+        if (Resource.Instance.Area == 4)
+        {
+            __BattleButtonText.text = _BattleButtonText_Area4;
+            return;
+        }
+        __BattleButtonText.text = __BattleButtonText_Stage_Full;
     }
     public void FixedUpdate()
     {

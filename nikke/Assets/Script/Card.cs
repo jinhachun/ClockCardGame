@@ -53,21 +53,33 @@ public class Card : MonoBehaviour
                 Stat.attack = b;
                 if (Stat.attack > Str._stat.attack)
                 {
-                    if(BattleManager.GameState == BattleState.Attack)
+                    if (BattleManager.GameState == BattleState.Attack)
                         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
                     this._attText.color = Color.red;
                 }
-                else if (Stat.attack < Str._stat.attack) this._attText.color = Color.gray;
+                else if (Stat.attack < Str._stat.attack)
+                {
+                    if (BattleManager.GameState == BattleState.Attack)
+                        BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+                    this._attText.color = Color.gray;
+                }
                 else this._attText.color = Color.white;
                 this._attText.text = Stat.attack.ToString();
                 break;
             case "Defence":
                 Stat.defence = b;
-                if (Stat.defence > Str._stat.defence) {
-                    BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-                    this._defText.color = Color.red; 
+                if (Stat.defence > Str._stat.defence)
+                {
+                    if (BattleManager.GameState == BattleState.Attack)
+                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
+                    this._defText.color = Color.red;
                 }
-                else if (Stat.defence < Str._stat.defence) this._defText.color = Color.gray;
+                else if (Stat.defence < Str._stat.defence)
+                {
+                    if (BattleManager.GameState == BattleState.Attack)
+                        BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+                    this._defText.color = Color.gray;
+                }
                 else this._defText.color = Color.white;
                 this._defText.text = Stat.defence.ToString();
                 break;

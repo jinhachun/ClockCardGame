@@ -419,9 +419,11 @@ public class CardDatabase : MonoBehaviour
                 /////////////////////////////////////////////////
             case "ÀúÁÖ":
                 return (() => {
-                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
-                        a.StatChange("Attack", a.Stat.attack -5);
-                        a.StatChange("Defence", a.Stat.defence -5);
+                    var tmpList = BattleManager.Instance.Hand.Where(x => !(x.Stat.attack == 0 && x.Stat.defence == 0)).ToList();
+                    if (tmpList.Count == 0) return;
+                    var tmpCard = tmpList[Random.Range(0, tmpList.Count)];
+                    tmpCard.StatChange("Attack", tmpCard.Stat.attack -4);
+                    tmpCard.StatChange("Defence", tmpCard.Stat.defence -4);
                 });
 
 
