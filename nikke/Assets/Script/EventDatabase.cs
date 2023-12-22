@@ -38,7 +38,7 @@ public class EventDatabase : MonoBehaviour
                 {
                     if (selectIndex == 0)
                     {
-                        if (Resource.Instance.Hp < 20) return false;
+                        if (Resource.Instance.Hp <= 20) return false;
                     }
                     return true;
                 }
@@ -46,7 +46,7 @@ public class EventDatabase : MonoBehaviour
                 {
                     if (selectIndex == 0)
                     {
-                        if (Resource.Instance.Hp < 10) return false;
+                        if (Resource.Instance.Hp <= 10) return false;
                     }
                     return true;
                 }
@@ -94,6 +94,34 @@ public class EventDatabase : MonoBehaviour
                     }
                     return true;
                 }
+            case "괴수 티라노":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (Resource.Instance.Hp*100/Resource.Instance.mHp>50) return false;
+                    }
+                    return true;
+                }
+            case "보물탐험":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (Resource.Instance.Hp <= 30) return false;
+                    }
+                    return true;
+                }
+            case "전쟁 속 작은 생명":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (!Resource.Instance.haveCard("크루세돌이")) return false;
+                    }
+                    else if (selectIndex == 2)
+                    {
+                        if (Resource.Instance.Deck.Where(x=>x._tier==2).ToList().Count==0) return false;
+                    }
+                    return true;
+                }
         }
         return true;
     }
@@ -108,7 +136,7 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Event_Damage(20);
-                            Resource.Instance.money += 100;
+                            Resource.Instance.Event_MoneyEarn(100);
                         });
                     }
                     else if (selectIndex == 1)
@@ -160,7 +188,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.money += 50;
+                            Resource.Instance.Event_MoneyEarn(50);
                         });
                     }
                     return null;
@@ -189,7 +217,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.money += 300;
+                            Resource.Instance.Event_MoneyEarn(300);
                         });
                     }
                     else if (selectIndex == 2)
@@ -217,7 +245,7 @@ public class EventDatabase : MonoBehaviour
                             if (Resource.Instance.money >= 100)
                             {
                                 Resource.Instance.money -= 100;
-                                Resource.Instance.money += Random.Range(0, 200);
+                                Resource.Instance.Event_MoneyEarn(Random.Range(0,201));
                             }
                         });
                     }
@@ -242,7 +270,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.money += 600;
+                            Resource.Instance.Event_MoneyEarn(600);
                         });
                     }
                     else if (selectIndex == 2)
@@ -305,7 +333,7 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Deck_Remove("깡통몬");
-                            Resource.Instance.money += 150;
+                            Resource.Instance.Event_MoneyEarn(150);
                         });
                     }
                     else if (selectIndex == 2)
@@ -350,6 +378,71 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Deck_Add("안동글이",true);
+                        });
+                    }
+                    return null;
+                }
+            case "괴수 티라노":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_MoneyEarn(400);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_MoneyEarn(200);
+                        });
+                    }
+                    return null;
+                }
+            case "보물탐험":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Damage(30);
+                            for (int i = 0; i < Resource.Instance.combiRate.Count; i++)
+                                Resource.Instance.combiRate[i] += 0.1f;
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                        });
+                    }
+                    return null;
+                }
+            case "전쟁 속 작은 생명":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(15);
+                        });
+                    }
+                    else if (selectIndex == 2)
+                    {
+                        return (() =>
+                        {
+                            var tmpList = Resource.Instance.Deck.Where(x => x._tier == 2).ToList();
+                            var targetCard = tmpList[Random.Range(0, tmpList.Count)];
+                            Resource.Instance.Deck_Remove(targetCard._name);
+
                         });
                     }
                     return null;

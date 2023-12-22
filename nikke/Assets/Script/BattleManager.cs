@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -59,11 +60,11 @@ public class BattleManager : MonoBehaviour
     List<Card> Cards;
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
 
-    public int turn;
     public int area;
     public EnemyType enemyType;
     public int reward;
 
+    bool waitDelay;
 
     public int Hp, Mhp, Shield;
     public int Att;
@@ -81,6 +82,7 @@ public class BattleManager : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
         var randomized = Resource.Instance.Deck.OrderBy(item => Random.Range(0, 999)).ToList();
         BaseDeck = randomized;
+        waitDelay = false;
 
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
@@ -93,8 +95,6 @@ public class BattleManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if (Mhp < Hp) Hp = Mhp;
-
 
     }
     private void ChangeState(BattleState battleState)
@@ -106,7 +106,6 @@ public class BattleManager : MonoBehaviour
                 PHASE_Set();
                 break;
             case BattleState.TurnStart:
-                turn++;
                 PHASE_TurnStart();
                 EnemyStatus_TurnStart();
                 DeckCountCheck();
@@ -147,7 +146,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_Set()
     {
-        Att = 0; Def = 0; Rate = 1; turn = 0;
+        Att = 0; Def = 0; Rate = 1;
         tmpAtt = 0; tmpDef = 0; tmpRate = 1; tmpReroll = 0;
         Enemies = new List<Enemy>();
         Deck = new List<Card>();
@@ -190,7 +189,7 @@ public class BattleManager : MonoBehaviour
         foreach (var enemy in final_enemylist)
         {
             cnt++;
-            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY + (enemy._enemyType == EnemyType.Mini ? 0 : (enemy._enemyType == EnemyType.Normal ? 0.5f : 1f)));
+            var enemyposTmp = new Vector2(EnemyPosX + EnemyPosBlank * cnt, EnemyPosY + (enemy._enemyType == EnemyType.Mini ? 0 : (enemy._enemyType == EnemyType.Normal ? 0.5f : (enemy._enemyType == EnemyType.Giga ? 1f : 2f))));
             var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
 
             enemyTmp.Set(enemy);
@@ -223,7 +222,13 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_TurnStart()
     {
+         
         Sequence sq = DOTween.Sequence();
+        if (waitDelay)
+        {
+            sq.AppendInterval(1f);
+            ChangeState(BattleState.TurnStart);
+        }
 
         Shield = 0;
         rerolladd(1);
@@ -233,7 +238,7 @@ public class BattleManager : MonoBehaviour
         }
         ShuffleDeck(sq);
     }
-
+    
     public int tmpAtt;
     public int tmpDef;
     public double tmpRate;
@@ -667,6 +672,7 @@ public class BattleManager : MonoBehaviour
     {
         DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+"+value, Color.green);
         Hp += value;
+        if (Mhp < Hp) Hp = Mhp;
     }
     public void PHASE_EndTurn()
     {
@@ -695,6 +701,7 @@ public class BattleManager : MonoBehaviour
     Queue<CardStruct> addcardQueue_Grave;
     public void AddCard(Queue<CardStruct> list, bool deck)
     {
+        waitDelay = true;
         Sequence cardAddSequence = DOTween.Sequence();
         while (list.Count > 0)
         {
@@ -720,6 +727,7 @@ public class BattleManager : MonoBehaviour
             
             cardAddSequence.AppendInterval(0.15f);
         }
+        cardAddSequence.AppendCallback(() => { waitDelay = false; });
 
     }
     public void DrawCard(Sequence sq)

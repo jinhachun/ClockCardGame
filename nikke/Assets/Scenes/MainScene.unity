@@ -16433,6 +16433,21 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
+  - _img: {fileID: 21300000, guid: 10b95c86405a60146aa19e7b01266973, type: 3}
+    _species: 0
+    _name: "\uC800\uC8FC"
+    _text: "\uB0B4 \uD328\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uCE74\uB4DC\uC5D0\uAC8C
+      -4/-4\uB97C \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    _tier: 0
+    _stat:
+      attack: 8
+      defence: 8
+    _type: 0
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 1
+    evol: []
+    isRare: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
@@ -16674,6 +16689,49 @@ MonoBehaviour:
     - _text: "\uBA4B\uC9C0\uAC8C \uC9C4\uD654\uD55C\uB2E4!(\uBA39\uAE68\uBE44\uAC00
         \uC9C4\uD654\uD569\uB2C8\uB2E4.)"
     - _text: "\uC9C4\uD654\uD558\uC9C0 \uC54A\uB294\uB2E4."
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 0
+    _isAreaThree: 1
+    _isAreaFour: 0
+    _eventName: "\uAD34\uC218 \uD2F0\uB77C\uB178"
+    _eventText: "\uB3D9\uAE00\uC774\uAC00 \uD2F0\uB77C\uB178\uC640 \uD568\uAED8 \uB3C4\uC2DC\uB97C
+      \uD30C\uAD34\uD558\uB294\uB370 \uB9DB\uB4E4\uB838\uC2B5\uB2C8\uB2E4!\n"
+    _eventSprite: {fileID: 21300000, guid: 6a26bc0e8c890b74586adb6bdd5b4aad, type: 3}
+    _eventSelect:
+    - _text: "\uB3C4\uC2DC\uC5D0 \uC7AC\uC559\uC744 \uAC00\uC838\uB2E4 \uC900\uB2E4.(\uCCB4\uB825\uC774
+        \uC808\uBC18\uC774\uD558\uC77C \uACBD\uC6B0, \uB3C8+400)"
+    - _text: "\uB3C4\uC2DC\uB97C \uC0B4\uC9DD \uD30C\uAD34\uD55C\uB2E4 .(\uB3C8+200)"
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 0
+    _isAreaThree: 1
+    _isAreaFour: 0
+    _eventName: "\uBCF4\uBB3C\uD0D0\uD5D8"
+    _eventText: "\uB3D9\uAE00\uC774\uAC00 \uC720\uC801\uC18D\uC744 \uB3CC\uC544\uB2E4\uB2C8\uBA70
+      \uBCF4\uBB3C\uC744 \uCC3E\uB2E4\uAC00 \uD568\uC815\uC5D0 \uBE60\uC84C\uC2B5\uB2C8\uB2E4!\n\uD568\uC815\uC5D0
+      \uBE60\uC9C4 \uB3D9\uAE00\uC774\uB97C \uBC84\uB9AC\uACE0 \uB3C4\uB9DD\uAC08\uAE4C\uC694?"
+    _eventSprite: {fileID: 21300000, guid: 8c48cdd5943438b40805cf9e14e2f7c0, type: 3}
+    _eventSelect:
+    - _text: "\uB3D9\uAE00\uC774\uB97C \uAD6C\uD574\uC8FC\uACE0 \uBCF4\uBB3C\uC744
+        \uCC3E\uB294\uB2E4.(\uCCB4\uB825-30 / \uBAA8\uB4E0 \uC885\uC871\uC870\uD569
+        \uBC30\uC728+0.1)"
+    - _text: "\uB3C4\uB9DD\uAC04\uB2E4."
+    _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 0
+    _isAreaThree: 1
+    _isAreaFour: 0
+    _eventName: "\uC804\uC7C1 \uC18D \uC791\uC740 \uC0DD\uBA85"
+    _eventText: "\uC804\uC7C1\uC5D0 \uC9C0\uCE5C \uD06C\uB8E8\uC138\uB3CC\uC774\uAC00
+      \uC791\uC740 \uAF43 \uD558\uB098\uB97C \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4.\n"
+    _eventSprite: {fileID: 21300000, guid: 1b198c3dac6b3824a89a084fd45a45dc, type: 3}
+    _eventSelect:
+    - _text: "\uD790\uB9C1\uD55C\uB2E4.(\uB371\uC5D0 \uD06C\uB8E8\uC138\uB3CC\uC774\uAC00
+        \uC788\uC744 \uACBD\uC6B0 \uCCB4\uB825 \uBAA8\uB450 \uD68C\uBCF5)"
+    - _text: "\uD734\uC2DD\uD55C\uB2E4.(\uCCB4\uB825+15)"
+    - _text: "\uAF43\uC744 \uC9D3\uBC1F\uB294\uB2E4.(\uBB34\uC791\uC704 2\uD2F0\uC5B4
+        \uCE74\uB4DC \uD55C \uC7A5 \uC0AD\uC81C)"
     _boss: 0
 --- !u!1 &1813648926
 GameObject:

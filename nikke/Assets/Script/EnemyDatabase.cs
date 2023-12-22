@@ -68,6 +68,7 @@ public class EnemyDatabase : MonoBehaviour
         if (et == EnemyType.Mini) return new Vector2(1, 1);
         else if (et == EnemyType.Normal) return new Vector2(1.3f, 1.3f);
         else if (et == EnemyType.Giga) return new Vector2(1.6f, 1.6f);
+        else if (et == EnemyType.Final) return new Vector2(2.5f, 2.5f);
         return new Vector2(1,1);
     }
 }
@@ -79,5 +80,5 @@ public enum EnemyPattern
 [Serializable]
 public enum EnemyType
 {
-    Mini,Normal,Giga
+    Mini,Normal,Giga,Final
 }

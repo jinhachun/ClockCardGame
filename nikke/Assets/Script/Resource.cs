@@ -101,6 +101,11 @@ public class Resource : MonoBehaviour
         Hp -= a;
         if (Hp <= 0) Hp = 1;
     }
+    public void Event_MoneyEarn(int a)
+    {
+        money += a;
+        RewardPopup.Create(a, false);
+    }
     public void Deck_Remove(string name)
     {
         foreach(CardStruct tmp in Deck)

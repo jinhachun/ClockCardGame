@@ -416,6 +416,14 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.AddCard(queue, true);
                 });
 
+                /////////////////////////////////////////////////
+            case "ÀúÁÖ":
+                return (() => {
+                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
+                        a.StatChange("Attack", a.Stat.attack -5);
+                        a.StatChange("Defence", a.Stat.defence -5);
+                });
+
 
         }
         return (() => { });
