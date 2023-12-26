@@ -42,7 +42,10 @@ public class Event : MonoBehaviour
     {
         buttonList = new List<RewardUnitSprite>();
         _Text_eventname.text = a._eventName;
-        _Text_eventtext.text = a._eventText;
+        var eventText = a._eventText;
+        if (Resource.Instance.Area >= 4 && Resource.Instance.Stage!=1)
+            eventText = eventText.Replace("@", Timer.Instance.TIME());
+        _Text_eventtext.text = eventText;
         _Image_eventimage.sprite = a._eventSprite;
         for(int i=0;i<a._eventSelect.Count;i++)
         {

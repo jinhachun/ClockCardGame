@@ -24,7 +24,7 @@ public class EventDatabase : MonoBehaviour
         else if (area == 3)
             return eventStruct._isAreaThree;
         else if (area == 4)
-            return eventStruct._isAreaThree;
+            return eventStruct._isAreaFour;
         else return false;
     }
     public List<EventStruct> EventList_area(int area, bool boss) => EventList.Where(x => (isArea(area, x)) && x._boss == boss).ToList();
@@ -121,6 +121,10 @@ public class EventDatabase : MonoBehaviour
                         if (Resource.Instance.Deck.Where(x=>x._tier==2).ToList().Count==0) return false;
                     }
                     return true;
+                }
+            case "咯青狼 场":
+                {
+                    return false;
                 }
         }
         return true;
@@ -443,6 +447,16 @@ public class EventDatabase : MonoBehaviour
                             var targetCard = tmpList[Random.Range(0, tmpList.Count)];
                             Resource.Instance.Deck_Remove(targetCard._name);
 
+                        });
+                    }
+                    return null;
+                }
+            case "咯青狼 场":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
                         });
                     }
                     return null;

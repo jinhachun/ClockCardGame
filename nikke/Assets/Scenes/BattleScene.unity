@@ -1003,6 +1003,178 @@ MonoBehaviour:
       _Bool: 0
     _statusStruct: "\uC751\uC6D0"
     _statusValue: 10
+  - _sprite: {fileID: 21300000, guid: 54985d4ae393f75449da445607f42678, type: 3}
+    _name: "\uC751\uC6D0\uB2E8\uC784\uD504"
+    _hp: 150
+    _area: 4
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uC800\uC8FC"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: "\uC751\uC6D0"
+    _statusValue: 10
+  - _sprite: {fileID: 21300000, guid: 08895f19fdadcb743853812030489721, type: 3}
+    _name: "\uD589\uB3D9\uB300\uC7A5\uCF54\uAE30"
+    _hp: 150
+    _area: 1
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uC800\uC8FC"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: 
+    _statusValue: 0
+  - _sprite: {fileID: 21300000, guid: b46f7104bb2587d4bb3d8c0834ec77f4, type: 3}
+    _name: "\uD3EC\uB300\uC7A5\uB78C\uC950"
+    _hp: 150
+    _area: 2
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uC800\uC8FC"
+      _Value: 1
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: 
+    _statusValue: 0
+  - _sprite: {fileID: 21300000, guid: 002ee2e7ac7be2445b60216fffe6ae9d, type: 3}
+    _name: "\uBE14\uB7EC\uB4DC\uD038"
+    _hp: 650
+    _area: 4
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 36
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 27
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 55
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    _statusStruct: "\uC5EC\uC655"
+    _statusValue: 30
+  - _sprite: {fileID: 21300000, guid: 7a0b2615193eb9547b538535ca5b606d, type: 3}
+    _name: "\uC30D\uB465\uC774\uC7A5\uAD70 \uBCFC\uD2B8"
+    _hp: 700
+    _area: 4
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 30
+      _Bool: 0
+    - _enemyPattern: 5
+      _CardName: 
+      _Value: 30
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    _statusStruct: "\uD615\uC758 \uB3D9\uC0DD\uC0AC\uB791"
+    _statusValue: 0
+  - _sprite: {fileID: 21300000, guid: 23b09387c01422841a52251b9f7c6294, type: 3}
+    _name: "\uC30D\uB465\uC774\uC7A5\uAD70 \uB108\uD2B8"
+    _hp: 700
+    _area: 4
+    _enemyType: 2
+    _enemyPatterns:
+    - _enemyPattern: 5
+      _CardName: 
+      _Value: 30
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 30
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    - _enemyPattern: 4
+      _CardName: 
+      _Value: 0
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    _statusStruct: "\uB3D9\uC0DD\uC758 \uD615\uC0AC\uB791"
+    _statusValue: 0
+  - _sprite: {fileID: 21300000, guid: eba079ae477a32a4180a361da2132f2d, type: 3}
+    _name: "\uAC00\uACE0\uC77C"
+    _hp: 200
+    _area: 4
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 10
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 15
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 20
+      _Bool: 0
+    - _enemyPattern: 6
+      _CardName: 
+      _Value: 50
+      _Bool: 0
+    _statusStruct: "\uAC00\uACE0\uC77C"
+    _statusValue: 0
+  - _sprite: {fileID: 21300000, guid: 5b31ee56b6af8ab4f8babb177728d4bc, type: 3}
+    _name: "\uAC00\uACE0\uC77C\uC11D\uC0C1"
+    _hp: 200
+    _area: 4
+    _enemyType: 0
+    _enemyPatterns:
+    - _enemyPattern: 3
+      _CardName: "\uC751\uAC00"
+      _Value: 1
+      _Bool: 1
+    _statusStruct: "\uCD08\uC7AC\uC0DD"
+    _statusValue: 50
   sqdList:
   - enemySquad:
     - "\uBBF8\uB2C8\uC751\uAC00"
@@ -1209,6 +1381,17 @@ MonoBehaviour:
     - "\uC751\uC6D0\uB2E8\uC784\uD504"
     area: 4
     enemyType: 0
+  - enemySquad:
+    - "\uAC00\uACE0\uC77C"
+    - "\uBE14\uB7EC\uB4DC\uD038"
+    - "\uAC00\uACE0\uC77C"
+    area: 4
+    enemyType: 0
+  - enemySquad:
+    - "\uC30D\uB465\uC774\uC7A5\uAD70 \uBCFC\uD2B8"
+    - "\uC30D\uB465\uC774\uC7A5\uAD70 \uB108\uD2B8"
+    area: 4
+    enemyType: 0
 --- !u!114 &723614872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,40 +1431,57 @@ MonoBehaviour:
     _info: "@\uD134 \uB4A4,  \uC9C0\uC6D0\uAD70\uC774 \uACF5\uAE09\uB429\uB2C8\uB2E4.
       \uC8FD\uC744\uB54C, \uBAA8\uB4E0 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 20 \uC90D\uB2C8\uB2E4."
   - _name: "\uC815\uCC30\uBCD1"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: a4b1a90ecd947984489da5183a7386d7, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB0B4 \uB0A8\uC740 \uB9AC\uB864\uD69F\uC218\uAC00
       0\uC774\uBA74 \uACF5\uACA9\uB825\uC774 @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
   - _name: "\uD22C\uC11D\uAE30"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 46984a0eb4c314b4999ad718d2306643, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uD53C\uD574\uB97C @ \uC785\uD799\uB2C8\uB2E4.
       \uD53C\uD574\uB7C9\uB3C4 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   - _name: "\uCD08\uC7AC\uC0DD"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 2ea562bd9678312459cbf0a6a18304ed, type: 3}
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uCCB4\uB825\uC744 @ \uD68C\uBCF5\uD569\uB2C8\uB2E4.
       \uD68C\uBCF5\uB7C9\uC740 \uC810\uC810 \uAC10\uC18C\uD569\uB2C8\uB2E4."
   - _name: "\uBC18\uACA9"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 1db8c01703b4022469161374b7f9c865, type: 3}
     _info: "\uACF5\uACA9\uBC1B\uC744 \uB54C, \uD53C\uD574\uB97C @ \uC785\uD799\uB2C8\uB2E4."
   - _name: "\uC790\uD3ED\uBCD1"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: cd092418eb2c9484bb54f52d0f65fa6a, type: 3}
     _info: "@\uD134 \uB4A4, \uC790\uD3ED\uD558\uC5EC \uD53C\uD574\uB97C 30 \uC785\uD799\uB2C8\uB2E4."
   - _name: "\uBAA9\uB9C8"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 2aeb8f8f5fa829c4aa67865886d309fd, type: 3}
     _info: "\uC0AC\uB9DD \uC2DC, \uBAA9\uB9C8 \uC18D\uC5D0 \uC228\uC5B4\uC788\uB294
       \uC801\uB4E4\uC774 \uB4F1\uC7A5\uD569\uB2C8\uB2E4!"
   - _name: "\uBD88\uC0AC\uC758\uBAB8"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 7d7314d39e8cc414c9c4a9e9403dc29f, type: 3}
     _info: "\uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4, \uCCB4\uB825\uC744
       @ \uD68C\uBCF5\uD569\uB2C8\uB2E4."
   - _name: "\uC751\uC6D0"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 69f9a1fa596195d4ea44f75662649537, type: 3}
     _info: "\uC8FD\uC744 \uB54C, \uBAA8\uB4E0 \uC801\uC758 \uACF5\uACA9\uB825\uC774
       @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
   - _name: "\uD3ED\uAD70"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
+    sprite: {fileID: 21300000, guid: 3ef03b5773f96e04e9cc71a9207ad536, type: 3}
     _info: "\uCCB4\uB825\uC774 @ \uC544\uB798\uB85C \uB0B4\uB824\uAC00\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.
       @\uB294 \uB9E4\uD134 \uCCB4\uB825\uC5D0 200\uC744 \uBE80 \uAC12\uC73C\uB85C
       \uBCC0\uD569\uB2C8\uB2E4."
+  - _name: "\uC5EC\uC655"
+    sprite: {fileID: 21300000, guid: d215995bcf3538b438ff35e4a26e2146, type: 3}
+    _info: "\uACF5\uACA9\uC744 \uBC1B\uC744 \uB54C, \uB0B4 \uC885\uC871\uC870\uD569\uC774
+      \uD2B8\uB9AC\uD50C\uBCF4\uB2E4 \uC544\uB798\uC77C \uACBD\uC6B0, \uCCB4\uB825\uC744
+      @ \uD68C\uBCF5\uD558\uACE0 \uB371\uC5D0 \uD0A4\uC2A4\uB9C8\uD06C\uB97C \uB123\uC2B5\uB2C8\uB2E4."
+  - _name: "\uD615\uC758 \uB3D9\uC0DD\uC0AC\uB791"
+    sprite: {fileID: 21300000, guid: f031835072b85c74ba174880e8d4820a, type: 3}
+    _info: "\uB9AC\uB864\uC744 \uD560 \uB584\uB9C8\uB2E4, \uBB18\uC9C0\uC5D0 \uC800\uC8FC\uB97C
+      \uC11E\uC5B4\uB123\uC2B5\uB2C8\uB2E4."
+  - _name: "\uB3D9\uC0DD\uC758 \uD615\uC0AC\uB791"
+    sprite: {fileID: 21300000, guid: 1a4f117d7e4901b43818ce22b70111cf, type: 3}
+    _info: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uB371\uACFC \uBB18\uC9C0\uC5D0
+      \uC788\uB294 \uC800\uC8FC\uC758 \uC218\uB9CC\uD07C \uC801\uB4E4\uC758 \uACF5\uACA9\uB825\uC744
+      \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
+  - _name: "\uAC00\uACE0\uC77C"
+    sprite: {fileID: 21300000, guid: 1a4f117d7e4901b43818ce22b70111cf, type: 3}
+    _info: "\uC0AC\uB9DD \uC2DC, \uC11D\uC0C1\uC73C\uB85C \uBCC0\uC2E0\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0

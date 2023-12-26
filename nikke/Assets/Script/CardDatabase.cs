@@ -48,10 +48,14 @@ public class CardDatabase : MonoBehaviour
     public int SpeciesCombination(List<SPECIES> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Key!=SPECIES.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
-        for(int i = 0; i < list.Count; i++)
+        try
         {
-            if (result.ContainsKey(list[i])) BattleManager.Instance.Hand[i].combiSpeices = true;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (result.ContainsKey(list[i])) BattleManager.Instance.Hand[i].combiSpeices = true;
+            }
         }
+        catch (Exception e) { }
         int combi = 0;
         foreach (var num in result)
         {

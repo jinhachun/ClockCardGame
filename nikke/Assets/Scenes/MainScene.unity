@@ -15265,6 +15265,7 @@ GameObject:
   - component: {fileID: 1792990736}
   - component: {fileID: 1792990737}
   - component: {fileID: 1792990734}
+  - component: {fileID: 1792990738}
   m_Layer: 0
   m_Name: Resource
   m_TagString: Untagged
@@ -16448,6 +16449,20 @@ MonoBehaviour:
     isFixed: 1
     evol: []
     isRare: 0
+  - _img: {fileID: 21300000, guid: 181cbc772b967f64c910c05079357b34, type: 3}
+    _species: 0
+    _name: "\uD0A4\uC2A4\uB9C8\uD06C"
+    _text: "\uC624\uD788\uB824 \uC88B\uC744 \uC9C0\uB3C4 \uBAA8\uB985\uB2C8\uB2E4..?"
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 0
+    isExhaust: 1
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
   cardinfoSprites_species:
   - species: 0
     sprite: {fileID: 21300000, guid: d35c645998c0a0b4bbe8487ac25781e0, type: 3}
@@ -16733,6 +16748,33 @@ MonoBehaviour:
     - _text: "\uAF43\uC744 \uC9D3\uBC1F\uB294\uB2E4.(\uBB34\uC791\uC704 2\uD2F0\uC5B4
         \uCE74\uB4DC \uD55C \uC7A5 \uC0AD\uC81C)"
     _boss: 0
+  - _isAreaOne: 0
+    _isAreaTwo: 0
+    _isAreaThree: 0
+    _isAreaFour: 1
+    _eventName: "\uC5EC\uD589\uC758 \uB05D"
+    _eventText: "\uB2F9\uC2E0\uC740 \uB098\uC05C\uB188\uB4E4\uC744 \uBAA8\uB450 \uBB34\uCC0C\uB974\uACE0
+      \uC138\uC0C1\uC758 \uAD6C\uC6D0\uC790\uAC00 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!!\n\n\uC774
+      \uC138\uC0C1\uC740 \uC774\uC81C \uB3D9\uAE00\uC758, \uB3D9\uAE00\uC5D0 \uC758\uD55C,
+      \uB3D9\uAE00\uC744 \uC704\uD55C \uC138\uC0C1\uC785\uB2C8\uB2E4!\n\n\uD074\uB9AC\uC5B4
+      \uD0C0\uC784 : @"
+    _eventSprite: {fileID: 21300000, guid: 5cc4ada09371e1a4bb10ace991a4db18, type: 3}
+    _eventSelect:
+    - _text: -THE END-
+    _boss: 0
+--- !u!114 &1792990738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792990733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3c81c9658f859479dbca612f817bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time_current: 0
 --- !u!1 &1813648926
 GameObject:
   m_ObjectHideFlags: 0

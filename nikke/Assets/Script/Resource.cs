@@ -28,6 +28,7 @@ public class Resource : MonoBehaviour
     }
     public void Start()
     {
+        time = 0f;
         VillageLevel = new Dictionary<string, int>();
         VillageLevel.Add("Farm", 0);
         VillageLevel.Add("House", 0);
@@ -66,7 +67,7 @@ public class Resource : MonoBehaviour
     public int jewel;
     public List<float> combiRate;
     public CardStruct shopcard;
-
+    public float time;
     public bool haveCard(string a)
     {
         bool chk = false;
@@ -83,7 +84,7 @@ public class Resource : MonoBehaviour
     public void StageUp()
     {
         Stage++;
-        if (Stage > 6||Area==4)
+        if (Stage > 6)
         {
             Area++;
             Stage = 1;

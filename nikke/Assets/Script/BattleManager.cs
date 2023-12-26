@@ -60,6 +60,24 @@ public class BattleManager : MonoBehaviour
     public List<Card> Grave;
     List<Card> Cards;
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
+    public int howManyCardsinDeck(string N)
+    {
+        int chk = 0;
+        foreach (Card card in Deck)
+        {
+            if (card.name.Equals(N)) chk++;
+        }
+        return chk;
+    }
+    public int howManyCardsinGrave(string N)
+    {
+        int chk = 0;
+        foreach (Card card in Grave)
+        {
+            if (card.name.Equals(N)) chk++;
+        }
+        return chk;
+    }
 
     public int area;
     public EnemyType enemyType;
@@ -437,6 +455,8 @@ public class BattleManager : MonoBehaviour
         }
         sq.AppendCallback(() =>
         {
+            foreach(Enemy enemy in Enemies)
+                EnemyStatus_Reroll(enemy);
             ChangeState(BattleState.Draw);
             sq.Kill();
         });
@@ -540,7 +560,6 @@ public class BattleManager : MonoBehaviour
             AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f) * (0.25f + ((float)AttLeft / (float)target.Str._hp));
 
             target._hp -= AttLeft;
-            pureAttack = false;
             bool lethal = (target._hp <= 0);
             if (lethal)
             {
@@ -563,6 +582,7 @@ public class BattleManager : MonoBehaviour
                 EnemyStatus_WhileAttack(target);
                 DamagePopup.Create(target.transform.position, AttLeft, critical, lethal);
             }
+            pureAttack = false;
             AttLeft = tmpAttLeft;
 
             loopcnt++;
@@ -595,6 +615,7 @@ public class BattleManager : MonoBehaviour
             if (Enemy.Pattern._enemyPattern == EnemyPattern.ATT)
             {
                 takeDamage(sq, Enemy);
+                sq.AppendInterval(0.8f);
             }
             else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
             {
@@ -607,22 +628,27 @@ public class BattleManager : MonoBehaviour
             }
             else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
             {
+                Enemy.transform.DOMoveY(Enemy._img.transform.position.y + 0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 Queue<CardStruct> queue = new Queue<CardStruct>();
                 for(int i=0;i<Enemy.Pattern._Value;i++)
                     queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
                 AddCard(queue, Enemy.Pattern._Bool);
+                sq.AppendInterval(0.8f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
             {
                 summonEnemy(EnemyDatabase.Instance.enemy(Enemy.Pattern._CardName));
+                sq.AppendInterval(0.8f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
             {
                 Enemy.gainShield(Enemy.Pattern._Value);
+                sq.AppendInterval(0.8f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.HEAL)
             {
                 healEnemy(Enemy.Pattern._Value, Enemy);
+                sq.AppendInterval(0.8f);
             }
         }
         
@@ -671,7 +697,6 @@ public class BattleManager : MonoBehaviour
                 Enemy._img.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
                 Hp -= FinalDamage;
             });
-            sq.AppendInterval(0.8f);
         }
         else
         {
@@ -680,7 +705,6 @@ public class BattleManager : MonoBehaviour
                 DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
                 Enemy._img.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
             });
-            sq.AppendInterval(0.2f);
         }
     }
     public void takeHeal(int value)
@@ -715,8 +739,12 @@ public class BattleManager : MonoBehaviour
 
     public void PHASE_LOSE()
     {
-        Resource.Instance.reset();
-        SceneManager.LoadScene("MainScene");
+        Sequence sq = DOTween.Sequence();
+        sq.AppendInterval(2.5f);
+        sq.AppendCallback(() => { 
+            Resource.Instance.reset();
+            SceneManager.LoadScene("MainScene");
+        });
     }
     Queue<CardStruct> addcardQueue_Deck;
     Queue<CardStruct> addcardQueue_Grave;
@@ -743,7 +771,7 @@ public class BattleManager : MonoBehaviour
             (deck ? Deck : Grave).Add(card);
             int Layer = 50 + (deck ? Deck.Count : Grave.Count) * 3;
             card.setLayer(0, Layer);
-            moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.4f, true);
+            moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.6f, true);
             if (deck)
                 cardAddSequence.AppendCallback(() => { card.flip(false); });
             
@@ -857,6 +885,13 @@ public class BattleManager : MonoBehaviour
             StatusDatabase.Instance.Action_WhileDying(enemy._statusName, enemy);
         }
     }
+    public void EnemyStatus_Reroll(Enemy enemy)
+    {
+        if (!enemy._statusName.Equals("¾øÀ½"))
+        {
+            StatusDatabase.Instance.Action_Reroll(enemy._statusName, enemy);
+        }
+    }
     public void summonEnemy(EnemyStruct enemystruct)
     {
         if (EnemyPos.Count == Enemies.Count) return;
@@ -911,6 +946,7 @@ public class BattleManager : MonoBehaviour
         var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
         return Effect;
     }
+
 
     [ContextMenu("stageUp")]
     public void cont_stageEnd()

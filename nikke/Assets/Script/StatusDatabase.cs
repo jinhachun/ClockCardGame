@@ -31,12 +31,13 @@ public class StatusDatabase : MonoBehaviour
                 }
             case ("보급형폭탄"):
                 {
+                    var enemyName = "공성용슬라임";
                     enemy.statusValueChange(enemy._statusValue-1);
                     if (enemy._statusValue == 0)
                     {
                         enemy.statusValueChange(2);
                         StatusPopup(enemy);
-                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("공성용슬라임"));
+                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
                     }
                     return;
                 }
@@ -91,6 +92,20 @@ public class StatusDatabase : MonoBehaviour
 
                     return;
                 }
+            case ("여왕"):
+                {
+                    var cardName = "키스마크";
+                    if (BattleManager.Instance.pureAttack == false) return;
+                    Debug.Log("조합 : " + CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi));
+                    if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) >= 3) return;
+                    StatusPopup(enemy);
+                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.Instance.card_token(cardName));
+                    BattleManager.Instance.AddCard(queue, true);
+
+                    return;
+                }
         }
         return ;
     }
@@ -106,10 +121,11 @@ public class StatusDatabase : MonoBehaviour
                 }
             case "두목":
                 {
+                    var enemyName = "둘기";
                     if (UnityEngine.Random.Range(0, 10) < 2)
                     {
                         StatusPopup(enemy);
-                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("둘기"));
+                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
                     }
                     return;
                 }
@@ -172,7 +188,34 @@ public class StatusDatabase : MonoBehaviour
                     enemy.statusValueChange(enemy._statusValue + 1);
                     return;
                 }
+            case "동생의 형사랑":
+                {
+                    var cardName = "저주";
+                    var tmpValue = BattleManager.Instance.howManyCardsinDeck(cardName) + BattleManager.Instance.howManyCardsinGrave(cardName);
+                    enemy.statusValueChange(tmpValue);
+                    if (tmpValue == 0) return;
+                    StatusPopup(enemy);
+                    foreach(Enemy tmpEnemy in BattleManager.Instance.Enemies)
+                        tmpEnemy.setAttackBuff(enemy._statusValue);
+                    return;
+                }
 
+        }
+
+    }
+    public void Action_Reroll(string name, Enemy enemy)
+    {
+        switch (name)
+        {
+            case "형의 동생사랑":
+                {
+                    var cardName = "저주";
+                    StatusPopup(enemy);
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.Instance.card_token(cardName));
+                    BattleManager.Instance.AddCard(queue, false);
+                    return;
+                }
         }
 
     }
@@ -188,14 +231,23 @@ public class StatusDatabase : MonoBehaviour
                 }
             case ("목마"):
                 {
+                    var enemyName = "영웅오킬레스";
                     StatusPopup(enemy);
-                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy("영웅오킬레스"));
+                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
                     return;
                 }
             case ("응원"):
                 {
-                    foreach(var tmpEnemy in BattleManager.Instance.Enemies)
+                    StatusPopup(enemy);
+                    foreach (var tmpEnemy in BattleManager.Instance.Enemies)
                         tmpEnemy.setAttackBuff(enemy._statusValue);
+                    return;
+                }
+            case ("가고일"):
+                {
+                    var enemyName = "가고일석상";
+                    StatusPopup(enemy);
+                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
                     return;
                 }
         }

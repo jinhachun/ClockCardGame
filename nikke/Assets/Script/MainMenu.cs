@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
     public string __BattleButtonText_Stage;
     string __BattleButtonText_Stage_Full => Resource.Instance.Stage != 6 ? (Resource.Instance.Area + " -" + Resource.Instance.Stage + "\n" + __BattleButtonText_Stage):  "BOSS - "+Resource.Instance.Area;
     string _BattleButtonText_Area4 => "FINAL BOSS";
+    string _BattleButtonText_End => "END";
 
 
     [SerializeField] TMP_Text _MoneyText;
@@ -44,6 +45,11 @@ public class MainMenu : MonoBehaviour
     public void TextUpdate()
     {
         _MoneyText.text = Resource.Instance.money.ToString();
+        if (Resource.Instance.Area == 5)
+        {
+            __BattleButtonText.text = _BattleButtonText_End;
+            return;
+        }
         if (Resource.Instance.Area == 4)
         {
             __BattleButtonText.text = _BattleButtonText_Area4;
@@ -77,6 +83,7 @@ public class MainMenu : MonoBehaviour
     }
     public void battleStart()
     {
+        if (Resource.Instance.Area >= 4 && Resource.Instance.Stage!=1) return;
         DOTween.KillAll();
         SceneManager.LoadScene("BattleScene");
     }
