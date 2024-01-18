@@ -12,10 +12,10 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _species;
     [SerializeField] private SpriteRenderer _type;
     [SerializeField] private SpriteRenderer _outLine;
-    [SerializeField] private TMP_Text _name;
-    [SerializeField] private TMP_Text _text;
+    [SerializeField] protected TMP_Text _name;
+    [SerializeField] protected TMP_Text _text;
     [SerializeField] private TMP_Text _infoText;
-    [SerializeField] private TMP_Text _tier;
+    [SerializeField] protected TMP_Text _tier;
     [SerializeField] private TMP_Text _attText;
     [SerializeField] private TMP_Text _defText;
     [SerializeField] private SpriteRenderer _cardBack;
@@ -28,11 +28,11 @@ public class Card : MonoBehaviour
     public CardStruct Str;
     public SPECIES Species { get; private set; }
     public TYPE Type { get; private set; }
-    public string name { get; private set; }
+    public  string name { get; protected set; }
     public STAT Stat { get; private set; }
     private int attack_before;
     private int defence_before;
-    public int tier { get; private set; }
+    public int tier { get; protected set; }
     public bool isExhaust { get; private set; }
     public bool isEthereal { get; private set; }
     public bool isFixed{ get; private set; }

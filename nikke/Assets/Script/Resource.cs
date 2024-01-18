@@ -30,10 +30,11 @@ public class Resource : MonoBehaviour
     {
         time = 0f;
         VillageLevel = new Dictionary<string, int>();
-        VillageLevel.Add("Farm", 0);
-        VillageLevel.Add("House", 0);
-        VillageLevel.Add("Church", 0);
-        VillageLevel.Add("Bath", 0);
+        VillageLevel.Add("Farm", PlayerPrefs.GetInt("Farm",0));
+        VillageLevel.Add("House", PlayerPrefs.GetInt("House", 0));
+        VillageLevel.Add("Church", PlayerPrefs.GetInt("Church", 0));
+        VillageLevel.Add("Bath", PlayerPrefs.GetInt("Bath", 0));
+
 
         SupportPrice = new Dictionary<string, int>();
         SupportPrice.Add("Evolve", 0);
@@ -41,7 +42,7 @@ public class Resource : MonoBehaviour
         SupportPrice.Add("Delete", 0);
         SupportPrice.Add("Heal", 0);
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
-        money = 100; jewel = 5;
+        money = 100; jewel = PlayerPrefs.GetInt("jewel", 3);
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
         for(int i = 0; i < 5; i++)
@@ -57,6 +58,7 @@ public class Resource : MonoBehaviour
         }
     }
     public List<CardStruct> Deck;
+    public List<BonusRule> Rules;
     public int Hp;
     public int tmpMhp;
     public int mHp => tmpMhp * (100 + 5 * VillageLevel["Bath"]) / 100;

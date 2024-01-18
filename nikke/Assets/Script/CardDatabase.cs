@@ -17,6 +17,7 @@ public class CardDatabase : MonoBehaviour
     }
     [SerializeField] List<CardStruct> cardDatabase;
     [SerializeField] List<CardStruct> cardDatabase_token;
+    [SerializeField] List<RuleStruct> ruleDatabase;
     [SerializeField] List<SpeciesSprite> cardinfoSprites_species;
     [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
@@ -515,6 +516,15 @@ public struct CardStruct
     public bool isFixed;
     public List<String> evol;
     public bool isRare;
+}
+[Serializable]
+public struct RuleStruct
+{
+    public Sprite _img;
+    public string _name;
+    [Multiline(3)]
+    public string _text;
+    public int _level;
 }
 [Serializable]
 public class STAT

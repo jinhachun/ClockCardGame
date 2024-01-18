@@ -451,12 +451,14 @@ public class EventDatabase : MonoBehaviour
                     }
                     return null;
                 }
-            case "여행의 끝":
+            case "마지막 전투":
                 {
                     if (selectIndex == 0)
                     {
                         return (() =>
                         {
+                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+
                         });
                     }
                     return null;

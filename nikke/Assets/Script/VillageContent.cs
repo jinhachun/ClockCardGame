@@ -12,7 +12,7 @@ public class VillageContent : MonoBehaviour
     public void TextUpdate()
     {
         _image.sprite = _imageList[level >= 5 ? 4 : level];
-        _text.text = level + "´Ü°è";
+        _text.text = "Lv."+level;
     }
     private void FixedUpdate()
     {
@@ -25,5 +25,11 @@ public class VillageContent : MonoBehaviour
             Resource.Instance.jewel--;
             Resource.Instance.VillageLevel[this.gameObject.name]++;
         }
+        SaveVillage();
+    }
+    public void SaveVillage()
+    {
+        PlayerPrefs.SetInt("jewel", Resource.Instance.jewel);
+        PlayerPrefs.SetInt(this.gameObject.name, level);
     }
 }

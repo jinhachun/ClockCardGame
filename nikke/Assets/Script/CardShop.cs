@@ -19,16 +19,17 @@ public class CardShop : MonoBehaviour
             if (card == null) return 0;
             switch (card.tier)
             {
-                case (0): return BuyPrice;
-                case (1): return BuyPrice*2;
-                case (2): return BuyPrice*7;
-                case (3): return BuyPrice*20;
-                case (4): return BuyPrice*60;
+                case (0): return BuyPrice * DiscountRate/100;
+                case (1): return BuyPrice*2 * DiscountRate / 100;
+                case (2): return BuyPrice*7 * DiscountRate / 100;
+                case (3): return BuyPrice*20 * DiscountRate / 100;
+                case (4): return BuyPrice*60 * DiscountRate / 100;
 
                 default:  return 0;
             }
         }
     }
+    public int DiscountRate => 100 - Resource.Instance.VillageLevel["House"]*2;
     [SerializeField] public Card card;
     public Card card_evol;
     public Card card_evol2;
@@ -129,10 +130,6 @@ public class CardShop : MonoBehaviour
         while (card.Str.evol.Count > 1 && random == tmp)
             random = Random.Range(0, card.Str.evol.Count);
         card_evol2.Set(CardDatabase.Instance.card(card.Str.evol[random]));
-        if (2*Resource.Instance.VillageLevel["House"] > Random.Range(0, 101))
-        {
-            evolve(CardDatabase.Instance.card(card.Str.evol[random]));
-        }
 
     }
     private void evolveUI(int n)

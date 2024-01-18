@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-
+using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
@@ -22,10 +22,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Card _cardPrefab;
 
     List<GameObject> MenuList;
+    List<GameObject> ButtonList;
     [SerializeField] GameObject _Main;
     [SerializeField] GameObject _Shop;
     [SerializeField] GameObject _Village;
     [SerializeField] GameObject _Support;
+    [SerializeField] GameObject _MainButton;
+    [SerializeField] GameObject _ShopButton;
+    [SerializeField] GameObject _VillageButton;
+    [SerializeField] GameObject _SupportButton;
 
     private static MainMenu instance;
     public static MainMenu Instance => instance;
@@ -40,6 +45,11 @@ public class MainMenu : MonoBehaviour
         MenuList.Add(_Shop);
         MenuList.Add(_Village);
         MenuList.Add(_Support);
+        ButtonList = new List<GameObject>();
+        ButtonList.Add(_MainButton);
+        ButtonList.Add(_ShopButton);
+        ButtonList.Add(_VillageButton);
+        ButtonList.Add(_SupportButton);
         TextUpdate();
     }
     public void TextUpdate()
@@ -91,8 +101,14 @@ public class MainMenu : MonoBehaviour
     {
         for(int i = 1; i <= MenuList.Count; i++)
         {
-            if (i == n) MenuList[i - 1].SetActive(true);
-            else MenuList[i - 1].SetActive(false);
+            if (i == n) { 
+                MenuList[i - 1].SetActive(true);
+                ButtonList[i - 1].GetComponent<Image>().color = new Color32(185, 193, 233,255);
+            }
+            else { 
+                MenuList[i - 1].SetActive(false);
+                ButtonList[i - 1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            }
         }
     }
 }
