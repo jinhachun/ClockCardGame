@@ -8,7 +8,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] private SpriteRenderer _visual;
     [SerializeField] private SpriteRenderer _cardBody;
-    [SerializeField] private SpriteRenderer _img;
+    [SerializeField] protected SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _species;
     [SerializeField] private SpriteRenderer _type;
     [SerializeField] private SpriteRenderer _outLine;
@@ -21,9 +21,9 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _cardBack;
 
 
-    [SerializeField] private string Exhaust;
-    [SerializeField] private string Ethereal;
-    [SerializeField] private string Fixed;
+    private string Exhaust => Resource.Instance.Kor?"¼Ò¸ê":"Exhaust";
+    private string Ethereal => Resource.Instance.Kor ? "ÈÖ¹ß¼º" : "Ethereal";
+    private string Fixed => Resource.Instance.Kor ? "°íÁ¤" : "Fixed";
     Collider2D collider => this.gameObject.GetComponent<BoxCollider2D>();
     public CardStruct Str;
     public SPECIES Species { get; private set; }
@@ -94,7 +94,7 @@ public class Card : MonoBehaviour
 public void Set(CardStruct str)
     {
         this.Str = str;
-        this._name.text = str._name;
+        this._name.text = DataManager.CardName(str.NUM,Resource.Instance.Kor,str._Token);
         this.name = str._name;
 
         string[] RomanNumeral = {"0","I","II","III","IV","V"};
@@ -114,7 +114,7 @@ public void Set(CardStruct str)
 
         StatChange("Attack", this.Stat.attack);
         StatChange("Defence", this.Stat.defence);
-        this._text.text = str._text;
+        this._text.text = DataManager.CardInfo(str.NUM, Resource.Instance.Kor, str._Token);
 
         this.isEthereal = str.isEthereal;
         this.isExhaust = str.isExhaust;

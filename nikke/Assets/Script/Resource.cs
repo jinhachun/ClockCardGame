@@ -8,6 +8,7 @@ public class Resource : MonoBehaviour
     private static Resource instance;
     public static Resource Instance => instance;
     [SerializeField] Card _cardPrefab;
+    [SerializeField] BonusRule _rulePrefab;
     public int startDeckTier;
     public void Awake()
     {
@@ -26,9 +27,40 @@ public class Resource : MonoBehaviour
         Destroy(this.gameObject);
 
     }
+    [ContextMenu("레벨설정")]
+    public void setLEVEL()
+    {
+        int tmpLv = LEVEL;
+        int loopCnt = 1000;
+        while (tmpLv > 0 && loopCnt>0)
+        {
+            int randomIndex = Random.Range(0, CardDatabase.Instance.ruleDatabase.Count);
+            RuleStruct bonusRule = CardDatabase.Instance.ruleDatabase[randomIndex];
+            if (Rules.ContainsKey(DataManager.RuleName(bonusRule._Number,Kor)))
+            {
+                Rules[DataManager.RuleName(bonusRule._Number, Kor)] += bonusRule._level;
+            }
+            else
+            {
+                Rules.Add(DataManager.RuleName(bonusRule._Number, Kor), bonusRule._level);
+            }
+            tmpLv -= bonusRule._level;
+            var card = Instantiate(_rulePrefab, new Vector2(0, 0), Quaternion.identity);
+            card.Set(bonusRule);
+            loopCnt--;
+        }
+        
+        foreach(KeyValuePair<string,int> keyValuePair in Rules)
+        {
+            Debug.Log(keyValuePair);
+        }
+    }
     public void Start()
     {
         time = 0f;
+        Kor = true;
+        LEVEL = 0;
+        Rules = new Dictionary<string, int>();
         VillageLevel = new Dictionary<string, int>();
         VillageLevel.Add("Farm", PlayerPrefs.GetInt("Farm",0));
         VillageLevel.Add("House", PlayerPrefs.GetInt("House", 0));
@@ -41,6 +73,18 @@ public class Resource : MonoBehaviour
         SupportPrice.Add("Add", 0);
         SupportPrice.Add("Delete", 0);
         SupportPrice.Add("Heal", 0);
+
+        float Rule_no3_1 = Rules.ContainsKey(DataManager.RuleName(3, Kor)) ? -0.3f : 0;
+        float Rule_no3_2 = Rules.ContainsKey(DataManager.RuleName(3, Kor)) ? 0.1f : 0;
+
+        combiRate.Add(1f + Rule_no3_1);
+        combiRate.Add(1.2f + Rule_no3_1);
+        combiRate.Add(1.5f + Rule_no3_1);
+        combiRate.Add(2f + Rule_no3_1);
+        combiRate.Add(2.5f + Rule_no3_2);
+        combiRate.Add(3f + Rule_no3_2);
+        combiRate.Add(3.5f + Rule_no3_2);
+
         Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
         money = 100; jewel = PlayerPrefs.GetInt("jewel", 3);
         shopcard = CardDatabase.Instance.card("동글이");
@@ -58,12 +102,14 @@ public class Resource : MonoBehaviour
         }
     }
     public List<CardStruct> Deck;
-    public List<BonusRule> Rules;
     public int Hp;
+    public bool Kor;
     public int tmpMhp;
     public int mHp => tmpMhp * (100 + 5 * VillageLevel["Bath"]) / 100;
     public int Area; public int Stage;
     public int money;
+    public int LEVEL;
+    public Dictionary<string,int> Rules;
     public Dictionary<string,int> VillageLevel;
     public Dictionary<string, int> SupportPrice;
     public int jewel;
@@ -129,6 +175,21 @@ public class Resource : MonoBehaviour
                 return;
             }
     }
+    public void Deck_Remove(int num)
+    {
+        foreach (CardStruct tmp in Deck)
+            if (tmp.NUM.Equals(num))
+            {
+                Deck.Remove(tmp);
+                var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
+                card.transform.localScale = new Vector2(2f, 2f);
+                card.Set(tmp);
+                card.setLayer(0, 500);
+                card.TouchableChange(false);
+                card.transform.DOScale(0, 1f).SetEase(Ease.InCubic).OnComplete(() => { Destroy(card.gameObject); });
+                return;
+            }
+    }
     public void Deck_Add(CardStruct cardStruct)
     {
         Deck.Add(cardStruct);
@@ -141,13 +202,25 @@ public class Resource : MonoBehaviour
         card.transform.DOScale(2, 1f).SetEase(Ease.OutCubic).OnComplete(() => { Destroy(card.gameObject); });
 
     }
+    public void Deck_Add(int num)
+    {
+        CardStruct tmp = CardDatabase.Instance.cardDatabase[num];
+        Deck_Add(tmp);
+
+    }
     public void Deck_Add(string name)
     {
         CardStruct tmp = CardDatabase.Instance.card(name);
         Deck_Add(tmp);
 
     }
-    public void Deck_Add(string name,bool token)
+    public void Deck_Add(int num, bool token)
+    {
+        CardStruct tmp = CardDatabase.Instance.cardDatabase_token[num];
+        Deck_Add(tmp);
+
+    }
+    public void Deck_Add(string name, bool token)
     {
         CardStruct tmp = CardDatabase.Instance.card_token(name);
         Deck_Add(tmp);

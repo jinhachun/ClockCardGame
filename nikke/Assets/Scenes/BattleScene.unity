@@ -1072,11 +1072,11 @@ MonoBehaviour:
     _enemyPatterns:
     - _enemyPattern: 0
       _CardName: 
-      _Value: 36
+      _Value: 45
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 27
+      _Value: 36
       _Bool: 0
     - _enemyPattern: 4
       _CardName: 
@@ -1084,11 +1084,11 @@ MonoBehaviour:
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 55
+      _Value: 75
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 50
+      _Value: 80
       _Bool: 0
     - _enemyPattern: 4
       _CardName: 
@@ -1104,7 +1104,7 @@ MonoBehaviour:
     _enemyPatterns:
     - _enemyPattern: 0
       _CardName: 
-      _Value: 30
+      _Value: 45
       _Bool: 0
     - _enemyPattern: 5
       _CardName: 
@@ -1116,11 +1116,11 @@ MonoBehaviour:
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 50
+      _Value: 70
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 50
+      _Value: 70
       _Bool: 0
     _statusStruct: "\uD615\uC758 \uB3D9\uC0DD\uC0AC\uB791"
     _statusValue: 0
@@ -1136,11 +1136,11 @@ MonoBehaviour:
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 30
+      _Value: 45
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 50
+      _Value: 60
       _Bool: 0
     - _enemyPattern: 4
       _CardName: 
@@ -1148,7 +1148,7 @@ MonoBehaviour:
       _Bool: 0
     - _enemyPattern: 0
       _CardName: 
-      _Value: 50
+      _Value: 70
       _Bool: 0
     _statusStruct: "\uB3D9\uC0DD\uC758 \uD615\uC0AC\uB791"
     _statusValue: 0
@@ -1160,15 +1160,15 @@ MonoBehaviour:
     _enemyPatterns:
     - _enemyPattern: 0
       _CardName: 
-      _Value: 10
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 15
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
       _Value: 20
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 25
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 30
       _Bool: 0
     - _enemyPattern: 6
       _CardName: 

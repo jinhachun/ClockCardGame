@@ -6,12 +6,17 @@ public class BonusRule : Card
 {
     public void Set(RuleStruct str)
     {
-        this._name.text = str._name;
-        this.name = str._name;
+        string tmpName = DataManager.RuleName(str._Number, Resource.Instance.Kor);
+        string tmpInfo = DataManager.RuleInfo(str._Number, Resource.Instance.Kor);
+        this._name.text = tmpName;
+        this.name = tmpName;
+
+
+        this._img.sprite = str._img;
 
         this._tier.text = str._level.ToString();
         this.tier = str._level;
 
-        this._text.text = str._text;
+        this._text.text = tmpInfo;
     }
 }

@@ -1,0 +1,540 @@
+{
+  "Rule": [
+    {
+      "RuleNum": "1",
+      "RuleName_KOR": "맹공",
+      "RuleName_ENG": "onslaught",
+      "RuleInfo_KOR": "적 패턴의 대미지가 15% 증가합니다.",
+      "RuleInfo_ENG": "Increases damage of enemy patterns by 15%."
+    },
+    {
+      "RuleNum": "2",
+      "RuleName_KOR": "튼튼",
+      "RuleName_ENG": "hardskin",
+      "RuleInfo_KOR": "적 체력이 10% 증가합니다.",
+      "RuleInfo_ENG": "Increases enemy hp by 10%."
+    },
+    {
+      "RuleNum": "3",
+      "RuleName_KOR": "조합왕",
+      "RuleName_ENG": "CombiKing",
+      "RuleInfo_KOR": "트리플 이하의 조합의 배율이 0.3 감소합니다. 풀하우스 이상의 조합의 배율이 0.1 증가합니다.",
+      "RuleInfo_ENG": "Decreases the rate of a combination of triple or less by 0.2. Increases the rate of a combination of full houses or more by 0.1."
+    },
+    {
+      "RuleNum": "4",
+      "RuleName_KOR": "허약함",
+      "RuleName_ENG": "frailty",
+      "RuleInfo_KOR": "최대 체력이 20 감소합니다.",
+      "RuleInfo_ENG": "Decrease max Hp by 20."
+    },
+    {
+      "RuleNum": "5",
+      "RuleName_KOR": "눈치없는 손님",
+      "RuleName_ENG": "tactless guest",
+      "RuleInfo_KOR": "내 덱에 눅눅한 동글이가 들어있습니다.",
+      "RuleInfo_ENG": "Add Soggy Dongle to my Deck."
+    }
+  ],
+  "Card": [
+    {
+      "Number": "0",
+      "CardName_KOR": "동글이",
+      "CardInfo_KOR": "동글동글합니다.",
+      "CardName_ENG": "Dongle",
+      "CardInfo_ENG": "Dongle means Round in Korean."
+    },
+    {
+      "Number": "1",
+      "CardName_KOR": "신병동글이",
+      "CardInfo_KOR": "갓 입대한 동글입니다.",
+      "CardName_ENG": "Recruit Dongle",
+      "CardInfo_ENG": "A dongle who just joined the army."
+    },
+    {
+      "Number": "2",
+      "CardName_KOR": "좀비",
+      "CardInfo_KOR": "체력을 2 회복합니다.",
+      "CardName_ENG": "Zombie",
+      "CardInfo_ENG": "Restore 2 Hp."
+    },
+    {
+      "Number": "3",
+      "CardName_KOR": "먹깨비",
+      "CardInfo_KOR": "뭐든지 먹어치우는 괴물입니다.",
+      "CardName_ENG": "Gremlin",
+      "CardInfo_ENG": "It's a monster that eats everything."
+    },
+    {
+      "Number": "4",
+      "CardName_KOR": "깡통몬",
+      "CardInfo_KOR": "이 카드를 뽑을때마다 공격력이  -2~2 만큼 무작위로 변화합니다.",
+      "CardName_ENG": "CanMon",
+      "CardInfo_ENG": "Each time you draw this card, its attack changes randomly by -2 to 2."
+    },
+    {
+      "Number": "5",
+      "CardName_KOR": "기사돌이",
+      "CardInfo_KOR": "기사작위를 받은 동글이입니다.",
+      "CardName_ENG": "Knight Dongle",
+      "CardInfo_ENG": "A knighthooded dongle."
+    },
+    {
+      "Number": "6",
+      "CardName_KOR": "크루세돌이",
+      "CardInfo_KOR": "성전에 기꺼이 참여하는 명예로운 동글이입니다.",
+      "CardName_ENG": "Crusade Dongle",
+      "CardInfo_ENG": "Honorable dongle willing to participate in the temple."
+    },
+    {
+      "Number": "7",
+      "CardName_KOR": "KI동글NG",
+      "CardInfo_KOR": "유아독존 동글이의 왕입니다",
+      "CardName_ENG": "KI dongle NG",
+      "CardInfo_ENG": "The king of the only dongle"
+    },
+    {
+      "Number": "8",
+      "CardName_KOR": "보두앵돌이",
+      "CardInfo_KOR": "공격할때마다 내 덱의 카드들의 공격력이 1 증가합니다.",
+      "CardName_ENG": "BauDongle",
+      "CardInfo_ENG": "Each attack increases my Deck's cards' attack by 1."
+    },
+    {
+      "Number": "9",
+      "CardName_KOR": "흑기사돌이",
+      "CardInfo_KOR": "강한 힘을 추구하다 사악해진 기사돌이입니다.",
+      "CardName_ENG": "BlackKnight Dongle",
+      "CardInfo_ENG": "a knight dongle who became evil while pursuing strong power."
+    },
+    {
+      "Number": "10",
+      "CardName_KOR": "부패한기사",
+      "CardInfo_KOR": "너무 사악해져 동글이의 형태를 유지하지 못하고 괴물이 되었습니다.",
+      "CardName_ENG": "RottenKnight Dongle",
+      "CardInfo_ENG": "It became so evil that it couldn't keep its shape and became a monster."
+    },
+    {
+      "Number": "11",
+      "CardName_KOR": "왕좀비",
+      "CardInfo_KOR": "체력을 4 회복합니다",
+      "CardName_ENG": "Big Zombie",
+      "CardInfo_ENG": "Restore 4 Hp."
+    },
+    {
+      "Number": "12",
+      "CardName_KOR": "왕왕좀비",
+      "CardInfo_KOR": "체력을 4 회복합니다",
+      "CardName_ENG": "Bigbig Zombie",
+      "CardInfo_ENG": "Restore 4 Hp."
+    },
+    {
+      "Number": "13",
+      "CardName_KOR": "사신",
+      "CardInfo_KOR": "기본배율이 1.2가 됩니다.",
+      "CardName_ENG": "Reaper",
+      "CardInfo_ENG": "The default rate becomes 1.2."
+    },
+    {
+      "Number": "14",
+      "CardName_KOR": "마계왕",
+      "CardInfo_KOR": "기본배율이 1.5가 됩니다.",
+      "CardName_ENG": "Hades",
+      "CardInfo_ENG": "The default rate becomes 1.5."
+    },
+    {
+      "Number": "15",
+      "CardName_KOR": "예니체돌이",
+      "CardInfo_KOR": "공격할때, 이 카드의 공격력이 1 증가합니다.",
+      "CardName_ENG": "JannissaDongle",
+      "CardInfo_ENG": "When attacking, this card's attack is increased by 1."
+    },
+    {
+      "Number": "16",
+      "CardName_KOR": "술탄돌이",
+      "CardInfo_KOR": "공격할때, 이 카드의 공격력이 2 증가합니다.",
+      "CardName_ENG": "SultanDongle",
+      "CardInfo_ENG": "When attacking, this card's attack is increased by 2."
+    },
+    {
+      "Number": "17",
+      "CardName_KOR": "살라딘돌이",
+      "CardInfo_KOR": "공격할때, 이 카드의 공격력이 2배가 됩니다.",
+      "CardName_ENG": "SalaDongle",
+      "CardInfo_ENG": "When attacking, this card doubles its attack."
+    },
+    {
+      "Number": "18",
+      "CardName_KOR": "리자드",
+      "CardInfo_KOR": "체력을 2 잃습니다.",
+      "CardName_ENG": "Lizard",
+      "CardInfo_ENG": "Lose 2 Hp."
+    },
+    {
+      "Number": "19",
+      "CardName_KOR": "티라노",
+      "CardInfo_KOR": "체력을 3 잃습니다, 내 체력이 절반 이하면 적 전체에게 피해를 15 줍니다.",
+      "CardName_ENG": "T-Rex",
+      "CardInfo_ENG": "Lose 3 Hp, Less than half of HP does 15 damage to the entire enemy."
+    },
+    {
+      "Number": "20",
+      "CardName_KOR": "블랙티라노",
+      "CardInfo_KOR": "체력을 5 잃습니다. 내 체력이 절반 이하먼 적 전체에게 피해를 40 줍니다.",
+      "CardName_ENG": "Black T-Rex",
+      "CardInfo_ENG": "Lose 5 Hp, Less than half of HP does 40 damage to the entire enemy."
+    },
+    {
+      "Number": "21",
+      "CardName_KOR": "버섯깨비",
+      "CardInfo_KOR": "공격할 때, 다음 턴에 리롤횟수를 1개 얻습니다.",
+      "CardName_ENG": "Shroomblin",
+      "CardInfo_ENG": "When attacking, you get 1 reroll count."
+    },
+    {
+      "Number": "22",
+      "CardName_KOR": "쿼드버섯깨비",
+      "CardInfo_KOR": "공격할 때, 다음 턴에 리롤횟수를 1개 얻습니다.",
+      "CardName_ENG": "QuadShroomblin",
+      "CardInfo_ENG": "When attacking, you get 1 reroll count."
+    },
+    {
+      "Number": "23",
+      "CardName_KOR": "버섯순이",
+      "CardInfo_KOR": "이 카드를 뽑을 때마다, 리롤횟수를 1개 얻습니다.",
+      "CardName_ENG": "Shroovely",
+      "CardInfo_ENG": "Each time you draw this card, you get one reroll count."
+    },
+    {
+      "Number": "24",
+      "CardName_KOR": "먹보괴수",
+      "CardInfo_KOR": "공격하기 전, 내 방어력만큼 적에게 대미지를 줍니다.",
+      "CardName_ENG": "FatMonster",
+      "CardInfo_ENG": "Before attack, damage the enemy as much as defense."
+    },
+    {
+      "Number": "25",
+      "CardName_KOR": "황금몬",
+      "CardInfo_KOR": "공격한 후, 묘지와 덱에 있는 황금몬의 공격력을 +1 합니다.",
+      "CardName_ENG": "GoldMon",
+      "CardInfo_ENG": "After attacking, +1 attack from the GoldMon in the Grave and Deck."
+    },
+    {
+      "Number": "26",
+      "CardName_KOR": "돈벼락동글",
+      "CardInfo_KOR": "공격한 후, 묘지에 황금몬 한장을 추가합니다.",
+      "CardName_ENG": "Parvenu Dongle",
+      "CardInfo_ENG": "After the attack, add a GoldMon to the Grave."
+    },
+    {
+      "Number": "27",
+      "CardName_KOR": "마이동스왕",
+      "CardInfo_KOR": "공격한 뒤, 내 덱에 황금몬을 2개 추가합니다.",
+      "CardName_ENG": "King Midongle",
+      "CardInfo_ENG": "After the attack, add 2 GoldMon to the Deck."
+    },
+    {
+      "Number": "28",
+      "CardName_KOR": "깡통봇",
+      "CardInfo_KOR": "이 카드를 뽑을때마다 공격력이  -2~2 만큼 무작위로 변화합니다.",
+      "CardName_ENG": "CanBot",
+      "CardInfo_ENG": "Each time you draw this card, its attack changes randomly by -2 to 2."
+    },
+    {
+      "Number": "29",
+      "CardName_KOR": "펀치봇",
+      "CardInfo_KOR": "이 카드를 뽑을때마다 공격력이  -3~3 만큼 무작위로 변화합니다.",
+      "CardName_ENG": "PunchBot",
+      "CardInfo_ENG": "Each time you draw this card, its attack changes randomly by -3 to 3."
+    },
+    {
+      "Number": "30",
+      "CardName_KOR": "삼두라",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 2배가 됩니다.",
+      "CardName_ENG": "Tridra",
+      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is doubled."
+    },
+    {
+      "Number": "31",
+      "CardName_KOR": "케르베로삼",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 2배가 됩니다.",
+      "CardName_ENG": "Keruberotri",
+      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is doubled."
+    },
+    {
+      "Number": "32",
+      "CardName_KOR": "킹삼도라",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 3배가 됩니다.",
+      "CardName_ENG": "Kingtridora",
+      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is tripled."
+    },
+    {
+      "Number": "33",
+      "CardName_KOR": "건당글이",
+      "CardInfo_KOR": "이 카드를 뽑을때마다 공격력이  0~5 만큼 무작위로 변화합니다.",
+      "CardName_ENG": "Gundongle",
+      "CardInfo_ENG": "Each time you draw this card, its attack changes randomly by 0 to 5."
+    },
+    {
+      "Number": "34",
+      "CardName_KOR": "초대형좀비",
+      "CardInfo_KOR": "체력을 4 회복합니다",
+      "CardName_ENG": "Gigantic Zombie",
+      "CardInfo_ENG": "Restore 4 Hp."
+    },
+    {
+      "Number": "35",
+      "CardName_KOR": "골목대장동글",
+      "CardInfo_KOR": "공격 시, 내 묘지, 덱에 있는 동글이에게 +1/+1을 부여합니다.",
+      "CardName_ENG": "KidLeader Dongle",
+      "CardInfo_ENG": "In attack, give +1/+1 to dongle in my Grave and Deck."
+    },
+    {
+      "Number": "36",
+      "CardName_KOR": "민병대동글",
+      "CardInfo_KOR": "공격 시, 내 묘지, 덱에 있는 동글이에게 +2/+2을 부여합니다.",
+      "CardName_ENG": "Militia Dongle",
+      "CardInfo_ENG": "In attack, give +2/+2 to dongle in my Grave and Deck."
+    },
+    {
+      "Number": "37",
+      "CardName_KOR": "동글의사당",
+      "CardInfo_KOR": "공격 시, 내 묘지, 덱에 있는 동글이에게 +5/+5을 부여합니다.",
+      "CardName_ENG": "the CapiDongle",
+      "CardInfo_ENG": "In attack, give +5/+5 to dongle in my Grave and Deck."
+    },
+    {
+      "Number": "38",
+      "CardName_KOR": "방패돌이",
+      "CardInfo_KOR": "나무방패를 든 동글이입니다.",
+      "CardName_ENG": "Shield Dongle",
+      "CardInfo_ENG": "A dongle with a wooden shield."
+    },
+    {
+      "Number": "39",
+      "CardName_KOR": "경찰돌이",
+      "CardInfo_KOR": "진압방패를 든 동글이입니다.",
+      "CardName_ENG": "RiotPolice Dongle",
+      "CardInfo_ENG": "A dongle with a riot shield."
+    },
+    {
+      "Number": "40",
+      "CardName_KOR": "캡틴동글이",
+      "CardInfo_KOR": "슈퍼히어로가 된 동글이입니다.",
+      "CardName_ENG": "Captain Dongle",
+      "CardInfo_ENG": "A dongle that became a superhero."
+    },
+    {
+      "Number": "41",
+      "CardName_KOR": "리빙아머",
+      "CardInfo_KOR": "이 카드를 뽑으면, 이 카드의 공격력만큼 무작위 적에게 피해를 줍니다.",
+      "CardName_ENG": "Living Armor",
+      "CardInfo_ENG": "If you draw this card, it damages random enemy as much as the attack of this card."
+    },
+    {
+      "Number": "42",
+      "CardName_KOR": "듀라한",
+      "CardInfo_KOR": "이 카드를 뽑으면, 이 카드의 공격력만큼 무작위 적에게 피해를 2번 줍니다.",
+      "CardName_ENG": "Durahan",
+      "CardInfo_ENG": "If you draw this card, it damages random enemy as much as the attack of this card twice."
+    },
+    {
+      "Number": "43",
+      "CardName_KOR": "백작동글이",
+      "CardInfo_KOR": "이 카드를 뽑으면, 이 카드의 공격력만큼 무작위 적에게 피해를 4번 줍니다.",
+      "CardName_ENG": "Count Dongle",
+      "CardInfo_ENG": "If you draw this card, it damages random enemy as much as the attack of this card four times."
+    },
+    {
+      "Number": "44",
+      "CardName_KOR": "동챙이",
+      "CardInfo_KOR": "공격할 때, 내 손의 무작위 카드 한 장에게 +1/+1을 부여합니다. 두번 발동합니다.",
+      "CardName_ENG": "Donglepole",
+      "CardInfo_ENG": "When attacking, give +1/+1 to one random card in my hand twice."
+    },
+    {
+      "Number": "45",
+      "CardName_KOR": "동구리",
+      "CardInfo_KOR": "공격할 때, 내 손의 무작위 카드 한 장에게 +1/+1을 부여합니다. 두번 발동합니다.",
+      "CardName_ENG": "Dongrog",
+      "CardInfo_ENG": "When attacking, give +1/+1 to one random card in my hand twice."
+    },
+    {
+      "Number": "46",
+      "CardName_KOR": "수륙양용동글",
+      "CardInfo_KOR": "공격할 때, 내 손의 무작위 카드에게 이 카드를 스탯을 부여합니다. 두 번 발동합니다.",
+      "CardName_ENG": "Amphibian Dongle",
+      "CardInfo_ENG": "When attacking, give this card's stat to one random card in my hand twice."
+    },
+    {
+      "Number": "47",
+      "CardName_KOR": "동글네시",
+      "CardInfo_KOR": "공격할 때, 내 손의 모든 카드에게 +1/+1을 부여합니다.",
+      "CardName_ENG": "Ness Dongle",
+      "CardInfo_ENG": "When attacking, give +1/+1 to all cards in my hand."
+    },
+    {
+      "Number": "48",
+      "CardName_KOR": "샴동글이",
+      "CardInfo_KOR": "내 묘지에 샴동글이를 추가합니다.",
+      "CardName_ENG": "Twingle",
+      "CardInfo_ENG": "After the attack, add a Twingle to the Grave."
+    },
+    {
+      "Number": "49",
+      "CardName_KOR": "삼동글이",
+      "CardInfo_KOR": "내 묘지에 삼동글이를 2장 추가합니다.",
+      "CardName_ENG": "Tridongle",
+      "CardInfo_ENG": "After the attack, add two Tridongle to the Grave."
+    },
+    {
+      "Number": "50",
+      "CardName_KOR": "동글키메라",
+      "CardInfo_KOR": "내 묘지에 삼동글이를 2장 추가합니다. 이 카드의 공격력은 이 카드를 뽑을 때의 내 묘지에 있는 카드 수입니다.",
+      "CardName_ENG": "Chimera Dongle",
+      "CardInfo_ENG": "After the attack, add two Tridongle to the Grave. Attack of this card is the number of cards in Grave when drawing."
+    },
+    {
+      "Number": "51",
+      "CardName_KOR": "봄글이",
+      "CardInfo_KOR": "내 덱에 피해를 30 주는 폭탄을 섞어넣습니다.",
+      "CardName_ENG": "Bomgle",
+      "CardInfo_ENG": "Add 30 damage bomb to my deck."
+    },
+    {
+      "Number": "52",
+      "CardName_KOR": "동글너마이트",
+      "CardInfo_KOR": "내 덱에 피해를 60 주는 폭탄을 섞어넣습니다.",
+      "CardName_ENG": "Donglenomite",
+      "CardInfo_ENG": "Add 60 damage bomb to my deck."
+    },
+    {
+      "Number": "53",
+      "CardName_KOR": "핵동글",
+      "CardInfo_KOR": "내 덱에 피해를 120 주는 폭탄을 섞어넣습니다.",
+      "CardName_ENG": "Donuclear",
+      "CardInfo_ENG": "Add 120 damage bomb to my deck."
+    },
+    {
+      "Number": "54",
+      "CardName_KOR": "유령",
+      "CardInfo_KOR": "내 묘지에 있는 무작위 언데드 종족 카드를 덱에 넣습니다.",
+      "CardName_ENG": "Ghost",
+      "CardInfo_ENG": "Put the random undead card in my Grave into the Deck."
+    },
+    {
+      "Number": "55",
+      "CardName_KOR": "폴터가이스트",
+      "CardInfo_KOR": "내 묘지에 있는 무작위 언데드 종족 카드를 덱에 넣습니다.",
+      "CardName_ENG": "Poltergeist",
+      "CardInfo_ENG": "Put the random undead card in my Grave into the Deck."
+    },
+    {
+      "Number": "56",
+      "CardName_KOR": "지니",
+      "CardInfo_KOR": "내 묘지에 있는 모든 언데드 종족 카드를 덱에 넣습니다.",
+      "CardName_ENG": "Genie",
+      "CardInfo_ENG": "Put all undead card in my Grave into the Deck."
+    },
+    {
+      "Number": "57",
+      "CardName_KOR": "슬롯머신",
+      "CardInfo_KOR": "내 덱에 무작위 카드를 추가합니다.",
+      "CardName_ENG": "SlotMachine",
+      "CardInfo_ENG": "Add a random card to my Deck."
+    },
+    {
+      "Number": "58",
+      "CardName_KOR": "슬롯머신+",
+      "CardInfo_KOR": "내 덱에 3티어 이상의 무작위 카드를 추가합니다.",
+      "CardName_ENG": "SlotMachine+",
+      "CardInfo_ENG": "Add at least 3 tier random card to my Deck."
+    },
+    {
+      "Number": "59",
+      "CardName_KOR": "슬롯머신++",
+      "CardInfo_KOR": "내 덱에 5티어 무작위 카드를 추가합니다.",
+      "CardName_ENG": "SlotMachine+",
+      "CardInfo_ENG": "Add a 5 tier random card to my Deck."
+    }
+  ],
+  "TokenCard": [
+    {
+      "Number": "0",
+      "CardName_KOR": "고양이털",
+      "CardInfo_KOR": "복실복실합니다...",
+      "CardName_ENG": "Cat Fur",
+      "CardInfo_ENG": "It's Furry..."
+    },
+    {
+      "Number": "1",
+      "CardName_KOR": "응가",
+      "CardInfo_KOR": "냄새가 구수합니다.",
+      "CardName_ENG": "Poo",
+      "CardInfo_ENG": "It stinks.."
+    },
+    {
+      "Number": "2",
+      "CardName_KOR": "눅눅한동글이",
+      "CardInfo_KOR": "맘대로 덱에 들어온 동글이입니다.",
+      "CardName_ENG": "Soggy Dongle",
+      "CardInfo_ENG": "It's a dongle that came into the deck without permission."
+    },
+    {
+      "Number": "3",
+      "CardName_KOR": "폭탄",
+      "CardInfo_KOR": "무작위 적에게 피해를 30 줍니다.",
+      "CardName_ENG": "Bomb",
+      "CardInfo_ENG": "Deals 30 damage to random enemy."
+    },
+    {
+      "Number": "4",
+      "CardName_KOR": "다이너마이트",
+      "CardInfo_KOR": "무작위 적에게 피해를 60 줍니다.",
+      "CardName_ENG": "Dynamite",
+      "CardInfo_ENG": "Deals 60 damage to random enemy."
+    },
+    {
+      "Number": "5",
+      "CardName_KOR": "핵폭탄",
+      "CardInfo_KOR": "무작위 적에게 피해를 120 줍니다.",
+      "CardName_ENG": "Nuclear Bomb",
+      "CardInfo_ENG": "Deals 120 damage to random enemy."
+    },
+    {
+      "Number": "6",
+      "CardName_KOR": "X",
+      "CardInfo_KOR": "더 이상 카드가 없습니다!",
+      "CardName_ENG": "X",
+      "CardInfo_ENG": "Not enough Card!"
+    },
+    {
+      "Number": "7",
+      "CardName_KOR": "안동글이",
+      "CardInfo_KOR": "이렇게 네모난 녀석은 처음입니다.",
+      "CardName_ENG": "dAngle",
+      "CardInfo_ENG": "I've never seen such a angled dude before."
+    },
+    {
+      "Number": "8",
+      "CardName_KOR": "상처",
+      "CardInfo_KOR": "상처없이 끝나는 전투는 없습니다.",
+      "CardName_ENG": "Wound",
+      "CardInfo_ENG": "There is no battle that ends without Wound."
+    },
+    {
+      "Number": "9",
+      "CardName_KOR": "저주",
+      "CardInfo_KOR": "내 패에 있는 무작위 카드 한 장에게 -4/-4를 부여합니다.",
+      "CardName_ENG": "Curse",
+      "CardInfo_ENG": "Give -4/-4 to a random card in my hand ."
+    },
+    {
+      "Number": "10",
+      "CardName_KOR": "키스마크",
+      "CardInfo_KOR": "오히려 좋을 지도 모릅니다..?",
+      "CardName_ENG": "Kiss Mark",
+      "CardInfo_ENG": "I feel better for some reason..."
+    }
+  ]
+}

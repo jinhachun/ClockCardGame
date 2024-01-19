@@ -169,10 +169,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollViewCardPrefab: {fileID: 1488823311}
   __DeckShowText: {fileID: 920148648}
-  _DeckShowText_showdeck: "\uB371 \uBCF4\uAE30"
-  _DeckShowText_not_showdeck: "\uB371 \uC548\uBCF4\uAE30"
   __BattleButtonText: {fileID: 1597744329}
-  __BattleButtonText_Stage: "\uC804\uD22C\uC2DC\uC791"
+  _Main_Info_Text1: {fileID: 675904015}
+  _Main_Info_Text2: {fileID: 5366910}
+  _Main_Info_Level: {fileID: 1385207052}
+  _ButtonText1: {fileID: 1896466080}
+  _ButtonText2: {fileID: 576847047}
+  _ButtonText3: {fileID: 2019990797}
+  _ButtonText4: {fileID: 1911572203}
   _MoneyText: {fileID: 1503988151}
   _cardPrefab: {fileID: 2090622068924517481, guid: 1a7f8184dbe79584698061c3aceb5133, type: 3}
   _Main: {fileID: 2013392934}
@@ -183,6 +187,141 @@ MonoBehaviour:
   _ShopButton: {fileID: 339115046}
   _VillageButton: {fileID: 1856219871}
   _SupportButton: {fileID: 1867195738}
+--- !u!1 &5366908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5366909}
+  - component: {fileID: 5366911}
+  - component: {fileID: 5366910}
+  m_Layer: 5
+  m_Name: "InfoText_\uCD94\uAC00\uADDC\uCE59"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5366909
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366908}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 77131811}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -21.675, y: -55}
+  m_SizeDelta: {x: 365.18, y: 262.86}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5366910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\uCD94\uAC00 \uADDC\uCE59 : \n"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 35
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 35
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &5366911
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366908}
+  m_CullTransparentMesh: 1
 --- !u!1 &11205523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1224,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 675904014}
+  - {fileID: 5366909}
+  - {fileID: 1385207051}
   m_Father: {fileID: 2013392935}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3964,10 +4105,9 @@ MonoBehaviour:
   _attText: {fileID: 1931720850}
   _defText: {fileID: 343709149}
   _cardBack: {fileID: 418899852}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
+    _Token: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
@@ -6291,7 +6431,7 @@ GameObject:
   - component: {fileID: 675904016}
   - component: {fileID: 675904015}
   m_Layer: 5
-  m_Name: InfoText
+  m_Name: "InfoText_\uD604\uC7AC\uB09C\uC774\uB3C4"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6337,7 +6477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD604\uC7AC \uB09C\uC774\uB3C4 : \n\n\uCD94\uAC00\uADDC\uCE59 :\n\n"
+  m_text: "\uD604\uC7AC \uB09C\uC774\uB3C4 : \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
   m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
@@ -9028,10 +9168,9 @@ MonoBehaviour:
   _attText: {fileID: 900420281}
   _defText: {fileID: 180407560}
   _cardBack: {fileID: 772494776}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
+    _Token: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
@@ -11142,18 +11281,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182197313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2013392935}
+  m_Father: {fileID: 1662010285}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 381.16, y: 35.12}
-  m_SizeDelta: {x: 762.33, y: 650.32}
+  m_AnchoredPosition: {x: 86.65903, y: 35.12}
+  m_SizeDelta: {x: 1351.3, y: 650.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182197315
 MonoBehaviour:
@@ -12726,6 +12865,144 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2090622068924517480, guid: 1a7f8184dbe79584698061c3aceb5133, type: 3}
   m_PrefabInstance: {fileID: 1327071964}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1385207050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1385207051}
+  - component: {fileID: 1385207053}
+  - component: {fileID: 1385207052}
+  m_Layer: 5
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1385207051
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385207050}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 77131811}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 210.07, y: 149.77}
+  m_SizeDelta: {x: 420.15, y: 64.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1385207052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385207050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '20
+
+
+'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 40
+  m_fontSizeBase: 40
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 35
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 4096
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1385207053
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385207050}
+  m_CullTransparentMesh: 1
 --- !u!1 &1403789808
 GameObject:
   m_ObjectHideFlags: 0
@@ -14693,6 +14970,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656187272}
   m_CullTransparentMesh: 1
+--- !u!1 &1662010284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662010285}
+  m_Layer: 5
+  m_Name: backgroundImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1662010285
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662010284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1182197314}
+  m_Father: {fileID: 2013392935}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 381, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1712591339
 GameObject:
   m_ObjectHideFlags: 0
@@ -15489,24 +15803,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardPrefab: {fileID: 2090622068924517481, guid: 1a7f8184dbe79584698061c3aceb5133, type: 3}
+  _rulePrefab: {fileID: 5192139210987247750, guid: 1e9bb5442a48765429c46ec00fff0af5, type: 3}
   startDeckTier: 2
   Deck: []
-  Rules: []
   Hp: 0
+  Kor: 1
   tmpMhp: 0
   Area: 0
   Stage: 0
   money: 0
+  LEVEL: 0
   jewel: 0
-  combiRate:
-  - 1
-  - 1.2
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  - 4
+  combiRate: []
   shopcard:
+    NUM: 0
+    _Token: 0
     _img: {fileID: 0}
     _species: 0
     _name: 
@@ -15551,7 +15862,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDatabase:
-  - _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 0
+    _Token: 0
+    _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
     _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
@@ -15569,7 +15882,9 @@ MonoBehaviour:
     - "\uBA39\uAE68\uBE44"
     - "\uAE61\uD1B5\uBAAC"
     isRare: 0
-  - _img: {fileID: -1345653317, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 1
+    _Token: 0
+    _img: {fileID: -1345653317, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uC2E0\uBCD1\uB3D9\uAE00\uC774"
     _text: "\uAC13 \uC785\uB300\uD55C \uB3D9\uAE00\uC785\uB2C8\uB2E4."
@@ -15586,7 +15901,9 @@ MonoBehaviour:
     - "\uC608\uB2C8\uCCB4\uB3CC\uC774"
     - "\uBC29\uD328\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: -1461477941, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 2
+    _Token: 0
+    _img: {fileID: -1461477941, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uC880\uBE44"
     _text: "\uCCB4\uB825\uC744 2 \uD68C\uBCF5\uD569\uB2C8\uB2E4."
@@ -15602,7 +15919,9 @@ MonoBehaviour:
     - "\uC655\uC880\uBE44"
     - "\uB9AC\uBE59\uC544\uBA38"
     isRare: 0
-  - _img: {fileID: -602355744, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 3
+    _Token: 0
+    _img: {fileID: -602355744, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBA39\uAE68\uBE44"
     _text: "\uBB50\uB4E0\uC9C0 \uBA39\uC5B4\uCE58\uC6B0\uB294 \uAD34\uBB3C\uC785\uB2C8\uB2E4."
@@ -15619,7 +15938,9 @@ MonoBehaviour:
     - "\uBC84\uC12F\uAE68\uBE44"
     - "\uB3D9\uCC59\uC774"
     isRare: 0
-  - _img: {fileID: 269951699, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 4
+    _Token: 0
+    _img: {fileID: 269951699, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 4
     _name: "\uAE61\uD1B5\uBAAC"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744\uB54C\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC774 
@@ -15637,7 +15958,9 @@ MonoBehaviour:
     - "\uAE61\uD1B5\uBD07"
     - "\uBD04\uAE00\uC774"
     isRare: 0
-  - _img: {fileID: 1702036209, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 5
+    _Token: 0
+    _img: {fileID: 1702036209, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uAE30\uC0AC\uB3CC\uC774"
     _text: "\uAE30\uC0AC\uC791\uC704\uB97C \uBC1B\uC740 \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
@@ -15653,7 +15976,9 @@ MonoBehaviour:
     - "\uD06C\uB8E8\uC138\uB3CC\uC774"
     - "\uD751\uAE30\uC0AC\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: -531305191, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 6
+    _Token: 0
+    _img: {fileID: -531305191, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uD06C\uB8E8\uC138\uB3CC\uC774"
     _text: "\uC131\uC804\uC5D0 \uAE30\uAEBC\uC774 \uCC38\uC5EC\uD558\uB294 \uBA85\uC608\uB85C\uC6B4
@@ -15670,7 +15995,9 @@ MonoBehaviour:
     - "KI\uB3D9\uAE00NG"
     - "\uBCF4\uB450\uC575\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: -377451114, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 7
+    _Token: 0
+    _img: {fileID: -377451114, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "KI\uB3D9\uAE00NG"
     _text: "\uC720\uC544\uB3C5\uC874 \uB3D9\uAE00\uC774\uC758 \uC655\uC785\uB2C8\uB2E4"
@@ -15684,7 +16011,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 2092307353, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 8
+    _Token: 0
+    _img: {fileID: 2092307353, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uBCF4\uB450\uC575\uB3CC\uC774"
     _text: "\uACF5\uACA9\uD560\uB54C\uB9C8\uB2E4 \uB0B4 \uB371\uC758 \uCE74\uB4DC\uB4E4\uC758
@@ -15699,7 +16028,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -1068784308, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 9
+    _Token: 0
+    _img: {fileID: -1068784308, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uD751\uAE30\uC0AC\uB3CC\uC774"
     _text: "\uAC15\uD55C \uD798\uC744 \uCD94\uAD6C\uD558\uB2E4 \uC0AC\uC545\uD574\uC9C4
@@ -15715,7 +16046,9 @@ MonoBehaviour:
     evol:
     - "\uBD80\uD328\uD55C\uAE30\uC0AC"
     isRare: 0
-  - _img: {fileID: 1336874911, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 20
+    _Token: 0
+    _img: {fileID: 1336874911, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBD80\uD328\uD55C\uAE30\uC0AC"
     _text: "\uB108\uBB34 \uC0AC\uC545\uD574\uC838 \uB3D9\uAE00\uC774\uC758 \uD615\uD0DC\uB97C
@@ -15730,7 +16063,9 @@ MonoBehaviour:
     isFixed: 1
     evol: []
     isRare: 0
-  - _img: {fileID: -540715397, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 11
+    _Token: 0
+    _img: {fileID: -540715397, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uC655\uC880\uBE44"
     _text: "\uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
@@ -15746,7 +16081,9 @@ MonoBehaviour:
     - "\uC655\uC655\uC880\uBE44"
     - "\uC0AC\uC2E0"
     isRare: 0
-  - _img: {fileID: -1701955638, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 12
+    _Token: 0
+    _img: {fileID: -1701955638, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uC655\uC655\uC880\uBE44"
     _text: "\uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
@@ -15761,7 +16098,9 @@ MonoBehaviour:
     evol:
     - "\uCD08\uB300\uD615\uC880\uBE44"
     isRare: 0
-  - _img: {fileID: -1792447714, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 13
+    _Token: 0
+    _img: {fileID: -1792447714, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uC0AC\uC2E0"
     _text: "\uAE30\uBCF8\uBC30\uC728\uC774 1.2\uAC00 \uB429\uB2C8\uB2E4."
@@ -15776,7 +16115,9 @@ MonoBehaviour:
     evol:
     - "\uB9C8\uACC4\uC655"
     isRare: 0
-  - _img: {fileID: 1988763040, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 14
+    _Token: 0
+    _img: {fileID: 1988763040, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 2
     _name: "\uB9C8\uACC4\uC655"
     _text: "\uAE30\uBCF8\uBC30\uC728\uC774 1.5\uAC00 \uB429\uB2C8\uB2E4."
@@ -15790,7 +16131,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -332545350, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 15
+    _Token: 0
+    _img: {fileID: -332545350, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uC608\uB2C8\uCCB4\uB3CC\uC774"
     _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
@@ -15806,7 +16149,9 @@ MonoBehaviour:
     evol:
     - "\uC220\uD0C4\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: 1556840480, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 16
+    _Token: 0
+    _img: {fileID: 1556840480, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uC220\uD0C4\uB3CC\uC774"
     _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
@@ -15822,22 +16167,26 @@ MonoBehaviour:
     evol:
     - "\uC0B4\uB77C\uB518\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: -73524960, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 17
+    _Token: 0
+    _img: {fileID: -73524960, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uC0B4\uB77C\uB518\uB3CC\uC774"
     _text: "\uACF5\uACA9\uD560\uB54C, \uC774 \uCE74\uB4DC\uC758 \uACF5\uACA9\uB825\uC774
       2\uBC30\uAC00 \uB429\uB2C8\uB2E4."
     _tier: 5
     _stat:
-      attack: 3
-      defence: 5
+      attack: 2
+      defence: 4
     _type: 1
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -1743205979, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 18
+    _Token: 0
+    _img: {fileID: -1743205979, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uB9AC\uC790\uB4DC"
     _text: "\uCCB4\uB825\uC744 2 \uC783\uC2B5\uB2C8\uB2E4."
@@ -15852,7 +16201,9 @@ MonoBehaviour:
     evol:
     - "\uD2F0\uB77C\uB178"
     isRare: 0
-  - _img: {fileID: -2057773683, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 19
+    _Token: 0
+    _img: {fileID: -2057773683, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uD2F0\uB77C\uB178"
     _text: "\uCCB4\uB825\uC744 3 \uC783\uC2B5\uB2C8\uB2E4, \uB0B4 \uCCB4\uB825\uC774
@@ -15869,7 +16220,9 @@ MonoBehaviour:
     evol:
     - "\uBE14\uB799\uD2F0\uB77C\uB178"
     isRare: 0
-  - _img: {fileID: -1202528877, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 20
+    _Token: 0
+    _img: {fileID: -1202528877, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBE14\uB799\uD2F0\uB77C\uB178"
     _text: "\uCCB4\uB825\uC744 5 \uC783\uC2B5\uB2C8\uB2E4. \uB0B4 \uCCB4\uB825\uC774
@@ -15885,7 +16238,9 @@ MonoBehaviour:
     isFixed: 1
     evol: []
     isRare: 0
-  - _img: {fileID: 1503569921, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 21
+    _Token: 0
+    _img: {fileID: 1503569921, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBC84\uC12F\uAE68\uBE44"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB2E4\uC74C \uD134\uC5D0 \uB9AC\uB864\uD69F\uC218\uB97C
@@ -15901,7 +16256,9 @@ MonoBehaviour:
     evol:
     - "\uCFFC\uB4DC\uBC84\uC12F\uAE68\uBE44"
     isRare: 0
-  - _img: {fileID: -394952563, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 22
+    _Token: 0
+    _img: {fileID: -394952563, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uCFFC\uB4DC\uBC84\uC12F\uAE68\uBE44"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB2E4\uC74C \uD134\uC5D0 \uB9AC\uB864\uD69F\uC218\uB97C
@@ -15918,7 +16275,9 @@ MonoBehaviour:
     - "\uBC84\uC12F\uC21C\uC774"
     - "\uBA39\uBCF4\uAD34\uC218"
     isRare: 0
-  - _img: {fileID: -70427969, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 23
+    _Token: 0
+    _img: {fileID: -70427969, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBC84\uC12F\uC21C\uC774"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744 \uB54C\uB9C8\uB2E4, \uB9AC\uB864\uD69F\uC218\uB97C
@@ -15933,7 +16292,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -1939962707, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 24
+    _Token: 0
+    _img: {fileID: -1939962707, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 3
     _name: "\uBA39\uBCF4\uAD34\uC218"
     _text: "\uACF5\uACA9\uD558\uAE30 \uC804, \uB0B4 \uBC29\uC5B4\uB825\uB9CC\uD07C
@@ -15948,7 +16309,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -185403328, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 25
+    _Token: 0
+    _img: {fileID: -185403328, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 4
     _name: "\uD669\uAE08\uBAAC"
     _text: "\uACF5\uACA9\uD55C \uD6C4, \uBB18\uC9C0\uC640 \uB371\uC5D0 \uC788\uB294
@@ -15964,7 +16327,9 @@ MonoBehaviour:
     evol:
     - "\uB3C8\uBCBC\uB77D\uB3D9\uAE00"
     isRare: 0
-  - _img: {fileID: 756823788, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 26
+    _Token: 0
+    _img: {fileID: 756823788, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uB3C8\uBCBC\uB77D\uB3D9\uAE00"
     _text: "\uACF5\uACA9\uD55C \uD6C4, \uBB18\uC9C0\uC5D0 \uD669\uAE08\uBAAC \uD55C\uC7A5\uC744
@@ -15980,7 +16345,9 @@ MonoBehaviour:
     evol:
     - "\uB9C8\uC774\uB3D9\uC2A4\uC655"
     isRare: 0
-  - _img: {fileID: -1437287443, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 27
+    _Token: 0
+    _img: {fileID: -1437287443, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 1
     _name: "\uB9C8\uC774\uB3D9\uC2A4\uC655"
     _text: "\uACF5\uACA9\uD55C \uB4A4, \uB0B4 \uB371\uC5D0 \uD669\uAE08\uBAAC\uC744
@@ -15995,7 +16362,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 1736501266, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 28
+    _Token: 0
+    _img: {fileID: 1736501266, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 4
     _name: "\uAE61\uD1B5\uBD07"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744\uB54C\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC774 
@@ -16011,7 +16380,9 @@ MonoBehaviour:
     evol:
     - "\uD380\uCE58\uBD07"
     isRare: 0
-  - _img: {fileID: -1473496071, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
+  - NUM: 29
+    _Token: 0
+    _img: {fileID: -1473496071, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 4
     _name: "\uD380\uCE58\uBD07"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744\uB54C\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC774 
@@ -16027,7 +16398,9 @@ MonoBehaviour:
     evol:
     - "\uAC74\uB2F9\uAE00\uC774"
     isRare: 0
-  - _img: {fileID: 681094421, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
+  - NUM: 30
+    _Token: 0
+    _img: {fileID: 681094421, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
     _species: 3
     _name: "\uC0BC\uB450\uB77C"
     _text: "\uACF5\uACA9\uD560 \uB54C \uC885\uC871\uC870\uD569\uC774 \uD2B8\uB9AC\uD50C\uC77C
@@ -16043,7 +16416,9 @@ MonoBehaviour:
     evol:
     - "\uCF00\uB974\uBCA0\uB85C\uC0BC"
     isRare: 1
-  - _img: {fileID: -261151899, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
+  - NUM: 31
+    _Token: 0
+    _img: {fileID: -261151899, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
     _species: 3
     _name: "\uCF00\uB974\uBCA0\uB85C\uC0BC"
     _text: "\uACF5\uACA9\uD560 \uB54C \uC885\uC871\uC870\uD569\uC774 \uD2B8\uB9AC\uD50C\uC77C
@@ -16059,7 +16434,9 @@ MonoBehaviour:
     evol:
     - "\uD0B9\uC0BC\uB3C4\uB77C"
     isRare: 1
-  - _img: {fileID: -755746398, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
+  - NUM: 32
+    _Token: 0
+    _img: {fileID: -755746398, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
     _species: 3
     _name: "\uD0B9\uC0BC\uB3C4\uB77C"
     _text: "\uACF5\uACA9\uD560 \uB54C \uC885\uC871\uC870\uD569\uC774 \uD2B8\uB9AC\uD50C\uC77C
@@ -16074,7 +16451,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 832294691, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
+  - NUM: 33
+    _Token: 0
+    _img: {fileID: 832294691, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
     _species: 4
     _name: "\uAC74\uB2F9\uAE00\uC774"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC744\uB54C\uB9C8\uB2E4 \uACF5\uACA9\uB825\uC774 
@@ -16089,7 +16468,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 1606615271, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
+  - NUM: 34
+    _Token: 0
+    _img: {fileID: 1606615271, guid: bd6127ae7001bcc4098c0d8f915b3c38, type: 3}
     _species: 2
     _name: "\uCD08\uB300\uD615\uC880\uBE44"
     _text: "\uCCB4\uB825\uC744 4 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
@@ -16103,7 +16484,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 839359140, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 35
+    _Token: 0
+    _img: {fileID: 839359140, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 0
     _name: "\uACE8\uBAA9\uB300\uC7A5\uB3D9\uAE00"
     _text: "\uACF5\uACA9 \uC2DC, \uB0B4 \uBB18\uC9C0, \uB371\uC5D0 \uC788\uB294 \uB3D9\uAE00\uC774\uC5D0\uAC8C
@@ -16119,7 +16502,9 @@ MonoBehaviour:
     evol:
     - "\uBBFC\uBCD1\uB300\uB3D9\uAE00"
     isRare: 1
-  - _img: {fileID: 1930695562, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 36
+    _Token: 0
+    _img: {fileID: 1930695562, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 0
     _name: "\uBBFC\uBCD1\uB300\uB3D9\uAE00"
     _text: "\uACF5\uACA9 \uC2DC, \uB0B4 \uBB18\uC9C0, \uB371\uC5D0 \uC788\uB294 \uB3D9\uAE00\uC774\uC5D0\uAC8C
@@ -16135,7 +16520,9 @@ MonoBehaviour:
     evol:
     - "\uB3D9\uAE00\uC758\uC0AC\uB2F9"
     isRare: 1
-  - _img: {fileID: 285401327, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 37
+    _Token: 0
+    _img: {fileID: 285401327, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC758\uC0AC\uB2F9"
     _text: "\uACF5\uACA9 \uC2DC, \uB0B4 \uBB18\uC9C0, \uB371\uC5D0 \uC788\uB294 \uB3D9\uAE00\uC774\uC5D0\uAC8C
@@ -16150,7 +16537,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 1768206966, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 38
+    _Token: 0
+    _img: {fileID: 1768206966, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 1
     _name: "\uBC29\uD328\uB3CC\uC774"
     _text: "\uB098\uBB34\uBC29\uD328\uB97C \uB4E0 \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
@@ -16165,7 +16554,9 @@ MonoBehaviour:
     evol:
     - "\uACBD\uCC30\uB3CC\uC774"
     isRare: 0
-  - _img: {fileID: -1997732876, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 39
+    _Token: 0
+    _img: {fileID: -1997732876, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 1
     _name: "\uACBD\uCC30\uB3CC\uC774"
     _text: "\uC9C4\uC555\uBC29\uD328\uB97C \uB4E0 \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
@@ -16180,21 +16571,25 @@ MonoBehaviour:
     evol:
     - "\uCEA1\uD2F4\uB3D9\uAE00\uC774"
     isRare: 0
-  - _img: {fileID: -579831666, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
+  - NUM: 40
+    _Token: 0
+    _img: {fileID: -579831666, guid: 92eacbc7d01d9c746ba9fe7920461162, type: 3}
     _species: 1
     _name: "\uCEA1\uD2F4\uB3D9\uAE00\uC774"
     _text: "\uC288\uD37C\uD788\uC5B4\uB85C\uAC00 \uB41C \uB3D9\uAE00\uC774\uC785\uB2C8\uB2E4."
     _tier: 5
     _stat:
       attack: 0
-      defence: 20
+      defence: 15
     _type: 2
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 63189997, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 41
+    _Token: 0
+    _img: {fileID: 63189997, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 2
     _name: "\uB9AC\uBE59\uC544\uBA38"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC73C\uBA74, \uC774 \uCE74\uB4DC\uC758
@@ -16211,7 +16606,9 @@ MonoBehaviour:
     evol:
     - "\uB4C0\uB77C\uD55C"
     isRare: 0
-  - _img: {fileID: -1054682757, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 42
+    _Token: 0
+    _img: {fileID: -1054682757, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 2
     _name: "\uB4C0\uB77C\uD55C"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC73C\uBA74, \uC774 \uCE74\uB4DC\uC758
@@ -16228,7 +16625,9 @@ MonoBehaviour:
     evol:
     - "\uBC31\uC791\uB3D9\uAE00\uC774"
     isRare: 0
-  - _img: {fileID: 1414500401, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 43
+    _Token: 0
+    _img: {fileID: 1414500401, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 2
     _name: "\uBC31\uC791\uB3D9\uAE00\uC774"
     _text: "\uC774 \uCE74\uB4DC\uB97C \uBF51\uC73C\uBA74, \uC774 \uCE74\uB4DC\uC758
@@ -16245,7 +16644,9 @@ MonoBehaviour:
     evol:
     - "\uBC31\uC791\uB3D9\uAE00\uC774"
     isRare: 0
-  - _img: {fileID: 1354592784, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 44
+    _Token: 0
+    _img: {fileID: 1354592784, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 3
     _name: "\uB3D9\uCC59\uC774"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB0B4 \uC190\uC758 \uBB34\uC791\uC704 \uCE74\uB4DC
@@ -16262,7 +16663,9 @@ MonoBehaviour:
     evol:
     - "\uB3D9\uAD6C\uB9AC"
     isRare: 0
-  - _img: {fileID: -690333526, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 45
+    _Token: 0
+    _img: {fileID: -690333526, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 3
     _name: "\uB3D9\uAD6C\uB9AC"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB0B4 \uC190\uC758 \uBB34\uC791\uC704 \uCE74\uB4DC
@@ -16280,7 +16683,9 @@ MonoBehaviour:
     - "\uC218\uB959\uC591\uC6A9\uB3D9\uAE00"
     - "\uB3D9\uAE00\uB124\uC2DC"
     isRare: 0
-  - _img: {fileID: 2132780417, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 46
+    _Token: 0
+    _img: {fileID: 2132780417, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 4
     _name: "\uC218\uB959\uC591\uC6A9\uB3D9\uAE00"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB0B4 \uC190\uC758 \uBB34\uC791\uC704 \uCE74\uB4DC\uC5D0\uAC8C
@@ -16296,7 +16701,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 953438256, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 47
+    _Token: 0
+    _img: {fileID: 953438256, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 3
     _name: "\uB3D9\uAE00\uB124\uC2DC"
     _text: "\uACF5\uACA9\uD560 \uB54C, \uB0B4 \uC190\uC758 \uBAA8\uB4E0 \uCE74\uB4DC\uC5D0\uAC8C
@@ -16311,7 +16718,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -1191905597, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 48
+    _Token: 0
+    _img: {fileID: -1191905597, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 1
     _name: "\uC0F4\uB3D9\uAE00\uC774"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC0F4\uB3D9\uAE00\uC774\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
@@ -16326,7 +16735,9 @@ MonoBehaviour:
     evol:
     - "\uC0BC\uB3D9\uAE00\uC774"
     isRare: 1
-  - _img: {fileID: -248539101, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 49
+    _Token: 0
+    _img: {fileID: -248539101, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 1
     _name: "\uC0BC\uB3D9\uAE00\uC774"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC0BC\uB3D9\uAE00\uC774\uB97C 2\uC7A5 \uCD94\uAC00\uD569\uB2C8\uB2E4."
@@ -16341,7 +16752,9 @@ MonoBehaviour:
     evol:
     - "\uB3D9\uAE00\uD0A4\uBA54\uB77C"
     isRare: 1
-  - _img: {fileID: 695139168, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
+  - NUM: 50
+    _Token: 0
+    _img: {fileID: 695139168, guid: ef0512b5c01a48742bd67c4f405ea4f1, type: 3}
     _species: 3
     _name: "\uB3D9\uAE00\uD0A4\uBA54\uB77C"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC0BC\uB3D9\uAE00\uC774\uB97C 2\uC7A5 \uCD94\uAC00\uD569\uB2C8\uB2E4.\n\uC774
@@ -16357,7 +16770,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 552041209, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 51
+    _Token: 0
+    _img: {fileID: 552041209, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uBD04\uAE00\uC774"
     _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 30 \uC8FC\uB294 \uD3ED\uD0C4\uC744
@@ -16373,7 +16788,9 @@ MonoBehaviour:
     evol:
     - "\uB3D9\uAE00\uB108\uB9C8\uC774\uD2B8"
     isRare: 0
-  - _img: {fileID: 1233210112, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 52
+    _Token: 0
+    _img: {fileID: 1233210112, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uB3D9\uAE00\uB108\uB9C8\uC774\uD2B8"
     _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 60 \uC8FC\uB294 \uD3ED\uD0C4\uC744
@@ -16389,7 +16806,9 @@ MonoBehaviour:
     evol:
     - "\uD575\uB3D9\uAE00"
     isRare: 0
-  - _img: {fileID: -224248228, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 53
+    _Token: 0
+    _img: {fileID: -224248228, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uD575\uB3D9\uAE00"
     _text: "\uB0B4 \uB371\uC5D0 \uD53C\uD574\uB97C 120 \uC8FC\uB294 \uD3ED\uD0C4\uC744
@@ -16404,7 +16823,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: -1344627752, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 54
+    _Token: 0
+    _img: {fileID: -1344627752, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 2
     _name: "\uC720\uB839"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uC5B8\uB370\uB4DC
@@ -16420,7 +16841,9 @@ MonoBehaviour:
     evol:
     - "\uD3F4\uD130\uAC00\uC774\uC2A4\uD2B8"
     isRare: 1
-  - _img: {fileID: -62071097, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 55
+    _Token: 0
+    _img: {fileID: -62071097, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 2
     _name: "\uD3F4\uD130\uAC00\uC774\uC2A4\uD2B8"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uC5B8\uB370\uB4DC
@@ -16436,7 +16859,9 @@ MonoBehaviour:
     evol:
     - "\uC9C0\uB2C8"
     isRare: 1
-  - _img: {fileID: 1845578137, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 56
+    _Token: 0
+    _img: {fileID: 1845578137, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 2
     _name: "\uC9C0\uB2C8"
     _text: "\uB0B4 \uBB18\uC9C0\uC5D0 \uC788\uB294 \uBAA8\uB4E0 \uC5B8\uB370\uB4DC
@@ -16451,7 +16876,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 89849843, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 57
+    _Token: 0
+    _img: {fileID: 89849843, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 4
     _name: "\uC2AC\uB86F\uBA38\uC2E0"
     _text: "\uB0B4 \uB371\uC5D0 \uBB34\uC791\uC704 \uCE74\uB4DC\uB97C \uCD94\uAC00\uD569\uB2C8\uB2E4."
@@ -16466,7 +16893,9 @@ MonoBehaviour:
     evol:
     - "\uC2AC\uB86F\uBA38\uC2E0+"
     isRare: 1
-  - _img: {fileID: -334357377, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 58
+    _Token: 0
+    _img: {fileID: -334357377, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 4
     _name: "\uC2AC\uB86F\uBA38\uC2E0+"
     _text: "\uB0B4 \uB371\uC5D0 3\uD2F0\uC5B4 \uC774\uC0C1\uC758 \uBB34\uC791\uC704
@@ -16482,7 +16911,9 @@ MonoBehaviour:
     evol:
     - "\uC2AC\uB86F\uBA38\uC2E0++"
     isRare: 1
-  - _img: {fileID: 763320457, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
+  - NUM: 59
+    _Token: 0
+    _img: {fileID: 763320457, guid: 9c450be56c171db4f85e152441f3d19b, type: 3}
     _species: 4
     _name: "\uC2AC\uB86F\uBA38\uC2E0++"
     _text: "\uB0B4 \uB371\uC5D0 5\uD2F0\uC5B4 \uBB34\uC791\uC704 \uCE74\uB4DC\uB97C
@@ -16498,7 +16929,9 @@ MonoBehaviour:
     evol: []
     isRare: 1
   cardDatabase_token:
-  - _img: {fileID: 21300000, guid: 5c1e67bef2f30f14fb23005975a67483, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 5c1e67bef2f30f14fb23005975a67483, type: 3}
     _species: 0
     _name: "\uACE0\uC591\uC774\uD138"
     _text: "\uBCF5\uC2E4\uBCF5\uC2E4\uD569\uB2C8\uB2E4..."
@@ -16512,7 +16945,9 @@ MonoBehaviour:
     isFixed: 1
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 1b47d0b18d39e3340b2b7ead5b2e074b, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 1b47d0b18d39e3340b2b7ead5b2e074b, type: 3}
     _species: 0
     _name: "\uC751\uAC00"
     _text: "\uB0C4\uC0C8\uAC00 \uAD6C\uC218\uD569\uB2C8\uB2E4."
@@ -16526,7 +16961,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 1c4f51079ebc0a4458ddf885373f854f, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 1c4f51079ebc0a4458ddf885373f854f, type: 3}
     _species: 0
     _name: "\uB205\uB205\uD55C\uB3D9\uAE00\uC774"
     _text: "\uB371\uC5D0 \uCE74\uB4DC\uAC00 \uBD80\uC871\uD574\uC11C \uBB34\uC791\uC815
@@ -16541,7 +16978,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: -1893115464, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: -1893115464, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uD3ED\uD0C4"
     _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 30 \uC90D\uB2C8\uB2E4."
@@ -16555,7 +16994,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 1078065320, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 1078065320, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uB2E4\uC774\uB108\uB9C8\uC774\uD2B8"
     _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 60 \uC90D\uB2C8\uB2E4."
@@ -16569,7 +17010,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uD575\uD3ED\uD0C4"
     _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 120 \uC90D\uB2C8\uB2E4."
@@ -16583,7 +17026,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 1566704378, guid: 51568bab6d65b574cbd460fa39532cac, type: 3}
     _species: 4
     _name: "\uD575\uD3ED\uD0C4"
     _text: "\uBB34\uC791\uC704 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 120 \uC90D\uB2C8\uB2E4."
@@ -16597,7 +17042,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 1
-  - _img: {fileID: 21300000, guid: 1c4f51079ebc0a4458ddf885373f854f, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 1c4f51079ebc0a4458ddf885373f854f, type: 3}
     _species: 0
     _name: X
     _text: "\uB354 \uC774\uC0C1 \uCE74\uB4DC\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4!"
@@ -16611,7 +17058,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
     _species: 0
     _name: "\uC548\uB3D9\uAE00\uC774"
     _text: "\uC774\uB807\uAC8C \uB124\uBAA8\uB09C \uB140\uC11D\uC740 \uCC98\uC74C\uC785\uB2C8\uB2E4."
@@ -16625,7 +17074,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 639a8838ada7abc478100e55082b1ef0, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 639a8838ada7abc478100e55082b1ef0, type: 3}
     _species: 0
     _name: "\uC0C1\uCC98"
     _text: "\uC0C1\uCC98\uC5C6\uC774 \uB05D\uB098\uB294 \uC804\uD22C\uB294 \uC5C6\uC2B5\uB2C8\uB2E4."
@@ -16639,7 +17090,9 @@ MonoBehaviour:
     isFixed: 0
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 10b95c86405a60146aa19e7b01266973, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 10b95c86405a60146aa19e7b01266973, type: 3}
     _species: 0
     _name: "\uC800\uC8FC"
     _text: "\uB0B4 \uD328\uC5D0 \uC788\uB294 \uBB34\uC791\uC704 \uCE74\uB4DC \uD55C
@@ -16654,7 +17107,9 @@ MonoBehaviour:
     isFixed: 1
     evol: []
     isRare: 0
-  - _img: {fileID: 21300000, guid: 181cbc772b967f64c910c05079357b34, type: 3}
+  - NUM: 0
+    _Token: 1
+    _img: {fileID: 21300000, guid: 181cbc772b967f64c910c05079357b34, type: 3}
     _species: 0
     _name: "\uD0A4\uC2A4\uB9C8\uD06C"
     _text: "\uC624\uD788\uB824 \uC88B\uC744 \uC9C0\uB3C4 \uBAA8\uB985\uB2C8\uB2E4..?"
@@ -16669,13 +17124,20 @@ MonoBehaviour:
     evol: []
     isRare: 0
   ruleDatabase:
-  - _img: {fileID: 0}
-    _name: "\uB9F9\uACF5"
-    _text: "\uC801 \uD328\uD134\uC758 \uB300\uBBF8\uC9C0\uAC00 10% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _Number: 0
     _level: 1
-  - _img: {fileID: 0}
-    _name: "\uD2BC\uD2BC"
-    _text: "\uC801 \uCCB4\uB825\uC774 20% \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _Number: 1
+    _level: 1
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _Number: 2
+    _level: 1
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _Number: 3
+    _level: 1
+  - _img: {fileID: 21300000, guid: 48c85eef2cbb1fb4e807548309214584, type: 3}
+    _Number: 4
     _level: 1
   cardinfoSprites_species:
   - species: 0
@@ -19205,7 +19667,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1182197314}
+  - {fileID: 1662010285}
   - {fileID: 77131811}
   m_Father: {fileID: 1783887238}
   m_RootOrder: 0
@@ -19569,10 +20031,9 @@ MonoBehaviour:
   _attText: {fileID: 2071809554}
   _defText: {fileID: 1506514514}
   _cardBack: {fileID: 965478480}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
+    _Token: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
@@ -21869,10 +22330,9 @@ MonoBehaviour:
   _attText: {fileID: 5797826476202913681}
   _defText: {fileID: 5237530814682657111}
   _cardBack: {fileID: 3874558782253629956}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
+    _Token: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
@@ -22297,10 +22757,9 @@ MonoBehaviour:
   _attText: {fileID: 5797826476914391665}
   _defText: {fileID: 5237530815464318135}
   _cardBack: {fileID: 3874558783554508772}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
+    _Token: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"

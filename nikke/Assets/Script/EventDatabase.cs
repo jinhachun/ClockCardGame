@@ -158,7 +158,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Add("기사돌이");
+                            Resource.Instance.Deck_Add(5);
                         });
                     }
                     else if (selectIndex == 1)
@@ -175,7 +175,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove("동글이");
+                            Resource.Instance.Deck_Remove(0);
                         });
                     }
                     else if (selectIndex == 1)
@@ -228,7 +228,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(4)._name);
+                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(4).NUM);
                         });
                     }
                     return null;
@@ -239,7 +239,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(Resource.Instance.Deck[Random.Range(0,Resource.Instance.Deck.Count)]._name);
+                            Resource.Instance.Deck_Remove(Resource.Instance.Deck[Random.Range(0,Resource.Instance.Deck.Count)].NUM);
                         });
                     }
                     else if (selectIndex == 1)
@@ -281,7 +281,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(5)._name);
+                            Resource.Instance.Deck_Add(CardDatabase.Instance.cardByTier(5).NUM);
                         });
                     }
                     return null;
@@ -299,7 +299,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Add("케르베로삼");
+                            Resource.Instance.Deck_Add(31);
                         });
                     }
                     return null;
@@ -317,7 +317,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove("좀비");
+                            Resource.Instance.Deck_Remove(2);
                         });
                     }
                     return null;
@@ -328,7 +328,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove("깡통몬");
+                            Resource.Instance.Deck_Remove(4);
                             Resource.Instance.Event_Heal(15);
                         });
                     }
@@ -336,7 +336,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove("깡통몬");
+                            Resource.Instance.Deck_Remove(4);
                             Resource.Instance.Event_MoneyEarn(150);
                         });
                     }
@@ -356,8 +356,8 @@ public class EventDatabase : MonoBehaviour
                         {
                             var _tmpStruct = CardDatabase.Instance.card("먹깨비");
                             var _tmpEvolveStruct = CardDatabase.Instance.card(_tmpStruct.evol[Random.Range(0, _tmpStruct.evol.Count)]);
-                            Resource.Instance.Deck_Remove(_tmpStruct._name);
-                            Resource.Instance.Deck_Add(_tmpEvolveStruct._name);
+                            Resource.Instance.Deck_Remove(_tmpStruct.NUM);
+                            Resource.Instance.Deck_Add(_tmpEvolveStruct.NUM);
                         });
                     }
                     else if (selectIndex == 1)
@@ -381,7 +381,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Add("안동글이",true);
+                            Resource.Instance.Deck_Add(7,true);
                         });
                     }
                     return null;
@@ -445,7 +445,7 @@ public class EventDatabase : MonoBehaviour
                         {
                             var tmpList = Resource.Instance.Deck.Where(x => x._tier == 2).ToList();
                             var targetCard = tmpList[Random.Range(0, tmpList.Count)];
-                            Resource.Instance.Deck_Remove(targetCard._name);
+                            Resource.Instance.Deck_Remove(targetCard.NUM);
 
                         });
                     }

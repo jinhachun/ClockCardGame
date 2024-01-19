@@ -352,6 +352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2090622068924517480}
   - component: {fileID: 293937832869210362}
+  - component: {fileID: 5192139210987247750}
   m_Layer: 0
   m_Name: Rule
   m_TagString: Untagged
@@ -401,6 +402,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.341396, y: 3.1079085}
   m_EdgeRadius: 0
+--- !u!114 &5192139210987247750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090622068924517483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557bec5b79ce8cd46bd9dcdb29b24791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visual: {fileID: 2090622069140470371}
+  _cardBody: {fileID: 2090622068194082902}
+  _img: {fileID: 2090622068405680084}
+  _species: {fileID: 0}
+  _type: {fileID: 0}
+  _outLine: {fileID: 6609746693015876535}
+  _name: {fileID: 2090622069019286651}
+  _text: {fileID: 2090622068078413686}
+  _infoText: {fileID: 0}
+  _tier: {fileID: 2090622069005699316}
+  _attText: {fileID: 0}
+  _defText: {fileID: 0}
+  _cardBack: {fileID: 3874558782741995094}
+  Exhaust: 
+  Ethereal: 
+  Fixed: 
+  Str:
+    NUM: 0
+    _img: {fileID: 0}
+    _species: 0
+    _name: 
+    _text: 
+    _tier: 0
+    _stat:
+      attack: 0
+      defence: 0
+    _type: 0
+    isExhaust: 0
+    isEthereal: 0
+    isFixed: 0
+    evol: []
+    isRare: 0
+  layer: 0
+  Touchable: 0
+  combiSpeices: 0
+  combiType: 0
 --- !u!1 &2090622069005699318
 GameObject:
   m_ObjectHideFlags: 0

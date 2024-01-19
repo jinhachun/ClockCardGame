@@ -61,18 +61,25 @@ public class Enemy : MonoBehaviour
         _statusText.text = this._statusValue + "";
         this._status.infoChange(this._statusValue);
     }
+    
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;
         this._name = enemyStruct._name;
         this._hp = enemyStruct._hp;
         this._mhp = this._hp;
+        Rule_no1();
         this._area = enemyStruct._area;
         this._img.sprite = enemyStruct._sprite;
         this._enemyType = enemyStruct._enemyType;
         Debug.Log(this._enemyType + " " + EnemyDatabase.Instance.spriteSize(this._enemyType));
         this._img.transform.parent.localScale = EnemyDatabase.Instance.spriteSize(this._enemyType);
-        this._enemyPatterns = enemyStruct._enemyPatterns;
+
+        this._enemyPatterns = new List<pattern>();
+        foreach (pattern tmpPattern in enemyStruct._enemyPatterns)
+        {
+            Rule_no0(tmpPattern);
+        }
         this._statusValue = enemyStruct._statusValue;
         if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
         _statusText.text = this._statusValue+"";
@@ -89,7 +96,32 @@ public class Enemy : MonoBehaviour
 
         PatternIndex = 0;
     }
-    
+
+    public void Rule_no0(pattern tmpPattern)
+    {
+        if (tmpPattern._enemyPattern == EnemyPattern.ATT)
+        {
+            pattern tmp = tmpPattern;
+            if (Resource.Instance.Rules.ContainsKey(DataManager.RuleName(0,Resource.Instance.Kor)))
+            {
+                tmp._Value += tmp._Value * 15 * Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)] / 100;
+            }
+            this._enemyPatterns.Add(tmp);
+        }
+        else
+            this._enemyPatterns.Add(tmpPattern);
+
+    }
+    public void Rule_no1()
+    {
+        if (Resource.Instance.Rules.ContainsKey(DataManager.RuleName(1, Resource.Instance.Kor)))
+        {
+            this._hp += _hp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;
+            this._mhp += _mhp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;
+        }
+
+    }
+
     void Update()
     {
         if (isOver && Input.GetMouseButtonDown(0))

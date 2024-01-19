@@ -9,13 +9,28 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
     [SerializeField] TMP_Text __DeckShowText;
-    public string _DeckShowText_showdeck;
-    public string _DeckShowText_not_showdeck;
+    public string _DeckShowText_showdeck => Resource.Instance.Kor?"덱보기":"Deck";
+    public string _DeckShowText_not_showdeck => Resource.Instance.Kor ? "덱 안보기" : "Hide Deck";
     [SerializeField] TMP_Text __BattleButtonText;
-    public string __BattleButtonText_Stage;
+    public string __BattleButtonText_Stage=> Resource.Instance.Kor ? "전투시작" : "Battle";
     string __BattleButtonText_Stage_Full => Resource.Instance.Stage != 6 ? (Resource.Instance.Area + " -" + Resource.Instance.Stage + "\n" + __BattleButtonText_Stage):  "BOSS - "+Resource.Instance.Area;
     string _BattleButtonText_Area4 => "FINAL BOSS";
     string _BattleButtonText_End => "END";
+
+    [SerializeField] TMP_Text _Main_Info_Text1;
+    [SerializeField] TMP_Text _Main_Info_Text2;
+    [SerializeField] TMP_Text _Main_Info_Level;
+    string _Main_InfoText1 => Resource.Instance.Kor ? "현재 난이도 : " : "LEVEL : ";
+    string _Main_InfoText2 => Resource.Instance.Kor ? "추가 규칙 : " : "Bonus Rules : ";
+
+    [SerializeField] TMP_Text _ButtonText1;
+    [SerializeField] TMP_Text _ButtonText2;
+    [SerializeField] TMP_Text _ButtonText3;
+    [SerializeField] TMP_Text _ButtonText4;
+    string ButtonText1 => Resource.Instance.Kor ? "메인" : "Main";
+    string ButtonText2 => Resource.Instance.Kor ? "병사상점" : "Shop";
+    string ButtonText3 => Resource.Instance.Kor ? "서포터" : "Deck Enhance";
+    string ButtonText4 => Resource.Instance.Kor ? "마을관리" : "Village";
 
 
     [SerializeField] TMP_Text _MoneyText;
@@ -54,7 +69,14 @@ public class MainMenu : MonoBehaviour
     }
     public void TextUpdate()
     {
+        _ButtonText1.text = ButtonText1;
+        _ButtonText2.text = ButtonText2;
+        _ButtonText3.text = ButtonText3;
+        _ButtonText4.text = ButtonText4;
+        _Main_Info_Text1.text = _Main_InfoText1;
+        _Main_Info_Text2.text = _Main_InfoText2;
         _MoneyText.text = Resource.Instance.money.ToString();
+        _Main_Info_Level.text = Resource.Instance.LEVEL.ToString();
         if (Resource.Instance.Area == 5)
         {
             __BattleButtonText.text = _BattleButtonText_End;

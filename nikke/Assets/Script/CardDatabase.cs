@@ -15,9 +15,9 @@ public class CardDatabase : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-    [SerializeField] List<CardStruct> cardDatabase;
-    [SerializeField] List<CardStruct> cardDatabase_token;
-    [SerializeField] List<RuleStruct> ruleDatabase;
+    [SerializeField] public List<CardStruct> cardDatabase;
+    [SerializeField] public List<CardStruct> cardDatabase_token;
+    [SerializeField] public List<RuleStruct> ruleDatabase;
     [SerializeField] List<SpeciesSprite> cardinfoSprites_species;
     [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
@@ -503,6 +503,8 @@ public class CardDatabase : MonoBehaviour
 [Serializable]
 public struct CardStruct
 {
+    public int NUM;
+    public bool _Token;
     public Sprite _img;
     public SPECIES _species;
     public string _name;
@@ -521,9 +523,7 @@ public struct CardStruct
 public struct RuleStruct
 {
     public Sprite _img;
-    public string _name;
-    [Multiline(3)]
-    public string _text;
+    public int _Number;
     public int _level;
 }
 [Serializable]

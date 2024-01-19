@@ -655,10 +655,8 @@ MonoBehaviour:
   _attText: {fileID: 5797826476619346883}
   _defText: {fileID: 5237530815172160773}
   _cardBack: {fileID: 3874558782741995094}
-  Exhaust: "\uC18C\uBA78"
-  Ethereal: "\uD718\uBC1C\uC131"
-  Fixed: "\uACE0\uC815"
   Str:
+    NUM: 0
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"

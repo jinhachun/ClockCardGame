@@ -108,7 +108,7 @@ public class Support : MonoBehaviour
         if (Resource.Instance.money >= AddPrice)
         {
             Resource.Instance.money -= AddPrice;
-            Resource.Instance.Deck_Add(_cardAddPrefab.name);
+            Resource.Instance.Deck_Add(_cardAddPrefab.Str.NUM);
             Resource.Instance.SupportPrice["Add"]++;
             _Content.transform.Find("Button_Add").gameObject.SetActive(false);
             QuitChk();
@@ -119,7 +119,7 @@ public class Support : MonoBehaviour
         if (Resource.Instance.money >= DeletePrice)
         {
             Resource.Instance.money -= DeletePrice;
-            Resource.Instance.Deck_Remove(_cardDeletePrefab.name);
+            Resource.Instance.Deck_Remove(_cardDeletePrefab.Str.NUM);
             Resource.Instance.SupportPrice["Delete"]++;
             _Content.transform.Find("Button_Delete").gameObject.SetActive(false);
             QuitChk();
@@ -144,8 +144,8 @@ public class Support : MonoBehaviour
             Resource.Instance.money -= EvolvePrice;
             var _tmpStruct = _cardEvolvePrefab.Str;
             var _tmpEvolveStruct = CardDatabase.Instance.card(_tmpStruct.evol[Random.Range(0,_tmpStruct.evol.Count)]);
-            Resource.Instance.Deck_Remove(_cardEvolvePrefab.name);
-            Resource.Instance.Deck_Add(_tmpEvolveStruct._name);
+            Resource.Instance.Deck_Remove(_cardEvolvePrefab.Str.NUM);
+            Resource.Instance.Deck_Add(_tmpEvolveStruct.NUM);
             Resource.Instance.SupportPrice["Evolve"]++;
             _Content.transform.Find("Button_Evolve").gameObject.SetActive(false);
             QuitChk();
