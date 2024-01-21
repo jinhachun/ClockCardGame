@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BonusRule : Card
 {
+    [SerializeField] TMPro.TMP_Text Rate;
     public void Set(RuleStruct str)
     {
         string tmpName = DataManager.RuleName(str._Number, Resource.Instance.Kor);
@@ -14,9 +15,11 @@ public class BonusRule : Card
 
         this._img.sprite = str._img;
 
-        this._tier.text = str._level.ToString();
+        this._tier.text = "+"+str._level.ToString();
         this.tier = str._level;
 
         this._text.text = tmpInfo;
+
+        this.Rate.text = "X"+Resource.Instance.Rules[this.name].ToString();
     }
 }

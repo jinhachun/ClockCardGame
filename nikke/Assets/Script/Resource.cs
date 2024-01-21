@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using DG.Tweening;
 
 public class Resource : MonoBehaviour
@@ -38,6 +39,7 @@ public class Resource : MonoBehaviour
             RuleStruct bonusRule = CardDatabase.Instance.ruleDatabase[randomIndex];
             if (Rules.ContainsKey(DataManager.RuleName(bonusRule._Number,Kor)))
             {
+                if (bonusRule._only) continue;
                 Rules[DataManager.RuleName(bonusRule._Number, Kor)] += bonusRule._level;
             }
             else
@@ -45,14 +47,13 @@ public class Resource : MonoBehaviour
                 Rules.Add(DataManager.RuleName(bonusRule._Number, Kor), bonusRule._level);
             }
             tmpLv -= bonusRule._level;
-            var card = Instantiate(_rulePrefab, new Vector2(0, 0), Quaternion.identity);
-            card.Set(bonusRule);
             loopCnt--;
         }
         
         foreach(KeyValuePair<string,int> keyValuePair in Rules)
         {
-            Debug.Log(keyValuePair);
+            var tmpstruct = CardDatabase.Instance.ruleDatabase.Where(x => DataManager.RuleName(x._Number, Resource.Instance.Kor).Equals(keyValuePair.Key)).FirstOrDefault();
+            var card = MainMenu.Instance.InstantiateRules(tmpstruct);
         }
     }
     public void Start()

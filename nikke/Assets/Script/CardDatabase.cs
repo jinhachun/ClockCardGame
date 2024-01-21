@@ -525,6 +525,7 @@ public struct RuleStruct
     public Sprite _img;
     public int _Number;
     public int _level;
+    public bool _only;
 }
 [Serializable]
 public class STAT

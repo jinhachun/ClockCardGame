@@ -106,7 +106,7 @@ public class BattleManager : MonoBehaviour
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
         RerollChance = 0;
-        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 9) * (area+1)/2;
+        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 9) * (area + 1) / 2;
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
         pureAttack = false;
@@ -242,7 +242,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_TurnStart()
     {
-         
+
         Sequence sq = DOTween.Sequence();
 
         Shield = 0;
@@ -253,7 +253,7 @@ public class BattleManager : MonoBehaviour
         }
         ShuffleDeck(sq);
     }
-    
+
     public int tmpAtt;
     public int tmpDef;
     public double tmpRate;
@@ -263,7 +263,7 @@ public class BattleManager : MonoBehaviour
         Sequence sq = DOTween.Sequence();
         var queue = new Queue<CardStruct>();
         float loopCnt = 0;
-        while (Deck.Count + Grave.Count +loopCnt < 5)
+        while (Deck.Count + Grave.Count + loopCnt < 5)
         {
             queue.Enqueue(CardDatabase.Instance.card_token("눅눅한동글이"));
             loopCnt++;
@@ -279,11 +279,12 @@ public class BattleManager : MonoBehaviour
     {
         Att = tmpAtt; Def = tmpDef; Rate = tmpRate;
         Sequence sq = DOTween.Sequence();
-        Debug.Log("기다리는중! : "+waitDelay);
+        Debug.Log("기다리는중! : " + waitDelay);
         if (waitDelay)
         {
             sq.AppendInterval(1f)
-            .AppendCallback(() => {
+            .AppendCallback(() =>
+            {
                 ChangeState(BattleState.Draw);
             });
             return;
@@ -351,7 +352,8 @@ public class BattleManager : MonoBehaviour
                     moveCard(DOTween.Sequence(), Hand[chkBtn.index], new Vector2(HandPos[chkBtn.index].x, HandPos[chkBtn.index].y + 1f), 0.1f, true);
                     chkN++;
                 }
-                else {
+                else
+                {
                     moveCard(DOTween.Sequence(), Hand[chkBtn.index], HandPos[chkBtn.index], 0.1f, true);
                     chkN--;
                 }
@@ -455,7 +457,7 @@ public class BattleManager : MonoBehaviour
         }
         sq.AppendCallback(() =>
         {
-            foreach(Enemy enemy in Enemies)
+            foreach (Enemy enemy in Enemies)
                 EnemyStatus_Reroll(enemy);
             ChangeState(BattleState.Draw);
             sq.Kill();
@@ -480,11 +482,11 @@ public class BattleManager : MonoBehaviour
                     var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
                     var damage = (int)(card.Stat.attack * Rate);
                     enemyDamage(damage, critical, target);
-                    if(damage>0)
+                    if (damage > 0)
                         switch (card.Str._type)
                         {
                             case (TYPE.FIRE):
-                                {effectOn(_fireAttackffectPrefab, target); return; }
+                                { effectOn(_fireAttackffectPrefab, target); return; }
                             case (TYPE.WATER):
                                 { effectOn(_waterAttackffectPrefab, target); return; }
                             case (TYPE.GRASS):
@@ -499,7 +501,7 @@ public class BattleManager : MonoBehaviour
 
             if (card.isExhaust)
             {
-                sq.Append(card.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(card.gameObject); }));
+                sq.AppendCallback(() => { card.deleteCard(); } );
             }
             else
             {
@@ -617,53 +619,67 @@ public class BattleManager : MonoBehaviour
                 takeDamage(sq, Enemy);
                 sq.AppendInterval(0.8f);
             }
-            else if(Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.BUFF)
             {
-                Enemy.setAttackBuff();
                 sq.AppendCallback(() =>
                 {
-                    Enemy.transform.DOMoveY(Enemy._img.transform.position.y+0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
+                    Enemy.setAttackBuff();
+                    Enemy.transform.DOMoveY(Enemy._img.transform.position.y + 0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
                 });
                 sq.AppendInterval(0.8f);
             }
-            else if(Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.CARDINSRT)
             {
-                Enemy.transform.DOMoveY(Enemy._img.transform.position.y + 0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
-                Queue<CardStruct> queue = new Queue<CardStruct>();
-                for(int i=0;i<Enemy.Pattern._Value;i++)
-                    queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
-                AddCard(queue, Enemy.Pattern._Bool);
+                sq.AppendCallback(() =>
+                {
+                    Enemy.transform.DOMoveY(Enemy._img.transform.position.y + 0.35f, 0.15f).SetLoops(4, LoopType.Yoyo);
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    for (int i = 0; i < Enemy.Pattern._Value; i++)
+                        queue.Enqueue(CardDatabase.Instance.card_token(Enemy.Pattern._CardName));
+                    AddCard(queue, Enemy.Pattern._Bool);
+                });
                 sq.AppendInterval(0.8f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
             {
-                summonEnemy(EnemyDatabase.Instance.enemy(Enemy.Pattern._CardName));
+                sq.AppendCallback(() =>
+                {
+                    summonEnemy(EnemyDatabase.Instance.enemy(Enemy.Pattern._CardName));
+                });
                 sq.AppendInterval(0.8f);
             }
-            else if (Enemy.Pattern._enemyPattern == EnemyPattern.SUMMON)
+            else if (Enemy.Pattern._enemyPattern == EnemyPattern.SHIELD)
             {
-                Enemy.gainShield(Enemy.Pattern._Value);
+                sq.AppendCallback(() =>
+                {
+                    Enemy.gainShield(Enemy.Pattern._Value);
+                });
                 sq.AppendInterval(0.8f);
             }
             else if (Enemy.Pattern._enemyPattern == EnemyPattern.HEAL)
             {
-                healEnemy(Enemy.Pattern._Value, Enemy);
+                sq.AppendCallback(() =>
+                {
+                    healEnemy(Enemy.Pattern._Value, Enemy);
+                });
                 sq.AppendInterval(0.8f);
             }
         }
-        
-            
-        
-        sq.AppendCallback(() => {
+
+
+
+        sq.AppendCallback(() =>
+        {
             deadChk();
             ChangeState(BattleState.EndTurn);
         });
     }
     public void deadChk()
     {
-        if (Hp <= 0) {
+        if (Hp <= 0)
+        {
             Hp = 0;
-            ChangeState(BattleState.Lose); 
+            ChangeState(BattleState.Lose);
         }
 
     }
@@ -674,7 +690,7 @@ public class BattleManager : MonoBehaviour
         Shield = ShieldDamageCompare ? Shield - dam : 0;
         if (FinalDamage > 0)
         {
-            DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage+"", Color.white);
+            DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage + "", Color.white);
             Hp -= FinalDamage;
         }
         else
@@ -685,31 +701,30 @@ public class BattleManager : MonoBehaviour
     }
     public void takeDamage(Sequence sq, Enemy Enemy)
     {
-        var dam = Enemy.damage;
-
-        int FinalDamage = Shield > dam ? 0 : dam - Shield;
-        Shield = Shield > dam ? Shield - dam : 0;
-        if (FinalDamage > 0)
+        sq.AppendCallback(() =>
         {
-            sq.AppendCallback(() =>
+            var dam = Enemy.damage;
+
+            int FinalDamage = Shield > dam ? 0 : dam - Shield;
+            Shield = Shield > dam ? Shield - dam : 0;
+            if (FinalDamage > 0)
             {
+
                 DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage + "", Color.white);
                 Enemy._img.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
                 Hp -= FinalDamage;
-            });
-        }
-        else
-        {
-            sq.AppendCallback(() =>
+            }
+            else
             {
                 DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
                 Enemy._img.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
-            });
-        }
+            }
+
+        });
     }
     public void takeHeal(int value)
     {
-        DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+"+value, Color.green);
+        DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+" + value, Color.green);
         Hp += value;
         if (Mhp < Hp) Hp = Mhp;
     }
@@ -724,11 +739,13 @@ public class BattleManager : MonoBehaviour
     public void PHASE_Reward()
     {
         int finalReward = reward * (Resource.Instance.VillageLevel["Farm"] + 100) / 100;
-        RewardPopup.Create(finalReward).OnComplete(()=> {
+        RewardPopup.Create(finalReward).OnComplete(() =>
+        {
             endgame_win(finalReward);
         });
     }
-    public void endgame_win(int finalReward) {
+    public void endgame_win(int finalReward)
+    {
         Resource.Instance.money += finalReward;
         Resource.Instance.StageUp();
         Resource.Instance.setHp(Hp);
@@ -741,7 +758,8 @@ public class BattleManager : MonoBehaviour
     {
         Sequence sq = DOTween.Sequence();
         sq.AppendInterval(2.5f);
-        sq.AppendCallback(() => { 
+        sq.AppendCallback(() =>
+        {
             Resource.Instance.reset();
             SceneManager.LoadScene("MainScene");
         });
@@ -774,7 +792,7 @@ public class BattleManager : MonoBehaviour
             moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.6f, true);
             if (deck)
                 cardAddSequence.AppendCallback(() => { card.flip(false); });
-            
+
             cardAddSequence.AppendInterval(0.15f);
         }
         cardAddSequence.AppendCallback(() => { waitDelay = false; });
@@ -785,7 +803,7 @@ public class BattleManager : MonoBehaviour
         Card tmpCard;
         if (Deck.Count <= 0)
         {
-            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.5f, false, false);  }
+            foreach (var card in Grave) { moveCard(sq, card, DeckPos(0), 0.5f, false, false); }
             Deck = Grave;
             ShuffleDeck(sq);
             Grave.Clear();
@@ -795,7 +813,8 @@ public class BattleManager : MonoBehaviour
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
         CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
-        for (int i = 0; i < Hand.Count; i++){
+        for (int i = 0; i < Hand.Count; i++)
+        {
             moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
             Hand[i].TouchableChange(true);
         }
@@ -809,20 +828,22 @@ public class BattleManager : MonoBehaviour
             seq.Join(card.transform.DOMove(v, duration));
         if (v.Equals(GravePos))
         {
-            seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60,60)), 0.2f));
+            seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60, 60)), 0.2f));
         }
-        else {
+        else
+        {
             if (card.transform.rotation.z != 0)
                 card.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one, bool cardFlip)
     {
-        if (one) {
+        if (one)
+        {
             seq.Append(card.transform.DOMove(v, duration));
-            if(card.transform.rotation.z!=0)
-                seq.Join(card.transform.DORotate(new Vector3(0,0,0), 0.2f));
-            seq.AppendCallback(()=>card.flip(cardFlip));
+            if (card.transform.rotation.z != 0)
+                seq.Join(card.transform.DORotate(new Vector3(0, 0, 0), 0.2f));
+            seq.AppendCallback(() => card.flip(cardFlip));
             seq.AppendInterval(0.05f);
         }
         else
@@ -852,7 +873,7 @@ public class BattleManager : MonoBehaviour
 
     public void EnemyStatus_TurnStart()
     {
-        foreach(Enemy enemy in EnemiesClone())
+        foreach (Enemy enemy in EnemiesClone())
         {
             if (!enemy._statusName.Equals("없음"))
             {
@@ -862,11 +883,11 @@ public class BattleManager : MonoBehaviour
     }
     public void EnemyStatus_WhileAttack(Enemy enemy)
     {
-           if (!enemy._statusName.Equals("없음"))
-            {
-                StatusDatabase.Instance.Action_WhileAttacked(enemy._statusName, enemy);
-            }
-        
+        if (!enemy._statusName.Equals("없음"))
+        {
+            StatusDatabase.Instance.Action_WhileAttacked(enemy._statusName, enemy);
+        }
+
     }
     public void EnemyStatus_TurnEnd()
     {
@@ -895,11 +916,11 @@ public class BattleManager : MonoBehaviour
     public void summonEnemy(EnemyStruct enemystruct)
     {
         if (EnemyPos.Count == Enemies.Count) return;
-        Vector2 enemyposTmp = new Vector2(0,0);
+        Vector2 enemyposTmp = new Vector2(0, 0);
         foreach (Vector2 enemyPosTmp in EnemyPos)
         {
             bool chk = false;
-            foreach(Enemy EnemyTmp in Enemies)
+            foreach (Enemy EnemyTmp in Enemies)
             {
                 if (enemyPosTmp.Equals(EnemyTmp.transform.position))
                     chk = true;
@@ -908,7 +929,7 @@ public class BattleManager : MonoBehaviour
         }
 
         var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
-        effectOn(_summonEffectPrefab,enemyTmp);
+        effectOn(_summonEffectPrefab, enemyTmp);
 
         enemyTmp.Set(enemystruct);
 
@@ -916,7 +937,7 @@ public class BattleManager : MonoBehaviour
         enemyHpBarTmp.Set(enemyTmp);
         Enemies.Add(enemyTmp);
     }
-    public void healEnemy(int a,Enemy enemy)
+    public void healEnemy(int a, Enemy enemy)
     {
         effectOn(_healEffectPrefab, enemy);
         enemy.heal(a);
@@ -933,7 +954,7 @@ public class BattleManager : MonoBehaviour
         Deck.Add(card);
         int Layer = 50 + (Deck.Count) * 3;
         card.setLayer(0, Layer);
-        BattleManager.Instance.moveCard(cardMoveSequence, card, DeckPos(0), 0.5f,false);
+        BattleManager.Instance.moveCard(cardMoveSequence, card, DeckPos(0), 0.5f, false);
         cardMoveSequence.AppendCallback(() => { card.flip(false); });
     }
     public Transform effectOn(Transform effectPrefab, Enemy enemy)
@@ -957,5 +978,5 @@ public class BattleManager : MonoBehaviour
 public delegate void Func();
 public enum BattleState
 {
-    Set, TurnStart, Draw, WaitingReroll, Reroll, Attack, EnemyAttack,EndTurn, Reward, Lose
+    Set, TurnStart, Draw, WaitingReroll, Reroll, Attack, EnemyAttack, EndTurn, Reward, Lose
 }

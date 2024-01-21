@@ -32,6 +32,10 @@ public class MainMenu : MonoBehaviour
     string ButtonText3 => Resource.Instance.Kor ? "서포터" : "Deck Enhance";
     string ButtonText4 => Resource.Instance.Kor ? "마을관리" : "Village";
 
+    [SerializeField] GameObject _RuleView_Container;
+    [SerializeField] GameObject _RulePrefab;
+    [SerializeField] GameObject _ImagePrefab;
+
 
     [SerializeField] TMP_Text _MoneyText;
     [SerializeField] Card _cardPrefab;
@@ -66,6 +70,17 @@ public class MainMenu : MonoBehaviour
         ButtonList.Add(_VillageButton);
         ButtonList.Add(_SupportButton);
         TextUpdate();
+    }
+    public GameObject InstantiateRules(RuleStruct ruleStruct)
+    {
+        var img = Instantiate(_ImagePrefab, new Vector2(0, 0), Quaternion.identity);
+        img.transform.SetParent(_RuleView_Container.transform); 
+        var rect = _RuleView_Container.GetComponent<RectTransform>();
+        rect.offsetMin = new Vector2(_RuleView_Container.transform.childCount*500,rect.offsetMin.y);
+        var card = Instantiate(_RulePrefab, img.transform.position, Quaternion.identity);
+        card.transform.SetParent(img.transform);
+        card.GetComponent<BonusRule>().Set(ruleStruct);
+        return card;
     }
     public void TextUpdate()
     {

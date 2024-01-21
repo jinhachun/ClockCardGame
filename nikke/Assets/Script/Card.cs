@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class Card : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Card : MonoBehaviour
     [SerializeField] private TMP_Text _defText;
     [SerializeField] private SpriteRenderer _cardBack;
 
+    public List<Card> Location;
+    protected float Size => this is BonusRule ? 1f : 0.8f;
 
     private string Exhaust => Resource.Instance.Kor?"º“∏Í":"Exhaust";
     private string Ethereal => Resource.Instance.Kor ? "»÷πﬂº∫" : "Ethereal";
@@ -175,20 +178,25 @@ public void Set(CardStruct str)
         if(_outLine!=null)
             _outLine.sortingOrder = newSortingOrder - 2;
         _cardBody.sortingOrder = newSortingOrder;
-        _species.sortingOrder = newSortingOrder+1;
-        _type.sortingOrder = newSortingOrder+1;
+
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
          meshRenderer = _text.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
+
         meshRenderer = _tier.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
+
+        if (this is BonusRule) return;
         meshRenderer = _infoText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
         meshRenderer = _attText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
         meshRenderer = _defText.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
+
+        _species.sortingOrder = newSortingOrder + 1;
+        _type.sortingOrder = newSortingOrder + 1;
     }
     public void setLayer(string A)
     {
@@ -197,34 +205,41 @@ public void Set(CardStruct str)
         _img.sortingLayerName = A;
         if (_outLine != null)
             _outLine.sortingLayerName = A;
-        _species.sortingLayerName = A;
-        _type.sortingLayerName = A;
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
         meshRenderer = _text.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
         meshRenderer = _tier.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
+
+        if (this is BonusRule) return;
         meshRenderer = _infoText.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
         meshRenderer = _attText.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
         meshRenderer = _defText.GetComponent<MeshRenderer>();
         meshRenderer.sortingLayerName = A;
+        _species.sortingLayerName = A;
+        _type.sortingLayerName = A;
 
     }
+    public void deleteCard()
+    {
+        this.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(this.gameObject); });
+    }
+    
     void OnMouseOver()
     {
         if (!Touchable) return;
-        _visual.transform.localScale = new Vector2(1.8f, 1.8f);
+        _visual.transform.localScale = new Vector2(Size*2, Size*2);
         setLayer(3,53+layer);
 
     }
 
     void OnMouseExit()
     {
-        if (!Touchable && _visual.transform.localScale.x == 0.8f) return;
-        _visual.transform.localScale = new Vector2(0.8f, 0.8f);
+        if (!Touchable && _visual.transform.localScale.x == Size) return;
+        _visual.transform.localScale = new Vector2(Size, Size);
         setLayer(0,50+ layer);
     }
 }
