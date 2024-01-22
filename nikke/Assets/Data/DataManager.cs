@@ -5,20 +5,23 @@ using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
+    private static DataManager instance;
+    public static DataManager Instance => instance;
     public TextAsset data;
     static private AllData datas;
-    static public string RuleName(int no,bool Kor) => Kor?datas.Rule[no].RuleName_KOR:datas.Rule[no].RuleName_ENG;
+    static public string RuleName(int no, bool Kor) => Kor ? datas.Rule[no].RuleName_KOR : datas.Rule[no].RuleName_ENG;
     static public string RuleInfo(int no, bool Kor) => Kor ? datas.Rule[no].RuleInfo_KOR : datas.Rule[no].RuleInfo_ENG;
-    static public string CardName(int no, bool Kor,bool Token) => Kor ? (Token? datas.TokenCard[no].CardName_KOR : datas.Card[no].CardName_KOR) : (Token ? datas.TokenCard[no].CardName_ENG : datas.Card[no].CardName_ENG);
-    static public string CardInfo(int no, bool Kor,bool Token) => Kor ? (Token? datas.TokenCard[no].CardInfo_KOR : datas.Card[no].CardInfo_KOR) : (Token? datas.TokenCard[no].CardInfo_ENG : datas.Card[no].CardInfo_ENG);
+    static public string CardName(int no, bool Kor, bool Token) => Kor ? (Token ? datas.TokenCard[no].CardName_KOR : datas.Card[no].CardName_KOR) : (Token ? datas.TokenCard[no].CardName_ENG : datas.Card[no].CardName_ENG);
+    static public string CardInfo(int no, bool Kor, bool Token) => Kor ? (Token ? datas.TokenCard[no].CardInfo_KOR : datas.Card[no].CardInfo_KOR) : (Token ? datas.TokenCard[no].CardInfo_ENG : datas.Card[no].CardInfo_ENG);
     void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         datas = JsonUtility.FromJson<AllData>(data.text);
     }
 
     void Update()
     {
-        
+
     }
 }
 [System.Serializable]

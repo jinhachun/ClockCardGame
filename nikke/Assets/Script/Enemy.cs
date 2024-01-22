@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
         if (tmpPattern._enemyPattern == EnemyPattern.ATT)
         {
             pattern tmp = tmpPattern;
-            if (Resource.Instance.Rules.ContainsKey(DataManager.RuleName(0,Resource.Instance.Kor)))
+            if (Resource.Instance.Rule_no(0))
             {
                 tmp._Value += tmp._Value * 15 * Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)] / 100;
             }
@@ -114,7 +114,7 @@ public class Enemy : MonoBehaviour
     }
     public void Rule_no1()
     {
-        if (Resource.Instance.Rules.ContainsKey(DataManager.RuleName(1, Resource.Instance.Kor)))
+        if (Resource.Instance.Rule_no(1))
         {
             this._hp += _hp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;
             this._mhp += _mhp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;

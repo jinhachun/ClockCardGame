@@ -37,31 +37,29 @@ public class Resource : MonoBehaviour
         {
             int randomIndex = Random.Range(0, CardDatabase.Instance.ruleDatabase.Count);
             RuleStruct bonusRule = CardDatabase.Instance.ruleDatabase[randomIndex];
-            if (Rules.ContainsKey(DataManager.RuleName(bonusRule._Number,Kor)))
+            if (tmpLv < bonusRule._level) continue;
+            if (Rule_no(bonusRule._Number))
             {
                 if (bonusRule._only) continue;
-                Rules[DataManager.RuleName(bonusRule._Number, Kor)] += bonusRule._level;
+                Rules[DataManager.RuleName(bonusRule._Number, Kor)] ++;
             }
             else
             {
-                Rules.Add(DataManager.RuleName(bonusRule._Number, Kor), bonusRule._level);
+                Rules.Add(DataManager.RuleName(bonusRule._Number, Kor), 1);
             }
             tmpLv -= bonusRule._level;
             loopCnt--;
         }
         
-        foreach(KeyValuePair<string,int> keyValuePair in Rules)
-        {
-            var tmpstruct = CardDatabase.Instance.ruleDatabase.Where(x => DataManager.RuleName(x._Number, Resource.Instance.Kor).Equals(keyValuePair.Key)).FirstOrDefault();
-            var card = MainMenu.Instance.InstantiateRules(tmpstruct);
-        }
+        
     }
-    public void Start()
+    public bool Rule_no(int n) => Rules.ContainsKey(DataManager.RuleName(n, Kor));
+    public void StartGame()
     {
         time = 0f;
         Kor = true;
-        LEVEL = 0;
         Rules = new Dictionary<string, int>();
+        setLEVEL();
         VillageLevel = new Dictionary<string, int>();
         VillageLevel.Add("Farm", PlayerPrefs.GetInt("Farm",0));
         VillageLevel.Add("House", PlayerPrefs.GetInt("House", 0));
@@ -74,19 +72,20 @@ public class Resource : MonoBehaviour
         SupportPrice.Add("Add", 0);
         SupportPrice.Add("Delete", 0);
         SupportPrice.Add("Heal", 0);
+        float Rule_no2_1 = Rule_no(2) ? -0.3f : 0;
+        float Rule_no2_2 = Rule_no(2) ? 0.1f : 0;
 
-        float Rule_no3_1 = Rules.ContainsKey(DataManager.RuleName(3, Kor)) ? -0.3f : 0;
-        float Rule_no3_2 = Rules.ContainsKey(DataManager.RuleName(3, Kor)) ? 0.1f : 0;
+        combiRate.Add(1f + Rule_no2_1);
+        combiRate.Add(1.2f + Rule_no2_1);
+        combiRate.Add(1.5f + Rule_no2_1);
+        combiRate.Add(2f + Rule_no2_1);
+        combiRate.Add(2.5f + Rule_no2_2);
+        combiRate.Add(3f + Rule_no2_2);
+        combiRate.Add(3.5f + Rule_no2_2);
 
-        combiRate.Add(1f + Rule_no3_1);
-        combiRate.Add(1.2f + Rule_no3_1);
-        combiRate.Add(1.5f + Rule_no3_1);
-        combiRate.Add(2f + Rule_no3_1);
-        combiRate.Add(2.5f + Rule_no3_2);
-        combiRate.Add(3f + Rule_no3_2);
-        combiRate.Add(3.5f + Rule_no3_2);
-
-        Hp = 100; tmpMhp = 100; Area = 1; Stage = 1;
+        float Rule_no3 = Rule_no(3) ? 20f : 0f;
+        bool Rule_no4 = Rule_no(4);
+        Hp = (int)((100f - Rule_no3) * (Rule_no(9) ? 0.5f : 1f)); tmpMhp = Hp; Area = 1; Stage = 1;
         money = 100; jewel = PlayerPrefs.GetInt("jewel", 3);
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
@@ -101,6 +100,7 @@ public class Resource : MonoBehaviour
             var tmp = (CardDatabase.Instance.cardByTier(startDeckTier));
             Deck.Add(tmp);
         }
+        if (Rule_no4) Deck.Add(CardDatabase.Instance.card_token(DataManager.CardName(2,Kor,true)));
     }
     public List<CardStruct> Deck;
     public int Hp;
@@ -176,7 +176,7 @@ public class Resource : MonoBehaviour
                 return;
             }
     }
-    public void Deck_Remove(int num)
+    public void Deck_Remove(int num,bool token)
     {
         foreach (CardStruct tmp in Deck)
             if (tmp.NUM.Equals(num))

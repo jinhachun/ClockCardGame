@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -29,8 +30,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] TMP_Text _ButtonText4;
     string ButtonText1 => Resource.Instance.Kor ? "메인" : "Main";
     string ButtonText2 => Resource.Instance.Kor ? "병사상점" : "Shop";
-    string ButtonText3 => Resource.Instance.Kor ? "서포터" : "Deck Enhance";
-    string ButtonText4 => Resource.Instance.Kor ? "마을관리" : "Village";
+    string ButtonText3 => Resource.Instance.Kor ? "마을" : "Village";
+    string ButtonText4 => Resource.Instance.Kor ? "기반시설" : "Infra";
 
     [SerializeField] GameObject _RuleView_Container;
     [SerializeField] GameObject _RulePrefab;
@@ -69,7 +70,16 @@ public class MainMenu : MonoBehaviour
         ButtonList.Add(_ShopButton);
         ButtonList.Add(_VillageButton);
         ButtonList.Add(_SupportButton);
+        InstantiateRule_UI();
         TextUpdate();
+    }
+    public void InstantiateRule_UI()
+    {
+        foreach (KeyValuePair<string, int> keyValuePair in Resource.Instance.Rules)
+        {
+            var tmpstruct = CardDatabase.Instance.ruleDatabase.Where(x => DataManager.RuleName(x._Number, Resource.Instance.Kor).Equals(keyValuePair.Key)).FirstOrDefault();
+            var card = MainMenu.Instance.InstantiateRules(tmpstruct);
+        }
     }
     public GameObject InstantiateRules(RuleStruct ruleStruct)
     {
@@ -136,6 +146,7 @@ public class MainMenu : MonoBehaviour
     }
     public void ButtonAction(int n)
     {
+        _RuleView_Container.SetActive(false);
         for(int i = 1; i <= MenuList.Count; i++)
         {
             if (i == n) { 
@@ -146,6 +157,7 @@ public class MainMenu : MonoBehaviour
                 MenuList[i - 1].SetActive(false);
                 ButtonList[i - 1].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
             }
+            if (i == 1) _RuleView_Container.SetActive(true);
         }
     }
 }

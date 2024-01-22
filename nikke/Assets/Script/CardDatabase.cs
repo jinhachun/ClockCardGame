@@ -111,27 +111,39 @@ public class CardDatabase : MonoBehaviour
         }
         return combi;
     }
+    public bool Rule_no5_0()
+    {
+        int cnt_card5tier = Resource.Instance.Deck.Where(x => x._tier >= 5).Count();
+        return cnt_card5tier >= 5;
+    }
     public string TypeCombinationText(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return " X1";
-        else if (combi == 1) return "OnePair X1.2";
-        else if (combi == 2) return "TwoPair X1.4";
-        else if (combi == 3) return "Triple X1.6";
-        else if (combi == 4) return "FullHouse X1.8";
-        else if (combi == 5) return "FourCard X2";
-        else return "FiveCard X3";
+        if (combi == 0) return " X"+TypeCombiRate(list);
+        else if (combi == 1) return "OnePair X" + TypeCombiRate(list);
+        else if (combi == 2) return "TwoPair X" + TypeCombiRate(list);
+        else if (combi == 3) return "Triple X" + TypeCombiRate(list);
+        else if (combi == 4) return "FullHouse X" + TypeCombiRate(list);
+        else if (combi == 5) return "FourCard X" + TypeCombiRate(list);
+        else return "FiveCard X" + TypeCombiRate(list);
     }
     public float TypeCombiRate(List<TYPE> list)
     {
+        float rateAdd = 0f;
+        if (Resource.Instance.Rule_no(5))
+        {
+            bool cnt_card5tier = Rule_no5_0();
+            if (cnt_card5tier) rateAdd += 0.3f;
+            else return 1f;
+        }
         int combi = TypeCombination(list);
-        if (combi == 0) return 1f;
-        else if (combi == 1) return 1.2f;
-        else if (combi == 2) return 1.4f;
-        else if (combi == 3) return 1.6f;
-        else if (combi == 4) return 1.8f;
-        else if (combi == 5) return 2;
-        else return 3;
+        if (combi == 0) return 1f + rateAdd;
+        else if (combi == 1) return 1.2f + rateAdd;
+        else if (combi == 2) return 1.4f + rateAdd;
+        else if (combi == 3) return 1.6f + rateAdd;
+        else if (combi == 4) return 1.8f + rateAdd;
+        else if (combi == 5) return 2 + rateAdd;
+        else return 3 + rateAdd;
 
     }
     

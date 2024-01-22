@@ -113,6 +113,15 @@ public class StatusDatabase : MonoBehaviour
     {
         switch (name)
         {
+            case "마구핥기":
+                {
+                    if (BattleManager.Instance.Deck.Count <= 0) return;
+                    StatusPopup(enemy);
+                    var deleteTarget = BattleManager.Instance.Deck[0];
+                    BattleManager.Instance.Deck.RemoveAt(0);
+                    deleteTarget.deleteCard();
+                    return;
+                }
             case "분노":
                 {
                     StatusPopup(enemy);

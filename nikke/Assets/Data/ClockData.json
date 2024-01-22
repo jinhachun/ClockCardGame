@@ -1,39 +1,81 @@
 {
   "Rule": [
     {
-      "RuleNum": "1",
+      "RuleNum": "0",
       "RuleName_KOR": "맹공",
-      "RuleName_ENG": "onslaught",
+      "RuleName_ENG": "Onslaught",
       "RuleInfo_KOR": "적 패턴의 대미지가 15% 증가합니다.",
       "RuleInfo_ENG": "Increases damage of enemy patterns by 15%."
     },
     {
-      "RuleNum": "2",
+      "RuleNum": "1",
       "RuleName_KOR": "튼튼",
-      "RuleName_ENG": "hardskin",
+      "RuleName_ENG": "Hardskin",
       "RuleInfo_KOR": "적 체력이 10% 증가합니다.",
       "RuleInfo_ENG": "Increases enemy hp by 10%."
     },
     {
-      "RuleNum": "3",
+      "RuleNum": "2",
       "RuleName_KOR": "조합왕",
       "RuleName_ENG": "CombiKing",
       "RuleInfo_KOR": "트리플 이하의 조합의 배율이 0.3 감소합니다. 풀하우스 이상의 조합의 배율이 0.1 증가합니다.",
       "RuleInfo_ENG": "Decreases the rate of a combination of triple or less by 0.2. Increases the rate of a combination of full houses or more by 0.1."
     },
     {
-      "RuleNum": "4",
+      "RuleNum": "3",
       "RuleName_KOR": "허약함",
-      "RuleName_ENG": "frailty",
+      "RuleName_ENG": "Infirmity",
       "RuleInfo_KOR": "최대 체력이 20 감소합니다.",
       "RuleInfo_ENG": "Decrease max Hp by 20."
     },
     {
-      "RuleNum": "5",
+      "RuleNum": "4",
       "RuleName_KOR": "눈치없는 손님",
-      "RuleName_ENG": "tactless guest",
+      "RuleName_ENG": "Tactless guest",
       "RuleInfo_KOR": "내 덱에 눅눅한 동글이가 들어있습니다.",
       "RuleInfo_ENG": "Add Soggy Dongle to my Deck."
+    },
+    {
+      "RuleNum": "5",
+      "RuleName_KOR": "왕의귀환",
+      "RuleName_ENG": "The Return of the King",
+      "RuleInfo_KOR": "내 덱에 5티어 카드가 5장 이상 있으면, 속성조합의 배율이 0.3 증가합니다. 없을 경우, 속성조합이 적용되지 않습니다.",
+      "RuleInfo_ENG": "If I have more than 5 5-tier cards in my deck, type combination's rate is increased by 0.3. If not, type combination does not apply."
+    },
+    {
+      "RuleNum": "6",
+      "RuleName_KOR": "치명타",
+      "RuleName_ENG": "Fatality",
+      "RuleInfo_KOR": "크리티컬이 발동할 확률이 절반이 됩니다. 크리티컬의 대미지 배율이 3이 됩니다.",
+      "RuleInfo_ENG": "The critical has a half chance of triggering. The critical has a damage ratio of 3."
+    },
+    {
+      "RuleNum": "7",
+      "RuleName_KOR": "바가지",
+      "RuleName_ENG": "Rip off",
+      "RuleInfo_KOR": "마을에서의 비용이 10% 상승합니다.",
+      "RuleInfo_ENG": "The cost in the village increases by 10%."
+    },
+    {
+      "RuleNum": "8",
+      "RuleName_KOR": "불평등조약",
+      "RuleName_ENG": "Unequal treaty",
+      "RuleInfo_KOR": "마을에서 리롤 한번을 무료로 할 수 있습니다. 마을에서의 비용이 25% 상승합니다.",
+      "RuleInfo_ENG": "You can do one reroll for free in the village. The cost in the village increases by 25%."
+    },
+    {
+      "RuleNum": "9",
+      "RuleName_KOR": "흡혈마",
+      "RuleName_ENG": "Vampire",
+      "RuleInfo_KOR": "최대체력이 절반으로 줄어듭니다. 카드를 사용할 때마다, 체력을 1 회복합니다.",
+      "RuleInfo_ENG": "Reduces maximum HP by half. Every time you use a card, you recover 1 HP."
+    },
+    {
+      "RuleNum": "10",
+      "RuleName_KOR": "판금방어구",
+      "RuleName_ENG": "Sheet metal",
+      "RuleInfo_KOR": "보스는 턴이 끝날 때 마다, 방어도를 체력의 4%만큼 획득합니다.",
+      "RuleInfo_ENG": "At the end of the turn, the boss earns shield 4% of its Hp."
     }
   ],
   "Card": [

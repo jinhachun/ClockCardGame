@@ -1207,19 +1207,47 @@ MonoBehaviour:
     _statusValue: 10
   - _sprite: {fileID: 21300000, guid: 08895f19fdadcb743853812030489721, type: 3}
     _name: "\uD589\uB3D9\uB300\uC7A5\uCF54\uAE30"
-    _hp: 150
+    _hp: 200
     _area: 1
     _enemyType: 2
     _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC800\uC8FC"
+    - _enemyPattern: 0
+      _CardName: 
       _Value: 1
       _Bool: 0
-    - _enemyPattern: 4
+    - _enemyPattern: 0
       _CardName: 
-      _Value: 0
+      _Value: 2
       _Bool: 0
-    _statusStruct: 
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 4
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 8
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 16
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 32
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 64
+      _Bool: 0
+    - _enemyPattern: 0
+      _CardName: 
+      _Value: 64
+      _Bool: 0
+    - _enemyPattern: 3
+      _CardName: "\uC751\uAC00"
+      _Value: 5
+      _Bool: 0
+    _statusStruct: "\uB9C8\uAD6C\uD565\uAE30"
     _statusValue: 0
   - _sprite: {fileID: 21300000, guid: b46f7104bb2587d4bb3d8c0834ec77f4, type: 3}
     _name: "\uD3EC\uB300\uC7A5\uB78C\uC950"
@@ -1398,6 +1426,10 @@ MonoBehaviour:
     - "\uB458\uAE30"
     - "\uBE45\uB458\uAE30"
     - "\uB458\uAE30"
+    area: 1
+    enemyType: 2
+  - enemySquad:
+    - "\uD589\uB3D9\uB300\uC7A5\uCF54\uAE30"
     area: 1
     enemyType: 2
   - enemySquad:
@@ -1668,6 +1700,10 @@ MonoBehaviour:
   - _name: "\uAC00\uACE0\uC77C"
     sprite: {fileID: 21300000, guid: 1a4f117d7e4901b43818ce22b70111cf, type: 3}
     _info: "\uC0AC\uB9DD \uC2DC, \uC11D\uC0C1\uC73C\uB85C \uBCC0\uC2E0\uD569\uB2C8\uB2E4."
+  - _name: "\uB9C8\uAD6C\uD565\uAE30"
+    sprite: {fileID: 21300000, guid: a7bfddcd46c90ea458c3c83b01f39add, type: 3}
+    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB371\uC5D0 \uC788\uB294 \uCE74\uB4DC
+      \uD55C \uC7A5\uC774 \uC18C\uBA78\uD569\uB2C8\uB2E4."
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0

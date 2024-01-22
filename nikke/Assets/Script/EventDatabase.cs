@@ -175,7 +175,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(0);
+                            Resource.Instance.Deck_Remove(0,false);
                         });
                     }
                     else if (selectIndex == 1)
@@ -239,7 +239,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(Resource.Instance.Deck[Random.Range(0,Resource.Instance.Deck.Count)].NUM);
+                            Resource.Instance.Deck_Remove(Resource.Instance.Deck[Random.Range(0,Resource.Instance.Deck.Count)]._name);
                         });
                     }
                     else if (selectIndex == 1)
@@ -317,7 +317,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(2);
+                            Resource.Instance.Deck_Remove(2,false);
                         });
                     }
                     return null;
@@ -328,7 +328,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(4);
+                            Resource.Instance.Deck_Remove(4,false);
                             Resource.Instance.Event_Heal(15);
                         });
                     }
@@ -336,7 +336,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Deck_Remove(4);
+                            Resource.Instance.Deck_Remove(4,false);
                             Resource.Instance.Event_MoneyEarn(150);
                         });
                     }
@@ -356,7 +356,7 @@ public class EventDatabase : MonoBehaviour
                         {
                             var _tmpStruct = CardDatabase.Instance.card("¸Ô±úºñ");
                             var _tmpEvolveStruct = CardDatabase.Instance.card(_tmpStruct.evol[Random.Range(0, _tmpStruct.evol.Count)]);
-                            Resource.Instance.Deck_Remove(_tmpStruct.NUM);
+                            Resource.Instance.Deck_Remove(_tmpStruct.NUM,false);
                             Resource.Instance.Deck_Add(_tmpEvolveStruct.NUM);
                         });
                     }
@@ -445,7 +445,7 @@ public class EventDatabase : MonoBehaviour
                         {
                             var tmpList = Resource.Instance.Deck.Where(x => x._tier == 2).ToList();
                             var targetCard = tmpList[Random.Range(0, tmpList.Count)];
-                            Resource.Instance.Deck_Remove(targetCard.NUM);
+                            Resource.Instance.Deck_Remove(targetCard._name);
 
                         });
                     }

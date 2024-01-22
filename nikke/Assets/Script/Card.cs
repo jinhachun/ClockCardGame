@@ -21,7 +21,6 @@ public class Card : MonoBehaviour
     [SerializeField] private TMP_Text _defText;
     [SerializeField] private SpriteRenderer _cardBack;
 
-    public List<Card> Location;
     protected float Size => this is BonusRule ? 1f : 0.8f;
 
     private string Exhaust => Resource.Instance.Kor?"¼Ò¸ê":"Exhaust";
@@ -225,7 +224,13 @@ public void Set(CardStruct str)
     }
     public void deleteCard()
     {
-        this.transform.DOScale(0, 0.2f).OnComplete(() => { Destroy(this.gameObject); });
+        BattleManager.Instance.waitDelay = true;
+        this.flip(true);
+        this.setLayer(0,100);
+        this.transform.DOScale(0, BattleManager.GameState==BattleState.Attack?0.2f:1f).SetEase(Ease.InCubic).OnComplete(() => {
+            BattleManager.Instance.waitDelay = false;
+            Destroy(this.gameObject); 
+        });
     }
     
     void OnMouseOver()

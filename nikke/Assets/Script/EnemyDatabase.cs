@@ -60,7 +60,7 @@ public class EnemyDatabase : MonoBehaviour
         {
             enemyStructs.Add(enemylist(enemyList,enemy));
         }
-        sqdList.Remove(sqdByArea);
+        sqdList.RemoveAll(x=>x.Equals(sqdByArea));
         return enemyStructs;
     }
     public Vector2 spriteSize(EnemyType et)

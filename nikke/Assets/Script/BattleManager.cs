@@ -83,7 +83,7 @@ public class BattleManager : MonoBehaviour
     public EnemyType enemyType;
     public int reward;
 
-    bool waitDelay;
+    public bool waitDelay;
 
     public int Hp, Mhp, Shield;
     public int Att;
@@ -269,7 +269,7 @@ public class BattleManager : MonoBehaviour
             loopCnt++;
         }
         AddCard(queue, true);
-        sq.AppendInterval(0.5f * loopCnt);
+        sq.AppendInterval(0.4f * loopCnt);
         sq.AppendCallback(() =>
         {
             ChangeState(BattleState.Draw);
@@ -464,6 +464,7 @@ public class BattleManager : MonoBehaviour
         });
     }
     public bool pureAttack;
+
     public void PHASE_Attack()
     {
         Sequence sq = DOTween.Sequence();
@@ -473,9 +474,14 @@ public class BattleManager : MonoBehaviour
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
             bool critical = (5 + Resource.Instance.VillageLevel["Church"] * 2) >= Random.Range(0, 101);
+            if(critical && Resource.Instance.Rule_no(6))
+                critical = Random.Range(0, 2) >= 1 ? Rule_no(6) : false;
+
+
 
             sq.AppendCallback(() =>
             {
+                if(Rule_no(9)) takeHeal(1);
                 if (Enemies.Count > 0)
                 {
                     pureAttack = true;
@@ -502,6 +508,7 @@ public class BattleManager : MonoBehaviour
             if (card.isExhaust)
             {
                 sq.AppendCallback(() => { card.deleteCard(); } );
+                sq.AppendInterval(0.2f);
             }
             else
             {
@@ -542,7 +549,7 @@ public class BattleManager : MonoBehaviour
     public void enemyDamage(int dam, bool critical, Enemy target)
     {
         if (target == null) return;
-        var AttLeft = !critical ? dam : dam * 2;
+        var AttLeft = !critical ? dam : dam * (Rule_no(6) ? 3:2);
         int loopcnt = 0;
 
         while (Enemies.Count > 0 && AttLeft > 0)
@@ -761,7 +768,7 @@ public class BattleManager : MonoBehaviour
         sq.AppendCallback(() =>
         {
             Resource.Instance.reset();
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("StartScene");
         });
     }
     Queue<CardStruct> addcardQueue_Deck;
@@ -823,9 +830,9 @@ public class BattleManager : MonoBehaviour
     {
 
         if (one)
-            seq.Append(card.transform.DOMove(v, duration));
+            seq.Append(card.transform.DOMove(v, duration).SetEase(Ease.OutCubic));
         else
-            seq.Join(card.transform.DOMove(v, duration));
+            seq.Join(card.transform.DOMove(v, duration).SetEase(Ease.OutCubic));
         if (v.Equals(GravePos))
         {
             seq.Join(card.transform.DORotate(new Vector3(0, 0, Random.Range(-60, 60)), 0.2f));
@@ -840,14 +847,14 @@ public class BattleManager : MonoBehaviour
     {
         if (one)
         {
-            seq.Append(card.transform.DOMove(v, duration));
+            seq.Append(card.transform.DOMove(v, duration).SetEase(Ease.OutCubic));
             if (card.transform.rotation.z != 0)
                 seq.Join(card.transform.DORotate(new Vector3(0, 0, 0), 0.2f));
             seq.AppendCallback(() => card.flip(cardFlip));
             seq.AppendInterval(0.05f);
         }
         else
-            seq.Join(card.transform.DOMove(v, duration).OnPlay(() => { card.flip(cardFlip); }));
+            seq.Join(card.transform.DOMove(v, duration).SetEase(Ease.OutCubic).OnPlay(() => { card.flip(cardFlip); }));
     }
     public void deckMoveCard(Sequence sq)
     {
@@ -896,6 +903,10 @@ public class BattleManager : MonoBehaviour
             if (!enemy._statusName.Equals("¾øÀ½"))
             {
                 StatusDatabase.Instance.Action_TurnEnd(enemy._statusName, enemy);
+            }
+            if ((enemyType == EnemyType.Giga || enemyType == EnemyType.Final) &&(enemy._enemyType==EnemyType.Giga|| enemy._enemyType == EnemyType.Final)&& Rule_no(10) )
+            {
+                enemy.gainShield(enemy._mhp * 4 / 100);
             }
         }
     }
@@ -966,6 +977,15 @@ public class BattleManager : MonoBehaviour
     {
         var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
         return Effect;
+    }
+    public bool Rule_no(int n)
+    {
+        if (Resource.Instance.Rule_no(n))
+        {
+            DamagePopup.Create(new Vector2(0,0), DataManager.RuleName(n,Resource.Instance.Kor), Color.yellow);
+            return true;
+        }
+        return false;
     }
 
 

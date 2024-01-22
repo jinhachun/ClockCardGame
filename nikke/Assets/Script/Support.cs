@@ -20,7 +20,8 @@ public class Support : MonoBehaviour
     [SerializeField] TMP_Text _DeletePrice;
     [SerializeField] TMP_Text _EvolvePrice;
 
-    public int Price => 30;
+    
+    public int Price => (int)(30*(Resource.Instance.Rule_no(7)?1.1f*Resource.Instance.Rules[DataManager.RuleName(7,Resource.Instance.Kor)]:1f) * (Resource.Instance.Rule_no(8) ? 1.25f : 1f));
     public int RerollPrice = 0;
     public int HealPrice => Price* (Resource.Instance.SupportPrice["Heal"]+2);
     public int AddPrice => Price* (Resource.Instance.SupportPrice["Add"] + 3);
@@ -28,7 +29,7 @@ public class Support : MonoBehaviour
     public int EvolvePrice => Price  * (Resource.Instance.SupportPrice["Evolve"]+ _cardEvolvePrefab.Str._tier*2);
     void Start()
     {
-        RerollPrice = Price;
+        RerollPrice = Resource.Instance.Rule_no(8) ? 0 : Price;
         Set();
     }
     public void Set()
@@ -50,7 +51,7 @@ public class Support : MonoBehaviour
         rare = Random.Range(0, 101) >= 75;
         if (rare)
         {
-            var rareCardDeck = Resource.Instance.Deck.Where(x => x.isRare && x._tier != 5).ToList();
+            var rareCardDeck = Resource.Instance.Deck.Where(x => x.isRare && x._tier != 5 && !x._Token).ToList();
             if (rareCardDeck.Count != 0)
                 _cardEvolvePrefab.Set(rareCardDeck[Random.Range(0, rareCardDeck.Count)]);
             else
@@ -58,7 +59,7 @@ public class Support : MonoBehaviour
         }
         if(!rare || rareChk == -1)
         {
-            var CardDeck = Resource.Instance.Deck.Where(x => x._tier != 5).ToList();
+            var CardDeck = Resource.Instance.Deck.Where(x => x._tier != 5 && !x._Token).ToList();
             if (CardDeck.Count != 0)
                 _cardEvolvePrefab.Set(CardDeck[Random.Range(0, CardDeck.Count)]);
             else
@@ -119,7 +120,7 @@ public class Support : MonoBehaviour
         if (Resource.Instance.money >= DeletePrice)
         {
             Resource.Instance.money -= DeletePrice;
-            Resource.Instance.Deck_Remove(_cardDeletePrefab.Str.NUM);
+            Resource.Instance.Deck_Remove(_cardDeletePrefab.Str.NUM,_cardDeletePrefab.Str._Token);
             Resource.Instance.SupportPrice["Delete"]++;
             _Content.transform.Find("Button_Delete").gameObject.SetActive(false);
             QuitChk();
@@ -144,7 +145,7 @@ public class Support : MonoBehaviour
             Resource.Instance.money -= EvolvePrice;
             var _tmpStruct = _cardEvolvePrefab.Str;
             var _tmpEvolveStruct = CardDatabase.Instance.card(_tmpStruct.evol[Random.Range(0,_tmpStruct.evol.Count)]);
-            Resource.Instance.Deck_Remove(_cardEvolvePrefab.Str.NUM);
+            Resource.Instance.Deck_Remove(_cardEvolvePrefab.Str.NUM, false);
             Resource.Instance.Deck_Add(_tmpEvolveStruct.NUM);
             Resource.Instance.SupportPrice["Evolve"]++;
             _Content.transform.Find("Button_Evolve").gameObject.SetActive(false);
