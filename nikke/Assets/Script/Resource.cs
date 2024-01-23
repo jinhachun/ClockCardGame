@@ -61,10 +61,10 @@ public class Resource : MonoBehaviour
         Rules = new Dictionary<string, int>();
         setLEVEL();
         VillageLevel = new Dictionary<string, int>();
-        VillageLevel.Add("Farm", PlayerPrefs.GetInt("Farm",0));
-        VillageLevel.Add("House", PlayerPrefs.GetInt("House", 0));
-        VillageLevel.Add("Church", PlayerPrefs.GetInt("Church", 0));
-        VillageLevel.Add("Bath", PlayerPrefs.GetInt("Bath", 0));
+        VillageLevel.Add("Farm", 0);
+        VillageLevel.Add("House", 0);
+        VillageLevel.Add("Church", 0);
+        VillageLevel.Add("Bath", 0);
 
 
         SupportPrice = new Dictionary<string, int>();
@@ -83,9 +83,11 @@ public class Resource : MonoBehaviour
         combiRate.Add(3f + Rule_no2_2);
         combiRate.Add(3.5f + Rule_no2_2);
 
-        float Rule_no3 = Rule_no(3) ? 20f : 0f;
+        float Rule_no3 = Rule_no(3) ? 10f : 0f;
+        float Rule_no9 = (Rule_no(9) ? -20 : 0);
         bool Rule_no4 = Rule_no(4);
-        Hp = (int)((100f - Rule_no3) * (Rule_no(9) ? 0.5f : 1f)); tmpMhp = Hp; Area = 1; Stage = 1;
+        Hp = (int)((100f - Rule_no3) + Rule_no9); 
+        tmpMhp = Hp; Area = 1; Stage = 1;
         money = 100; jewel = PlayerPrefs.GetInt("jewel", 3);
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
@@ -106,7 +108,7 @@ public class Resource : MonoBehaviour
     public int Hp;
     public bool Kor;
     public int tmpMhp;
-    public int mHp => tmpMhp * (100 + 5 * VillageLevel["Bath"]) / 100;
+    public int mHp => tmpMhp * (100 + 10 * VillageLevel["Bath"]) / 100;
     public int Area; public int Stage;
     public int money;
     public int LEVEL;

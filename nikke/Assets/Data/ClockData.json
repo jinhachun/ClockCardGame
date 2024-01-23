@@ -4,7 +4,7 @@
       "RuleNum": "0",
       "RuleName_KOR": "맹공",
       "RuleName_ENG": "Onslaught",
-      "RuleInfo_KOR": "적 패턴의 대미지가 15% 증가합니다.",
+      "RuleInfo_KOR": "적 패턴의 대미지가 10% 증가합니다.",
       "RuleInfo_ENG": "Increases damage of enemy patterns by 15%."
     },
     {
@@ -76,6 +76,27 @@
       "RuleName_ENG": "Sheet metal",
       "RuleInfo_KOR": "보스는 턴이 끝날 때 마다, 방어도를 체력의 4%만큼 획득합니다.",
       "RuleInfo_ENG": "At the end of the turn, the boss earns shield 4% of its Hp."
+    },
+    {
+      "RuleNum": "11",
+      "RuleName_KOR": "트릭룸",
+      "RuleName_ENG": "Trick Room",
+      "RuleInfo_KOR": "상대가 먼저 공격합니다.",
+      "RuleInfo_ENG": "Enemy attacks first."
+    },
+    {
+      "RuleNum": "12",
+      "RuleName_KOR": "빚쟁이",
+      "RuleName_ENG": "Creditor",
+      "RuleInfo_KOR": "전투가 시작할때, 내 보유 돈의 30%를 잃습니다.",
+      "RuleInfo_ENG": "At the start of the battle, You lose 30% of your money."
+    },
+    {
+      "RuleNum": "13",
+      "RuleName_KOR": "인간시대의 종말",
+      "RuleName_ENG": "Terminator",
+      "RuleInfo_KOR": "내 기계종족 카드들의 스탯이 +2/+2 됩니다. 다른 카드는 -1/-1 됩니다.",
+      "RuleInfo_ENG": "The stat on my mechanical species cards is +2/+2. The other cards are -1/-1."
     }
   ],
   "Card": [
@@ -173,16 +194,16 @@
     {
       "Number": "13",
       "CardName_KOR": "사신",
-      "CardInfo_KOR": "기본배율이 1.2가 됩니다.",
+      "CardInfo_KOR": "이 카드를 뽑으면, 기본배율이 1.2가 됩니다.",
       "CardName_ENG": "Reaper",
-      "CardInfo_ENG": "The default rate becomes 1.2."
+      "CardInfo_ENG": "When you draw this card, the default rate becomes 1.2."
     },
     {
       "Number": "14",
       "CardName_KOR": "마계왕",
-      "CardInfo_KOR": "기본배율이 1.5가 됩니다.",
+      "CardInfo_KOR": "이 카드를 뽑으면, 기본배율이 1.5가 됩니다.",
       "CardName_ENG": "Hades",
-      "CardInfo_ENG": "The default rate becomes 1.5."
+      "CardInfo_ENG": "When you draw this card, the default rate becomes 1.5."
     },
     {
       "Number": "15",
@@ -292,23 +313,23 @@
     {
       "Number": "30",
       "CardName_KOR": "삼두라",
-      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 2배가 됩니다.",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 내 모든 카드에게 +1/+1를 부여합니다.",
       "CardName_ENG": "Tridra",
-      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is doubled."
+      "CardInfo_ENG": "If the Species combination is triple when attacking, Give all my cards +1/+1."
     },
     {
       "Number": "31",
       "CardName_KOR": "케르베로삼",
-      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 2배가 됩니다.",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 내 모든 카드에게 +1/+1를 부여합니다.",
       "CardName_ENG": "Keruberotri",
-      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is doubled."
+      "CardInfo_ENG": "If the Species combination is triple when attacking, Give all my cards +1/+1."
     },
     {
       "Number": "32",
       "CardName_KOR": "킹삼도라",
-      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 공격력이 3배가 됩니다.",
+      "CardInfo_KOR": "공격할 때 종족조합이 트리플일 경우, 내 모든 카드에게 +3/+3을 부여합니다.",
       "CardName_ENG": "Kingtridora",
-      "CardInfo_ENG": "If the Species combination is triple when attacking, the attack power is tripled."
+      "CardInfo_ENG": "If the Species combination is triple when attacking, Give all my cards +3/+3."
     },
     {
       "Number": "33",
@@ -567,9 +588,9 @@
     {
       "Number": "9",
       "CardName_KOR": "저주",
-      "CardInfo_KOR": "내 패에 있는 무작위 카드 한 장에게 -4/-4를 부여합니다.",
+      "CardInfo_KOR": "내 패에 있는 무작위 카드 한 장에게 -3/-3을 부여합니다.",
       "CardName_ENG": "Curse",
-      "CardInfo_ENG": "Give -4/-4 to a random card in my hand ."
+      "CardInfo_ENG": "Give -3/-3 to a random card in my hand ."
     },
     {
       "Number": "10",

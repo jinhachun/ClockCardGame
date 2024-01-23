@@ -46,7 +46,6 @@ public class Event : MonoBehaviour
         if (Resource.Instance.Area >= 4 && Resource.Instance.Stage != 1)
         {
             eventText = eventText.Replace("@", Timer.Instance.TIME());
-            Resource.Instance.jewel++;
             PlayerPrefs.SetInt("maxLevel", PlayerPrefs.GetInt("maxLevel") + Random.Range(1,4));
         }
         _Text_eventtext.text = eventText;

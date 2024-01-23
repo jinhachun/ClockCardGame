@@ -12,6 +12,11 @@ public struct pattern
     public string _CardName;
     public int _Value;
     public bool _Bool;
+
+    public void SetValue(int value)
+    {
+        this._Value = value;
+    }
 }
 
 [Serializable]

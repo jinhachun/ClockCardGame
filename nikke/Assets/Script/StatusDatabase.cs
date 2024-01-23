@@ -69,6 +69,7 @@ public class StatusDatabase : MonoBehaviour
                 {
                     StatusPopup(enemy);
                     enemy.setAttackBuff(enemy._statusValue);
+                    enemy.SetPatternText();
                     return;
                 }
             case ("반격"):
@@ -173,6 +174,16 @@ public class StatusDatabase : MonoBehaviour
                         enemy.statusValueChange(enemy._statusValue+5);
 
                     }
+                    return;
+                }
+            case "화아력":
+                {
+                    enemy.statusValueChange(enemy._statusValue - 1);
+                    if (enemy._statusValue > 0) return; 
+                    StatusPopup(enemy);
+                    BattleManager.Instance.effectOn(BattleManager.Instance._fireAttackffectPrefab, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
+                    BattleManager.Instance.takeDamage(50);
+                    enemy.statusValueChange(3);
                     return;
                 }
             case "정찰병":

@@ -111,7 +111,8 @@ public void Set(CardStruct str)
         this.Type = str._type;
 
         this.Stat = new STAT();
-        this.Stat.attack = str._stat.attack;
+        var Rule_no13_0 = Resource.Instance.Rule_no(13) ? (this.Species==SPECIES.MECH? 2: -1) : 0;
+        this.Stat.attack = str._stat.attack + Rule_no13_0;
         this.Stat.defence = str._stat.defence;
 
         StatChange("Attack", this.Stat.attack);

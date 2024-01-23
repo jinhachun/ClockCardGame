@@ -26,8 +26,6 @@ public class Enemy : MonoBehaviour
     bool isOver = false;
     public bool isTarget = false;
     int PatternIndex;
-    public double attackBuff = 0;
-    public int damage => (int)attackBuff + Pattern._Value;
     public void setAttackBuff()
     {
         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
@@ -75,11 +73,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(this._enemyType + " " + EnemyDatabase.Instance.spriteSize(this._enemyType));
         this._img.transform.parent.localScale = EnemyDatabase.Instance.spriteSize(this._enemyType);
 
-        this._enemyPatterns = new List<pattern>();
-        foreach (pattern tmpPattern in enemyStruct._enemyPatterns)
-        {
-            Rule_no0(tmpPattern);
-        }
+        this._enemyPatterns = Str._enemyPatterns;
         this._statusValue = enemyStruct._statusValue;
         if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
         _statusText.text = this._statusValue+"";
@@ -97,21 +91,6 @@ public class Enemy : MonoBehaviour
         PatternIndex = 0;
     }
 
-    public void Rule_no0(pattern tmpPattern)
-    {
-        if (tmpPattern._enemyPattern == EnemyPattern.ATT)
-        {
-            pattern tmp = tmpPattern;
-            if (Resource.Instance.Rule_no(0))
-            {
-                tmp._Value += tmp._Value * 15 * Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)] / 100;
-            }
-            this._enemyPatterns.Add(tmp);
-        }
-        else
-            this._enemyPatterns.Add(tmpPattern);
-
-    }
     public void Rule_no1()
     {
         if (Resource.Instance.Rule_no(1))
@@ -135,13 +114,19 @@ public class Enemy : MonoBehaviour
 
     }
     public pattern Pattern => _enemyPatterns[PatternIndex];
+    public double attackBuff = 0;
+    public int attackValue_Rule=> Pattern._Value
+        + (Resource.Instance.Rule_no(0) ? (Pattern._Value * 10 * (Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)]) / 100) : (0));
+    public int damage => (int)attackBuff + attackValue_Rule;
+    
+
     public void SetPatternText()
     {
         switch (Pattern._enemyPattern)
         {
             case EnemyPattern.ATT:
                 {
-                    string dammTxt = Pattern._Value + (attackBuff == 0 ? "" : "+" + attackBuff);
+                    string dammTxt = (attackValue_Rule) + (attackBuff == 0 ? "" : "+" + attackBuff);
                     this._hpBar.setText_Pattern(dammTxt, Color.red);
                     return;
                 }
@@ -155,7 +140,17 @@ public class Enemy : MonoBehaviour
                     this._hpBar.setText_Pattern("Zzz", Color.green);
                     return;
                 }
-              
+            case EnemyPattern.HEAL:
+                {
+                    this._hpBar.setText_Pattern("+", Color.green);
+                    return;
+                }
+            case EnemyPattern.SHIELD:
+                {
+                    this._hpBar.setText_Pattern("DEF", Color.blue);
+                    return;
+                }
+
             default:
                 this._hpBar.setText_Pattern("?", Color.green);
                 return;

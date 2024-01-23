@@ -244,13 +244,25 @@ public class CardDatabase : MonoBehaviour
                 return (() =>
                 {
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
-                        b.StatChange("Attack", b.Stat.attack * 2);
+                    {
+                        foreach (Card card in BattleManager.Instance.AllCards)
+                        {
+                            card.StatChange("Attack", card.Stat.attack +1);
+                            card.StatChange("Defence", card.Stat.defence + 1);
+                        }
+                    }
                 });
             case "Å·»ïµµ¶ó":
                 return (() =>
                 {
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
-                        b.StatChange("Attack", b.Stat.attack * 3);
+                    {
+                        foreach (Card card in BattleManager.Instance.AllCards)
+                        {
+                            card.StatChange("Attack", card.Stat.attack + 3);
+                            card.StatChange("Defence", card.Stat.defence + 3);
+                        }
+                    }
                 });
             case "°ñ¸ñ´ëÀåµ¿±Û":
                 return (() => {
@@ -439,8 +451,8 @@ public class CardDatabase : MonoBehaviour
                     var tmpList = BattleManager.Instance.Hand.Where(x => !(x.Stat.attack == 0 && x.Stat.defence == 0)).ToList();
                     if (tmpList.Count == 0) return;
                     var tmpCard = tmpList[Random.Range(0, tmpList.Count)];
-                    tmpCard.StatChange("Attack", tmpCard.Stat.attack -4);
-                    tmpCard.StatChange("Defence", tmpCard.Stat.defence -4);
+                    tmpCard.StatChange("Attack", tmpCard.Stat.attack -3);
+                    tmpCard.StatChange("Defence", tmpCard.Stat.defence -3);
                 });
 
 

@@ -21,7 +21,7 @@ public class Support : MonoBehaviour
     [SerializeField] TMP_Text _EvolvePrice;
 
     
-    public int Price => (int)(30*(Resource.Instance.Rule_no(7)?1.1f*Resource.Instance.Rules[DataManager.RuleName(7,Resource.Instance.Kor)]:1f) * (Resource.Instance.Rule_no(8) ? 1.25f : 1f));
+    public int Price => (int)(30*(1f+(Resource.Instance.Rule_no(7)?0.1f*Resource.Instance.Rules[DataManager.RuleName(7,Resource.Instance.Kor)]:0f)) * (Resource.Instance.Rule_no(8) ? 1.2f : 1f));
     public int RerollPrice = 0;
     public int HealPrice => Price* (Resource.Instance.SupportPrice["Heal"]+2);
     public int AddPrice => Price* (Resource.Instance.SupportPrice["Add"] + 3);

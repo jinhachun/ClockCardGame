@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public Transform _lightAttackffectPrefab;
     [SerializeField] public Transform _darkAttackffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
-    List<Vector2> HandPos;
+    public List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
     Vector2 ButtonPos(float i) => new Vector2(ButtonPosX, ButtonPosY - ButtonPosBlank * i);
     List<Vector2> EnemyPos;
@@ -58,6 +58,7 @@ public class BattleManager : MonoBehaviour
     public List<Card> Deck;
     public List<Card> Hand;
     public List<Card> Grave;
+    public List<Card> AllCards => Deck.Concat(Hand).Concat(Grave).ToList();
     List<Card> Cards;
     public List<Enemy> targetEnemy => Enemies.Where(x => x.isTarget).ToList();
     public int howManyCardsinDeck(string N)
@@ -90,6 +91,7 @@ public class BattleManager : MonoBehaviour
     public int Def;
     public double Rate;
     public int RerollChance;
+    public int Turn;
     TMP_Text RerollText;
     DeckCount DeckCntTxt;
     DeckCount GraveCntTxt;
@@ -119,6 +121,7 @@ public class BattleManager : MonoBehaviour
     private void ChangeState(BattleState battleState)
     {
         GameState = battleState;
+        Debug.Log(battleState);
         switch (battleState)
         {
             case BattleState.Set:
@@ -166,7 +169,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_Set()
     {
-        Att = 0; Def = 0; Rate = 1;
+        Att = 0; Def = 0; Rate = 1; Turn = 0;
         tmpAtt = 0; tmpDef = 0; tmpRate = 1; tmpReroll = 0;
         Enemies = new List<Enemy>();
         Deck = new List<Card>();
@@ -244,8 +247,9 @@ public class BattleManager : MonoBehaviour
     {
 
         Sequence sq = DOTween.Sequence();
-
+        Turn++;
         Shield = 0;
+        if (Rule_no(13) && Turn == 1) Shield += 100;
         rerolladd(1);
         foreach (var enemy in EnemiesClone())
         {
@@ -272,6 +276,7 @@ public class BattleManager : MonoBehaviour
         sq.AppendInterval(0.4f * loopCnt);
         sq.AppendCallback(() =>
         {
+            if (Rule_no(11)) { ChangeState(BattleState.EnemyAttack); return; }
             ChangeState(BattleState.Draw);
         });
     }
@@ -473,7 +478,7 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
-            bool critical = (5 + Resource.Instance.VillageLevel["Church"] * 2) >= Random.Range(0, 101);
+            bool critical = (5 + Resource.Instance.VillageLevel["Church"] * 4) >= Random.Range(0, 101);
             if(critical && Resource.Instance.Rule_no(6))
                 critical = Random.Range(0, 2) >= 1 ? Rule_no(6) : false;
 
@@ -531,7 +536,10 @@ public class BattleManager : MonoBehaviour
 
             tmpAtt = 0; tmpDef = 0; tmpRate = 1;
             if (!battleEndChk())
+            {
+                if (Resource.Instance.Rule_no(11)) { ChangeState(BattleState.EndTurn); return; }
                 ChangeState(BattleState.EnemyAttack);
+            }
         });
     }
     public bool battleEndChk()
@@ -678,6 +686,7 @@ public class BattleManager : MonoBehaviour
         sq.AppendCallback(() =>
         {
             deadChk();
+            if (Resource.Instance.Rule_no(11)){ ChangeState(BattleState.Draw); return;}
             ChangeState(BattleState.EndTurn);
         });
     }
@@ -745,7 +754,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_Reward()
     {
-        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"] + 100) / 100;
+        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*5 + 100) / 100;
         RewardPopup.Create(finalReward).OnComplete(() =>
         {
             endgame_win(finalReward);
@@ -754,6 +763,8 @@ public class BattleManager : MonoBehaviour
     public void endgame_win(int finalReward)
     {
         Resource.Instance.money += finalReward;
+        if(enemyType==EnemyType.Giga)
+            Resource.Instance.jewel++;
         Resource.Instance.StageUp();
         Resource.Instance.setHp(Hp);
         DOTween.KillAll();
@@ -976,6 +987,11 @@ public class BattleManager : MonoBehaviour
     public Transform effectOn(Transform effectPrefab, Card card)
     {
         var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
+        return Effect;
+    }
+    public Transform effectOn(Transform effectPrefab, Vector2 v)
+    {
+        var Effect = Instantiate(effectPrefab, v, Quaternion.identity);
         return Effect;
     }
     public bool Rule_no(int n)

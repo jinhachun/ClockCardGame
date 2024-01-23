@@ -9,6 +9,7 @@ public class LevelSlider : MonoBehaviour
 {
     public GameObject _sliderObject;
     public TMP_Text _text;
+    public TMP_Text _text_max;
     private Slider _slider;
     public void Start()
     {
@@ -19,6 +20,7 @@ public class LevelSlider : MonoBehaviour
     public void TextUpdate()
     {
         _text.text = "LV."+((int)_slider.value).ToString();
+        _text_max.text = "MaxLv : " + _slider.maxValue.ToString();
     }
     public void StartGame()
     {

@@ -42,14 +42,6 @@ public class EventDatabase : MonoBehaviour
                     }
                     return true;
                 }
-            case "안동글이와의 만남":
-                {
-                    if (selectIndex == 0)
-                    {
-                        if (Resource.Instance.Hp <= 10) return false;
-                    }
-                    return true;
-                }
             case "위험한 도박":
                 {
                     if (selectIndex == 0)
@@ -374,7 +366,6 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.Event_Damage(10);
                         });
                     }
                     else if (selectIndex == 1)

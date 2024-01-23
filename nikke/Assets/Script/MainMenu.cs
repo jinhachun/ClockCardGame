@@ -36,6 +36,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject _RuleView_Container;
     [SerializeField] GameObject _RulePrefab;
     [SerializeField] GameObject _ImagePrefab;
+    [SerializeField] GameObject _RuleBackGroundImage;
 
 
     [SerializeField] TMP_Text _MoneyText;
@@ -77,6 +78,7 @@ public class MainMenu : MonoBehaviour
     {
         foreach (KeyValuePair<string, int> keyValuePair in Resource.Instance.Rules)
         {
+            _RuleBackGroundImage.SetActive(false);
             var tmpstruct = CardDatabase.Instance.ruleDatabase.Where(x => DataManager.RuleName(x._Number, Resource.Instance.Kor).Equals(keyValuePair.Key)).FirstOrDefault();
             var card = MainMenu.Instance.InstantiateRules(tmpstruct);
         }
@@ -86,7 +88,7 @@ public class MainMenu : MonoBehaviour
         var img = Instantiate(_ImagePrefab, new Vector2(0, 0), Quaternion.identity);
         img.transform.SetParent(_RuleView_Container.transform); 
         var rect = _RuleView_Container.GetComponent<RectTransform>();
-        rect.offsetMin = new Vector2(_RuleView_Container.transform.childCount*500,rect.offsetMin.y);
+        rect.offsetMin = new Vector2(_RuleView_Container.transform.childCount*480,rect.offsetMin.y);
         var card = Instantiate(_RulePrefab, img.transform.position, Quaternion.identity);
         card.transform.SetParent(img.transform);
         card.GetComponent<BonusRule>().Set(ruleStruct);
@@ -142,6 +144,7 @@ public class MainMenu : MonoBehaviour
     {
         if (Resource.Instance.Area >= 4 && Resource.Instance.Stage!=1) return;
         DOTween.KillAll();
+        if (Resource.Instance.Rule_no(12)) Resource.Instance.money = (Resource.Instance.money*70/100);
         SceneManager.LoadScene("BattleScene");
     }
     public void ButtonAction(int n)
