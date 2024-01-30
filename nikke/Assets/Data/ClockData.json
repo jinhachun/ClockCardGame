@@ -5,7 +5,7 @@
       "RuleName_KOR": "맹공",
       "RuleName_ENG": "Onslaught",
       "RuleInfo_KOR": "적 패턴의 대미지가 10% 증가합니다.",
-      "RuleInfo_ENG": "Increases damage of enemy patterns by 15%."
+      "RuleInfo_ENG": "Increases damage of enemy patterns by 10%."
     },
     {
       "RuleNum": "1",
@@ -25,12 +25,12 @@
       "RuleNum": "3",
       "RuleName_KOR": "허약함",
       "RuleName_ENG": "Infirmity",
-      "RuleInfo_KOR": "최대 체력이 20 감소합니다.",
-      "RuleInfo_ENG": "Decrease max Hp by 20."
+      "RuleInfo_KOR": "최대 체력이 10 감소합니다.",
+      "RuleInfo_ENG": "Decrease max Hp by 10."
     },
     {
       "RuleNum": "4",
-      "RuleName_KOR": "눈치없는 손님",
+      "RuleName_KOR": "몰래 온 손님",
       "RuleName_ENG": "Tactless guest",
       "RuleInfo_KOR": "내 덱에 눅눅한 동글이가 들어있습니다.",
       "RuleInfo_ENG": "Add Soggy Dongle to my Deck."
@@ -53,22 +53,22 @@
       "RuleNum": "7",
       "RuleName_KOR": "바가지",
       "RuleName_ENG": "Rip off",
-      "RuleInfo_KOR": "마을에서의 비용이 10% 상승합니다.",
+      "RuleInfo_KOR": "마을에서의 비용이 5% 상승합니다.",
       "RuleInfo_ENG": "The cost in the village increases by 10%."
     },
     {
       "RuleNum": "8",
       "RuleName_KOR": "불평등조약",
       "RuleName_ENG": "Unequal treaty",
-      "RuleInfo_KOR": "마을에서 리롤 한번을 무료로 할 수 있습니다. 마을에서의 비용이 25% 상승합니다.",
+      "RuleInfo_KOR": "마을에서 리롤 한번을 무료로 할 수 있습니다. 마을에서의 비용이 20% 상승합니다.",
       "RuleInfo_ENG": "You can do one reroll for free in the village. The cost in the village increases by 25%."
     },
     {
       "RuleNum": "9",
       "RuleName_KOR": "흡혈마",
       "RuleName_ENG": "Vampire",
-      "RuleInfo_KOR": "최대체력이 절반으로 줄어듭니다. 카드를 사용할 때마다, 체력을 1 회복합니다.",
-      "RuleInfo_ENG": "Reduces maximum HP by half. Every time you use a card, you recover 1 HP."
+      "RuleInfo_KOR": "최대체력이 20 줄어듭니다. 카드를 사용할 때마다, 체력을 1 회복합니다.",
+      "RuleInfo_ENG": "Reduces maximum HP by 20. Every time you use a card, you recover 1 HP."
     },
     {
       "RuleNum": "10",
@@ -81,8 +81,8 @@
       "RuleNum": "11",
       "RuleName_KOR": "트릭룸",
       "RuleName_ENG": "Trick Room",
-      "RuleInfo_KOR": "상대가 먼저 공격합니다.",
-      "RuleInfo_ENG": "Enemy attacks first."
+      "RuleInfo_KOR": "상대가 먼저 공격합니다. 첫 턴에는 방어도 100을 얻습니다.",
+      "RuleInfo_ENG": "Enemy attacks first. On the first turn, you get 100 defense, too."
     },
     {
       "RuleNum": "12",
@@ -95,8 +95,57 @@
       "RuleNum": "13",
       "RuleName_KOR": "인간시대의 종말",
       "RuleName_ENG": "Terminator",
-      "RuleInfo_KOR": "내 기계종족 카드들의 스탯이 +2/+2 됩니다. 다른 카드는 -1/-1 됩니다.",
-      "RuleInfo_ENG": "The stat on my mechanical species cards is +2/+2. The other cards are -1/-1."
+      "RuleInfo_KOR": "내 기계종족 카드들의 공격력이 +3 됩니다. 다른 카드는 -1 됩니다.",
+      "RuleInfo_ENG": "The attck of mechanical species cards is +2. The other cards are -1."
+    },
+    {
+      "RuleNum": "14",
+      "RuleName_KOR": "무종족이 희종족",
+      "RuleName_ENG": "No race is good race",
+      "RuleInfo_KOR": "종족조합에 따른 배율이 뒤집힙니다.",
+      "RuleInfo_ENG": "The rate according to the race combination is reversed."
+    },
+    {
+      "RuleNum": "15",
+      "RuleName_KOR": "종말시계",
+      "RuleName_ENG": "Doomsday clock",
+      "RuleInfo_KOR": "전투시작후, 10턴이 지나면 턴이 끝날 때 현재 체력의 50%의 피해를 입습니다.",
+      "RuleInfo_ENG": "After the start of the battle, after 10 turns, you deal 50% damage of your current HP at the end of the turn."
+    },
+    {
+      "RuleNum": "16",
+      "RuleName_KOR": "끝판왕",
+      "RuleName_ENG": "Boss of Boss",
+      "RuleInfo_KOR": "최종보스와의 전투 직전 '마지막 전투' 이벤트로 회복할 수 없습니다.",
+      "RuleInfo_ENG": "Unable to recover with the 'last battle' event just before the battle against the final boss."
+    },
+    {
+      "RuleNum": "17",
+      "RuleName_KOR": "명을 받들라!",
+      "RuleName_ENG": "Obey the call!",
+      "RuleInfo_KOR": "내 언데드 종족 카드들의 공격력이 1 증가합니다. 적의 체력이 15% 증가합니다.",
+      "RuleInfo_ENG": "Increases my Undead card's attack by 1. Increases enemy's HP by 15%."
+    },
+    {
+      "RuleNum": "18",
+      "RuleName_KOR": "피의 욕망",
+      "RuleName_ENG": "Bloodlust",
+      "RuleInfo_KOR": "내 괴수종족 카드들이 공격할 때, 체력을 1 회복합니다. 적의 패턴의 대미지가 15% 증가합니다.",
+      "RuleInfo_ENG": "When my Monster cards attack, restore 1 HP. Increases damage of enemy patterns by 15%."
+    },
+    {
+      "RuleNum": "19",
+      "RuleName_KOR": "인간찬가",
+      "RuleName_ENG": "Humanity",
+      "RuleInfo_KOR": "내 인간 종족 카드들이 공격시 발동하는 효과가 2번 발동됩니다. 턴이 끝날 때마다, 적이 1 공격력을 얻습니다.",
+      "RuleInfo_ENG": "The effect that my human race cards invoke on attack is triggered 2 times. At the end of the turn, the enemy gets 1 bonus attack."
+    },
+    {
+      "RuleNum": "20",
+      "RuleName_KOR": "왔다리 갔다리",
+      "RuleName_ENG": "Back and Forth",
+      "RuleInfo_KOR": "홀수번째 턴에는 공격이 1.5배 되고 방어력이 0.5배 됩니다. 짝수번째 턴에는 반대로 됩니다.",
+      "RuleInfo_ENG": "On the odd turn, 1.5 times the attack and 0.5 times the defense. On the even turn, it is applied in reverse."
     }
   ],
   "Card": [
@@ -159,9 +208,9 @@
     {
       "Number": "8",
       "CardName_KOR": "보두앵돌이",
-      "CardInfo_KOR": "공격할때마다 내 덱의 카드들의 공격력이 1 증가합니다.",
+      "CardInfo_KOR": "공격할때마다 내 묘지와 덱의 카드들에게 공격력을 2 부여합니다.",
       "CardName_ENG": "BauDongle",
-      "CardInfo_ENG": "Each attack increases my Deck's cards' attack by 1."
+      "CardInfo_ENG": "Every time this card attacks, increases attack by 2 to Grave and Deck's cards."
     },
     {
       "Number": "9",
@@ -236,16 +285,16 @@
     {
       "Number": "19",
       "CardName_KOR": "티라노",
-      "CardInfo_KOR": "체력을 3 잃습니다, 내 체력이 절반 이하면 적 전체에게 피해를 15 줍니다.",
+      "CardInfo_KOR": "체력을 2 잃습니다. 적 전체에게 피해를 5 줍니다.",
       "CardName_ENG": "T-Rex",
-      "CardInfo_ENG": "Lose 3 Hp, Less than half of HP does 15 damage to the entire enemy."
+      "CardInfo_ENG": "Lose 2 Hp. Deals 5 damage to the entire enemy."
     },
     {
       "Number": "20",
       "CardName_KOR": "블랙티라노",
-      "CardInfo_KOR": "체력을 5 잃습니다. 내 체력이 절반 이하먼 적 전체에게 피해를 40 줍니다.",
+      "CardInfo_KOR": "체력을 2 잃습니다. 적 전체에게 피해를 25 줍니다.",
       "CardName_ENG": "Black T-Rex",
-      "CardInfo_ENG": "Lose 5 Hp, Less than half of HP does 40 damage to the entire enemy."
+      "CardInfo_ENG": "Lose 2 Hp. Deal 25 damage to the entire enemy."
     },
     {
       "Number": "21",
@@ -439,21 +488,21 @@
     {
       "Number": "48",
       "CardName_KOR": "샴동글이",
-      "CardInfo_KOR": "내 묘지에 샴동글이를 추가합니다.",
+      "CardInfo_KOR": "내 묘지에 샴동글이를 2장 추가합니다.",
       "CardName_ENG": "Twingle",
       "CardInfo_ENG": "After the attack, add a Twingle to the Grave."
     },
     {
       "Number": "49",
       "CardName_KOR": "삼동글이",
-      "CardInfo_KOR": "내 묘지에 삼동글이를 2장 추가합니다.",
+      "CardInfo_KOR": "내 묘지에 삼동글이를 3장 추가합니다.",
       "CardName_ENG": "Tridongle",
       "CardInfo_ENG": "After the attack, add two Tridongle to the Grave."
     },
     {
       "Number": "50",
       "CardName_KOR": "동글키메라",
-      "CardInfo_KOR": "내 묘지에 삼동글이를 2장 추가합니다. 이 카드의 공격력은 이 카드를 뽑을 때의 내 묘지에 있는 카드 수입니다.",
+      "CardInfo_KOR": "내 묘지에 동글키메라를 3장 추가합니다. 이 카드의 공격력은 이 카드를 뽑을 때의 내 묘지에 있는 카드 수입니다.",
       "CardName_ENG": "Chimera Dongle",
       "CardInfo_ENG": "After the attack, add two Tridongle to the Grave. Attack of this card is the number of cards in Grave when drawing."
     },
@@ -519,6 +568,34 @@
       "CardInfo_KOR": "내 덱에 5티어 무작위 카드를 추가합니다.",
       "CardName_ENG": "SlotMachine+",
       "CardInfo_ENG": "Add a 5 tier random card to my Deck."
+    },
+    {
+      "Number": "60",
+      "CardName_KOR": "천사동글이",
+      "CardInfo_KOR": "내 모든 카드에게 +2/+2를 부여합니다.",
+      "CardName_ENG": "AngelDongle",
+      "CardInfo_ENG": "Give all my cards +2/+2."
+    },
+    {
+      "Number": "61",
+      "CardName_KOR": "프랑켄동글",
+      "CardInfo_KOR": "이 카드가 손에 있을 때, 이 카드를 뽑거나 리롤할 때마다 이 카드는 +2/+2를 얻습니다.",
+      "CardName_ENG": "FrankenDongle",
+      "CardInfo_ENG": "When you have this card in your hand, every time you draw this card or reroll, it earns +2/+2."
+    },
+    {
+      "Number": "62",
+      "CardName_KOR": "불가사리",
+      "CardInfo_KOR": "공격 시, 내 덱과 묘지에 있는 카드를 삭제하고 그 카드의 스탯을 얻습니다.",
+      "CardName_ENG": "Pulgasari",
+      "CardInfo_ENG": "When attacking, Delete cards in my Deck and Grave and get stat of those cards."
+    },
+    {
+      "Number": "63",
+      "CardName_KOR": "슈퍼컴퓨터",
+      "CardInfo_KOR": "리롤개수를 5회 획득합니다.",
+      "CardName_ENG": "SuperCOM",
+      "CardInfo_ENG": "Earn 5 re-rolls."
     }
   ],
   "TokenCard": [

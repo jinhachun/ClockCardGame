@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] StatusUnit _status;
     [SerializeField] public SpriteRenderer _img;
     [SerializeField] private SpriteRenderer _targetImg;
+    [SerializeField] private SpriteRenderer _targetBeforeClickImg;
     [SerializeField] private TMP_Text _statusText;
 
 
@@ -66,7 +67,7 @@ public class Enemy : MonoBehaviour
         this._name = enemyStruct._name;
         this._hp = enemyStruct._hp;
         this._mhp = this._hp;
-        Rule_no1();
+        Rule_HP();
         this._area = enemyStruct._area;
         this._img.sprite = enemyStruct._sprite;
         this._enemyType = enemyStruct._enemyType;
@@ -91,18 +92,28 @@ public class Enemy : MonoBehaviour
         PatternIndex = 0;
     }
 
-    public void Rule_no1()
+    public void Rule_HP()
     {
         if (Resource.Instance.Rule_no(1))
         {
             this._hp += _hp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;
             this._mhp += _mhp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;
         }
+        if (Resource.Instance.Rule_no(17))
+        {
+            this._hp += _hp * 15 / 100;
+            this._mhp += _mhp * 15 / 100;
+        }
 
     }
 
     void Update()
     {
+        if (isOver && isTarget==false)
+        {
+            _targetBeforeClickImg.gameObject.SetActive(true);
+        }
+        else _targetBeforeClickImg.gameObject.SetActive(false);
         if (isOver && Input.GetMouseButtonDown(0))
         {
             if (BattleManager.GameState != BattleState.WaitingReroll) return;
@@ -116,7 +127,8 @@ public class Enemy : MonoBehaviour
     public pattern Pattern => _enemyPatterns[PatternIndex];
     public double attackBuff = 0;
     public int attackValue_Rule=> Pattern._Value
-        + (Resource.Instance.Rule_no(0) ? (Pattern._Value * 10 * (Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)]) / 100) : (0));
+        + (Resource.Instance.Rule_no(0) ? (Pattern._Value * 10 * (Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)]) / 100) : (0))
+        + (Resource.Instance.Rule_no(18) ? (Pattern._Value * 15 / 100) : (0));
     public int damage => (int)attackBuff + attackValue_Rule;
     
 
@@ -161,6 +173,7 @@ public class Enemy : MonoBehaviour
     {
         PatternIndex++;
         if (PatternIndex == _enemyPatterns.Count) PatternIndex = 0;
+        SetPatternText();
     }
     void OnMouseOver()
     {

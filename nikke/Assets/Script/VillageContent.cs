@@ -9,10 +9,14 @@ public class VillageContent : MonoBehaviour
 
     [SerializeField] TMP_Text _text;
     private int level => Resource.Instance.VillageLevel[this.gameObject.name];
+    private void Awake()
+    {
+        TextUpdate();
+    }
     public void TextUpdate()
     {
         _image.sprite = _imageList[level >= 5 ? 4 : level];
-        _text.text = "Lv."+level;
+        _text.text = "Lv."+(level==4?"MAX":level.ToString());
     }
     private void FixedUpdate()
     {
@@ -20,16 +24,10 @@ public class VillageContent : MonoBehaviour
     }
     public void Upgrade()
     {
-        if (Resource.Instance.jewel > 0 && level<5)
+        if (Resource.Instance.jewel > 0 && level<4)
         {
             Resource.Instance.jewel--;
             Resource.Instance.VillageLevel[this.gameObject.name]++;
         }
-        SaveVillage();
-    }
-    public void SaveVillage()
-    {
-        PlayerPrefs.SetInt("jewel", Resource.Instance.jewel);
-        PlayerPrefs.SetInt(this.gameObject.name, level);
     }
 }

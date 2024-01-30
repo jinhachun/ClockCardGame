@@ -592,8 +592,6 @@ GameObject:
   m_Component:
   - component: {fileID: 723614868}
   - component: {fileID: 723614870}
-  - component: {fileID: 723614871}
-  - component: {fileID: 723614872}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -679,1147 +677,6 @@ MonoBehaviour:
   TypeCombi: 
   pureAttack: 0
   patternCnt: 0
---- !u!114 &723614871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723614867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ba6df8b5955a640ade6a910377cab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyList:
-  - _sprite: {fileID: 21300000, guid: 43b08e5b2605d9f46b23b48208d1f73b, type: 3}
-    _name: "\uBBF8\uB2C8\uC751\uAC00"
-    _hp: 25
-    _area: 1
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 5
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 10
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 2
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 0bf1bd2b6a9027b4ea7eb9ccc362ce60, type: 3}
-    _name: "\uB625\uAC1C"
-    _hp: 45
-    _area: 1
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 2
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 4
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 8
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 16
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 32
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 665336ab9d7a15549ba1d2ded698066e, type: 3}
-    _name: "\uC655\uC751\uAC00"
-    _hp: 100
-    _area: 1
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 39d983c0475f6b44ba51048b04ebf47b, type: 3}
-    _name: "\uD654\uB09C\uD45C\uC9C0\uD310"
-    _hp: 45
-    _area: 1
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 10
-      _Bool: 0
-    _statusStruct: "\uBD84\uB178"
-    _statusValue: 1
-  - _sprite: {fileID: 21300000, guid: f49df4d974de8d249a637091d8eecb21, type: 3}
-    _name: "\uB458\uAE30"
-    _hp: 20
-    _area: 1
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 4
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 4
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 11bcca7b2814c7743a2d9ee7577bcb0c, type: 3}
-    _name: "\uB6B1\uB0E5\uC774"
-    _hp: 70
-    _area: 1
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uACE0\uC591\uC774\uD138"
-      _Value: 1
-      _Bool: 1
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 12
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 15
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 7309613071481a646913558b20fcac00, type: 3}
-    _name: "\uBE45\uB458\uAE30"
-    _hp: 180
-    _area: 1
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 35
-      _Bool: 0
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 3
-      _Bool: 0
-    _statusStruct: "\uB450\uBAA9"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 84c3eec99c8a74c44b1171ef79ace3ae, type: 3}
-    _name: "\uC560\uBC8C"
-    _hp: 60
-    _area: 2
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 12
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 7058d013c4b3d0e4797e035590710d1a, type: 3}
-    _name: "\uBC8C\uB808"
-    _hp: 60
-    _area: 2
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 12
-      _Bool: 0
-    _statusStruct: "\uC5C6\uC74C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: f88ecb814f7eb7d4086b8c8926463511, type: 3}
-    _name: "\uBC11\uB3D9\uC774"
-    _hp: 130
-    _area: 2
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 3
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 3
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 3
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uB2E8\uB2E8\uD568"
-    _statusValue: 6
-  - _sprite: {fileID: 21300000, guid: f89ff8bcb7812a549892e2705442d946, type: 3}
-    _name: "\uB3C4\uAE68\uBE44"
-    _hp: 220
-    _area: 2
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 15
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uB3C4\uAE68\uBE44\uC694\uC220"
-    _statusValue: 5
-  - _sprite: {fileID: 21300000, guid: 2814092e18259fb469d3bc18623e0d40, type: 3}
-    _name: "\uD648\uB7F0\uB3C4\uAE68\uBE44"
-    _hp: 180
-    _area: 2
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 3
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 6
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 12
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 24
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 48
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 48
-      _Bool: 0
-    _statusStruct: "\uB3C4\uAE68\uBE44\uC694\uC220"
-    _statusValue: 5
-  - _sprite: {fileID: 21300000, guid: 24fe774b031892e48a90e0de13fa1de9, type: 3}
-    _name: "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    _hp: 75
-    _area: 2
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 8
-      _Bool: 0
-    _statusStruct: "\uD3ED\uC8FC"
-    _statusValue: 3
-  - _sprite: {fileID: 21300000, guid: 94962754723b7434c8ab0c62d49f27c1, type: 3}
-    _name: "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    _hp: 40
-    _area: 2
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 7
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 10
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 2
-      _CardName: "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-      _Value: 1
-      _Bool: 0
-    _statusStruct: "\uBC18\uACA9"
-    _statusValue: 1
-  - _sprite: {fileID: 21300000, guid: 869a865a189c97f429468fc340d0fc7a, type: 3}
-    _name: "\uC232\uC655\uC624\uB9AC\uB108\uAD6C\uB9AC"
-    _hp: 500
-    _area: 2
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 35
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 0
-      _Value: 5
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 0
-      _Value: 10
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 45
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 45
-      _Bool: 0
-    _statusStruct: "\uACE0\uD608\uC555"
-    _statusValue: 5
-  - _sprite: {fileID: 21300000, guid: 0dff24346ddb3bc4199510ea55907042, type: 3}
-    _name: "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    _hp: 80
-    _area: 3
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 8
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 12
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uBCF4\uAE09\uD615\uD3ED\uD0C4"
-    _statusValue: 3
-  - _sprite: {fileID: 21300000, guid: b379e5e2254513e489e12ba878ddddde, type: 3}
-    _name: "\uC624\uD06C\uB3C4\uB07C\uBCD1"
-    _hp: 160
-    _area: 3
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 18
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 10
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 23
-      _Bool: 0
-    - _enemyPattern: 3
-      _CardName: "\uC0C1\uCC98"
-      _Value: 2
-      _Bool: 0
-    _statusStruct: "\uC815\uCC30\uBCD1"
-    _statusValue: 5
-  - _sprite: {fileID: 21300000, guid: 841f7e3728205cc45aeb9d63da08cae9, type: 3}
-    _name: "\uD2B8\uB864"
-    _hp: 300
-    _area: 3
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 50
-      _Bool: 0
-    _statusStruct: "\uCD08\uC7AC\uC0DD"
-    _statusValue: 30
-  - _sprite: {fileID: 21300000, guid: 474927d095367c541ad1db1ef9824de1, type: 3}
-    _name: "\uBA67\uB3FC\uC9C0\uAE30\uC0AC"
-    _hp: 240
-    _area: 3
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC0C1\uCC98"
-      _Value: 1
-      _Bool: 1
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 15
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 15
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uC815\uCC30\uBCD1"
-    _statusValue: 15
-  - _sprite: {fileID: 21300000, guid: c60f4ff6db44b3b438ce775d6e70c4fc, type: 3}
-    _name: "\uACE0\uBE14\uB9B0\uD314\uB791\uD06C\uC2A4"
-    _hp: 200
-    _area: 3
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uBC18\uACA9"
-    _statusValue: 8
-  - _sprite: {fileID: 21300000, guid: 9de40cc1779869342a031d4fc65b1973, type: 3}
-    _name: "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    _hp: 230
-    _area: 3
-    _enemyType: 1
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 30
-      _Bool: 0
-    - _enemyPattern: 6
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    _statusStruct: "\uD22C\uC11D\uAE30"
-    _statusValue: 1
-  - _sprite: {fileID: 21300000, guid: 4169939940638644fa968685c8ac38cc, type: 3}
-    _name: "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    _hp: 50
-    _area: 3
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uC790\uD3ED\uBCD1"
-    _statusValue: 4
-  - _sprite: {fileID: 21300000, guid: 2cb40930e677cab43b2dd4213d7447f6, type: 3}
-    _name: "\uD53C\uB098\uD0C0\uBAA9\uB9C8"
-    _hp: 600
-    _area: 3
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 30
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 50
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 50
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    _statusStruct: "\uBAA9\uB9C8"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: e79f2c509aa72864ca60490bce508a3b, type: 3}
-    _name: "\uC601\uC6C5\uC624\uD0AC\uB808\uC2A4"
-    _hp: 100
-    _area: 3
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 1
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uBD88\uC0AC\uC758\uBAB8"
-    _statusValue: 50
-  - _sprite: {fileID: 21300000, guid: c37cb3d10d88259498adfaebc8bbf606, type: 3}
-    _name: "\uD3ED\uAD70\uBC1C\uB85D"
-    _hp: 1000
-    _area: 4
-    _enemyType: 3
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 0
-      _Value: 50
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 0
-      _Value: 40
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 40
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 80
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 2
-      _CardName: "\uC751\uC6D0\uB2E8\uC784\uD504"
-      _Value: 1
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 60
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 100
-      _Bool: 0
-    - _enemyPattern: 2
-      _CardName: "\uC751\uC6D0\uB2E8\uC784\uD504"
-      _Value: 1
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 100
-      _Bool: 0
-    _statusStruct: "\uD3ED\uAD70"
-    _statusValue: 1000
-  - _sprite: {fileID: 21300000, guid: 54985d4ae393f75449da445607f42678, type: 3}
-    _name: "\uC751\uC6D0\uB2E8\uC784\uD504"
-    _hp: 120
-    _area: 4
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC800\uC8FC"
-      _Value: 1
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uC751\uC6D0"
-    _statusValue: 10
-  - _sprite: {fileID: 21300000, guid: 54985d4ae393f75449da445607f42678, type: 3}
-    _name: "\uC751\uC6D0\uB2E8\uC784\uD504"
-    _hp: 120
-    _area: 4
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC800\uC8FC"
-      _Value: 1
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uC751\uC6D0"
-    _statusValue: 10
-  - _sprite: {fileID: 21300000, guid: 08895f19fdadcb743853812030489721, type: 3}
-    _name: "\uD589\uB3D9\uB300\uC7A5\uCF54\uAE30"
-    _hp: 200
-    _area: 1
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 1
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 2
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 4
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 8
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 16
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 32
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 64
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 64
-      _Bool: 0
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 5
-      _Bool: 0
-    _statusStruct: "\uB9C8\uAD6C\uD565\uAE30"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: b46f7104bb2587d4bb3d8c0834ec77f4, type: 3}
-    _name: "\uD3EC\uB300\uC7A5\uB78C\uC950"
-    _hp: 600
-    _area: 2
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 2
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 4
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    _statusStruct: "\uD654\uC544\uB825"
-    _statusValue: 3
-  - _sprite: {fileID: 21300000, guid: 002ee2e7ac7be2445b60216fffe6ae9d, type: 3}
-    _name: "\uBE14\uB7EC\uB4DC\uD038"
-    _hp: 1200
-    _area: 4
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 45
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 36
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 75
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 80
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    _statusStruct: "\uC5EC\uC655"
-    _statusValue: 40
-  - _sprite: {fileID: 21300000, guid: 7a0b2615193eb9547b538535ca5b606d, type: 3}
-    _name: "\uC30D\uB465\uC774\uC7A5\uAD70 \uBCFC\uD2B8"
-    _hp: 720
-    _area: 4
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 45
-      _Bool: 0
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 30
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 55
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 60
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 65
-      _Bool: 0
-    _statusStruct: "\uD615\uC758 \uB3D9\uC0DD\uC0AC\uB791"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 23b09387c01422841a52251b9f7c6294, type: 3}
-    _name: "\uC30D\uB465\uC774\uC7A5\uAD70 \uB108\uD2B8"
-    _hp: 720
-    _area: 4
-    _enemyType: 2
-    _enemyPatterns:
-    - _enemyPattern: 5
-      _CardName: 
-      _Value: 30
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 45
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 55
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 0
-      _Bool: 0
-    - _enemyPattern: 4
-      _CardName: 
-      _Value: 60
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 65
-      _Bool: 0
-    _statusStruct: "\uB3D9\uC0DD\uC758 \uD615\uC0AC\uB791"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: eba079ae477a32a4180a361da2132f2d, type: 3}
-    _name: "\uAC00\uACE0\uC77C"
-    _hp: 200
-    _area: 4
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 20
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 25
-      _Bool: 0
-    - _enemyPattern: 0
-      _CardName: 
-      _Value: 30
-      _Bool: 0
-    - _enemyPattern: 6
-      _CardName: 
-      _Value: 50
-      _Bool: 0
-    _statusStruct: "\uAC00\uACE0\uC77C"
-    _statusValue: 0
-  - _sprite: {fileID: 21300000, guid: 5b31ee56b6af8ab4f8babb177728d4bc, type: 3}
-    _name: "\uAC00\uACE0\uC77C\uC11D\uC0C1"
-    _hp: 200
-    _area: 4
-    _enemyType: 0
-    _enemyPatterns:
-    - _enemyPattern: 3
-      _CardName: "\uC751\uAC00"
-      _Value: 1
-      _Bool: 1
-    _statusStruct: "\uCD08\uC7AC\uC0DD"
-    _statusValue: 50
-  sqdList:
-  - enemySquad:
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uB625\uAC1C"
-    - "\uB625\uAC1C"
-    area: 1
-    enemyType: 1
-  - enemySquad:
-    - "\uC655\uC751\uAC00"
-    area: 1
-    enemyType: 1
-  - enemySquad:
-    - "\uB625\uAC1C"
-    - "\uD654\uB09C\uD45C\uC9C0\uD310"
-    area: 1
-    enemyType: 1
-  - enemySquad:
-    - "\uB458\uAE30"
-    - "\uB458\uAE30"
-    - "\uB458\uAE30"
-    - "\uB458\uAE30"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uB6B1\uB0E5\uC774"
-    - "\uB458\uAE30"
-    area: 1
-    enemyType: 1
-  - enemySquad:
-    - "\uB458\uAE30"
-    - "\uBE45\uB458\uAE30"
-    - "\uB458\uAE30"
-    area: 1
-    enemyType: 2
-  - enemySquad:
-    - "\uD589\uB3D9\uB300\uC7A5\uCF54\uAE30"
-    area: 1
-    enemyType: 2
-  - enemySquad:
-    - "\uB6B1\uB0E5\uC774"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uD654\uB09C\uD45C\uC9C0\uD310"
-    - "\uB458\uAE30"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    - "\uB458\uAE30"
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    - "\uD654\uB09C\uD45C\uC9C0\uD310"
-    - "\uBBF8\uB2C8\uC751\uAC00"
-    area: 1
-    enemyType: 1
-  - enemySquad:
-    - "\uC560\uBC8C"
-    - "\uBC8C\uB808"
-    - "\uC560\uBC8C"
-    - "\uBC8C\uB808"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uBC11\uB3D9\uC774"
-    - "\uBC11\uB3D9\uC774"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uB625\uAC1C"
-    - "\uB458\uAE30"
-    area: 1
-    enemyType: 0
-  - enemySquad:
-    - "\uB3C4\uAE68\uBE44"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uD648\uB7F0\uB3C4\uAE68\uBE44"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uC560\uBC8C"
-    - "\uD648\uB7F0\uB3C4\uAE68\uBE44"
-    - "\uBC8C\uB808"
-    area: 2
-    enemyType: 1
-  - enemySquad:
-    - "\uC560\uBC8C"
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    - "\uBC8C\uB808"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    area: 2
-    enemyType: 0
-  - enemySquad:
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    area: 2
-    enemyType: 1
-  - enemySquad:
-    - "\uBC11\uB3D9\uC774"
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    - "\uBC11\uB3D9\uC774"
-    area: 2
-    enemyType: 1
-  - enemySquad:
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    area: 2
-    enemyType: 1
-  - enemySquad:
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    - "\uC232\uC655\uC624\uB9AC\uB108\uAD6C\uB9AC"
-    - "\uD3ED\uC8FC\uBC11\uB3D9\uC774"
-    area: 2
-    enemyType: 2
-  - enemySquad:
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    - "\uD3EC\uB300\uC7A5\uB78C\uC950"
-    - "\uCAC4\uBCD1\uB108\uAD6C\uB9AC"
-    area: 2
-    enemyType: 2
-  - enemySquad:
-    - "\uB3C4\uAE68\uBE44"
-    - "\uB3C4\uAE68\uBE44"
-    area: 2
-    enemyType: 1
-  - enemySquad:
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACE0\uBE14\uB9B0\uD314\uB791\uD06C\uC2A4"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    - "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uD2B8\uB864"
-    - "\uBA67\uB3FC\uC9C0\uAE30\uC0AC"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uC624\uD06C\uB3C4\uB07C\uBCD1"
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    - "\uC624\uD06C\uB3C4\uB07C\uBCD1"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    - "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    area: 3
-    enemyType: 0
-  - enemySquad:
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    - "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    - "\uACE0\uBE14\uB9B0\uD22C\uC11D\uAE30"
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    area: 3
-    enemyType: 1
-  - enemySquad:
-    - "\uBA67\uB3FC\uC9C0\uAE30\uC0AC"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uBA67\uB3FC\uC9C0\uAE30\uC0AC"
-    area: 3
-    enemyType: 1
-  - enemySquad:
-    - "\uD2B8\uB864"
-    - "\uD2B8\uB864"
-    area: 3
-    enemyType: 1
-  - enemySquad:
-    - "\uC624\uD06C\uB3C4\uB07C\uBCD1"
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    - "\uACF5\uC131\uC6A9\uC2AC\uB77C\uC784"
-    - "\uACE0\uBE14\uB9B0\uC790\uD3ED\uBCD1"
-    - "\uC624\uD06C\uB3C4\uB07C\uBCD1"
-    area: 3
-    enemyType: 1
-  - enemySquad:
-    - "\uD53C\uB098\uD0C0\uBAA9\uB9C8"
-    area: 3
-    enemyType: 2
-  - enemySquad:
-    - "\uC751\uC6D0\uB2E8\uC784\uD504"
-    - "\uD3ED\uAD70\uBC1C\uB85D"
-    - "\uC751\uC6D0\uB2E8\uC784\uD504"
-    area: 4
-    enemyType: 0
-  - enemySquad:
-    - "\uAC00\uACE0\uC77C"
-    - "\uBE14\uB7EC\uB4DC\uD038"
-    - "\uAC00\uACE0\uC77C"
-    area: 4
-    enemyType: 0
-  - enemySquad:
-    - "\uC30D\uB465\uC774\uC7A5\uAD70 \uBCFC\uD2B8"
-    - "\uC30D\uB465\uC774\uC7A5\uAD70 \uB108\uD2B8"
-    area: 4
-    enemyType: 0
---- !u!114 &723614872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723614867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5820efeb7d8ef1646a1bfc9b04950832, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusList:
-  - _name: "\uBD84\uB178"
-    sprite: {fileID: 21300000, guid: 209d50af982acfd4a946fc0df2cd4e31, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uACF5\uACA9\uB825\uC774 @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uB450\uBAA9"
-    sprite: {fileID: 21300000, guid: 18a262800362a9848b7d8b621785318a, type: 3}
-    _info: "\uD134\uC774 \uC2DC\uC791\uB420 \uB54C, \uB79C\uB364\uD55C \uD655\uB960\uB85C
-      \uBD80\uD558\uB97C \uC0DD\uC131\uD569\uB2C8\uB2E4."
-  - _name: "\uB2E8\uB2E8\uD568"
-    sprite: {fileID: 21300000, guid: c3a3c3179765bd94f802ca831bbf4c90, type: 3}
-    _info: "\uD134\uC774 \uC2DC\uC791\uB420 \uB54C, \uC274\uB4DC\uB97C @ \uC0DD\uC131\uD569\uB2C8\uB2E4."
-  - _name: "\uB3C4\uAE68\uBE44\uC694\uC220"
-    sprite: {fileID: 21300000, guid: 01181b33f429c144d97fc738550ae64f, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uC774\uC0C1\uD55C \uC77C\uC744 \uC800\uC9C0\uB985\uB2C8\uB2E4."
-  - _name: "\uD3ED\uC8FC"
-    sprite: {fileID: 21300000, guid: 545ee13d61299ae42975306a05e05d5b, type: 3}
-    _info: "\uD53C\uD574\uB97C \uBC1B\uC73C\uBA74, \uACF5\uACA9\uB825\uC774 @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uACE0\uD608\uC555"
-    sprite: {fileID: 21300000, guid: 5ed045e77f1085c4199bdd473487ec1f, type: 3}
-    _info: "\uCCB4\uB825\uC774 \uC808\uBC18 \uC774\uD558\uB85C \uB0B4\uB824\uAC00\uBA74
-      \uD134\uC774 \uB05D\uB0A0 \uB54C, \uACF5\uACA9\uB825\uC774 @ \uC99D\uAC00\uD569\uB2C8\uB2E4.
-      \uC99D\uAC00\uB7C9 \uB610\uD55C \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uBCF4\uAE09\uD615\uD3ED\uD0C4"
-    sprite: {fileID: 21300000, guid: 81a5a5a311b351248bad8b953504e514, type: 3}
-    _info: "@\uD134 \uB4A4,  \uC9C0\uC6D0\uAD70\uC774 \uACF5\uAE09\uB429\uB2C8\uB2E4.
-      \uC8FD\uC744\uB54C, \uBAA8\uB4E0 \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C 20 \uC90D\uB2C8\uB2E4."
-  - _name: "\uC815\uCC30\uBCD1"
-    sprite: {fileID: 21300000, guid: a4b1a90ecd947984489da5183a7386d7, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB0B4 \uB0A8\uC740 \uB9AC\uB864\uD69F\uC218\uAC00
-      0\uC774\uBA74 \uACF5\uACA9\uB825\uC774 @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uD22C\uC11D\uAE30"
-    sprite: {fileID: 21300000, guid: 46984a0eb4c314b4999ad718d2306643, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uD53C\uD574\uB97C @ \uC785\uD799\uB2C8\uB2E4.
-      \uD53C\uD574\uB7C9\uB3C4 \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uCD08\uC7AC\uC0DD"
-    sprite: {fileID: 21300000, guid: 2ea562bd9678312459cbf0a6a18304ed, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uCCB4\uB825\uC744 @ \uD68C\uBCF5\uD569\uB2C8\uB2E4.
-      \uD68C\uBCF5\uB7C9\uC740 \uC810\uC810 \uAC10\uC18C\uD569\uB2C8\uB2E4."
-  - _name: "\uBC18\uACA9"
-    sprite: {fileID: 21300000, guid: 1db8c01703b4022469161374b7f9c865, type: 3}
-    _info: "\uACF5\uACA9\uBC1B\uC744 \uB54C, \uD53C\uD574\uB97C @ \uC785\uD799\uB2C8\uB2E4."
-  - _name: "\uC790\uD3ED\uBCD1"
-    sprite: {fileID: 21300000, guid: cd092418eb2c9484bb54f52d0f65fa6a, type: 3}
-    _info: "@\uD134 \uB4A4, \uC790\uD3ED\uD558\uC5EC \uD53C\uD574\uB97C 30 \uC785\uD799\uB2C8\uB2E4."
-  - _name: "\uBAA9\uB9C8"
-    sprite: {fileID: 21300000, guid: 2aeb8f8f5fa829c4aa67865886d309fd, type: 3}
-    _info: "\uC0AC\uB9DD \uC2DC, \uBAA9\uB9C8 \uC18D\uC5D0 \uC228\uC5B4\uC788\uB294
-      \uC801\uB4E4\uC774 \uB4F1\uC7A5\uD569\uB2C8\uB2E4!"
-  - _name: "\uBD88\uC0AC\uC758\uBAB8"
-    sprite: {fileID: 21300000, guid: 7d7314d39e8cc414c9c4a9e9403dc29f, type: 3}
-    _info: "\uD53C\uD574\uB97C \uBC1B\uC744 \uB54C\uB9C8\uB2E4, \uCCB4\uB825\uC744
-      @ \uD68C\uBCF5\uD569\uB2C8\uB2E4."
-  - _name: "\uC751\uC6D0"
-    sprite: {fileID: 21300000, guid: 69f9a1fa596195d4ea44f75662649537, type: 3}
-    _info: "\uC8FD\uC744 \uB54C, \uBAA8\uB4E0 \uC801\uC758 \uACF5\uACA9\uB825\uC774
-      @ \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  - _name: "\uD3ED\uAD70"
-    sprite: {fileID: 21300000, guid: 3ef03b5773f96e04e9cc71a9207ad536, type: 3}
-    _info: "\uCCB4\uB825\uC774 @ \uC544\uB798\uB85C \uB0B4\uB824\uAC00\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.
-      @\uB294 \uB9E4\uD134 \uCCB4\uB825\uC5D0 200\uC744 \uBE80 \uAC12\uC73C\uB85C
-      \uBCC0\uD569\uB2C8\uB2E4."
-  - _name: "\uC5EC\uC655"
-    sprite: {fileID: 21300000, guid: d215995bcf3538b438ff35e4a26e2146, type: 3}
-    _info: "\uACF5\uACA9\uC744 \uBC1B\uC744 \uB54C, \uB0B4 \uC885\uC871\uC870\uD569\uC774
-      \uD2B8\uB9AC\uD50C\uBCF4\uB2E4 \uC544\uB798\uC77C \uACBD\uC6B0, \uCCB4\uB825\uC744
-      @ \uD68C\uBCF5\uD558\uACE0 \uB371\uC5D0 \uD0A4\uC2A4\uB9C8\uD06C\uB97C \uB123\uC2B5\uB2C8\uB2E4."
-  - _name: "\uD615\uC758 \uB3D9\uC0DD\uC0AC\uB791"
-    sprite: {fileID: 21300000, guid: f031835072b85c74ba174880e8d4820a, type: 3}
-    _info: "\uB9AC\uB864\uC744 \uD560 \uB584\uB9C8\uB2E4, \uBB18\uC9C0\uC5D0 \uC800\uC8FC\uB97C
-      \uC11E\uC5B4\uB123\uC2B5\uB2C8\uB2E4."
-  - _name: "\uB3D9\uC0DD\uC758 \uD615\uC0AC\uB791"
-    sprite: {fileID: 21300000, guid: 1a4f117d7e4901b43818ce22b70111cf, type: 3}
-    _info: "\uB0B4 \uD134\uC774 \uB05D\uB0A0 \uB54C, \uB371\uACFC \uBB18\uC9C0\uC5D0
-      \uC788\uB294 \uC800\uC8FC\uC758 \uC218\uB9CC\uD07C \uC801\uB4E4\uC758 \uACF5\uACA9\uB825\uC744
-      \uC99D\uAC00\uC2DC\uD0B5\uB2C8\uB2E4."
-  - _name: "\uAC00\uACE0\uC77C"
-    sprite: {fileID: 21300000, guid: 1a4f117d7e4901b43818ce22b70111cf, type: 3}
-    _info: "\uC0AC\uB9DD \uC2DC, \uC11D\uC0C1\uC73C\uB85C \uBCC0\uC2E0\uD569\uB2C8\uB2E4."
-  - _name: "\uB9C8\uAD6C\uD565\uAE30"
-    sprite: {fileID: 21300000, guid: a7bfddcd46c90ea458c3c83b01f39add, type: 3}
-    _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB371\uC5D0 \uC788\uB294 \uCE74\uB4DC
-      \uD55C \uC7A5\uC774 \uC18C\uBA78\uD569\uB2C8\uB2E4."
-  - _name: "\uD654\uC544\uB825"
-    sprite: {fileID: 21300000, guid: a7bfddcd46c90ea458c3c83b01f39add, type: 3}
-    _info: "@ \uD134 \uB4A4, 50\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4!"
 --- !u!1 &809088349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,6 +752,141 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809088349}
+  m_CullTransparentMesh: 1
+--- !u!1 &819134718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 819134719}
+  - component: {fileID: 819134721}
+  - component: {fileID: 819134720}
+  m_Layer: 5
+  m_Name: TurnText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &819134719
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819134718}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7069017, y: 0.7069017, z: 0.7069017}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1231602791}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 320.37, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &819134720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819134718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 9999999
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 35
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 35
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 1024
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &819134721
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819134718}
   m_CullTransparentMesh: 1
 --- !u!1 &863478548
 GameObject:
@@ -2092,6 +1084,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863478548}
   m_CullTransparentMesh: 1
+--- !u!1 &867889434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867889435}
+  - component: {fileID: 867889437}
+  - component: {fileID: 867889436}
+  m_Layer: 5
+  m_Name: BackGround_money
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &867889435
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867889434}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7069017, y: 0.7069017, z: 0.7069017}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1231602791}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 39.195007, y: -0.0025558472}
+  m_SizeDelta: {x: 15.51, y: 14.66}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &867889436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867889434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &867889437
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867889434}
+  m_CullTransparentMesh: 1
 --- !u!1 &868739653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +1326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1338efde99e1afe47bcf7afc0af0b1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chk: 1
   text: {fileID: 1581003470}
 --- !u!1 &931421184
 GameObject:
@@ -2713,6 +1782,7 @@ RectTransform:
   m_Children:
   - {fileID: 863478549}
   - {fileID: 909808871}
+  - {fileID: 1231602791}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2721,6 +1791,59 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1231602790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231602791}
+  - component: {fileID: 1231602792}
+  m_Layer: 5
+  m_Name: TurnUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1231602791
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231602790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 867889435}
+  - {fileID: 819134719}
+  m_Father: {fileID: 1116294884}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -29, y: -19.702026}
+  m_SizeDelta: {x: 226.4701, y: 35.345093}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1231602792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231602790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1338efde99e1afe47bcf7afc0af0b1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chk: 0
+  text: {fileID: 819134720}
 --- !u!1 &1443909149
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class DataManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        Application.targetFrameRate = 60;
         datas = JsonUtility.FromJson<AllData>(data.text);
     }
 

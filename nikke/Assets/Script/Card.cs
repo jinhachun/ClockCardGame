@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
     [SerializeField] private SpriteRenderer _species;
     [SerializeField] private SpriteRenderer _type;
     [SerializeField] private SpriteRenderer _outLine;
-    [SerializeField] protected TMP_Text _name;
+    [SerializeField] public TMP_Text _name;
     [SerializeField] protected TMP_Text _text;
     [SerializeField] private TMP_Text _infoText;
     [SerializeField] protected TMP_Text _tier;
@@ -52,37 +52,41 @@ public class Card : MonoBehaviour
         switch (statVar)
         {
             case "Attack":
-                Stat.attack = b;
-                if (Stat.attack > Str._stat.attack)
+                if (b > Stat.attack)
                 {
                     if (BattleManager.GameState == BattleState.Attack)
                         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-                    this._attText.color = Color.red;
                 }
-                else if (Stat.attack < Str._stat.attack)
+                else if (b < Stat.attack)
                 {
                     if (BattleManager.GameState == BattleState.Attack)
                         BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
-                    this._attText.color = Color.gray;
                 }
+                if (b > Str._stat.attack)
+                    this._attText.color = Color.red;
+                else if (b < Str._stat.attack)
+                    this._attText.color = Color.gray;
                 else this._attText.color = Color.white;
+                Stat.attack = b;
                 this._attText.text = Stat.attack.ToString();
                 break;
             case "Defence":
-                Stat.defence = b;
-                if (Stat.defence > Str._stat.defence)
+                if (b > Stat.defence)
                 {
                     if (BattleManager.GameState == BattleState.Attack)
                         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-                    this._defText.color = Color.red;
                 }
-                else if (Stat.defence < Str._stat.defence)
+                else if (b < Stat.defence)
                 {
                     if (BattleManager.GameState == BattleState.Attack)
                         BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
-                    this._defText.color = Color.gray;
                 }
+                if (b > Str._stat.defence)
+                    this._defText.color = Color.red;
+                else if (b < Str._stat.defence)
+                    this._defText.color = Color.gray;
                 else this._defText.color = Color.white;
+                Stat.defence = b;
                 this._defText.text = Stat.defence.ToString();
                 break;
         }
@@ -111,8 +115,9 @@ public void Set(CardStruct str)
         this.Type = str._type;
 
         this.Stat = new STAT();
-        var Rule_no13_0 = Resource.Instance.Rule_no(13) ? (this.Species==SPECIES.MECH? 2: -1) : 0;
-        this.Stat.attack = str._stat.attack + Rule_no13_0;
+        var Rule_no13_0 = Resource.Instance.Rule_no(13) ? (this.Species==SPECIES.MECH? 3: -1) : 0;
+        var Rule_no17_0 = Resource.Instance.Rule_no(17) ? (this.Species == SPECIES.UNDEAD ? 1 : 0) : 0;
+        this.Stat.attack = str._stat.attack + Rule_no13_0 + Rule_no17_0;
         this.Stat.defence = str._stat.defence;
 
         StatChange("Attack", this.Stat.attack);
@@ -233,7 +238,17 @@ public void Set(CardStruct str)
             Destroy(this.gameObject); 
         });
     }
-    
+    public void deleteCard(float time)
+    {
+        BattleManager.Instance.waitDelay = true;
+        this.flip(true);
+        this.setLayer(0, 100);
+        this.transform.DOScale(0, time).SetEase(Ease.InCubic).OnComplete(() => {
+            BattleManager.Instance.waitDelay = false;
+            Destroy(this.gameObject);
+        });
+    }
+
     void OnMouseOver()
     {
         if (!Touchable) return;

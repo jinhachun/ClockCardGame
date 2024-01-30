@@ -88,7 +88,7 @@ public class MainMenu : MonoBehaviour
         var img = Instantiate(_ImagePrefab, new Vector2(0, 0), Quaternion.identity);
         img.transform.SetParent(_RuleView_Container.transform); 
         var rect = _RuleView_Container.GetComponent<RectTransform>();
-        rect.offsetMin = new Vector2(_RuleView_Container.transform.childCount*480,rect.offsetMin.y);
+        rect.offsetMin = new Vector2(_RuleView_Container.transform.childCount*450,rect.offsetMin.y);
         var card = Instantiate(_RulePrefab, img.transform.position, Quaternion.identity);
         card.transform.SetParent(img.transform);
         card.GetComponent<BonusRule>().Set(ruleStruct);

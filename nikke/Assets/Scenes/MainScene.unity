@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1000\uB2E8\uACC4"
+  m_text: "0\uB2E8\uACC4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
   m_sharedMaterial: {fileID: -4439266846090219863, guid: 444167e5e143ad646a09a550f9a9a46b, type: 2}
@@ -4203,7 +4203,6 @@ MonoBehaviour:
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
-    _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
     _tier: 1
     _stat:
       attack: 2
@@ -9427,7 +9426,6 @@ MonoBehaviour:
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
-    _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
     _tier: 1
     _stat:
       attack: 2
@@ -10614,7 +10612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -464.8345, y: -245.4524}
+  m_AnchoredPosition: {x: -464.83542, y: -245.4524}
   m_SizeDelta: {x: 440.15, y: 490.90445}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &999889131
@@ -18738,7 +18736,6 @@ MonoBehaviour:
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
-    _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
     _tier: 1
     _stat:
       attack: 2
@@ -21037,7 +21034,6 @@ MonoBehaviour:
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
-    _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
     _tier: 1
     _stat:
       attack: 2
@@ -21464,7 +21460,6 @@ MonoBehaviour:
     _img: {fileID: -207859412, guid: 645526109ac2f6d4591cdd33edc7ee51, type: 3}
     _species: 0
     _name: "\uB3D9\uAE00\uC774"
-    _text: "\uB3D9\uAE00\uB3D9\uAE00\uD569\uB2C8\uB2E4."
     _tier: 1
     _stat:
       attack: 2

@@ -58,6 +58,7 @@ public class Resource : MonoBehaviour
     {
         time = 0f;
         Kor = true;
+        metSquad = new List<EnemySquadStruct>();
         Rules = new Dictionary<string, int>();
         setLEVEL();
         VillageLevel = new Dictionary<string, int>();
@@ -83,12 +84,14 @@ public class Resource : MonoBehaviour
         combiRate.Add(3f + Rule_no2_2);
         combiRate.Add(3.5f + Rule_no2_2);
 
+        if (Rule_no(14)) combiRate = Enumerable.Reverse(combiRate).ToList();
+
         float Rule_no3 = Rule_no(3) ? 10f : 0f;
         float Rule_no9 = (Rule_no(9) ? -20 : 0);
         bool Rule_no4 = Rule_no(4);
         Hp = (int)((100f - Rule_no3) + Rule_no9); 
         tmpMhp = Hp; Area = 1; Stage = 1;
-        money = 100; jewel = PlayerPrefs.GetInt("jewel", 3);
+        money = 100; jewel = 3;
         shopcard = CardDatabase.Instance.card("µø±€¿Ã");
         Deck = new List<CardStruct>();
         for(int i = 0; i < 5; i++)
@@ -117,6 +120,7 @@ public class Resource : MonoBehaviour
     public Dictionary<string, int> SupportPrice;
     public int jewel;
     public List<float> combiRate;
+    public List<EnemySquadStruct> metSquad;
     public CardStruct shopcard;
     public float time;
     public bool haveCard(string a)

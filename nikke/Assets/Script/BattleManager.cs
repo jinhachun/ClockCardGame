@@ -192,6 +192,7 @@ public class BattleManager : MonoBehaviour
         RerollText = Instantiate(_textPrefab, ButtonPos(1.6f), Quaternion.identity);
         RerollText.text = "Chance : " + RerollChance.ToString();
         RerollText.fontSize = 3f;
+
         var cnt = 0;
         Sequence sq = DOTween.Sequence().SetAutoKill(false);
         foreach (var tmpCard in BaseDeck)
@@ -248,8 +249,8 @@ public class BattleManager : MonoBehaviour
 
         Sequence sq = DOTween.Sequence();
         Turn++;
-        Shield = 0;
-        if (Rule_no(13) && Turn == 1) Shield += 100;
+        if(!Resource.Instance.Rule_no(11)) Shield = 0;
+        if (Resource.Instance.Rule_no(11) && Turn == 1) Shield += 100;
         rerolladd(1);
         foreach (var enemy in EnemiesClone())
         {
@@ -294,15 +295,46 @@ public class BattleManager : MonoBehaviour
             });
             return;
         }
+        List<Card> cardsDrawnThisTurn = new List<Card>() ;
         while (Hand.Count < 5)
         {
-            DrawCard(sq);
+            cardsDrawnThisTurn.Add(DrawCard(sq));
             if (Hand.Count + Deck.Count + Grave.Count < 5) break;
         }
         deckMoveCard(sq);
+        bool cardActionFuncAnimationChk = false;
         sq.AppendCallback(() =>
         {
-            foreach (var card in Hand) card.setLayer(0, 50);
+            foreach (var card in cardsDrawnThisTurn)
+            {
+                if (CardDatabase.Instance.BeforeCardActionFunc(card))
+                {
+                    cardActionFuncAnimationChk = true;
+                    card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
+
+                }
+            }
+        });
+        if (cardActionFuncAnimationChk) sq.AppendInterval(0.6f);
+        cardActionFuncAnimationChk = false;
+        sq.AppendCallback(() =>
+        {
+            foreach (var card in Hand)
+            {
+                if (CardDatabase.Instance.BeforeCardActionFunc_Always(card))
+                {
+                    cardActionFuncAnimationChk = true;
+                    card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
+
+                }
+            }
+        });
+        if (cardActionFuncAnimationChk) sq.AppendInterval(0.6f);
+        sq.AppendCallback(() =>
+        {
+            foreach (var card in Hand) {
+                card.setLayer(0, 50); 
+            }
             ChangeState(BattleState.WaitingReroll);
             sq.Kill();
         });
@@ -375,14 +407,14 @@ public class BattleManager : MonoBehaviour
         }
         var SpeciesCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
         SpeciesCombiText.text = CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi);
-        int speciesCombi = CardDatabase.Instance.SpeciesCombination(SpeciesCombi);
-        WatingRerollPhase_TextSet(speciesCombi, SpeciesCombiText);
+        float speciesCombiRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
+        WatingRerollPhase_TextSet(speciesCombiRate, SpeciesCombiText);
         CombiText.Add(SpeciesCombiText);
 
         var TypeCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x - 0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
         TypeCombiText.text = CardDatabase.Instance.TypeCombinationText(TypeCombi);
-        int typeCombi = CardDatabase.Instance.TypeCombination(TypeCombi);
-        WatingRerollPhase_TextSet(typeCombi, TypeCombiText);
+        float typeCombiRate = CardDatabase.Instance.TypeCombiRate(TypeCombi);
+        WatingRerollPhase_TextSet(typeCombiRate, TypeCombiText);
         CombiText.Add(TypeCombiText);
 
         foreach (Card card in Hand)
@@ -390,35 +422,41 @@ public class BattleManager : MonoBehaviour
         AttDefCal(tmpAtt, tmpDef, tmpRate);
         battleEndChk();
     }
-    public void WatingRerollPhase_TextSet(int combi, TMP_Text text)
+    public void WatingRerollPhase_TextSet(float combi, TMP_Text text)
     {
-        switch (combi)
-        {
-            case 0:
-                text.color = Color.gray;
-                break;
-            case 1:
-                break;
-            case 2:
-                text.fontSize = 5;
-                break;
-            case 3:
-                text.fontSize = 6;
-                text.color = new Color(0, 100, 0);
-                break;
-            case 4:
-                text.fontSize = 7;
-                text.color = Color.blue;
-                break;
-            case 5:
-                text.fontSize = 7;
-                text.color = Color.blue;
-                break;
-            case 6:
-                text.fontSize = 8;
-                text.color = Color.red;
-                break;
+        if (combi < 1) {
+            text.color = Color.gray;
+            return;
         }
+        if (combi < 1.5f) {
+            return; 
+        }
+        if (combi < 2f)
+        {
+            text.fontSize = 5;
+            return; 
+        }
+        if (combi < 2.5f)
+        {
+            text.fontSize = 6;
+            text.color = new Color(0, 100, 0);
+            return; 
+        }
+        if (combi < 3f)
+        {
+            text.fontSize = 7;
+            text.color = Color.blue;
+            return;
+        }
+        if (combi < 3.5f)
+        {
+            text.fontSize = 7;
+            text.color = Color.blue;
+            return;
+        }
+        text.fontSize = 8;
+        text.color = Color.red;
+        return; 
     }
 
     public void rerolladd(int n)
@@ -434,8 +472,8 @@ public class BattleManager : MonoBehaviour
         float speciesRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
         float tmpRate = typeRate * speciesRate * (float)r;
         Rate *= (double)Mathf.Round((tmpRate * 100f)) / 100f;
-        foreach (var i in Hand) { Att += (int)(Rate * i.Stat.attack); Def += i.Stat.defence; }
-        this.Def = (int)(Rate * (double)Def);
+        foreach (var i in Hand) { Att += (int)(Rate * i.Stat.attack * (Resource.Instance.Rule_no(20) ? (Turn / 2 == 0 ? 0.5f : 1.5f) : 1)); Def += i.Stat.defence; }
+        this.Def = (int)(Rate * (double)Def * (Rule_no(20) ? (Turn / 2 == 0 ? 1.5f : 0.5f) : 1));
     }
     public bool RerollPhase_isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
 
@@ -473,8 +511,28 @@ public class BattleManager : MonoBehaviour
     public void PHASE_Attack()
     {
         Sequence sq = DOTween.Sequence();
-        foreach (var card in Hand) CardDatabase.Instance.CardActionFunc(card)();
+        bool cardActionFuncAnimationChk = false;
+        bool Rule_no19_cardActionFuncAnimationChk = false;
+        foreach (var card in Hand) {
+            card.TouchableChange(false);
+            if (CardDatabase.Instance.CardActionFunc(card))
+            {
+                cardActionFuncAnimationChk = true;
+                card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
+
+            }
+            if (Resource.Instance.Rule_no(19) && card.Species == SPECIES.HUMAN &&  CardDatabase.Instance.CardActionFunc(card) &&  Rule_no(19))
+            {
+                Rule_no19_cardActionFuncAnimationChk = true;
+                card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
+
+            }
+        }
+        if (cardActionFuncAnimationChk) sq.AppendInterval(0.6f);
+        if (Rule_no19_cardActionFuncAnimationChk) sq.AppendInterval(0.6f);
+
         AttDefCal(tmpAtt, tmpDef, tmpRate);
+        Rule_no(9);
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
@@ -486,12 +544,13 @@ public class BattleManager : MonoBehaviour
 
             sq.AppendCallback(() =>
             {
-                if(Rule_no(9)) takeHeal(1);
+                if(Resource.Instance.Rule_no(9)) takeHeal(1);
+                if (card.Species==SPECIES.MONSTER && Rule_no(18)) takeHeal(1);
                 if (Enemies.Count > 0)
                 {
                     pureAttack = true;
                     var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
-                    var damage = (int)(card.Stat.attack * Rate);
+                    var damage = (int)(card.Stat.attack * Rate * (Resource.Instance.Rule_no(20)?(Turn/2==0?0.5f:1.5f):1));
                     enemyDamage(damage, critical, target);
                     if (damage > 0)
                         switch (card.Str._type)
@@ -562,8 +621,6 @@ public class BattleManager : MonoBehaviour
 
         while (Enemies.Count > 0 && AttLeft > 0)
         {
-
-            target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
             var afterShieldAttLeft = AttLeft - target._shield;
             target.lossShield(AttLeft);
             if (afterShieldAttLeft < 0)
@@ -592,7 +649,7 @@ public class BattleManager : MonoBehaviour
                     Destroy(deadEnemy._hpBar.gameObject);
                     Destroy(deadEnemy.gameObject);
                 });
-
+                target =Enemies.Count>0? Enemies[Random.Range(0, Enemies.Count)]:null;
             }
             else
             {
@@ -616,7 +673,10 @@ public class BattleManager : MonoBehaviour
         foreach (Enemy tmp in Enemies)
             tmpList.Add(tmp);
         foreach (Enemy tmp in tmpList)
+        {
+            Debug.Log("공격대상 :" + tmp._name);
             BattleManager.Instance.enemyDamage(dam, false, tmp);
+        }
     }
     public int patternCnt;
     public void PHASE_EnemyAttack()
@@ -686,7 +746,14 @@ public class BattleManager : MonoBehaviour
         sq.AppendCallback(() =>
         {
             deadChk();
-            if (Resource.Instance.Rule_no(11)){ ChangeState(BattleState.Draw); return;}
+            if (Resource.Instance.Rule_no(11))
+            {
+                foreach (var Enemy in Enemies) {
+                    Enemy.TurnEnd(); 
+                }
+                ChangeState(BattleState.Draw);
+                return;
+            }
             ChangeState(BattleState.EndTurn);
         });
     }
@@ -746,7 +813,14 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_EndTurn()
     {
-        foreach (var Enemy in Enemies) Enemy.TurnEnd();
+        if(Turn==10 && Rule_no(15))
+        {
+            takeDamage(Mhp / 2);
+        }
+        if (!Resource.Instance.Rule_no(11))
+        {
+            foreach (var Enemy in Enemies) Enemy.TurnEnd();
+        }
         if (Hp <= 0) ChangeState(BattleState.Lose);
         else if (Enemies.Count == 0) ChangeState(BattleState.Reward);
         else
@@ -816,7 +890,7 @@ public class BattleManager : MonoBehaviour
         cardAddSequence.AppendCallback(() => { waitDelay = false; });
 
     }
-    public void DrawCard(Sequence sq)
+    public Card DrawCard(Sequence sq)
     {
         Card tmpCard;
         if (Deck.Count <= 0)
@@ -827,15 +901,18 @@ public class BattleManager : MonoBehaviour
             Grave.Clear();
         }
         tmpCard = Deck[0];
-        tmpCard.flip(true);
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
-        CardDatabase.Instance.BeforeCardActionFunc(tmpCard)();
         for (int i = 0; i < Hand.Count; i++)
         {
-            moveCard(sq, Hand[i], HandPos[i], 0.8f, false, true);
+            moveCard(sq, Hand[i], HandPos[i], 0.2f, false, true);
             Hand[i].TouchableChange(true);
         }
+        sq.AppendCallback(() =>
+        {
+            tmpCard.flip(true);
+        });
+        return tmpCard;
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one)
     {

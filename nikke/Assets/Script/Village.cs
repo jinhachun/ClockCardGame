@@ -14,7 +14,7 @@ public class Village : MonoBehaviour
     public string _HouseTxtInfo;
     public string _ChurchTxtInfo;
     public string _BathTxtInfo;
-    public void Start()
+    public void Awake()
     {
         TextUpdate();
     }

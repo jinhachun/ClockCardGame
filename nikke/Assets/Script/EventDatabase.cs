@@ -116,7 +116,19 @@ public class EventDatabase : MonoBehaviour
                 }
             case "여행의 끝":
                 {
-                    return false;
+                    if (selectIndex == 0)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            case "마지막 전투":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return !Resource.Instance.Rule_no(16);
+                    }
+                    return true;
                 }
         }
         return true;
@@ -450,6 +462,18 @@ public class EventDatabase : MonoBehaviour
                         {
                             Resource.Instance.Event_Heal(Resource.Instance.mHp);
 
+                        });
+                    }
+                    return null;
+                }
+            case "여행의 끝":
+                {
+                    if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            DG.Tweening.DOTween.KillAll();
+                            UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
                         });
                     }
                     return null;

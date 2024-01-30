@@ -21,8 +21,8 @@ public class CardDatabase : MonoBehaviour
     [SerializeField] List<SpeciesSprite> cardinfoSprites_species;
     [SerializeField] List<TypeSprite> cardinfoSprites_type;
     [SerializeField] List<Sprite> btnSprites;
-    
-    
+
+
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
     public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
     public CardStruct card_token(string a) => cardDatabase_token.Where(x => x._name.Equals(a)).FirstOrDefault();
@@ -34,13 +34,14 @@ public class CardDatabase : MonoBehaviour
         return card(a);
     }
     public List<CardStruct> cardByTierList(int a) => cardDatabase.Where(x => x._tier == a).ToList();
-    public List<CardStruct> cardByRareTierList(int a) => cardDatabase.Where(x =>x.isRare && x._tier == a).ToList();
-    public CardStruct cardByTier(int a) => cardByTierList(a)[Random.Range(0,cardByTierList(a).Count)];
+    public List<CardStruct> cardByRareTierList(int a) => cardDatabase.Where(x => x.isRare && x._tier == a).ToList();
+    public List<CardStruct> cardByUltimate => cardDatabase.Where(x => x.isUltimate).ToList();
+    public CardStruct cardByTier(int a) => cardByTierList(a)[Random.Range(0, cardByTierList(a).Count)];
     public Sprite btn(int i) => btnSprites[i];
     public Sprite speciesSprite(SPECIES c)
     {
         return cardinfoSprites_species.Find(g => g.species == c).sprite;
-        
+
     }
     public Sprite typeSprite(TYPE r)
     {
@@ -48,7 +49,7 @@ public class CardDatabase : MonoBehaviour
     }
     public int SpeciesCombination(List<SPECIES> list)
     {
-        var result = list.GroupBy(x => x).Where(g => g.Key!=SPECIES.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
+        var result = list.GroupBy(x => x).Where(g => g.Key != SPECIES.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
         try
         {
             for (int i = 0; i < list.Count; i++)
@@ -72,9 +73,9 @@ public class CardDatabase : MonoBehaviour
     public string SpeciesCombinationText(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return " X"+Resource.Instance.combiRate[0];
-        else if (combi == 1) return "OnePair X"+Resource.Instance.combiRate[1];
-        else if (combi == 2) return "TwoPair X"+Resource.Instance.combiRate[2];
+        if (combi == 0) return " X" + Resource.Instance.combiRate[0];
+        else if (combi == 1) return "OnePair X" + Resource.Instance.combiRate[1];
+        else if (combi == 2) return "TwoPair X" + Resource.Instance.combiRate[2];
         else if (combi == 3) return "Triple X" + Resource.Instance.combiRate[3];
         else if (combi == 4) return "FullHouse X" + Resource.Instance.combiRate[4];
         else if (combi == 5) return "FourCard X" + Resource.Instance.combiRate[5];
@@ -94,7 +95,7 @@ public class CardDatabase : MonoBehaviour
     }
     public int TypeCombination(List<TYPE> list)
     {
-        var result = list.GroupBy(x => x).Where(g =>g.Key!=TYPE.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
+        var result = list.GroupBy(x => x).Where(g => g.Key != TYPE.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
         for (int i = 0; i < list.Count; i++)
         {
             if (result.ContainsKey(list[i])) BattleManager.Instance.Hand[i].combiType = true;
@@ -119,7 +120,7 @@ public class CardDatabase : MonoBehaviour
     public string TypeCombinationText(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return " X"+TypeCombiRate(list);
+        if (combi == 0) return " X" + TypeCombiRate(list);
         else if (combi == 1) return "OnePair X" + TypeCombiRate(list);
         else if (combi == 2) return "TwoPair X" + TypeCombiRate(list);
         else if (combi == 3) return "Triple X" + TypeCombiRate(list);
@@ -146,78 +147,87 @@ public class CardDatabase : MonoBehaviour
         else return 3 + rateAdd;
 
     }
-    
-    public CardAction CardActionFunc(Card b)
+
+    public bool CardActionFunc(Card b)
     {
         string a = b.name;
         switch (a)
         {
             case "좀비":
-                return (() => {
+                {
                     BattleManager.Instance.takeHeal(2);
-                });
+                    return true;
+                }
             case "왕좀비":
             case "왕왕좀비":
             case "초대형좀비":
-                return (() => {
+                {
                     BattleManager.Instance.takeHeal(4);
-                });
+                    return true;
+                }
             case "보두앵돌이":
-                return (() => {
+                {
+                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    {
+                        tmp.StatChange("Attack", tmp.Stat.attack + 2);
+                    }
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
-                        tmp.StatChange("Attack", tmp.Stat.attack + 1);
+                        tmp.StatChange("Attack", tmp.Stat.attack + 2);
                     }
-                });
+                    return true;
+                }
             case "예니체돌이":
-                return (() => {
-                    b.StatChange("Attack", b.Stat.attack+1);
-                });
+                {
+                    b.StatChange("Attack", b.Stat.attack + 1);
+                    return true;
+                }
             case "술탄돌이":
-                return (() => {
+                {
                     b.StatChange("Attack", b.Stat.attack + 2);
-                });
+                    return true;
+                }
             case "살라딘돌이":
-                return (() => {
+                {
                     b.StatChange("Attack", b.Stat.attack * 2);
-                });
+                    return true;
+                }
             case "리자드":
-                return (() => {
+                {
                     BattleManager.Instance.takeDamage(2);
-                });
+                    return true;
+                }
             case "티라노":
-                return (() => {
-                    BattleManager.Instance.takeDamage(3);
-                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
-                    {
-                        BattleManager.Instance.enemyWideDamage(15);
-                    }
-                });
+                {
+                    BattleManager.Instance.takeDamage(2);
+                    BattleManager.Instance.enemyWideDamage(5);
+                    return true;
+                }
             case "블랙티라노":
-                return (() => {
-                    BattleManager.Instance.takeDamage(5);
-                    if (BattleManager.Instance.Hp <= BattleManager.Instance.Mhp * 50 / 100)
-                    {
-                        BattleManager.Instance.enemyWideDamage(40);
-                    }
-                });
+                {
+                    BattleManager.Instance.takeDamage(2);
+                    BattleManager.Instance.enemyWideDamage(25);
+                    return true;
+                }
 
             case "버섯깨비":
             case "쿼드버섯깨비":
-                return (() => {
+                {
                     BattleManager.Instance.rerolladd(1);
-                });
+                    return true;
+                }
             case "먹보괴수":
-                return (() => {
+                {
                     var target = BattleManager.Instance.targetEnemy.Count == 0 ? BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)] : BattleManager.Instance.targetEnemy[0];
                     BattleManager.Instance.enemyDamage(BattleManager.Instance.Def, false, target);
-                });
+                    return true;
+                }
 
             case "황금몬":
-                return (() => {
+                {
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
-                        if(tmp.name.Equals("황금몬"))
+                        if (tmp.name.Equals("황금몬"))
                             tmp.StatChange("Attack", tmp.Stat.attack + 1);
                     }
                     foreach (Card tmp in BattleManager.Instance.Grave)
@@ -225,35 +235,38 @@ public class CardDatabase : MonoBehaviour
                         if (tmp.name.Equals("황금몬"))
                             tmp.StatChange("Attack", tmp.Stat.attack + 1);
                     }
-                });
+                    return true;
+                }
             case "돈벼락동글":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
                     BattleManager.Instance.AddCard(queue, false);
-                });
+                    return true;
+                }
             case "마이동스왕":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
-                    BattleManager.Instance.AddCard(queue,true);
-                });
+                    BattleManager.Instance.AddCard(queue, true);
+                    return true;
+                }
             case "삼두라":
             case "케르베로삼":
-                return (() =>
+
                 {
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
                     {
                         foreach (Card card in BattleManager.Instance.AllCards)
                         {
-                            card.StatChange("Attack", card.Stat.attack +1);
+                            card.StatChange("Attack", card.Stat.attack + 1);
                             card.StatChange("Defence", card.Stat.defence + 1);
                         }
                     }
-                });
+                    return true;
+                }
             case "킹삼도라":
-                return (() =>
                 {
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) == 3)
                     {
@@ -263,9 +276,10 @@ public class CardDatabase : MonoBehaviour
                             card.StatChange("Defence", card.Stat.defence + 3);
                         }
                     }
-                });
+                    return true;
+                }
             case "골목대장동글":
-                return (() => {
+                {
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("동글이"))
@@ -285,9 +299,10 @@ public class CardDatabase : MonoBehaviour
                         }
 
                     }
-                });
+                    return true;
+                }
             case "민병대동글":
-                return (() => {
+                {
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("동글이"))
@@ -307,9 +322,10 @@ public class CardDatabase : MonoBehaviour
                         }
 
                     }
-                });
+                    return true;
+                }
             case "동글의사당":
-                return (() => {
+                {
                     foreach (Card tmp in BattleManager.Instance.Deck)
                     {
                         if (tmp.name.Equals("동글이"))
@@ -329,183 +345,249 @@ public class CardDatabase : MonoBehaviour
                         }
 
                     }
-                });
+                    return true;
+                }
             case "동챙이":
             case "동구리":
-                return (() => {
+                {
                     for (int i = 0; i < 2; i++)
                     {
-                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
-                        a.StatChange("Attack", a.Stat.attack + 1);
-                        a.StatChange("Defence", a.Stat.defence + 1);
+                        Card tmpHandCard = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
+                        tmpHandCard.StatChange("Attack", tmpHandCard.Stat.attack + 1);
+                        tmpHandCard.StatChange("Defence", tmpHandCard.Stat.defence + 1);
                     }
-                });
+                    return true;
+                }
             case "수륙양용동글":
-                return (() => {
+                {
                     for (int i = 0; i < 2; i++)
                     {
-                        var a = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
-                        a.StatChange("Attack", b.Stat.attack + a.Stat.attack);
-                        a.StatChange("Defence", b.Stat.defence + a.Stat.defence);
+                        Card tmpHandCard = BattleManager.Instance.Hand[Random.Range(0, BattleManager.Instance.Hand.Count)];
+                        tmpHandCard.StatChange("Attack", b.Stat.attack + tmpHandCard.Stat.attack);
+                        tmpHandCard.StatChange("Defence", b.Stat.defence + tmpHandCard.Stat.defence);
                     }
-                });
+                    return true;
+                }
             case "동글네시":
-                return (() => {
-                    foreach (Card a in BattleManager.Instance.Hand)
+                {
+                    foreach (Card tmpHandCard in BattleManager.Instance.Hand)
                     {
-                        a.StatChange("Attack", a.Stat.attack + 1);
-                        a.StatChange("Defence", a.Stat.defence + 1);
+                        tmpHandCard.StatChange("Attack", tmpHandCard.Stat.attack + 1);
+                        tmpHandCard.StatChange("Defence", tmpHandCard.Stat.defence + 1);
                     }
-                });
+                    return true;
+                }
             case "샴동글이":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("샴동글이"));
+                    queue.Enqueue(CardDatabase.instance.card("샴동글이"));
                     BattleManager.Instance.AddCard(queue, false);
-                });
+                    return true;
+                }
 
             case "삼동글이":
-            case "동글키메라":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("삼동글이"));
                     queue.Enqueue(CardDatabase.instance.card("삼동글이"));
                     BattleManager.Instance.AddCard(queue, false);
-                });
+                    return true;
+                }
+            case "동글키메라":
+                {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    queue.Enqueue(CardDatabase.instance.card("동글키메라"));
+                    queue.Enqueue(CardDatabase.instance.card("동글키메라"));
+                    queue.Enqueue(CardDatabase.instance.card("동글키메라"));
+                    BattleManager.Instance.AddCard(queue, false);
+                    return true;
+                }
             case "봄글이":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("폭탄"));
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
             case "폭탄":
-                return (() => {
+                {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(30, false, target);
-                });
+                    return true;
+                }
             case "동글너마이트":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("다이너마이트"));
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
             case "다이너마이트":
-                return (() => {
+                {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(60, false, target);
-                });
+                    return true;
+                }
             case "핵동글":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("핵폭탄"));
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
             case "핵폭탄":
-                return (() => {
+                {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(120, false, target);
-                });
+                    return true;
+                }
             case "유령":
             case "폴터가이스트":
-                return (() => {
+                {
                     var cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
-                    var card = cardList.Count==0?null:cardList[Random.Range(0, cardList.Count)];
+                    var card = cardList.Count == 0 ? null : cardList[Random.Range(0, cardList.Count)];
                     BattleManager.Instance.moveCardGraveToDeck(card);
-                });
+                    return true;
+                }
             case "지니":
-                return (() => {
+                {
                     var cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
                     int loopCnt = 0;
-                    while (cardList.Count > 0 && ++loopCnt <=1000)
+                    while (cardList.Count > 0 && ++loopCnt <= 1000)
                     {
                         cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
                         var card = cardList.Count == 0 ? null : cardList[Random.Range(0, cardList.Count)];
                         BattleManager.Instance.moveCardGraveToDeck(card);
                     }
 
-                });
+                    return true;
+                }
             case "슬롯머신":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(RandomCard());
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
             case "슬롯머신+":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     var tier = Random.Range(3, 6);
                     queue.Enqueue(cardByTier(tier));
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
             case "슬롯머신++":
-                return (() => {
+                {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     var tier = 5;
                     queue.Enqueue(cardByTier(tier));
                     BattleManager.Instance.AddCard(queue, true);
-                });
+                    return true;
+                }
+            case "천사동글이":
+                {
+                    foreach (Card card in BattleManager.Instance.AllCards)
+                    {
+                        card.StatChange("Attack", card.Stat.attack + 2);
+                        card.StatChange("Defence", card.Stat.defence + 2);
+                    }
+                    return true;
+                }
+            case "불가사리":
+                {
 
-                /////////////////////////////////////////////////
+                    var deleteTarget = BattleManager.Instance.Deck[0];
+                    BattleManager.Instance.Deck.RemoveAt(0);
+                    b.StatChange("Attack", b.Stat.attack + deleteTarget.Stat.attack);
+                    b.StatChange("Defence", b.Stat.defence + deleteTarget.Stat.defence);
+                    deleteTarget.deleteCard(1f);
+
+                    deleteTarget = BattleManager.Instance.Grave[0];
+                    BattleManager.Instance.Grave.RemoveAt(0);
+                    b.StatChange("Attack", b.Stat.attack + deleteTarget.Stat.attack);
+                    b.StatChange("Defence", b.Stat.defence + deleteTarget.Stat.defence);
+                    deleteTarget.deleteCard(1f);
+
+                    return true;
+                }
+            case "슈퍼컴퓨터":
+                {
+                    BattleManager.Instance.rerolladd(5);
+                    return true;
+                }
+
+            /////////////////////////////////////////////////
             case "저주":
-                return (() => {
+                {
                     var tmpList = BattleManager.Instance.Hand.Where(x => !(x.Stat.attack == 0 && x.Stat.defence == 0)).ToList();
-                    if (tmpList.Count == 0) return;
+                    if (tmpList.Count == 0) return true;
                     var tmpCard = tmpList[Random.Range(0, tmpList.Count)];
-                    tmpCard.StatChange("Attack", tmpCard.Stat.attack -3);
-                    tmpCard.StatChange("Defence", tmpCard.Stat.defence -3);
-                });
+                    tmpCard.StatChange("Attack", tmpCard.Stat.attack - 3);
+                    tmpCard.StatChange("Defence", tmpCard.Stat.defence - 3);
+                    return true;
+                }
 
 
         }
-        return (() => { });
+        return false;
     }
-    public CardAction BeforeCardActionFunc(Card b)
+    public bool BeforeCardActionFunc(Card b)
     {
         string a = b.name;
         switch (a)
         {
             case "깡통몬":
             case "깡통봇":
-                return (() => {
+                {
                     b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
-                });
+                    return true;
+                }
             case "펀치봇":
-                return (() => {
+                {
                     b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 4));
-                });
+                    return true;
+                }
             case "건당글이":
-                return (() => {
+                {
                     b.StatChange("Attack", Random.Range(b.Stat.attack, b.Stat.attack + 6));
-                });
+                    return true;
+                }
 
             case "사신":
-                return (() => {
-                    if(BattleManager.Instance.tmpRate<1.2)
+                {
+                    if (BattleManager.Instance.tmpRate < 1.2)
                         BattleManager.Instance.tmpRate = 1.2;
-                });
+                    return true;
+                }
             case "마계왕":
-                return (() => {
+                {
                     if (BattleManager.Instance.tmpRate < 1.5)
                         BattleManager.Instance.tmpRate = 1.5;
-                });
+                    return true;
+                }
             case "버섯순이":
-                return (() => {
+                {
                     BattleManager.Instance.rerolladd(1);
-                });
+                    return true;
+                }
             case "리빙아머":
-                return (() => {
-                    var target = BattleManager.Instance.Enemies.Count==0?null:BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
+                {
+                    var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
-                });
+                    return true;
+                }
             case "듀라한":
-                return (() => {
+                {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
-                });
+                    return true;
+                }
             case "백작동글이":
-                return (() => {
+                {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
@@ -514,14 +596,32 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
                     BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
-                });
+                    return true;
+                }
             case "동글키메라":
-                return (() => {
+                {
                     b.StatChange("Attack", BattleManager.Instance.Grave.Count);
-                });
+                    return true;
+                }
 
         }
-        return (() => { });
+        return false;
+    }
+    public bool BeforeCardActionFunc_Always(Card b)
+    {
+        string a = b.name;
+        switch (a)
+        {
+            case "프랑켄동글":
+                {
+                    b.StatChange("Attack", b.Stat.attack+2);
+                    b.StatChange("Defence", b.Stat.defence + 2);
+                    return true;
+                }
+
+
+        }
+        return false;
     }
 }
 [Serializable]
@@ -532,8 +632,6 @@ public struct CardStruct
     public Sprite _img;
     public SPECIES _species;
     public string _name;
-    [Multiline(3)]
-    public string _text;
     public int _tier;
     public STAT _stat;
     public TYPE _type;
@@ -542,6 +640,7 @@ public struct CardStruct
     public bool isFixed;
     public List<String> evol;
     public bool isRare;
+    public bool isUltimate;
 }
 [Serializable]
 public struct RuleStruct
@@ -575,7 +674,7 @@ public enum SPECIES
 }
 public enum TYPE
 {
-    NONE,FIRE,WATER,GRASS,LIGHT,DARK
+    NONE, FIRE, WATER, GRASS, LIGHT, DARK
 }
 
 public delegate void CardAction();

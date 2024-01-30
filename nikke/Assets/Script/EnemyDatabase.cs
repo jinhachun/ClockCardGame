@@ -56,7 +56,7 @@ public class EnemyDatabase : MonoBehaviour
 
     public List<EnemyStruct> final_enemylist(int area,EnemyType type)
     {
-        var sqdListByArea = sqdList.Where(x => x.area == area).ToList().Where(x=>x.enemyType==type).ToList();
+        var sqdListByArea = sqdList.Where(x => x.area == area).ToList().Where(x=>x.enemyType==type).ToList().Where(x=>!Resource.Instance.metSquad.Contains(x)).ToList();
         int randomNum = Random.Range(0, sqdListByArea.Count);
         var sqdByArea = sqdListByArea[randomNum];
 
@@ -65,7 +65,7 @@ public class EnemyDatabase : MonoBehaviour
         {
             enemyStructs.Add(enemylist(enemyList,enemy));
         }
-        sqdList.RemoveAll(x=>x.Equals(sqdByArea));
+        Resource.Instance.metSquad.Add(sqdByArea);
         return enemyStructs;
     }
     public Vector2 spriteSize(EnemyType et)
