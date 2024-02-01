@@ -213,7 +213,7 @@ public class CardDatabase : MonoBehaviour
             case "버섯깨비":
             case "쿼드버섯깨비":
                 {
-                    BattleManager.Instance.rerolladd(1);
+                    BattleManager.Instance.rerolladd();
                     return true;
                 }
             case "먹보괴수":
@@ -225,12 +225,7 @@ public class CardDatabase : MonoBehaviour
 
             case "황금몬":
                 {
-                    foreach (Card tmp in BattleManager.Instance.Deck)
-                    {
-                        if (tmp.name.Equals("황금몬"))
-                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
-                    }
-                    foreach (Card tmp in BattleManager.Instance.Grave)
+                    foreach (Card tmp in BattleManager.Instance.AllCards)
                     {
                         if (tmp.name.Equals("황금몬"))
                             tmp.StatChange("Attack", tmp.Stat.attack + 1);
@@ -280,7 +275,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "골목대장동글":
                 {
-                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    foreach (Card tmp in BattleManager.Instance.AllCards)
                     {
                         if (tmp.name.Equals("동글이"))
                         {
@@ -288,22 +283,12 @@ public class CardDatabase : MonoBehaviour
                             tmp.StatChange("Attack", tmp.Stat.attack + 1);
                             tmp.StatChange("Defence", tmp.Stat.defence + 1);
                         }
-                    }
-
-                    foreach (Card tmp in BattleManager.Instance.Grave)
-                    {
-                        if (tmp.name.Equals("동글이"))
-                        {
-                            tmp.StatChange("Attack", tmp.Stat.attack + 1);
-                            tmp.StatChange("Defence", tmp.Stat.defence + 1);
-                        }
-
                     }
                     return true;
                 }
             case "민병대동글":
                 {
-                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    foreach (Card tmp in BattleManager.Instance.AllCards)
                     {
                         if (tmp.name.Equals("동글이"))
                         {
@@ -311,22 +296,12 @@ public class CardDatabase : MonoBehaviour
                             tmp.StatChange("Attack", tmp.Stat.attack + 2);
                             tmp.StatChange("Defence", tmp.Stat.defence + 2);
                         }
-                    }
-
-                    foreach (Card tmp in BattleManager.Instance.Grave)
-                    {
-                        if (tmp.name.Equals("동글이"))
-                        {
-                            tmp.StatChange("Attack", tmp.Stat.attack + 2);
-                            tmp.StatChange("Defence", tmp.Stat.defence + 2);
-                        }
-
                     }
                     return true;
                 }
             case "동글의사당":
                 {
-                    foreach (Card tmp in BattleManager.Instance.Deck)
+                    foreach (Card tmp in BattleManager.Instance.AllCards)
                     {
                         if (tmp.name.Equals("동글이"))
                         {
@@ -334,16 +309,6 @@ public class CardDatabase : MonoBehaviour
                             tmp.StatChange("Attack", tmp.Stat.attack + 5);
                             tmp.StatChange("Defence", tmp.Stat.defence + 5);
                         }
-                    }
-
-                    foreach (Card tmp in BattleManager.Instance.Grave)
-                    {
-                        if (tmp.name.Equals("동글이"))
-                        {
-                            tmp.StatChange("Attack", tmp.Stat.attack + 5);
-                            tmp.StatChange("Defence", tmp.Stat.defence + 5);
-                        }
-
                     }
                     return true;
                 }
@@ -517,6 +482,92 @@ public class CardDatabase : MonoBehaviour
                     BattleManager.Instance.rerolladd(5);
                     return true;
                 }
+            case "동글라미드":
+                {
+                    b.StatChange("Defence", b.Stat.defence + 4);
+                    return true;
+                }
+            case "엘동글라도":
+                {
+                    b.StatChange("Defence", b.Stat.defence + 6);
+                    if(b.Stat.attack<20 && b.Stat.defence>=20)
+                        b.StatChange("Attack", 20);
+
+                    return true;
+                }
+            case "마왕동글이":
+                {
+                    foreach (Card card in BattleManager.Instance.AllCards)
+                    {
+                        if (card.Type == TYPE.DARK)
+                        {
+                            card.StatChange("Attack", card.Stat.attack + 3);
+                            card.StatChange("Defence", card.Stat.defence + 3);
+                        }
+                    }
+                    return true;
+                }
+            case "네크로동글":
+                {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    var tmpGrave = new List<Card>();
+                    for (int i = 0; i < BattleManager.Instance.Grave.Count; i++)
+                    {
+                        tmpGrave.Add(BattleManager.Instance.Grave[i]);
+                    }
+                    foreach(Card card in tmpGrave)
+                    {
+                        if (card.tier <= 2)
+                        {
+                            var deleteTarget = card;
+                            BattleManager.Instance.Grave.Remove(card);
+                            var addTarget = cardDatabase.Where(x => x._species == SPECIES.UNDEAD).ToList().OrderBy(x => Random.value).FirstOrDefault();
+                            queue.Enqueue(addTarget);
+                            deleteTarget.deleteCard(1f);
+                        }
+                    }
+                    if (queue.Count > 0)
+                        BattleManager.Instance.AddCard(queue, false);
+                    else return false;
+
+
+                    return true;
+                }
+            case "저주인형":
+                {
+                    foreach(Enemy target in BattleManager.Instance.Enemies)
+                        target.setAttackDebuff(0);
+                    return true;
+                }
+            case "피노키오":
+                {
+
+                    foreach (Enemy target in BattleManager.Instance.Enemies)
+                    {
+                        target.setAttackDebuff(0);
+                        target.lossShield(target._shield);
+                    }
+                    return true;
+                }
+            case "동글팩토리":
+                {
+                    Queue<CardStruct> queue = new Queue<CardStruct>();
+                    for (int i = 0; i < BattleManager.Instance.Deck.Count; i++)
+                    {
+                        if (BattleManager.Instance.Deck[i].Str._Token)
+                        {
+                            var deleteTarget = BattleManager.Instance.Deck[i];
+                            BattleManager.Instance.Deck.RemoveAt(i);
+                            var addTarget = cardDatabase.Where(x => x._species == SPECIES.MECH && x._tier==5).ToList().OrderBy(x => Random.value).FirstOrDefault();
+                            queue.Enqueue(addTarget);
+                            deleteTarget.deleteCard(1f);
+                            BattleManager.Instance.AddCard(queue, true);
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
 
             /////////////////////////////////////////////////
             case "저주":
@@ -539,19 +590,24 @@ public class CardDatabase : MonoBehaviour
         switch (a)
         {
             case "깡통몬":
+                {
+                    b.StatChange("Attack", Random.Range(b.Stat.attack-2, b.Stat.attack + 3));
+                    return true;
+                }
             case "깡통봇":
                 {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 2, b.Stat.attack + 3));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack, b.Stat.attack + 3));
                     return true;
                 }
             case "펀치봇":
                 {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack - 3, b.Stat.attack + 4));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack+1, b.Stat.attack + 4));
                     return true;
                 }
             case "건당글이":
                 {
-                    b.StatChange("Attack", Random.Range(b.Stat.attack, b.Stat.attack + 6));
+                    b.StatChange("Attack", Random.Range(b.Stat.attack+1, b.Stat.attack + 6));
+                    b.StatChange("Defence", Random.Range(b.Stat.defence+1, b.Stat.defence + 6));
                     return true;
                 }
 
@@ -569,7 +625,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "버섯순이":
                 {
-                    BattleManager.Instance.rerolladd(1);
+                    BattleManager.Instance.rerolladd();
                     return true;
                 }
             case "리빙아머":
@@ -601,6 +657,29 @@ public class CardDatabase : MonoBehaviour
             case "동글키메라":
                 {
                     b.StatChange("Attack", BattleManager.Instance.Grave.Count);
+                    return true;
+                }
+            case "랩터라이더":
+                {
+                    foreach(Card card in BattleManager.Instance.Hand) {
+                        if (card.isFixed)
+                        {
+                            card.StatChange("Attack", card.Stat.attack+1);
+                            card.StatChange("Defence", card.Stat.defence + 1);
+                        }
+                    }
+                    return true;
+                }
+            case "치킨라이더":
+                {
+                    foreach (Card card in BattleManager.Instance.Hand)
+                    {
+                        if (card.isFixed)
+                        {
+                            card.StatChange("Attack", card.Stat.attack + 3);
+                            card.StatChange("Defence", card.Stat.defence + 2);
+                        }
+                    }
                     return true;
                 }
 

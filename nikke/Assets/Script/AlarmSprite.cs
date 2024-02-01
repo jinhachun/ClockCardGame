@@ -11,12 +11,37 @@ public class AlarmSprite : MonoBehaviour
     {
         spriteRenderer.sprite = statusStruct.sprite;
     }
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            if (GetComponent<Collider2D>().OverlapPoint(wp))
+            {
+                OnTouchDown();
+            }
+            else
+                OnTouchUp();
+
+        }
+    }
     private void OnMouseOver()
     {
-        alarm.gameObject.SetActive(true);
+        OnTouchDown();
     }
     private void OnMouseExit()
     {
+        OnTouchUp();
+    }
+    void OnTouchDown()
+    {
+        alarm.gameObject.SetActive(true);
+    }
+
+    void OnTouchUp()
+    {
         alarm.gameObject.SetActive(false);
     }
+
 }

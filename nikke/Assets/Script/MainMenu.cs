@@ -73,6 +73,7 @@ public class MainMenu : MonoBehaviour
         ButtonList.Add(_SupportButton);
         InstantiateRule_UI();
         TextUpdate();
+        Resource.Instance.Save();
     }
     public void InstantiateRule_UI()
     {
@@ -140,8 +141,13 @@ public class MainMenu : MonoBehaviour
         __DeckShowText.text = _DeckShowText_not_showdeck;
         _scrollViewCardPrefab.Set(tmpDeck);
     }
+    public void ButtonAction_toStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
     public void battleStart()
     {
+        Resource.Instance.Save();
         if (Resource.Instance.Area >= 4 && Resource.Instance.Stage!=1) return;
         DOTween.KillAll();
         if (Resource.Instance.Rule_no(12)) Resource.Instance.money = (Resource.Instance.money*70/100);

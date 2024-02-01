@@ -108,7 +108,7 @@ public class BattleManager : MonoBehaviour
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
         RerollChance = 0;
-        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 50 : 100)) * Random.Range(5, 9) * (area + 1) / 2;
+        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 40 : 60)) * Random.Range(5, 9) * (area*2 + 1) / 2;
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
         pureAttack = false;
@@ -251,7 +251,7 @@ public class BattleManager : MonoBehaviour
         Turn++;
         if(!Resource.Instance.Rule_no(11)) Shield = 0;
         if (Resource.Instance.Rule_no(11) && Turn == 1) Shield += 100;
-        rerolladd(1);
+        rerolladd();
         foreach (var enemy in EnemiesClone())
         {
             enemy.SetPatternText();
@@ -459,9 +459,14 @@ public class BattleManager : MonoBehaviour
         return; 
     }
 
-    public void rerolladd(int n)
+    public void rerolladd()
     {
         RerollChance++;
+        RerollText.text = "Chance : " + RerollChance.ToString();
+    }
+    public void rerolladd(int n)
+    {
+        RerollChance+=n;
         RerollText.text = "Chance : " + RerollChance.ToString();
     }
 
@@ -472,8 +477,11 @@ public class BattleManager : MonoBehaviour
         float speciesRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
         float tmpRate = typeRate * speciesRate * (float)r;
         Rate *= (double)Mathf.Round((tmpRate * 100f)) / 100f;
-        foreach (var i in Hand) { Att += (int)(Rate * i.Stat.attack * (Resource.Instance.Rule_no(20) ? (Turn / 2 == 0 ? 0.5f : 1.5f) : 1)); Def += i.Stat.defence; }
-        this.Def = (int)(Rate * (double)Def * (Rule_no(20) ? (Turn / 2 == 0 ? 1.5f : 0.5f) : 1));
+        foreach (var i in Hand) { 
+            Att += (int)(Rate * i.Stat.attack * (Resource.Instance.Rule_no(20) ? (Turn / 2 == 0 ? 0.5f : 1.5f) : 1)); 
+            Def += i.Stat.defence; 
+        }
+        this.Def = (int)(Rate * Mathf.Ceil((float)Def * (Rule_no(20) ? (Turn / 2 == 0 ? 1.5f : 0.5f) : 1)));
     }
     public bool RerollPhase_isBtnChk(RerollButton btn) => btn.btnSprite.Equals(CardDatabase.Instance.btn(0));
 
@@ -828,7 +836,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_Reward()
     {
-        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*5 + 100) / 100;
+        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*3 + 100) / 100;
         RewardPopup.Create(finalReward).OnComplete(() =>
         {
             endgame_win(finalReward);

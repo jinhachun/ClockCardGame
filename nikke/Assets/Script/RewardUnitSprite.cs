@@ -32,11 +32,32 @@ public class RewardUnitSprite : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync("EventScene");
         }
-    }
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            if (GetComponent<Collider2D>().OverlapPoint(wp))
+            {
+                OnTouchDown();
+            }else
+                OnTouchUp();
 
-    void OnMouseOver()
+        }
+
+            
+    }
+    private void OnMouseOver()
     {
-        if (!active) {
+        OnTouchDown();
+    }
+    private void OnMouseExit()
+    {
+        OnTouchUp();
+    }
+    void OnTouchDown()
+    {
+        if (!active)
+        {
             _prefab.color = Color.red;
         }
         else
@@ -47,7 +68,7 @@ public class RewardUnitSprite : MonoBehaviour
         }
     }
 
-    void OnMouseExit()
+    void OnTouchUp()
     {
         isOver = false;
         _prefab.color = Color.white;

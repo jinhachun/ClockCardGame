@@ -24,7 +24,7 @@ public class Support : MonoBehaviour
     public int Price => (int)(30*(1f+(Resource.Instance.Rule_no(7)?0.1f*Resource.Instance.Rules[DataManager.RuleName(7,Resource.Instance.Kor)]:0f)) * (Resource.Instance.Rule_no(8) ? 1.2f : 1f));
     public int RerollPrice = 0;
     public int HealPrice => Price* (Resource.Instance.SupportPrice["Heal"]+2);
-    public int AddPrice => Price* (Resource.Instance.SupportPrice["Add"] + 3)*(_cardAddPrefab.tier*2-5);
+    public int AddPrice => Price* (Resource.Instance.SupportPrice["Add"] + 3)*(_cardAddPrefab.tier*3-8);
     public int DeletePrice => Price  * (Resource.Instance.SupportPrice["Delete"]* 2 + 3);
     public int EvolvePrice => Price  * (Resource.Instance.SupportPrice["Evolve"]+ _cardEvolvePrefab.Str._tier*2);
     void Start()
@@ -97,7 +97,7 @@ public class Support : MonoBehaviour
     public void QuitChk()
     {
         Set();
-        bool chk = Random.Range(0, 101) > 50;
+        bool chk = Random.Range(0, 101) > 75;
         UpdateText();
         if (chk) Quit();
     }

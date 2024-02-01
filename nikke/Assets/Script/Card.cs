@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
 
+[Serializable]
 public class Card : MonoBehaviour
 {
 
@@ -40,8 +42,6 @@ public class Card : MonoBehaviour
     public bool isFixed{ get; private set; }
     public int layer = 0;
     public bool Touchable = false;
-    public CardAction BeforeAction;
-    public CardAction Action;
 
     public bool combiSpeices;
     public bool combiType;
@@ -52,16 +52,6 @@ public class Card : MonoBehaviour
         switch (statVar)
         {
             case "Attack":
-                if (b > Stat.attack)
-                {
-                    if (BattleManager.GameState == BattleState.Attack)
-                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-                }
-                else if (b < Stat.attack)
-                {
-                    if (BattleManager.GameState == BattleState.Attack)
-                        BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
-                }
                 if (b > Str._stat.attack)
                     this._attText.color = Color.red;
                 else if (b < Str._stat.attack)
@@ -71,16 +61,6 @@ public class Card : MonoBehaviour
                 this._attText.text = Stat.attack.ToString();
                 break;
             case "Defence":
-                if (b > Stat.defence)
-                {
-                    if (BattleManager.GameState == BattleState.Attack)
-                        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-                }
-                else if (b < Stat.defence)
-                {
-                    if (BattleManager.GameState == BattleState.Attack)
-                        BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
-                }
                 if (b > Str._stat.defence)
                     this._defText.color = Color.red;
                 else if (b < Str._stat.defence)
@@ -90,6 +70,25 @@ public class Card : MonoBehaviour
                 this._defText.text = Stat.defence.ToString();
                 break;
         }
+    }
+    public void StatChange(string statVar,int a,bool effect)
+    {
+        int b = a;
+        if (b < 0) b = 0;
+        if (effect) StatChangeEffect(b, statVar.Equals("Attack") ? Stat.attack : Stat.defence);
+        StatChange(statVar, a);
+    }
+    public void StatChangeEffect(int changestat, int beforestat)
+    {
+        if (changestat > beforestat)
+        {
+            BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
+        }
+        else if (changestat < beforestat)
+        {
+            BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+        }
+
     }
     public void TouchableChange(bool a)
     {
@@ -120,8 +119,8 @@ public void Set(CardStruct str)
         this.Stat.attack = str._stat.attack + Rule_no13_0 + Rule_no17_0;
         this.Stat.defence = str._stat.defence;
 
-        StatChange("Attack", this.Stat.attack);
-        StatChange("Defence", this.Stat.defence);
+        StatChange("Attack", this.Stat.attack, false);
+        StatChange("Defence", this.Stat.defence, false);
         this._text.text = DataManager.CardInfo(str.NUM, Resource.Instance.Kor, str._Token);
 
         this.isEthereal = str.isEthereal;
@@ -249,18 +248,41 @@ public void Set(CardStruct str)
         });
     }
 
-    void OnMouseOver()
+    void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            if (GetComponent<Collider2D>().OverlapPoint(wp))
+            {
+                OnTouchDown();
+            }
+            else
+                OnTouchUp();
+
+        }
+    }
+    private void OnMouseOver()
+    {
+        OnTouchDown();
+    }
+    private void OnMouseExit()
+    {
+        OnTouchUp();   
+    }
+    void OnTouchDown()
     {
         if (!Touchable) return;
-        _visual.transform.localScale = new Vector2(Size*2, Size*2);
-        setLayer(3,53+layer);
-
+        _visual.transform.localScale = new Vector2(Size * 2, Size * 2);
+        setLayer(3, 53 + layer);
     }
 
-    void OnMouseExit()
+    void OnTouchUp()
     {
         if (!Touchable && _visual.transform.localScale.x == Size) return;
         _visual.transform.localScale = new Vector2(Size, Size);
-        setLayer(0,50+ layer);
+        setLayer(0, 50 + layer);
     }
+
 }

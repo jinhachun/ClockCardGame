@@ -25,7 +25,7 @@ public class Village : MonoBehaviour
     private void TextUpdate()
     {
         _jewel.text = Resource.Instance.jewel+"";
-        _FarmTxt.text = _FarmTxtInfo.Replace("@",Resource.Instance.VillageLevel["Farm"]*5+"");
+        _FarmTxt.text = _FarmTxtInfo.Replace("@",Resource.Instance.VillageLevel["Farm"]*3+"");
         _HouseTxt.text = _HouseTxtInfo.Replace("@", Resource.Instance.VillageLevel["House"]*5 + "");
         _ChurchTxt.text = _ChurchTxtInfo.Replace("@",(5+ Resource.Instance.VillageLevel["Church"] * 4) + "");
         _BathTxt.text = _BathTxtInfo.Replace("@", Resource.Instance.VillageLevel["Bath"] * 10 + "");

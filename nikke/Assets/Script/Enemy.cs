@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     public int _shield;
     public int _area;
     public int _statusValue;
-    
+
     public EnemyType _enemyType;
     public List<pattern> _enemyPatterns;
     public string _statusName;
@@ -30,12 +30,18 @@ public class Enemy : MonoBehaviour
     public void setAttackBuff()
     {
         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-        attackBuff += Pattern._Value; 
+        attackBuff += Pattern._Value;
     }
     public void setAttackBuff(int a)
     {
         BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
-        attackBuff += a; 
+        attackBuff += a;
+    }
+    public void setAttackDebuff(int a)
+    {
+        if(attackBuff>0)
+            BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+        attackBuff = a;
     }
     public void gainShield(int a)
     {
@@ -60,7 +66,7 @@ public class Enemy : MonoBehaviour
         _statusText.text = this._statusValue + "";
         this._status.infoChange(this._statusValue);
     }
-    
+
     public void Set(EnemyStruct enemyStruct)
     {
         this.Str = enemyStruct;
@@ -77,11 +83,11 @@ public class Enemy : MonoBehaviour
         this._enemyPatterns = Str._enemyPatterns;
         this._statusValue = enemyStruct._statusValue;
         if (this._statusValue == 0) _statusText.gameObject.SetActive(false);
-        _statusText.text = this._statusValue+"";
+        _statusText.text = this._statusValue + "";
         if (!enemyStruct._statusStruct.Equals("¾øÀ½"))
         {
             this._statusName = enemyStruct._statusStruct;
-            this._status.set(StatusDatabase.Instance.Status(_statusName),this._statusValue);
+            this._status.set(StatusDatabase.Instance.Status(_statusName), this._statusValue);
         }
         else
         {
@@ -109,7 +115,20 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (isOver && isTarget==false)
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            if (GetComponent<Collider2D>().OverlapPoint(wp))
+            {
+                OnTouchDown();
+            }
+            else
+                OnTouchUp();
+
+        }
+
+        if (isOver && isTarget == false)
         {
             _targetBeforeClickImg.gameObject.SetActive(true);
         }
@@ -117,20 +136,21 @@ public class Enemy : MonoBehaviour
         if (isOver && Input.GetMouseButtonDown(0))
         {
             if (BattleManager.GameState != BattleState.WaitingReroll) return;
-            if (!isTarget && BattleManager.Instance.targetEnemy.Count > 0) BattleManager.Instance.targetEnemy[0].isTarget=false;
+            if (!isTarget && BattleManager.Instance.targetEnemy.Count > 0) BattleManager.Instance.targetEnemy[0].isTarget = false;
             isTarget = isTarget ? false : true;
         }
-        if(isTarget!=_targetImg.gameObject.activeInHierarchy)
+        if (isTarget != _targetImg.gameObject.activeInHierarchy)
             _targetImg.gameObject.SetActive(isTarget);
+
 
     }
     public pattern Pattern => _enemyPatterns[PatternIndex];
     public double attackBuff = 0;
-    public int attackValue_Rule=> Pattern._Value
+    public int attackValue_Rule => Pattern._Value
         + (Resource.Instance.Rule_no(0) ? (Pattern._Value * 10 * (Resource.Instance.Rules[DataManager.RuleName(0, Resource.Instance.Kor)]) / 100) : (0))
         + (Resource.Instance.Rule_no(18) ? (Pattern._Value * 15 / 100) : (0));
     public int damage => (int)attackBuff + attackValue_Rule;
-    
+
 
     public void SetPatternText()
     {
@@ -175,13 +195,22 @@ public class Enemy : MonoBehaviour
         if (PatternIndex == _enemyPatterns.Count) PatternIndex = 0;
         SetPatternText();
     }
-    void OnMouseOver()
+
+
+    private void OnMouseOver()
+    {
+        OnTouchDown();
+    }
+    private void OnMouseExit()
+    {
+        OnTouchUp();
+    }
+    void OnTouchDown()
     {
         isOver = true;
-
     }
 
-    void OnMouseExit()
+    void OnTouchUp()
     {
         isOver = false;
     }
