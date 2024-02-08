@@ -154,6 +154,7 @@ public class Enemy : MonoBehaviour
 
     public void SetPatternText()
     {
+        this._hpBar.SetName(this._name + (attackBuff == 0 ? "" : "<sup>+" + attackBuff+"</sup>"));
         switch (Pattern._enemyPattern)
         {
             case EnemyPattern.ATT:

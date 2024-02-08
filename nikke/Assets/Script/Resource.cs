@@ -98,13 +98,13 @@ public class Resource : MonoBehaviour
         money = 100; jewel = 3;
         shopcard = CardDatabase.Instance.card("동글이");
         Deck = new List<CardStruct>();
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
             var tmp = (CardDatabase.Instance.cardByTier(1));
             Deck.Add(tmp);
 
         }
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 12; i++)
         {
             var tmp = (CardDatabase.Instance.cardByTier(startDeckTier));
             Deck.Add(tmp);

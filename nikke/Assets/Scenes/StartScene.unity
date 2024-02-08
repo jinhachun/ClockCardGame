@@ -600,7 +600,7 @@ MonoBehaviour:
     _info: "\uD134\uC774 \uB05D\uB0A0 \uB54C, \uB371\uC5D0 \uC788\uB294 \uCE74\uB4DC
       \uD55C \uC7A5\uC774 \uC18C\uBA78\uD569\uB2C8\uB2E4."
   - _name: "\uD654\uC544\uB825"
-    sprite: {fileID: 21300000, guid: a7bfddcd46c90ea458c3c83b01f39add, type: 3}
+    sprite: {fileID: 21300000, guid: 6f277c0e3cdc9dc468a87b26a41f7ffc, type: 3}
     _info: "@ \uD134 \uB4A4, 50\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4!"
 --- !u!114 &221887299
 MonoBehaviour:
@@ -2127,7 +2127,7 @@ MonoBehaviour:
       attack: 12
       defence: 0
     _type: 5
-    isExhaust: 1
+    isExhaust: 0
     isEthereal: 0
     isFixed: 1
     evol:
@@ -3031,7 +3031,7 @@ MonoBehaviour:
     _stat:
       attack: 0
       defence: 15
-    _type: 0
+    _type: 2
     isExhaust: 1
     isEthereal: 0
     isFixed: 0
@@ -3064,7 +3064,7 @@ MonoBehaviour:
     _stat:
       attack: 12
       defence: 0
-    _type: 1
+    _type: 5
     isExhaust: 0
     isEthereal: 0
     isFixed: 0
@@ -3111,10 +3111,10 @@ MonoBehaviour:
     _name: "\uB9C8\uC655\uB3D9\uAE00\uC774"
     _tier: 5
     _stat:
-      attack: 15
+      attack: 12
       defence: 0
     _type: 5
-    isExhaust: 1
+    isExhaust: 0
     isEthereal: 0
     isFixed: 1
     evol: []
@@ -3178,7 +3178,7 @@ MonoBehaviour:
     _stat:
       attack: 7
       defence: 7
-    _type: 0
+    _type: 2
     isExhaust: 0
     isEthereal: 0
     isFixed: 1
@@ -6256,6 +6256,7 @@ MonoBehaviour:
   _LoadFileBox: {fileID: 1166852900}
   saveData:
     Deck: []
+    Deck_token: 
     Hp: 0
     Kor: 0
     tmpMhp: 0
@@ -6275,23 +6276,7 @@ MonoBehaviour:
     jewel: 0
     combiRate: []
     metSquad: []
-    shopcard:
-      NUM: 0
-      _Token: 0
-      _img: {fileID: 0}
-      _species: 0
-      _name: 
-      _tier: 0
-      _stat:
-        attack: 0
-        defence: 0
-      _type: 0
-      isExhaust: 0
-      isEthereal: 0
-      isFixed: 0
-      evol: []
-      isRare: 0
-      isUltimate: 0
+    shopcard: 
     time: 0
 --- !u!1 &1920618931
 GameObject:

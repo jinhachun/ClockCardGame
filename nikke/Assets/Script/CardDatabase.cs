@@ -535,8 +535,11 @@ public class CardDatabase : MonoBehaviour
                 }
             case "저주인형":
                 {
-                    foreach(Enemy target in BattleManager.Instance.Enemies)
+                    foreach (Enemy target in BattleManager.Instance.Enemies)
+                    {
                         target.setAttackDebuff(0);
+                        target.SetPatternText();
+                    }
                     return true;
                 }
             case "피노키오":
@@ -546,6 +549,7 @@ public class CardDatabase : MonoBehaviour
                     {
                         target.setAttackDebuff(0);
                         target.lossShield(target._shield);
+                        target.SetPatternText();
                     }
                     return true;
                 }

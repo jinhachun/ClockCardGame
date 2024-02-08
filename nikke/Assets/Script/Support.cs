@@ -44,7 +44,8 @@ public class Support : MonoBehaviour
         }
         else if (rare)
         {
-            List<CardStruct> rareList = CardDatabase.Instance.cardByRareTierList(3);
+            var tier = Random.Range(0, Resource.Instance.Area);
+            List<CardStruct> rareList = CardDatabase.Instance.cardByRareTierList(3+tier);
             CardStruct rareCard = rareList[Random.Range(0, rareList.Count)];
             _cardAddPrefab.Set(rareCard);
         }

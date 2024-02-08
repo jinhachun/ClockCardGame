@@ -21,5 +21,8 @@ public class EnemyHpBar : HpBar
         text_Name.text = enemy._name;
         OnOff = true;
     }
-    
+    public void SetName(string name)
+    {
+        text_Name.text = name;
+    }
 }
