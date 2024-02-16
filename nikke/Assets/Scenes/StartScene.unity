@@ -2532,7 +2532,7 @@ MonoBehaviour:
     _tier: 5
     _stat:
       attack: 0
-      defence: 6
+      defence: 4
     _type: 2
     isExhaust: 0
     isEthereal: 0
@@ -3013,8 +3013,8 @@ MonoBehaviour:
     _name: "\uBD88\uAC00\uC0AC\uB9AC"
     _tier: 5
     _stat:
-      attack: 5
-      defence: 5
+      attack: 8
+      defence: 8
     _type: 1
     isExhaust: 0
     isEthereal: 0
@@ -3030,7 +3030,7 @@ MonoBehaviour:
     _tier: 5
     _stat:
       attack: 0
-      defence: 15
+      defence: 10
     _type: 2
     isExhaust: 1
     isEthereal: 0
@@ -3096,7 +3096,7 @@ MonoBehaviour:
     _tier: 5
     _stat:
       attack: 0
-      defence: 12
+      defence: 6
     _type: 1
     isExhaust: 0
     isEthereal: 0
@@ -3111,7 +3111,7 @@ MonoBehaviour:
     _name: "\uB9C8\uC655\uB3D9\uAE00\uC774"
     _tier: 5
     _stat:
-      attack: 12
+      attack: 9
       defence: 0
     _type: 5
     isExhaust: 0

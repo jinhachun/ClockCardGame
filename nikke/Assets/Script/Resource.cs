@@ -265,14 +265,14 @@ public class Resource : MonoBehaviour
         // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
         string jsonData = JsonUtility.ToJson(data);
         // 데이터를 저장할 경로 지정
-        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
         // 파일 생성 및 저장
         File.WriteAllText(path, jsonData);
     }
 
     public ResourceSaveData Load()//로드    
     {
-        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
         if (!File.Exists(path)) return null;
         ResourceSaveData data =null;
 
@@ -311,7 +311,7 @@ public class Resource : MonoBehaviour
         this.metSquad = data.metSquad;
         this.shopcard = CardDatabase.Instance.card(data.shopcard);
         this.time = data.time;
-        File.Delete(Path.Combine(Application.dataPath, "playerData.json"));
+        File.Delete(Path.Combine(Application.persistentDataPath, "playerData.json"));
     }
 
 }
