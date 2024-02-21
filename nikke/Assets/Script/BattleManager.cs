@@ -310,6 +310,7 @@ public class BattleManager : MonoBehaviour
                 if (CardDatabase.Instance.BeforeCardActionFunc(card))
                 {
                     cardActionFuncAnimationChk = true;
+                    AudioManager.instance.PlaySfx(4);
                     card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
 
                 }
@@ -324,6 +325,7 @@ public class BattleManager : MonoBehaviour
                 if (CardDatabase.Instance.BeforeCardActionFunc_Always(card))
                 {
                     cardActionFuncAnimationChk = true;
+                    AudioManager.instance.PlaySfx(4);
                     card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
 
                 }
@@ -526,12 +528,14 @@ public class BattleManager : MonoBehaviour
             if (CardDatabase.Instance.CardActionFunc(card))
             {
                 cardActionFuncAnimationChk = true;
+                AudioManager.instance.PlaySfx(4);
                 card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
 
             }
             if (Resource.Instance.Rule_no(19) && card.Species == SPECIES.HUMAN &&  CardDatabase.Instance.CardActionFunc(card) &&  Rule_no(19))
             {
                 Rule_no19_cardActionFuncAnimationChk = true;
+                AudioManager.instance.PlaySfx(4);
                 card.transform.DOScale(card.transform.localScale * 1.35f, 0.3f).SetLoops(2, LoopType.Yoyo);
 
             }
@@ -556,9 +560,11 @@ public class BattleManager : MonoBehaviour
                 if (card.Species==SPECIES.MONSTER && Rule_no(18)) takeHeal(1);
                 if (Enemies.Count > 0)
                 {
+
                     pureAttack = true;
                     var target = targetEnemy.Count == 0 ? Enemies[Random.Range(0, Enemies.Count)] : targetEnemy[0];
                     var damage = (int)(card.Stat.attack * Rate * (Resource.Instance.Rule_no(20)?(Turn/2==0?0.5f:1.5f):1));
+                    AudioManager.instance.PlaySfx(0);
                     enemyDamage(damage, critical, target);
                     if (damage > 0)
                         switch (card.Str._type)
@@ -645,6 +651,8 @@ public class BattleManager : MonoBehaviour
             bool lethal = (target._hp <= 0);
             if (lethal)
             {
+
+                AudioManager.instance.PlaySfx(5);
                 DamagePopup.Create(target.transform.position, AttLeft + target._hp, critical, lethal);
                 var deadEnemy = target;
                 target._hp = 0;
@@ -781,11 +789,13 @@ public class BattleManager : MonoBehaviour
         Shield = ShieldDamageCompare ? Shield - dam : 0;
         if (FinalDamage > 0)
         {
+            AudioManager.instance.PlaySfx(0);
             DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage + "", Color.white);
             Hp -= FinalDamage;
         }
         else
         {
+            AudioManager.instance.PlaySfx(3);
             DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
         }
         if (Hp <= 0) deadChk();
@@ -801,12 +811,14 @@ public class BattleManager : MonoBehaviour
             if (FinalDamage > 0)
             {
 
+                AudioManager.instance.PlaySfx(1);
                 DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), FinalDamage + "", Color.white);
                 Enemy._img.transform.DOScale(4f, 0.15f).SetLoops(2, LoopType.Yoyo);
                 Hp -= FinalDamage;
             }
             else
             {
+                AudioManager.instance.PlaySfx(3);
                 DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "BLOCK", Color.gray);
                 Enemy._img.transform.DOScale(2f, 0.2f).SetLoops(2, LoopType.Yoyo);
             }
@@ -815,6 +827,7 @@ public class BattleManager : MonoBehaviour
     }
     public void takeHeal(int value)
     {
+        AudioManager.instance.PlaySfx(10);
         DamagePopup.Create(new Vector2(HandPos[2].x, HandPos[0].y - 3.5f), "+" + value, Color.green);
         Hp += value;
         if (Mhp < Hp) Hp = Mhp;
@@ -836,6 +849,7 @@ public class BattleManager : MonoBehaviour
     }
     public void PHASE_Reward()
     {
+        AudioManager.instance.PlaySfx(6);
         int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*3 + 100) / 100;
         RewardPopup.Create(finalReward).OnComplete(() =>
         {
@@ -911,20 +925,20 @@ public class BattleManager : MonoBehaviour
         tmpCard = Deck[0];
         Hand.Add(tmpCard);
         Deck.Remove(tmpCard);
+        sq.AppendCallback(() =>
+        {
+            AudioManager.instance.PlaySfx(2);
+            tmpCard.flip(true);
+        });
         for (int i = 0; i < Hand.Count; i++)
         {
             moveCard(sq, Hand[i], HandPos[i], 0.2f, false, true);
             Hand[i].TouchableChange(true);
         }
-        sq.AppendCallback(() =>
-        {
-            tmpCard.flip(true);
-        });
         return tmpCard;
     }
     public void moveCard(Sequence seq, Card card, Vector2 v, float duration, bool one)
     {
-
         if (one)
             seq.Append(card.transform.DOMove(v, duration).SetEase(Ease.OutCubic));
         else

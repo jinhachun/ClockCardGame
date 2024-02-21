@@ -26,6 +26,7 @@ public class VillageContent : MonoBehaviour
     {
         if (Resource.Instance.jewel > 0 && level<4)
         {
+            AudioManager.instance.PlaySfx(7);
             Resource.Instance.jewel--;
             Resource.Instance.VillageLevel[this.gameObject.name]++;
         }

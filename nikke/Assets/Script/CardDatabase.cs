@@ -462,20 +462,25 @@ public class CardDatabase : MonoBehaviour
                 }
             case "불가사리":
                 {
+                    var deleteTarget = BattleManager.Instance.Deck.Count>0?BattleManager.Instance.Deck[0]:null;
+                    if (deleteTarget != null)
+                    {
+                        BattleManager.Instance.Deck.RemoveAt(0);
+                        b.StatChange("Attack", b.Stat.attack + deleteTarget.Stat.attack);
+                        b.StatChange("Defence", b.Stat.defence + deleteTarget.Stat.defence);
+                        deleteTarget.deleteCard(1f);
+                    }
 
-                    var deleteTarget = BattleManager.Instance.Deck[0];
-                    BattleManager.Instance.Deck.RemoveAt(0);
+                    deleteTarget = BattleManager.Instance.Grave.Count > 0 ? BattleManager.Instance.Grave[0] : null;
+                    if (deleteTarget != null)
+                    {
+                        BattleManager.Instance.Grave.RemoveAt(0);
                     b.StatChange("Attack", b.Stat.attack + deleteTarget.Stat.attack);
                     b.StatChange("Defence", b.Stat.defence + deleteTarget.Stat.defence);
                     deleteTarget.deleteCard(1f);
+                    }
 
-                    deleteTarget = BattleManager.Instance.Grave[0];
-                    BattleManager.Instance.Grave.RemoveAt(0);
-                    b.StatChange("Attack", b.Stat.attack + deleteTarget.Stat.attack);
-                    b.StatChange("Defence", b.Stat.defence + deleteTarget.Stat.defence);
-                    deleteTarget.deleteCard(1f);
-
-                    return true;
+                return true;
                 }
             case "슈퍼컴퓨터":
                 {

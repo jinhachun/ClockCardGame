@@ -111,6 +111,11 @@ public class Resource : MonoBehaviour
         }
         if (Rule_no4) Deck.Add(CardDatabase.Instance.card_token(DataManager.CardName(2,Kor,true)));
     }
+    public void GameWin()
+    {
+        PlayerPrefs.SetInt("maxLevel", PlayerPrefs.GetInt("maxLevel") + Random.Range(1, 4));
+        File.Delete(Path.Combine(Application.persistentDataPath, "playerData.json"));
+    }
     public List<CardStruct> Deck;
     public int Hp;
     public bool Kor;
@@ -156,12 +161,14 @@ public class Resource : MonoBehaviour
     }
     public void Event_Heal(int a)
     {
+        AudioManager.instance.PlaySfx(10);
         DamagePopup.Create(new Vector2(-2,-3), "+"+a, Color.green);
         Hp += a;
         if (Hp >= mHp) Hp = mHp;
     }
     public void Event_Damage(int a)
     {
+        AudioManager.instance.PlaySfx(0);
         DamagePopup.Create(new Vector2(-2, -3), "" + a, Color.white);
         Hp -= a;
         if (Hp <= 0) Hp = 1;
@@ -176,6 +183,7 @@ public class Resource : MonoBehaviour
         foreach(CardStruct tmp in Deck)
             if (tmp._name.Equals(name))
             {
+                AudioManager.instance.PlaySfx(9);
                 Deck.Remove(tmp);
                 var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
                 card.transform.localScale = new Vector2(2f, 2f);
@@ -191,6 +199,7 @@ public class Resource : MonoBehaviour
         foreach (CardStruct tmp in Deck)
             if (tmp.NUM.Equals(num))
             {
+                AudioManager.instance.PlaySfx(9);
                 Deck.Remove(tmp);
                 var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);
                 card.transform.localScale = new Vector2(2f, 2f);
@@ -203,6 +212,7 @@ public class Resource : MonoBehaviour
     }
     public void Deck_Add(CardStruct cardStruct)
     {
+        AudioManager.instance.PlaySfx(8);
         Deck.Add(cardStruct);
 
         var card = Instantiate(_cardPrefab, new Vector2(0, 0), Quaternion.identity);

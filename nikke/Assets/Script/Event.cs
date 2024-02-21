@@ -45,8 +45,8 @@ public class Event : MonoBehaviour
         var eventText = a._eventText;
         if (Resource.Instance.Area >= 4 && Resource.Instance.Stage != 1)
         {
+            Resource.Instance.GameWin();
             eventText = eventText.Replace("@", Timer.Instance.TIME());
-            PlayerPrefs.SetInt("maxLevel", PlayerPrefs.GetInt("maxLevel") + Random.Range(1,4));
         }
         _Text_eventtext.text = eventText;
         _Image_eventimage.sprite = a._eventSprite;
