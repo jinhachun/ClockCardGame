@@ -104,7 +104,7 @@ public class Resource : MonoBehaviour
             Deck.Add(tmp);
 
         }
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 16; i++)
         {
             var tmp = (CardDatabase.Instance.cardByTier(startDeckTier));
             Deck.Add(tmp);
@@ -120,7 +120,7 @@ public class Resource : MonoBehaviour
     public int Hp;
     public bool Kor;
     public int tmpMhp;
-    public int mHp => tmpMhp * (100 + 10 * VillageLevel["Bath"]) / 100;
+    public int mHp => tmpMhp * (100 + 15 * VillageLevel["Bath"]) / 100;
     public int Area; public int Stage;
     public int money;
     public int LEVEL;

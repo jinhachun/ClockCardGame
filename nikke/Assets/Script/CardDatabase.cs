@@ -218,6 +218,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "¸Ôº¸±«¼ö":
                 {
+                    if (BattleManager.Instance.Enemies.Count <= 0) return false ;
                     var target = BattleManager.Instance.targetEnemy.Count == 0 ? BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)] : BattleManager.Instance.targetEnemy[0];
                     BattleManager.Instance.enemyDamage(BattleManager.Instance.Def, false, target);
                     return true;

@@ -35,7 +35,7 @@ public class Support : MonoBehaviour
     public void Set()
     {
         var rare = Random.Range(0, 101) >= 75;
-        var ultimate = Random.Range(0, 101) <= 5;
+        var ultimate = Random.Range(0, 101) <= 3;
         if (ultimate)
         {
             List<CardStruct> ultimateList = CardDatabase.Instance.cardByUltimate;

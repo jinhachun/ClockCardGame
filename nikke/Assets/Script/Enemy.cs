@@ -100,6 +100,8 @@ public class Enemy : MonoBehaviour
 
     public void Rule_HP()
     {
+        this._hp += _hp * 1 * Resource.Instance.Area * Resource.Instance.LEVEL / 200;
+        this._mhp += _mhp * 1 * Resource.Instance.Area * Resource.Instance.LEVEL / 200;
         if (Resource.Instance.Rule_no(1))
         {
             this._hp += _hp * 10 * Resource.Instance.Rules[DataManager.RuleName(1, Resource.Instance.Kor)] / 100;

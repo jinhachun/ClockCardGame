@@ -201,6 +201,26 @@ public class EventDatabase : MonoBehaviour
                     }
                     return null;
                 }
+            case "진화의 돌":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() => {
+                            var CardDeck = Resource.Instance.Deck.Where(x => x._tier != 5 && !x._Token).ToList();
+                            if (CardDeck.Count != 0)
+                            {
+                                var _tmpStruct = (CardDeck[Random.Range(0, CardDeck.Count)]);
+                                var _tmpEvolveStruct = CardDatabase.Instance.card(_tmpStruct.evol[Random.Range(0, _tmpStruct.evol.Count)]);
+                                Resource.Instance.Deck_Remove(_tmpStruct.NUM, false);
+                                Resource.Instance.Deck_Add(_tmpEvolveStruct.NUM);
+                            }
+                        });
+                    }else if(selectIndex == 1)
+                    {
+                        return (() => { });
+                    }
+                    return null;
+                }
             case "드르렁~":
                 {
                     if (selectIndex == 0)
@@ -212,7 +232,7 @@ public class EventDatabase : MonoBehaviour
                     }
                     return null;
                 }
-            case "빅둘기 격파!":
+            case "보스 격파!":
                 {
                     if (selectIndex == 0)
                     {
@@ -422,6 +442,25 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
+                        });
+                    }
+                    return null;
+                }
+            case "동튜버의 객기":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Damage(Resource.Instance.Hp-1);
+                            Resource.Instance.Event_MoneyEarn(999);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(20);
                         });
                     }
                     return null;

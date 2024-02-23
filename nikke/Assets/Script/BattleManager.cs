@@ -108,7 +108,7 @@ public class BattleManager : MonoBehaviour
         Hp = Resource.Instance.Hp; Mhp = Resource.Instance.mHp; Shield = 0;
         area = Resource.Instance.Area; enemyType = Resource.Instance.Stage != 6 ? (Resource.Instance.Stage >= 4 ? EnemyType.Normal : EnemyType.Mini) : EnemyType.Giga;
         RerollChance = 0;
-        reward = (enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 40 : 60)) * Random.Range(5, 9) * (area*2 + 1) / 2;
+        reward = (int)((enemyType == EnemyType.Mini ? 30 : (enemyType == EnemyType.Normal ? 40 : 60)) * Random.Range(4, 8) * (area*2)/(1.8f));
         addcardQueue_Deck = new Queue<CardStruct>();
         addcardQueue_Grave = new Queue<CardStruct>();
         pureAttack = false;
@@ -850,7 +850,7 @@ public class BattleManager : MonoBehaviour
     public void PHASE_Reward()
     {
         AudioManager.instance.PlaySfx(6);
-        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*3 + 100) / 100;
+        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*2 + 100) / 100;
         RewardPopup.Create(finalReward).OnComplete(() =>
         {
             endgame_win(finalReward);
