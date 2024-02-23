@@ -503,6 +503,13 @@ public class EventDatabase : MonoBehaviour
 
                         });
                     }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+
+                        });
+                    }
                     return null;
                 }
             case "여행의 끝":
