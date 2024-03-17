@@ -14,9 +14,9 @@ public class BattleManager : MonoBehaviour
     {
         instance = this;
     }
-    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -7, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = -11f, GravePosY = -5f;
-    float ButtonPosX = 8f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
-    float EnemyPosX = -8f, EnemyPosY = 3f, EnemyPosLength = 16f, EnemyPosBlank;
+    float DeckPosX = 11f, DeckPoxY = -5, HandPosX = -6.5f, HandPosY = -2.75f, HandPosBlank = 3f, GravePosX = 11f, GravePosY = 3f;
+    float ButtonPosX = 8.5f, ButtonPosY = -1f, ButtonPosBlank = 1.25f;
+    float EnemyPosX = -7f, EnemyPosY = 3f, EnemyPosLength = 15f, EnemyPosBlank;
 
 
     [SerializeField] Card _cardPrefab;
@@ -31,22 +31,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] ScrollViewCardBunch _scrollViewCardPrefab;
     [SerializeField] DeckCount _deckCountPrefab;
     [SerializeField] public GameObject _canvas;
+    [SerializeField] CombiText _SpeciesText;
+    [SerializeField] CombiText _TypeText;
+    [SerializeField] CombiText _FinalRateText;
 
     [SerializeField] public Transform _damagePopupPrefab;
     [SerializeField] public Transform _rewardPopupPrefab;
-    [SerializeField] public Transform _fracturePrefab;
-    [SerializeField] public Transform _attEffectPrefab;
-    [SerializeField] public Transform _summonEffectPrefab;
-    [SerializeField] public Transform _rageEffectPrefab;
-    [SerializeField] public Transform _healEffectPrefab;
-    [SerializeField] public Transform _shieldEffectPrefab;
-    [SerializeField] public Transform _deBuffEffectPrefab;
-
-    [SerializeField] public Transform _fireAttackffectPrefab;
-    [SerializeField] public Transform _waterAttackffectPrefab;
-    [SerializeField] public Transform _grassAttackffectPrefab;
-    [SerializeField] public Transform _lightAttackffectPrefab;
-    [SerializeField] public Transform _darkAttackffectPrefab;
     Vector2 DeckPos(int i) => new Vector2(DeckPosX, DeckPoxY + 0.15f * (Deck.Count - i));
     public List<Vector2> HandPos;
     Vector2 GravePos => new Vector2(GravePosX, GravePosY);
@@ -116,7 +106,7 @@ public class BattleManager : MonoBehaviour
     }
     public void FixedUpdate()
     {
-
+        _FinalRateText.Set("", (float)Rate);
     }
     private void ChangeState(BattleState battleState)
     {
@@ -251,7 +241,7 @@ public class BattleManager : MonoBehaviour
         Turn++;
         if(!Resource.Instance.Rule_no(11)) Shield = 0;
         if (Resource.Instance.Rule_no(11) && Turn == 1) Shield += 100;
-        rerolladd();
+        AddRerollChance();
         foreach (var enemy in EnemiesClone())
         {
             enemy.SetPatternText();
@@ -345,20 +335,20 @@ public class BattleManager : MonoBehaviour
     private List<RerollButton> ChkButtons;
     public List<SPECIES> SpeciesCombi;
     public List<TYPE> TypeCombi;
-    private List<TMP_Text> CombiText;
+    private List<GameObject> CombiText;
     public void PHASE_WaitingReroll()
     {
-
         ChkButtons = new List<RerollButton>();
         SpeciesCombi = new List<SPECIES>();
         TypeCombi = new List<TYPE>();
-        CombiText = new List<TMP_Text>();
+        CombiText = new List<GameObject>();
+        CombiText.Add(_SpeciesText.gameObject);
+        CombiText.Add(_TypeText.gameObject);
         List<RerollButton> Btns = new List<RerollButton>();
         var attackbtn = Instantiate(_attackButtonPrefab, ButtonPos(1), Quaternion.identity);
         attackbtn.ActionSet(() =>
         {
             foreach (var btn in Btns) Destroy(btn.gameObject);
-            foreach (var txt in CombiText) Destroy(txt.gameObject);
             ChangeState(BattleState.Attack);
         });
         Btns.Add(attackbtn);
@@ -372,7 +362,6 @@ public class BattleManager : MonoBehaviour
             RerollChance -= 1;
             RerollText.text = "Chance : " + RerollChance.ToString();
             foreach (var btn in Btns) Destroy(btn.gameObject);
-            foreach (var txt in CombiText) Destroy(txt.gameObject);
             ChangeState(BattleState.Reroll);
         });
         Btns.Add(rerollbtn);
@@ -407,17 +396,13 @@ public class BattleManager : MonoBehaviour
             SpeciesCombi.Add(Hand[i].Species);
             TypeCombi.Add(Hand[i].Type);
         }
-        var SpeciesCombiText = Instantiate(_textPrefab, new Vector2(HandPos[1].x - 1f, HandPos[0].y + 2.25f), Quaternion.identity);
-        SpeciesCombiText.text = CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi);
-        float speciesCombiRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
-        WatingRerollPhase_TextSet(speciesCombiRate, SpeciesCombiText);
-        CombiText.Add(SpeciesCombiText);
+        var SpeciesCombiRate = CardDatabase.Instance.SpeciesCombiRate(SpeciesCombi);
+        _SpeciesText.Set(CardDatabase.Instance.SpeciesCombinationText(SpeciesCombi), SpeciesCombiRate);
+        WatingRerollPhase_TextSet(SpeciesCombiRate, _SpeciesText._text_rate);
 
-        var TypeCombiText = Instantiate(_textPrefab, new Vector2(HandPos[4].x - 0.5f, HandPos[0].y + 2.25f), Quaternion.identity);
-        TypeCombiText.text = CardDatabase.Instance.TypeCombinationText(TypeCombi);
-        float typeCombiRate = CardDatabase.Instance.TypeCombiRate(TypeCombi);
-        WatingRerollPhase_TextSet(typeCombiRate, TypeCombiText);
-        CombiText.Add(TypeCombiText);
+        float TypeCombiRate = CardDatabase.Instance.TypeCombiRate(TypeCombi);
+        _TypeText.Set(CardDatabase.Instance.TypeCombinationText(TypeCombi), TypeCombiRate);
+        WatingRerollPhase_TextSet(TypeCombiRate, _TypeText._text_rate);
 
         foreach (Card card in Hand)
             card.glow(true);
@@ -426,47 +411,51 @@ public class BattleManager : MonoBehaviour
     }
     public void WatingRerollPhase_TextSet(float combi, TMP_Text text)
     {
-        if (combi < 1) {
+        if (combi < 1)
+        {
+            text.fontSize = 45;
             text.color = Color.gray;
             return;
         }
-        if (combi < 1.5f) {
+        if (combi < 1.5f)
+        {
+            text.fontSize = 45;
             return; 
         }
         if (combi < 2f)
         {
-            text.fontSize = 5;
+            text.fontSize = 50;
             return; 
         }
         if (combi < 2.5f)
         {
-            text.fontSize = 6;
+            text.fontSize = 50;
             text.color = new Color(0, 100, 0);
             return; 
         }
         if (combi < 3f)
         {
-            text.fontSize = 7;
+            text.fontSize = 60;
             text.color = Color.blue;
             return;
         }
         if (combi < 3.5f)
         {
-            text.fontSize = 7;
+            text.fontSize = 60;
             text.color = Color.blue;
             return;
         }
-        text.fontSize = 8;
+        text.fontSize = 70;
         text.color = Color.red;
         return; 
     }
 
-    public void rerolladd()
+    public void AddRerollChance()
     {
         RerollChance++;
         RerollText.text = "Chance : " + RerollChance.ToString();
     }
-    public void rerolladd(int n)
+    public void AddRerollChance(int n)
     {
         RerollChance+=n;
         RerollText.text = "Chance : " + RerollChance.ToString();
@@ -548,7 +537,7 @@ public class BattleManager : MonoBehaviour
         foreach (var card in Hand)
         {
             sq.Append(card.transform.DOMoveY(card.transform.position.y + 1f, 0.2f));
-            bool critical = (5 + Resource.Instance.VillageLevel["Church"] * 4) >= Random.Range(0, 101);
+            bool critical = (5 + Resource.Instance.VillageLevel["Church"] * Village.Value_Church) >= Random.Range(0, 101);
             if(critical && Resource.Instance.Rule_no(6))
                 critical = Random.Range(0, 2) >= 1 ? Rule_no(6) : false;
 
@@ -570,15 +559,15 @@ public class BattleManager : MonoBehaviour
                         switch (card.Str._type)
                         {
                             case (TYPE.FIRE):
-                                { effectOn(_fireAttackffectPrefab, target); return; }
+                                { EffectManager.effectOn(EffectManager.EffectName.Fire, target); return; }
                             case (TYPE.WATER):
-                                { effectOn(_waterAttackffectPrefab, target); return; }
+                                { EffectManager.effectOn(EffectManager.EffectName.Water, target); return; }
                             case (TYPE.GRASS):
-                                { effectOn(_grassAttackffectPrefab, target); return; }
+                                { EffectManager.effectOn(EffectManager.EffectName.Grass, target); return; }
                             case (TYPE.LIGHT):
-                                { effectOn(_lightAttackffectPrefab, target); return; }
+                                { EffectManager.effectOn(EffectManager.EffectName.Light, target); return; }
                             case (TYPE.DARK):
-                                { effectOn(_darkAttackffectPrefab, target); return; }
+                                { EffectManager.effectOn(EffectManager.EffectName.Dark, target); return; }
                         }
                 }
             });
@@ -644,7 +633,7 @@ public class BattleManager : MonoBehaviour
             }
             AttLeft = afterShieldAttLeft;
             var tmpAttLeft = AttLeft - target._hp;
-            var AttEffect = Instantiate(_attEffectPrefab, new Vector2(target._img.transform.position.x * Random.Range(85, 115) / 100f, (target._img.transform.position.y - 1.5f) * Random.Range(85, 115) / 100f), Quaternion.identity);
+            var AttEffect = EffectManager.effectOn(EffectManager.EffectName.Attack, new Vector2(target._img.transform.position.x * Random.Range(85, 115) / 100f, (target._img.transform.position.y - 1.5f) * Random.Range(85, 115) / 100f));
             AttEffect.transform.localScale *= (target.Str._enemyType == EnemyType.Mini ? 0.6f : 1f) * (0.25f + ((float)AttLeft / (float)target.Str._hp));
 
             target._hp -= AttLeft;
@@ -657,7 +646,7 @@ public class BattleManager : MonoBehaviour
                 var deadEnemy = target;
                 target._hp = 0;
                 Enemies.Remove(deadEnemy);
-                var Particle = effectOn(_fracturePrefab, deadEnemy);
+                var Particle = EffectManager.effectOn(EffectManager.EffectName.Fracture, deadEnemy);
                 Particle.transform.localScale *= (deadEnemy.Str._enemyType == EnemyType.Mini ? 0.6f : 1f);
                 deadEnemy._img.transform.DOScale(0, 0.3f).OnComplete(() =>
                 {
@@ -850,7 +839,7 @@ public class BattleManager : MonoBehaviour
     public void PHASE_Reward()
     {
         AudioManager.instance.PlaySfx(6);
-        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]*2 + 100) / 100;
+        int finalReward = reward * (Resource.Instance.VillageLevel["Farm"]* Village.Value_Farm + 100) / 100;
         RewardPopup.Create(finalReward).OnComplete(() =>
         {
             endgame_win(finalReward);
@@ -903,7 +892,7 @@ public class BattleManager : MonoBehaviour
             (deck ? Deck : Grave).Add(card);
             int Layer = 50 + (deck ? Deck.Count : Grave.Count) * 3;
             card.setLayer(0, Layer);
-            moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.6f, true);
+            moveCard(cardAddSequence, card, (deck ? DeckPos(0) : GravePos), 0.5f, true);
             if (deck)
                 cardAddSequence.AppendCallback(() => { card.flip(false); });
 
@@ -1050,7 +1039,7 @@ public class BattleManager : MonoBehaviour
         }
 
         var enemyTmp = Instantiate(_EnemyPrefab, enemyposTmp, Quaternion.identity);
-        effectOn(_summonEffectPrefab, enemyTmp);
+        EffectManager.effectOn(EffectManager.EffectName.Summon, enemyTmp);
 
         enemyTmp.Set(enemystruct);
 
@@ -1060,7 +1049,7 @@ public class BattleManager : MonoBehaviour
     }
     public void healEnemy(int a, Enemy enemy)
     {
-        effectOn(_healEffectPrefab, enemy);
+        EffectManager.effectOn(EffectManager.EffectName.Heal, enemy); ;
         enemy.heal(a);
         DamagePopup.Create(enemy.transform.position, "+" + a, Color.green);
 
@@ -1077,21 +1066,6 @@ public class BattleManager : MonoBehaviour
         card.setLayer(0, Layer);
         BattleManager.Instance.moveCard(cardMoveSequence, card, DeckPos(0), 0.5f, false);
         cardMoveSequence.AppendCallback(() => { card.flip(false); });
-    }
-    public Transform effectOn(Transform effectPrefab, Enemy enemy)
-    {
-        var Effect = Instantiate(effectPrefab, new Vector2(enemy._img.transform.position.x, (enemy._img.transform.position.y - 2f)), Quaternion.identity);
-        return Effect;
-    }
-    public Transform effectOn(Transform effectPrefab, Card card)
-    {
-        var Effect = Instantiate(effectPrefab, new Vector2(card.transform.position.x, (card.transform.position.y - 2f)), Quaternion.identity);
-        return Effect;
-    }
-    public Transform effectOn(Transform effectPrefab, Vector2 v)
-    {
-        var Effect = Instantiate(effectPrefab, v, Quaternion.identity);
-        return Effect;
     }
     public bool Rule_no(int n)
     {

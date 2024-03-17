@@ -14,6 +14,12 @@ public class Village : MonoBehaviour
     public string _HouseTxtInfo;
     public string _ChurchTxtInfo;
     public string _BathTxtInfo;
+
+    static public int Value_Farm = 2;
+    static public int Value_House = 5;
+    static public int Value_Church = 4;
+    static public int Value_Bath = 15;
+
     public void Awake()
     {
         TextUpdate();
@@ -25,9 +31,9 @@ public class Village : MonoBehaviour
     private void TextUpdate()
     {
         _jewel.text = Resource.Instance.jewel+"";
-        _FarmTxt.text = _FarmTxtInfo.Replace("@",Resource.Instance.VillageLevel["Farm"]*2+"");
-        _HouseTxt.text = _HouseTxtInfo.Replace("@", Resource.Instance.VillageLevel["House"]*5 + "");
-        _ChurchTxt.text = _ChurchTxtInfo.Replace("@",(5+ Resource.Instance.VillageLevel["Church"] * 4) + "");
-        _BathTxt.text = _BathTxtInfo.Replace("@", Resource.Instance.VillageLevel["Bath"] * 15 + "");
+        _FarmTxt.text = _FarmTxtInfo.Replace("@",Resource.Instance.VillageLevel["Farm"]*Village.Value_Farm+"");
+        _HouseTxt.text = _HouseTxtInfo.Replace("@", Resource.Instance.VillageLevel["House"]* Village.Value_House + "");
+        _ChurchTxt.text = _ChurchTxtInfo.Replace("@",(5+ Resource.Instance.VillageLevel["Church"] * Village.Value_Church) + "");
+        _BathTxt.text = _BathTxtInfo.Replace("@", Resource.Instance.VillageLevel["Bath"] * Village.Value_Bath + "");
     }
 }

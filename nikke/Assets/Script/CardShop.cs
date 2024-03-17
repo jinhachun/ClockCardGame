@@ -29,7 +29,7 @@ public class CardShop : MonoBehaviour
             }
         }
     }
-    public int DiscountRate => 100 - Resource.Instance.VillageLevel["House"]*5;
+    public int DiscountRate => 100 - Resource.Instance.VillageLevel["House"]*Village.Value_House;
     [SerializeField] public Card card;
     public Card card_evol;
     public Card card_evol2;

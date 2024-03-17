@@ -73,13 +73,13 @@ public class CardDatabase : MonoBehaviour
     public string SpeciesCombinationText(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return " X" + Resource.Instance.combiRate[0];
-        else if (combi == 1) return "OnePair X" + Resource.Instance.combiRate[1];
-        else if (combi == 2) return "TwoPair X" + Resource.Instance.combiRate[2];
-        else if (combi == 3) return "Triple X" + Resource.Instance.combiRate[3];
-        else if (combi == 4) return "FullHouse X" + Resource.Instance.combiRate[4];
-        else if (combi == 5) return "FourCard X" + Resource.Instance.combiRate[5];
-        else return "FiveCard X" + Resource.Instance.combiRate[6];
+        if (combi == 0) return "No Pair";
+        else if (combi == 1) return "One Pair";
+        else if (combi == 2) return "Two Pair";
+        else if (combi == 3) return "Triple";
+        else if (combi == 4) return "Full House";
+        else if (combi == 5) return "Four Card";
+        else return "Five Card";
     }
     public float SpeciesCombiRate(List<SPECIES> list)
     {
@@ -120,13 +120,13 @@ public class CardDatabase : MonoBehaviour
     public string TypeCombinationText(List<TYPE> list)
     {
         int combi = TypeCombination(list);
-        if (combi == 0) return " X" + TypeCombiRate(list);
-        else if (combi == 1) return "OnePair X" + TypeCombiRate(list);
-        else if (combi == 2) return "TwoPair X" + TypeCombiRate(list);
-        else if (combi == 3) return "Triple X" + TypeCombiRate(list);
-        else if (combi == 4) return "FullHouse X" + TypeCombiRate(list);
-        else if (combi == 5) return "FourCard X" + TypeCombiRate(list);
-        else return "FiveCard X" + TypeCombiRate(list);
+        if (combi == 0) return "No Pair";
+        else if (combi == 1) return "One Pair";
+        else if (combi == 2) return "Two Pair";
+        else if (combi == 3) return "Triple";
+        else if (combi == 4) return "Full House";
+        else if (combi == 5) return "Four Card";
+        else return "Five Card";
     }
     public float TypeCombiRate(List<TYPE> list)
     {
@@ -213,7 +213,7 @@ public class CardDatabase : MonoBehaviour
             case "¹ö¼¸±úºñ":
             case "Äõµå¹ö¼¸±úºñ":
                 {
-                    BattleManager.Instance.rerolladd();
+                    BattleManager.Instance.AddRerollChance();
                     return true;
                 }
             case "¸Ôº¸±«¼ö":
@@ -485,7 +485,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "½´ÆÛÄÄÇ»ÅÍ":
                 {
-                    BattleManager.Instance.rerolladd(5);
+                    BattleManager.Instance.AddRerollChance(5);
                     return true;
                 }
             case "µ¿±Û¶ó¹Ìµå":
@@ -635,7 +635,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "¹ö¼¸¼øÀÌ":
                 {
-                    BattleManager.Instance.rerolladd();
+                    BattleManager.Instance.AddRerollChance();
                     return true;
                 }
             case "¸®ºù¾Æ¸Ó":

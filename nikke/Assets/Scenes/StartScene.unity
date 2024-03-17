@@ -3154,7 +3154,7 @@ MonoBehaviour:
     _name: "\uB124\uD06C\uB85C\uB3D9\uAE00"
     _tier: 5
     _stat:
-      attack: 10
+      attack: 5
       defence: 0
     _type: 5
     isExhaust: 1

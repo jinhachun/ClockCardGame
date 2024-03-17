@@ -82,11 +82,11 @@ public class Card : MonoBehaviour
     {
         if (changestat > beforestat)
         {
-            BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
+            EffectManager.effectOn(EffectManager.EffectName.Rage, this);
         }
         else if (changestat < beforestat)
         {
-            BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+            EffectManager.effectOn(EffectManager.EffectName.Debuff, this);
         }
 
     }
@@ -178,10 +178,10 @@ public void Set(CardStruct str)
         int newSortingOrder = b;
         _cardBack.sortingOrder = newSortingOrder+2 + a;
         _cardBody.sortingOrder = newSortingOrder;
-        _img.sortingOrder = newSortingOrder-1;
+        _img.sortingOrder = newSortingOrder-2;
         if(_outLine!=null)
-            _outLine.sortingOrder = newSortingOrder - 2;
-        _cardBody.sortingOrder = newSortingOrder;
+            _outLine.sortingOrder = newSortingOrder - 3;
+        _cardBody.sortingOrder = newSortingOrder-1;
 
         MeshRenderer meshRenderer = _name.GetComponent<MeshRenderer>();
         meshRenderer.sortingOrder = newSortingOrder;
@@ -200,7 +200,7 @@ public void Set(CardStruct str)
         meshRenderer.sortingOrder = newSortingOrder;
 
         _species.sortingOrder = newSortingOrder + 1;
-        _type.sortingOrder = newSortingOrder + 1;
+        _type.sortingOrder = newSortingOrder;
     }
     public void setLayer(string A)
     {

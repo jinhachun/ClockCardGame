@@ -181,7 +181,7 @@ public class StatusDatabase : MonoBehaviour
                     enemy.statusValueChange(enemy._statusValue - 1);
                     if (enemy._statusValue > 0) return; 
                     StatusPopup(enemy);
-                    BattleManager.Instance.effectOn(BattleManager.Instance._fireAttackffectPrefab, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
+                    EffectManager.effectOn(EffectManager.EffectName.Fire, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
                     BattleManager.Instance.takeDamage(50);
                     enemy.statusValueChange(3);
                     return;
@@ -204,6 +204,7 @@ public class StatusDatabase : MonoBehaviour
             case "≈ıºÆ±‚":
                 {
                     StatusPopup(enemy);
+                    EffectManager.effectOn(EffectManager.EffectName.Fracture, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
                     BattleManager.Instance.takeDamage(enemy._statusValue);
                     enemy.statusValueChange(enemy._statusValue + 1);
                     return;

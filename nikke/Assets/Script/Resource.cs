@@ -120,7 +120,7 @@ public class Resource : MonoBehaviour
     public int Hp;
     public bool Kor;
     public int tmpMhp;
-    public int mHp => tmpMhp * (100 + 15 * VillageLevel["Bath"]) / 100;
+    public int mHp => tmpMhp * (100 + Village.Value_Bath * VillageLevel["Bath"]) / 100;
     public int Area; public int Stage;
     public int money;
     public int LEVEL;

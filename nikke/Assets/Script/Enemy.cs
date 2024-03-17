@@ -29,23 +29,23 @@ public class Enemy : MonoBehaviour
     int PatternIndex;
     public void setAttackBuff()
     {
-        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
+        EffectManager.effectOn(EffectManager.EffectName.Rage, this);
         attackBuff += Pattern._Value;
     }
     public void setAttackBuff(int a)
     {
-        BattleManager.Instance.effectOn(BattleManager.Instance._rageEffectPrefab, this);
+        EffectManager.effectOn(EffectManager.EffectName.Rage, this);
         attackBuff += a;
     }
     public void setAttackDebuff(int a)
     {
         if(attackBuff>0)
-            BattleManager.Instance.effectOn(BattleManager.Instance._deBuffEffectPrefab, this);
+            EffectManager.effectOn(EffectManager.EffectName.Debuff, this);
         attackBuff = a;
     }
     public void gainShield(int a)
     {
-        BattleManager.Instance.effectOn(BattleManager.Instance._shieldEffectPrefab, this);
+        EffectManager.effectOn(EffectManager.EffectName.Shield, this);
         _shield += a;
     }
     public void lossShield(int a)
