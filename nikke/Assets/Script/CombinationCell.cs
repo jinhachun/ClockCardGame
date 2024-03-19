@@ -11,7 +11,8 @@ public class CombinationCell : MonoBehaviour
     public RateTarget rateTarget;
     private void OnEnable()
     {
-        var rate = rateTarget == RateTarget.Species ?Resource.Instance.combiRate: Resource.Instance.combiRate;
-        text.text = System.Math.Round(rate[(int)combi],2).ToString();
+        bool target = rateTarget == RateTarget.Species;
+        float rate = target ? CardDatabase.Instance.SpeciesCombiRate((int)combi) : CardDatabase.Instance.TypeCombiRate((int)combi);
+        text.text = System.Math.Round(rate,2).ToString();
     }
 }

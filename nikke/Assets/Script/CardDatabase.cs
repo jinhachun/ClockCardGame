@@ -81,17 +81,21 @@ public class CardDatabase : MonoBehaviour
         else if (combi == 5) return "Four Card";
         else return "Five Card";
     }
+    public float SpeciesCombiRate(int combi)
+    {
+        if (combi == 0) return Resource.Instance.combiRate_Species[0];
+        else if (combi == 1) return Resource.Instance.combiRate_Species[1];
+        else if (combi == 2) return Resource.Instance.combiRate_Species[2];
+        else if (combi == 3) return Resource.Instance.combiRate_Species[3];
+        else if (combi == 4) return Resource.Instance.combiRate_Species[4];
+        else if (combi == 5) return Resource.Instance.combiRate_Species[5];
+        else return Resource.Instance.combiRate_Species[6];
+
+    }
     public float SpeciesCombiRate(List<SPECIES> list)
     {
         int combi = SpeciesCombination(list);
-        if (combi == 0) return Resource.Instance.combiRate[0];
-        else if (combi == 1) return Resource.Instance.combiRate[1];
-        else if (combi == 2) return Resource.Instance.combiRate[2];
-        else if (combi == 3) return Resource.Instance.combiRate[3];
-        else if (combi == 4) return Resource.Instance.combiRate[4];
-        else if (combi == 5) return Resource.Instance.combiRate[5];
-        else return Resource.Instance.combiRate[6];
-
+        return SpeciesCombiRate(combi);
     }
     public int TypeCombination(List<TYPE> list)
     {
@@ -128,7 +132,7 @@ public class CardDatabase : MonoBehaviour
         else if (combi == 5) return "Four Card";
         else return "Five Card";
     }
-    public float TypeCombiRate(List<TYPE> list)
+    public float TypeCombiRate(int combi)
     {
         float rateAdd = 0f;
         if (Resource.Instance.Rule_no(5))
@@ -137,15 +141,19 @@ public class CardDatabase : MonoBehaviour
             if (cnt_card5tier) rateAdd += 0.3f;
             else return 1f;
         }
-        int combi = TypeCombination(list);
-        if (combi == 0) return 1f + rateAdd;
-        else if (combi == 1) return 1.2f + rateAdd;
-        else if (combi == 2) return 1.4f + rateAdd;
-        else if (combi == 3) return 1.6f + rateAdd;
-        else if (combi == 4) return 1.8f + rateAdd;
-        else if (combi == 5) return 2 + rateAdd;
-        else return 3 + rateAdd;
+        if (combi == 0) return Resource.Instance.combiRate_Type[0];
+        else if (combi == 1) return Resource.Instance.combiRate_Type[1] + rateAdd;
+        else if (combi == 2) return Resource.Instance.combiRate_Type[2] + rateAdd;
+        else if (combi == 3) return Resource.Instance.combiRate_Type[3] + rateAdd;
+        else if (combi == 4) return Resource.Instance.combiRate_Type[4] + rateAdd;
+        else if (combi == 5) return Resource.Instance.combiRate_Type[5] + rateAdd;
+        else return Resource.Instance.combiRate_Type[6] + rateAdd;
 
+    }
+    public float TypeCombiRate(List<TYPE> list)
+    {
+        int combi = TypeCombination(list);
+        return TypeCombiRate(combi);
     }
 
     public bool CardActionFunc(Card b)

@@ -316,7 +316,7 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
-                            Resource.Instance.combiRate[3] = 2.5f;
+                            Resource.Instance.combiRate_Species[3] = 2.5f;
                         });
                     }
                     else if (selectIndex == 1)
@@ -434,8 +434,8 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Event_Damage(30);
-                            for (int i = 0; i < Resource.Instance.combiRate.Count; i++)
-                                Resource.Instance.combiRate[i] += 0.1f;
+                            for (int i = 0; i < Resource.Instance.combiRate_Species.Count; i++)
+                                Resource.Instance.combiRate_Species[i] += 0.1f;
                         });
                     }
                     else if (selectIndex == 1)

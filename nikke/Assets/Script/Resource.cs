@@ -80,15 +80,23 @@ public class Resource : MonoBehaviour
         float Rule_no2_1 = Rule_no(2) ? -0.3f : 0;
         float Rule_no2_2 = Rule_no(2) ? 0.1f : 0;
 
-        combiRate.Add(1f + Rule_no2_1);
-        combiRate.Add(1.2f + Rule_no2_1);
-        combiRate.Add(1.5f + Rule_no2_1);
-        combiRate.Add(2f + Rule_no2_1);
-        combiRate.Add(2.5f + Rule_no2_2);
-        combiRate.Add(3f + Rule_no2_2);
-        combiRate.Add(3.5f + Rule_no2_2);
+        combiRate_Species.Add(1f + Rule_no2_1);
+        combiRate_Species.Add(1.2f + Rule_no2_1);
+        combiRate_Species.Add(1.5f + Rule_no2_1);
+        combiRate_Species.Add(2f + Rule_no2_1);
+        combiRate_Species.Add(2.5f + Rule_no2_2);
+        combiRate_Species.Add(3f + Rule_no2_2);
+        combiRate_Species.Add(3.5f + Rule_no2_2);
 
-        if (Rule_no(14)) combiRate = Enumerable.Reverse(combiRate).ToList();
+        combiRate_Type.Add(1f);
+        combiRate_Type.Add(1.2f);
+        combiRate_Type.Add(1.4f);
+        combiRate_Type.Add(1.6f);
+        combiRate_Type.Add(1.8f);
+        combiRate_Type.Add(2f);
+        combiRate_Type.Add(3f);
+
+        if (Rule_no(14)) combiRate_Species = Enumerable.Reverse(combiRate_Species).ToList();
 
         float Rule_no3 = Rule_no(3) ? 10f : 0f;
         float Rule_no9 = (Rule_no(9) ? -20 : 0);
@@ -128,7 +136,8 @@ public class Resource : MonoBehaviour
     public DictionaryOfStringAndInteger VillageLevel;
     public DictionaryOfStringAndInteger SupportPrice;
     public int jewel;
-    public List<float> combiRate;
+    public List<float> combiRate_Species;
+    public List<float> combiRate_Type;
     public List<EnemySquadStruct> metSquad;
     public CardStruct shopcard;
     public float time;
@@ -269,7 +278,7 @@ public class Resource : MonoBehaviour
     public void Save()
     {
         ResourceSaveData data = new ResourceSaveData
-            (Deck, Hp, Kor, tmpMhp, Area, Stage, money, LEVEL, Rules, VillageLevel, SupportPrice, jewel, combiRate, metSquad, shopcard, time);
+            (Deck, Hp, Kor, tmpMhp, Area, Stage, money, LEVEL, Rules, VillageLevel, SupportPrice, jewel, combiRate_Species,combiRate_Type, metSquad, shopcard, time);
 
 
         // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
@@ -317,7 +326,8 @@ public class Resource : MonoBehaviour
         this.VillageLevel = data.VillageLevel;
         this.SupportPrice = data.SupportPrice;
         this.jewel = data.jewel;
-        this.combiRate = data.combiRate;
+        this.combiRate_Species = data.combiRate_Species;
+        this.combiRate_Type = data.combiRate_Type;
         this.metSquad = data.metSquad;
         this.shopcard = CardDatabase.Instance.card(data.shopcard);
         this.time = data.time;
@@ -341,12 +351,13 @@ public class ResourceSaveData
     public DictionaryOfStringAndInteger VillageLevel;
     public DictionaryOfStringAndInteger SupportPrice;
     public int jewel;
-    public List<float> combiRate;
+    public List<float> combiRate_Species;
+    public List<float> combiRate_Type;
     public List<EnemySquadStruct> metSquad;
     public string shopcard;
     public float time;
 
-    public ResourceSaveData(List<CardStruct> deck, int hp, bool kor, int tmpMhp, int area, int stage, int money, int lEVEL, DictionaryOfStringAndInteger rules, DictionaryOfStringAndInteger villageLevel, DictionaryOfStringAndInteger supportPrice, int jewel, List<float> combiRate, List<EnemySquadStruct> metSquad, CardStruct shopcard, float time)
+    public ResourceSaveData(List<CardStruct> deck, int hp, bool kor, int tmpMhp, int area, int stage, int money, int lEVEL, DictionaryOfStringAndInteger rules, DictionaryOfStringAndInteger villageLevel, DictionaryOfStringAndInteger supportPrice, int jewel, List<float> combiRate, List<float> combiRate2, List<EnemySquadStruct> metSquad, CardStruct shopcard, float time)
     {
         Deck = new List<string>();
         Deck_token = new List<bool>();
@@ -366,7 +377,8 @@ public class ResourceSaveData
         VillageLevel = villageLevel;
         SupportPrice = supportPrice;
         this.jewel = jewel;
-        this.combiRate = combiRate;
+        this.combiRate_Species = combiRate;
+        this.combiRate_Type = combiRate2;
         this.metSquad = metSquad;
         this.shopcard = shopcard._name;
         this.time = time;

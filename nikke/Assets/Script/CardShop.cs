@@ -7,7 +7,6 @@ public class CardShop : MonoBehaviour
 {
     [SerializeField] Transform _evolveEffectPrefab;
     [SerializeField] GameObject BackGround;
-    [SerializeField] GameObject BackGround_evol;
     [SerializeField] Card _CardPrefab;
     [SerializeField] TMP_Text _evolPer;
     [SerializeField] TMP_Text _evolPer2;

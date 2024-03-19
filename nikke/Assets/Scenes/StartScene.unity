@@ -6132,7 +6132,8 @@ MonoBehaviour:
     keys: []
     values: 
   jewel: 0
-  combiRate: []
+  combiRate_Species: []
+  combiRate_Type: []
   metSquad: []
   shopcard:
     NUM: 0
@@ -6361,7 +6362,8 @@ MonoBehaviour:
       keys: []
       values: 
     jewel: 0
-    combiRate: []
+    combiRate_Species: []
+    combiRate_Type: []
     metSquad: []
     shopcard: 
     time: 0
