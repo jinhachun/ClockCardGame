@@ -180,7 +180,7 @@
     {
       "Number": "4",
       "CardName_KOR": "깡통몬",
-      "CardInfo_KOR": "이 카드를 뽑을때마다 공격력이  -2~2 만큼 무작위로 변화합니다.",
+      "CardInfo_KOR": "이 카드를 뽑으면, 공격력이 -2~2 만큼 무작위로 변화합니다.",
       "CardName_ENG": "CanMon",
       "CardInfo_ENG": "Each time you draw this card, its attack changes randomly by -2 to 2."
     },
@@ -208,7 +208,7 @@
     {
       "Number": "8",
       "CardName_KOR": "보두앵돌이",
-      "CardInfo_KOR": "공격 시, 내 묘지와 덱의 카드들에게 공격력을 2 부여합니다.",
+      "CardInfo_KOR": "내 묘지와 덱의 카드들에게 공격력을 2 부여합니다.",
       "CardName_ENG": "BauDongle",
       "CardInfo_ENG": "Every time this card attacks, increases attack by 2 to Grave and Deck's cards."
     },
@@ -572,9 +572,9 @@
     {
       "Number": "60",
       "CardName_KOR": "천사동글이",
-      "CardInfo_KOR": "내 모든 카드에게 +2/+2를 부여합니다.",
+      "CardInfo_KOR": "내 모든 카드에게 +1/+1을 부여합니다.",
       "CardName_ENG": "AngelDongle",
-      "CardInfo_ENG": "Give all my cards +2/+2."
+      "CardInfo_ENG": "Give all my cards +1/+1."
     },
     {
       "Number": "61",
@@ -659,6 +659,34 @@
       "CardInfo_KOR": "내 덱에 있는 무작위 토큰카드을 무작위 5티어 기계카드로 바꿉니다.",
       "CardName_ENG": "Dongle Factory",
       "CardInfo_ENG": "내 덱에 있는 무작위 토큰카드을 무작위 5티어 기계카드로 바꿉니다."
+    },
+    {
+      "Number": "73",
+      "CardName_KOR": "흑화크루세돌이",
+      "CardInfo_KOR": "더 큰 적과 싸우기 위해 흑기사돌이와 힘을 합친 크루세돌이입니다.",
+      "CardName_ENG": "흑화크루세돌이",
+      "CardInfo_ENG": "더 큰 적과 싸우기 위해 흑기사돌이와 힘을 합친 크루세돌이입니다."
+    },
+    {
+      "Number": "74",
+      "CardName_KOR": "나즈동글",
+      "CardInfo_KOR": "이 카드를 뽑을때마다, 내 손의 언데드 종족 카드에게 공격력을 2 부여하고 리롤을 1 획득합니다.",
+      "CardName_ENG": "나즈동글",
+      "CardInfo_ENG": "이 카드를 뽑을때마다, 내 손의 언데드의 공격력을 2 부여하고 리롤을 1 획득합니다."
+    },
+    {
+      "Number": "75",
+      "CardName_KOR": "오메가동글",
+      "CardInfo_KOR": "내 손의 이 카드를 제외한 모든 카드의 종족이 괴수인 경우, 이 카드의 스탯이 3배가 됩니다.",
+      "CardName_ENG": "오메가동글",
+      "CardInfo_ENG": "내 손의 이 카드를 제외한 모든 카드의 종족이 괴수인 경우, 이 카드의 스탯을 3배로 강화합니다."
+    },
+    {
+      "Number": "76",
+      "CardName_KOR": "초천원돌파동글봇",
+      "CardInfo_KOR": "이 카드를 뽑으면, 내 손의 모든 기계의 공격력과 방어력이 0~3만큼 무작위로 변화합니다.",
+      "CardName_ENG": "초천원돌파동글봇",
+      "CardInfo_ENG": "내가 현재 보유한 리롤의 수가 3개 이상일 경우, 내 모든 기계에게 +2/+2를 부여합니다."
     }
   ],
   "TokenCard": [

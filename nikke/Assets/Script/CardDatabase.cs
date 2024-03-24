@@ -585,6 +585,15 @@ public class CardDatabase : MonoBehaviour
                     }
                     return false;
                 }
+            case "오메가동글":
+                {
+                    var monsterList = BattleManager.Instance.Hand.Where(x => x.Species == SPECIES.MONSTER).ToList();
+                    if (monsterList.Count < 4) return false;
+
+                    b.StatChange("Attack", b.Stat.attack*3);
+                    b.StatChange("Defence",b.Stat.defence*3);
+                    return true;
+                }
 
 
             /////////////////////////////////////////////////
@@ -696,6 +705,30 @@ public class CardDatabase : MonoBehaviour
                         {
                             card.StatChange("Attack", card.Stat.attack + 3);
                             card.StatChange("Defence", card.Stat.defence + 2);
+                        }
+                    }
+                    return true;
+                }
+            case "나즈동글":
+                {
+                    foreach (Card card in BattleManager.Instance.Hand)
+                    {
+                        if (card.Species == SPECIES.UNDEAD)
+                        {
+                            card.StatChange("Attack", card.Stat.attack + 2);
+                        }
+                    }
+                    BattleManager.Instance.AddRerollChance();
+                    return true;
+                }
+            case "초천원돌파동글봇":
+                {
+                    foreach (Card card in BattleManager.Instance.Hand)
+                    {
+                        if (card.Species == SPECIES.MECH)
+                        {
+                            card.StatChange("Attack", Random.Range(b.Stat.attack, b.Stat.attack + 4));
+                            card.StatChange("Defence", Random.Range(b.Stat.attack, b.Stat.attack + 4));
                         }
                     }
                     return true;

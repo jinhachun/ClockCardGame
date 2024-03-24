@@ -114,6 +114,43 @@ public class EventDatabase : MonoBehaviour
                     }
                     return true;
                 }
+            case "[합체] 전쟁의 폐해":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (!Resource.Instance.haveCard("크루세돌이")|| !Resource.Instance.haveCard("흑기사돌이")) return false;
+                    }
+                    return true;
+                }
+            case "[합체] 영혼약탈자":
+                {
+                    if (selectIndex == 0)
+                    {
+
+                        if (!Resource.Instance.haveCard("사신") || !Resource.Instance.haveCard("듀라한")) return false;
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        if (Resource.Instance.Deck.Where(x => x._tier == 2).ToList().Count == 0) return false;
+                    }
+                    return true;
+                }
+            case "[합체] 우리들의 워게임":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (!Resource.Instance.haveCard("케르베로삼") || !Resource.Instance.haveCard("티라노")) return false;
+                    }
+                    return true;
+                }
+            case "[합체] 합체로봇의 낭만":
+                {
+                    if (selectIndex == 0)
+                    {
+                        if (!Resource.Instance.haveCard("슬롯머신+") || !Resource.Instance.haveCard("펀치봇")) return false;
+                    }
+                    return true;
+                }
             case "여행의 끝":
                 {
                     if (selectIndex == 0)
@@ -493,13 +530,15 @@ public class EventDatabase : MonoBehaviour
                     }
                     return null;
                 }
-            case "마지막 전투":
+            case "[합체] 전쟁의 폐해":
                 {
                     if (selectIndex == 0)
                     {
                         return (() =>
                         {
-                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                            Resource.Instance.Deck_Remove(6, false);
+                            Resource.Instance.Deck_Remove(9, false);
+                            Resource.Instance.Deck_Add(73);
 
                         });
                     }
@@ -507,7 +546,72 @@ public class EventDatabase : MonoBehaviour
                     {
                         return (() =>
                         {
+                            Resource.Instance.Event_Heal(15);
+                        });
+                    }
+                    return null;
+                }
+            case "[합체] 영혼약탈자":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove(13, false);
+                            Resource.Instance.Deck_Remove(42, false);
+                            Resource.Instance.Deck_Add(74);
 
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            var tmpList = Resource.Instance.Deck.Where(x => x._tier == 2).ToList();
+                            var targetCard = tmpList[Random.Range(0, tmpList.Count)];
+                            Resource.Instance.Deck_Remove(targetCard._name);
+
+                        });
+                    }
+                    return null;
+                }
+            case "[합체] 우리들의 워게임":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove(31, false);
+                            Resource.Instance.Deck_Remove(19, false);
+                            Resource.Instance.Deck_Add(75);
+
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_MoneyEarn(300);
+                        });
+                    }
+                    return null;
+                }
+            case "[합체] 합체로봇의 낭만":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Deck_Remove(58, false);
+                            Resource.Instance.Deck_Remove(29, false);
+                            Resource.Instance.Deck_Add(76);
+
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
                         });
                     }
                     return null;
@@ -523,6 +627,17 @@ public class EventDatabase : MonoBehaviour
                         });
                     }
                     return null;
+                }
+            case "마지막 전투":
+                {
+                    if (selectIndex == 0)
+                    {
+                        return (() =>
+                        {
+                            Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                        });
+                    }
+                    return null ;
                 }
         }
         return null;

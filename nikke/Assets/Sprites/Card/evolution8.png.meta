@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 749e8767235904149b2ac31ac98f4243
+guid: bdf05025de70d804a8e1e5faa7b01fba
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,7 +115,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 73_CrusadolAlter
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 35
+        width: 273
+        height: 271
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee122fe851f51cc4d928b36e461c6288
+      internalID: 1171149206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 74_nazdongle
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 64
+        width: 288
+        height: 247
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5877246448782f8439674bfa1ab3ea2e
+      internalID: -1914334389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 75_OmegaDongle
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 57
+        width: 286
+        height: 252
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b230d01d9353b448549ee033617d05
+      internalID: 1043403497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 76_SuperTenganToppaDongle
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 92
+        width: 263
+        height: 219
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98bcdf56b46f0b04abbe361fb17f3f4e
+      internalID: -1356729097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +210,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      73_CrusadolAlter: 1171149206
+      74_nazdongle: -1914334389
+      75_OmegaDongle: 1043403497
+      76_SuperTenganToppaDongle: -1356729097
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
