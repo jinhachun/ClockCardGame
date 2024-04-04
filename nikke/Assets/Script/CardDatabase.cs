@@ -15,6 +15,9 @@ public class CardDatabase : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
+
+    //------------------------------------------------------------------------------
+
     [SerializeField] public List<CardStruct> cardDatabase;
     [SerializeField] public List<CardStruct> cardDatabase_token;
     [SerializeField] public List<RuleStruct> ruleDatabase;
@@ -24,6 +27,9 @@ public class CardDatabase : MonoBehaviour
 
 
     public int RandomCardIndex => Random.Range(0, cardDatabase.Count);
+
+    //-------------------------------------CARD_DATABASE--------------------------
+
     public CardStruct card(string a) => cardDatabase.Where(x => x._name.Equals(a)).FirstOrDefault();
     public CardStruct card_token(string a) => cardDatabase_token.Where(x => x._name.Equals(a)).FirstOrDefault();
 
@@ -47,6 +53,9 @@ public class CardDatabase : MonoBehaviour
     {
         return cardinfoSprites_type.Find(g => g.species == r).sprite;
     }
+
+    //---------------------------------COMBINATION-------------------------
+
     public int SpeciesCombination(List<SPECIES> list)
     {
         var result = list.GroupBy(x => x).Where(g => g.Key != SPECIES.NONE && g.Count() > 1).ToDictionary(x => x.Key, x => x.Count());
@@ -156,6 +165,8 @@ public class CardDatabase : MonoBehaviour
         return TypeCombiRate(combi);
     }
 
+    /// ------------------------------------ACTION----------------------------
+    
     public bool CardActionFunc(Card b)
     {
         string a = b.name;
@@ -163,14 +174,14 @@ public class CardDatabase : MonoBehaviour
         {
             case "좀비":
                 {
-                    BattleManager.Instance.takeHeal(2);
+                    BattleManager.Instance.Heal_Player(2);
                     return true;
                 }
             case "왕좀비":
             case "왕왕좀비":
             case "초대형좀비":
                 {
-                    BattleManager.Instance.takeHeal(4);
+                    BattleManager.Instance.Heal_Player(4);
                     return true;
                 }
             case "보두앵돌이":
@@ -202,33 +213,33 @@ public class CardDatabase : MonoBehaviour
                 }
             case "리자드":
                 {
-                    BattleManager.Instance.takeDamage(2);
+                    BattleManager.Instance.Damage_toPlayer(2);
                     return true;
                 }
             case "티라노":
                 {
-                    BattleManager.Instance.takeDamage(2);
-                    BattleManager.Instance.enemyWideDamage(5);
+                    BattleManager.Instance.Damage_toPlayer(2);
+                    BattleManager.Instance.Damage_toEnemy_Wide(5);
                     return true;
                 }
             case "블랙티라노":
                 {
-                    BattleManager.Instance.takeDamage(2);
-                    BattleManager.Instance.enemyWideDamage(25);
+                    BattleManager.Instance.Damage_toPlayer(2);
+                    BattleManager.Instance.Damage_toEnemy_Wide(25);
                     return true;
                 }
 
             case "버섯깨비":
             case "쿼드버섯깨비":
                 {
-                    BattleManager.Instance.AddRerollChance();
+                    BattleManager.Instance.Add_RerollChance();
                     return true;
                 }
             case "먹보괴수":
                 {
                     if (BattleManager.Instance.Enemies.Count <= 0) return false ;
                     var target = BattleManager.Instance.targetEnemy.Count == 0 ? BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)] : BattleManager.Instance.targetEnemy[0];
-                    BattleManager.Instance.enemyDamage(BattleManager.Instance.Def, false, target);
+                    BattleManager.Instance.Damage_toEnemy(BattleManager.Instance.Def, false, target);
                     return true;
                 }
 
@@ -245,7 +256,7 @@ public class CardDatabase : MonoBehaviour
                 {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
-                    BattleManager.Instance.AddCard(queue, false);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     return true;
                 }
             case "마이동스왕":
@@ -253,7 +264,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
                     queue.Enqueue(CardDatabase.instance.card("황금몬"));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "삼두라":
@@ -356,7 +367,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("샴동글이"));
                     queue.Enqueue(CardDatabase.instance.card("샴동글이"));
-                    BattleManager.Instance.AddCard(queue, false);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     return true;
                 }
 
@@ -365,7 +376,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card("삼동글이"));
                     queue.Enqueue(CardDatabase.instance.card("삼동글이"));
-                    BattleManager.Instance.AddCard(queue, false);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     return true;
                 }
             case "동글키메라":
@@ -374,46 +385,46 @@ public class CardDatabase : MonoBehaviour
                     queue.Enqueue(CardDatabase.instance.card("동글키메라"));
                     queue.Enqueue(CardDatabase.instance.card("동글키메라"));
                     queue.Enqueue(CardDatabase.instance.card("동글키메라"));
-                    BattleManager.Instance.AddCard(queue, false);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     return true;
                 }
             case "봄글이":
                 {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("폭탄"));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "폭탄":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(30, false, target);
+                    BattleManager.Instance.Damage_toEnemy(30, false, target);
                     return true;
                 }
             case "동글너마이트":
                 {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("다이너마이트"));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "다이너마이트":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(60, false, target);
+                    BattleManager.Instance.Damage_toEnemy(60, false, target);
                     return true;
                 }
             case "핵동글":
                 {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.instance.card_token("핵폭탄"));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "핵폭탄":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(120, false, target);
+                    BattleManager.Instance.Damage_toEnemy(120, false, target);
                     return true;
                 }
             case "유령":
@@ -421,7 +432,7 @@ public class CardDatabase : MonoBehaviour
                 {
                     var cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
                     var card = cardList.Count == 0 ? null : cardList[Random.Range(0, cardList.Count)];
-                    BattleManager.Instance.moveCardGraveToDeck(card);
+                    BattleManager.Instance.Card_Move_GraveToDeck(card);
                     return true;
                 }
             case "지니":
@@ -432,7 +443,7 @@ public class CardDatabase : MonoBehaviour
                     {
                         cardList = BattleManager.Instance.Grave.Where(x => x.Str._species == SPECIES.UNDEAD).ToList();
                         var card = cardList.Count == 0 ? null : cardList[Random.Range(0, cardList.Count)];
-                        BattleManager.Instance.moveCardGraveToDeck(card);
+                        BattleManager.Instance.Card_Move_GraveToDeck(card);
                     }
 
                     return true;
@@ -441,7 +452,7 @@ public class CardDatabase : MonoBehaviour
                 {
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(RandomCard());
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "슬롯머신+":
@@ -449,7 +460,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     var tier = Random.Range(3, 6);
                     queue.Enqueue(cardByTier(tier));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "슬롯머신++":
@@ -457,7 +468,7 @@ public class CardDatabase : MonoBehaviour
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     var tier = 5;
                     queue.Enqueue(cardByTier(tier));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                     return true;
                 }
             case "천사동글이":
@@ -493,7 +504,7 @@ public class CardDatabase : MonoBehaviour
                 }
             case "슈퍼컴퓨터":
                 {
-                    BattleManager.Instance.AddRerollChance(5);
+                    BattleManager.Instance.Add_RerollChance(5);
                     return true;
                 }
             case "동글라미드":
@@ -541,7 +552,7 @@ public class CardDatabase : MonoBehaviour
                         }
                     }
                     if (queue.Count > 0)
-                        BattleManager.Instance.AddCard(queue, false);
+                        BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     else return false;
 
 
@@ -579,7 +590,7 @@ public class CardDatabase : MonoBehaviour
                             var addTarget = cardDatabase.Where(x => x._species == SPECIES.MECH && x._tier==5).ToList().OrderBy(x => Random.value).FirstOrDefault();
                             queue.Enqueue(addTarget);
                             deleteTarget.deleteCard(1f);
-                            BattleManager.Instance.AddCard(queue, true);
+                            BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
                             return true;
                         }
                     }
@@ -652,33 +663,33 @@ public class CardDatabase : MonoBehaviour
                 }
             case "버섯순이":
                 {
-                    BattleManager.Instance.AddRerollChance();
+                    BattleManager.Instance.Add_RerollChance();
                     return true;
                 }
             case "리빙아머":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     return true;
                 }
             case "듀라한":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     return true;
                 }
             case "백작동글이":
                 {
                     var target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     target = BattleManager.Instance.Enemies.Count == 0 ? null : BattleManager.Instance.Enemies[Random.Range(0, BattleManager.Instance.Enemies.Count)];
-                    BattleManager.Instance.enemyDamage(b.Stat.attack, false, target);
+                    BattleManager.Instance.Damage_toEnemy(b.Stat.attack, false, target);
                     return true;
                 }
             case "동글키메라":
@@ -718,7 +729,7 @@ public class CardDatabase : MonoBehaviour
                             card.StatChange("Attack", card.Stat.attack + 2);
                         }
                     }
-                    BattleManager.Instance.AddRerollChance();
+                    BattleManager.Instance.Add_RerollChance();
                     return true;
                 }
             case "초천원돌파동글봇":

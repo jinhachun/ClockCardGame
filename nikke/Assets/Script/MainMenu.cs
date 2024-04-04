@@ -44,6 +44,8 @@ public class MainMenu : MonoBehaviour
 
     List<GameObject> MenuList;
     List<GameObject> ButtonList;
+    [SerializeField] GameObject _MainBackGround;
+    [SerializeField] ScoreCalculator _Score;
     [SerializeField] GameObject _Main;
     [SerializeField] GameObject _Shop;
     [SerializeField] GameObject _Village;
@@ -145,10 +147,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("StartScene");
     }
+    public void ButtonAction_toStartScene_GameEnd()
+    {
+        Resource.Instance.GameWin();
+        SceneManager.LoadScene("StartScene");
+    }
     public void battleStart()
     {
         Resource.Instance.Save();
-        if (Resource.Instance.Area >= 4 && Resource.Instance.Stage!=1) return;
+        if (Resource.Instance.Area >= 5) return;
         DOTween.KillAll();
         if (Resource.Instance.Rule_no(12)) Resource.Instance.money = (Resource.Instance.money*70/100);
         SceneManager.LoadScene("BattleScene");
@@ -168,5 +175,17 @@ public class MainMenu : MonoBehaviour
             }
             if (i == 1) _RuleView_Container.SetActive(true);
         }
+    }
+    public void Show_Score()
+    {
+        bool Clear = Resource.Instance.Area == 5;
+        int Level = Resource.Instance.LEVEL;
+        int HighestDam = Resource.Instance.HighestDam;
+        int Time_Min = Timer.Min;
+        int Time_Sec = Timer.Sec;
+
+        _Score.Set(Clear, Level, HighestDam, Time_Min, Time_Sec);
+        _Score.gameObject.SetActive(true);
+        _MainBackGround.SetActive(false);
     }
 }

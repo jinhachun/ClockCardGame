@@ -1669,6 +1669,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB3D9\uAE00\uC774\uC640 \uB450\uB354\uC9C0\uC528"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB545\uC744 \uD30C\uB2E4\uAC00 \uB450\uB354\uC9C0\uC528\uB97C
       \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4. \uAC15\uB3C4\uAC00 \uB418\uC5B4 \uB450\uB354\uC9C0\uC528\uC758
@@ -1683,6 +1684,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC2E0\uBCD1\uBC1B\uC544\uB77C!"
     _eventText: "\uAE30\uC0AC\uB3CC\uC774 \uD55C \uBA85\uC774 \uB2F9\uC2E0\uC758
       \uB371\uC5D0 \uC601\uC785\uB418\uACE0 \uC2F6\uC5B4\uD569\uB2C8\uB2E4."
@@ -1696,6 +1698,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB108 \uD574\uACE0\uC57C!"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB098\uD0DC\uD558\uAC8C \uD589\uB3D9\uD569\uB2C8\uB2E4.\n\uD655
       \uD574\uACE0\uD574\uC11C \uB2E4\uB978 \uB3D9\uAE00\uC774\uB4E4\uC5D0\uAC8C
@@ -1711,6 +1714,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB108 \uD574\uACE0\uC57C!"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB098\uD0DC\uD558\uAC8C \uD589\uB3D9\uD569\uB2C8\uB2E4.\n\uD655
       \uD574\uACE0\uD574\uC11C \uB2E4\uB978 \uB3D9\uAE00\uC774\uB4E4\uC5D0\uAC8C
@@ -1725,6 +1729,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB3D9\uC804\uC218\uC9D1\uAC00"
     _eventText: "\uB3D9\uAE00\uC774\uAC00  \uC790\uD310\uAE30\uC5D0\uC11C \uB3D9\uC804\uC744
       \uC90D\uACE0\uB2E4\uB2D9\uB2C8\uB2E4.\n\uBE44\uB85D \uC801\uC740 \uC591\uC758
@@ -1737,6 +1742,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC9C4\uD654\uC758 \uB3CC"
     _eventText: "\uC774\uC0C1\uD55C \uB3CC\uC744 \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4.
       \uC774 \uB3CC\uC744 \uB9CC\uC9C0\uBA74, \uB3D9\uAE00\uC774\uAC00 \uC9C4\uD654\uD560
@@ -1751,6 +1757,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB4DC\uB974\uB801~"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uB0AE\uC7A0\uC744 \uC7A1\uB2C8\uB2E4.\n\uBAB8\uC758
       \uD53C\uB85C\uAC00 \uCE58\uC720\uB418\uB294 \uB4EF \uD569\uB2C8\uB2E4..."
@@ -1762,6 +1769,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uBCF4\uC2A4 \uACA9\uD30C!"
     _eventText: "\uB9C8\uC744\uC744 \uC810\uAC70\uD55C \uBABB\uB41C \uBCF4\uC2A4\uB97C
       \uC4F0\uB7EC\uB728\uB824 \uC8FC\uBBFC\uB4E4\uC774 \uAC10\uC0AC\uC758 \uB73B\uC73C\uB85C\n\uB3D9\uAE00\uC774
@@ -1781,6 +1789,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC704\uD5D8\uD55C \uB3C4\uBC15"
     _eventText: "\uB3C4\uBC15\uC655 \uAE40\uB3C4\uBC15\uC528\uAC00 \uB2F9\uC2E0\uC758
       \uBCD1\uB825\uC744 \uC0C1\uB300\uB85C \uB3C4\uBC15\uC744 \uC81C\uC548\uD569\uB2C8\uB2E4.\n\uB2F9\uC2E0\uC758
@@ -1797,6 +1806,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC232\uC758 \uC9C0\uBC30\uC790"
     _eventText: "\uC232\uC744 \uC810\uAC70\uD558\uB358 \uBCF4\uC2A4\uB97C \uC4F0\uB7EC\uB728\uB9AC\uACE0
       \uB2F9\uC2E0\uC740 \uC232\uC758 \uC655\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!\n\uB3D9\uAE00\uC774\uB4E4\uACFC
@@ -1815,6 +1825,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC548\uB3D9\uAE00\uC774\uC640\uC758 \uB9CC\uB0A8"
     _eventText: "\uB3D9\uAE00\uD558\uC9C0 \uC54A\uACE0 \uAC01\uC838\uC788\uB294 \uC548\uB3D9\uAE00\uC774
       \uBB34\uB9AC\uB97C \uB9C8\uC8FC\uD588\uC2B5\uB2C8\uB2E4.\n\uC5B4\uB5BB\uAC8C
@@ -1829,6 +1840,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uCF00\uB974\uBCA0\uB85C\uC0BC\uC758 \uAC04\uD0DD"
     _eventText: "\uC57C\uC0DD \uCF00\uB974\uBCA0\uB85C\uC0BC\uC744 \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4.\n\uCF00\uB974\uBCA0\uB85C\uC0BC\uC740
       \uB3D9\uAE00\uC774\uC758 \uB9E8\uB4E4\uB9E8\uB4E4\uD55C \uB450\uD53C\uAC00
@@ -1844,6 +1856,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uCE58\uBA85\uC801\uC778 \uACE0\uBC31"
     _eventText: "\uC880\uBE44\uAC00 \uC0AC\uC2E4 \uB2F9\uC2E0\uC744 \uC88B\uC544\uD55C\uB2E4\uACE0
       \uACE0\uBC31\uD588\uC2B5\uB2C8\uB2E4.\n\uACE0\uBC31\uC744 \uBC1B\uC544\uC8FC\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
@@ -1857,6 +1870,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uACE0\uCCA0\uC0C1"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uAE61\uD1B5\uBAAC\uC744 \uD314\uC544\uC11C
       \uAE4C\uAE4C\uB97C \uC0AC\uBA39\uC73C\uB824\uD569\uB2C8\uB2E4!\n\uC774\uB97C
@@ -1873,6 +1887,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 0
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uADF9\uC801\uC778 \uC9C4\uD654"
     _eventText: "\uBA39\uAE68\uBE44\uC758 \uC0C1\uD0DC\uAC00 \uC774\uC0C1\uD569\uB2C8\uB2E4.\n\uC9C4\uD654\uB97C
       \uC55E\uB450\uACE0 \uC788\uB294 \uAC83\uC774 \uBD84\uBA85\uD569\uB2C8\uB2E4!"
@@ -1886,6 +1901,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uAD34\uC218 \uD2F0\uB77C\uB178"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uD2F0\uB77C\uB178\uC640 \uD568\uAED8 \uB3C4\uC2DC\uB97C
       \uD30C\uAD34\uD558\uB294\uB370 \uB9DB\uB4E4\uB838\uC2B5\uB2C8\uB2E4!\n"
@@ -1899,6 +1915,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uBCF4\uBB3C\uD0D0\uD5D8"
     _eventText: "\uB3D9\uAE00\uC774\uAC00 \uC720\uC801\uC18D\uC744 \uB3CC\uC544\uB2E4\uB2C8\uBA70
       \uBCF4\uBB3C\uC744 \uCC3E\uB2E4\uAC00 \uD568\uC815\uC5D0 \uBE60\uC84C\uC2B5\uB2C8\uB2E4!\n\uD568\uC815\uC5D0
@@ -1914,6 +1931,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uB3D9\uD29C\uBC84\uC758 \uAC1D\uAE30"
     _eventText: "\uB3D9\uD29C\uBE0C\uB97C \uD558\uB294 \uB3D9\uAE00\uC774\uAC00 \uC601\uC0C1\uC744
       \uCC0D\uAE30\uC704\uD574 \uC11C\uCEE4\uC2A4\uB97C \uC5F0\uC2B5\uD588\uB2F5\uB2C8\uB2E4!\n\uC704\uD5D8\uD574\uBCF4\uC774\uB294\uB370
@@ -1927,6 +1945,7 @@ MonoBehaviour:
     _isAreaTwo: 1
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "\uC804\uC7C1 \uC18D \uC791\uC740 \uC0DD\uBA85"
     _eventText: "\uC804\uC7C1\uC5D0 \uC9C0\uCE5C \uD06C\uB8E8\uC138\uB3CC\uC774\uAC00
       \uC791\uC740 \uAF43 \uD558\uB098\uB97C \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4.\n"
@@ -1942,6 +1961,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "[\uD569\uCCB4] \uC804\uC7C1\uC758 \uD3D0\uD574"
     _eventText: "\uC804\uC7C1 \uC18D\uC5D0\uC11C \uC815\uC758\uB85C\uC6B4 \uB9C8\uC74C\uC740
       \uD558\uB4F1 \uC4F8\uBAA8\uC5C6\uC2B5\uB2C8\uB2E4.\n\uD55C\uB54C \uC815\uC758\uB85C\uC6E0\uB358
@@ -1957,6 +1977,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "[\uD569\uCCB4] \uC601\uD63C\uC57D\uD0C8\uC790"
     _eventText: "\uBB34\uC2DC\uBB34\uC2DC\uD55C \uC545\uB839\uC744 \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4.\n\uC601\uD63C\uC744
       \uBC14\uCE5C\uB2E4\uBA74 \uC545\uB839\uC774\uB77C\uB3C4 \uD611\uC870\uC801\uC73C\uB85C
@@ -1973,13 +1994,14 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "[\uD569\uCCB4] \uC6B0\uB9AC\uB4E4\uC758 \uC6CC\uAC8C\uC784"
     _eventText: "\uC5B4\uCA4C\uB2E4\uBCF4\uB2C8 \uD2F0\uB77C\uB178\uC640 \uCF00\uB974\uBCA0\uB85C\uC0BC\uC774
       \uD798\uC744 \uD569\uCDB0 \uBC14\uC774\uB7EC\uC2A4\uB97C \uC0C1\uB300\uD558\uAC8C
       \uB418\uC5C8\uC2B5\uB2C8\uB2E4.\n\uD569\uCCB4\uC9C4\uD654\uB97C \uD55C\uB2E4\uBA74
       \uB354\uB354\uC6B1 \uC27D\uAC8C \uC0C1\uB300\uB97C \uCC98\uCE58\uD560 \uC218
       \uC788\uC9C0 \uC54A\uC744\uAE4C\uC694? "
-    _eventSprite: {fileID: 21300000, guid: 666b7d24892ac1b44942f7ce6c14a263, type: 3}
+    _eventSprite: {fileID: 21300000, guid: 76b148dc779b74b41be9a60dde0e143f, type: 3}
     _eventSelect:
     - _text: "\uD569\uCCB4\uC9C4\uD654!(\uD2F0\uB77C\uB178\uC640 \uCF00\uB974\uBCA0\uB85C\uC0BC
         \uD569\uCCB4)"
@@ -1989,6 +2011,7 @@ MonoBehaviour:
     _isAreaTwo: 0
     _isAreaThree: 1
     _isAreaFour: 0
+    _isAreaEnd: 0
     _eventName: "[\uD569\uCCB4] \uD569\uCCB4\uB85C\uBD07\uC758 \uB0AD\uB9CC"
     _eventText: "\uB85C\uBD07\uB4E4\uC774 \uD569\uCCB4\uD558\uB294\uB370\uC5D0\uB294
       \uB0AD\uB9CC\uC774 \uC874\uC7AC\uD569\uB2C8\uB2E4.\n\uB0AD\uB9CC\uC744 \uC2E4\uD604\uC2DC\uD0AC\uAE4C\uC694?"
@@ -2001,7 +2024,8 @@ MonoBehaviour:
   - _isAreaOne: 0
     _isAreaTwo: 0
     _isAreaThree: 0
-    _isAreaFour: 1
+    _isAreaFour: 0
+    _isAreaEnd: 1
     _eventName: "\uC5EC\uD589\uC758 \uB05D"
     _eventText: "\uB2F9\uC2E0\uC740 \uB098\uC05C\uB188\uB4E4\uC744 \uBAA8\uB450 \uBB34\uCC0C\uB974\uACE0
       \uC138\uC0C1\uC758 \uAD6C\uC6D0\uC790\uAC00 \uB418\uC5C8\uC2B5\uB2C8\uB2E4!!\n\n\uC774
@@ -2011,12 +2035,13 @@ MonoBehaviour:
     _eventSprite: {fileID: 21300000, guid: 5cc4ada09371e1a4bb10ace991a4db18, type: 3}
     _eventSelect:
     - _text: -THE END-
-    - _text: "\uBA54\uC778\uD654\uBA74\uC73C\uB85C"
-    _boss: 0
+    - _text: "\uC810\uC218\uBCF4\uAE30"
+    _boss: 1
   - _isAreaOne: 0
     _isAreaTwo: 0
     _isAreaThree: 0
     _isAreaFour: 1
+    _isAreaEnd: 0
     _eventName: "\uB9C8\uC9C0\uB9C9 \uC804\uD22C"
     _eventText: "\uB2F9\uC2E0\uC740 \uB3D9\uAE00\uC774\uC640 \uD568\uAED8 \uC655\uAD6D\uC758
       \uC131\uAE4C\uC9C0 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4.\n\uC774\uC81C \uB2F9\uC2E0\uC740
@@ -6277,6 +6302,7 @@ MonoBehaviour:
     isRare: 0
     isUltimate: 0
   time: 0
+  HighestDam: 0
   cardNum: 0
 --- !u!4 &1792990735
 Transform:
@@ -6491,6 +6517,7 @@ MonoBehaviour:
     metSquad: []
     shopcard: 
     time: 0
+    HighestDam: 0
 --- !u!1 &1920618931
 GameObject:
   m_ObjectHideFlags: 0

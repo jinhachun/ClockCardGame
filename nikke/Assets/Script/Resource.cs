@@ -121,7 +121,6 @@ public class Resource : MonoBehaviour
     }
     public void GameWin()
     {
-        PlayerPrefs.SetInt("maxLevel", PlayerPrefs.GetInt("maxLevel") + Random.Range(1, 4));
         File.Delete(Path.Combine(Application.persistentDataPath, "playerData.json"));
     }
     public List<CardStruct> Deck;
@@ -141,6 +140,7 @@ public class Resource : MonoBehaviour
     public List<EnemySquadStruct> metSquad;
     public CardStruct shopcard;
     public float time;
+    public int HighestDam;
     public bool haveCard(string a)
     {
         bool chk = false;
@@ -162,12 +162,22 @@ public class Resource : MonoBehaviour
             Area++;
             Stage = 1;
         }
+        if(Area==4 && Stage == 2)
+        {
+            Area = 5; Stage = 1;
+            if(PlayerPrefs.GetInt("maxLevel")== LEVEL)
+                PlayerPrefs.SetInt("maxLevel", PlayerPrefs.GetInt("maxLevel") + Random.Range(1, 4));
+        }
         Debug.Log(Area + "-" + Stage);   
     }
     public void setHp(int a)
     {
         Hp = a;
     }
+
+
+
+
     public void Event_Heal(int a)
     {
         AudioManager.instance.PlaySfx(10);
@@ -278,7 +288,7 @@ public class Resource : MonoBehaviour
     public void Save()
     {
         ResourceSaveData data = new ResourceSaveData
-            (Deck, Hp, Kor, tmpMhp, Area, Stage, money, LEVEL, Rules, VillageLevel, SupportPrice, jewel, combiRate_Species,combiRate_Type, metSquad, shopcard, time);
+            (Deck, Hp, Kor, tmpMhp, Area, Stage, money, LEVEL, Rules, VillageLevel, SupportPrice, jewel, combiRate_Species,combiRate_Type, metSquad, shopcard, time, HighestDam);
 
 
         // ToJson을 사용하면 JSON형태로 포멧팅된 문자열이 생성된다  
@@ -331,6 +341,7 @@ public class Resource : MonoBehaviour
         this.metSquad = data.metSquad;
         this.shopcard = CardDatabase.Instance.card(data.shopcard);
         this.time = data.time;
+        this.HighestDam = data.HighestDam;
         File.Delete(Path.Combine(Application.persistentDataPath, "playerData.json"));
     }
 
@@ -356,8 +367,13 @@ public class ResourceSaveData
     public List<EnemySquadStruct> metSquad;
     public string shopcard;
     public float time;
+    public int HighestDam;
 
-    public ResourceSaveData(List<CardStruct> deck, int hp, bool kor, int tmpMhp, int area, int stage, int money, int lEVEL, DictionaryOfStringAndInteger rules, DictionaryOfStringAndInteger villageLevel, DictionaryOfStringAndInteger supportPrice, int jewel, List<float> combiRate, List<float> combiRate2, List<EnemySquadStruct> metSquad, CardStruct shopcard, float time)
+    public ResourceSaveData(
+        List<CardStruct> deck, int hp, bool kor, int tmpMhp, int area, int stage, int money, int lEVEL,
+        DictionaryOfStringAndInteger rules, DictionaryOfStringAndInteger villageLevel, DictionaryOfStringAndInteger supportPrice,
+        int jewel, List<float> combiRate, List<float> combiRate2, List<EnemySquadStruct> metSquad, CardStruct shopcard,
+        float time, int HighestDam)
     {
         Deck = new List<string>();
         Deck_token = new List<bool>();
@@ -382,6 +398,7 @@ public class ResourceSaveData
         this.metSquad = metSquad;
         this.shopcard = shopcard._name;
         this.time = time;
+        this.HighestDam = HighestDam;
     }
 }
 

@@ -17,7 +17,7 @@ public class DeckCount : MonoBehaviour
         }
         if (isOver && Input.GetMouseButtonDown(0))
         {
-            BattleManager.Instance.deckCntClick(cards);
+            BattleManager.Instance.Deck_chkCnt(cards);
         }
     }
     public void Set(ref List<Card> list)

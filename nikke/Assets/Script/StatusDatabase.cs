@@ -37,7 +37,7 @@ public class StatusDatabase : MonoBehaviour
                     {
                         enemy.statusValueChange(2);
                         StatusPopup(enemy);
-                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
+                        BattleManager.Instance.Summon_Enemy(EnemyDatabase.Instance.enemy(enemyName));
                     }
                     return;
                 }
@@ -47,8 +47,8 @@ public class StatusDatabase : MonoBehaviour
                     if (enemy._statusValue == 0)
                     {
                         StatusPopup(enemy);
-                        BattleManager.Instance.takeDamage(30);
-                        BattleManager.Instance.enemyDamage(enemy._hp, false, enemy);
+                        BattleManager.Instance.Damage_toPlayer(30);
+                        BattleManager.Instance.Damage_toEnemy(enemy._hp, false, enemy);
 
                     }
                     return;
@@ -76,20 +76,20 @@ public class StatusDatabase : MonoBehaviour
                 {
                     if (BattleManager.Instance.pureAttack == false) return;
                     StatusPopup(enemy);
-                    BattleManager.Instance.takeDamage(enemy._statusValue);
+                    BattleManager.Instance.Damage_toPlayer(enemy._statusValue);
                     return;
                 }
             case ("불사의몸"):
                 {
                     StatusPopup(enemy);
-                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    BattleManager.Instance.Heal_Enemy(enemy._statusValue, enemy);
                     return;
                 }
             case ("폭군"):
                 {
                     if (enemy._hp >= enemy._statusValue) return;
                     StatusPopup(enemy);
-                    BattleManager.Instance.healEnemy(enemy._statusValue-enemy._hp, enemy);
+                    BattleManager.Instance.Heal_Enemy(enemy._statusValue-enemy._hp, enemy);
 
                     return;
                 }
@@ -100,10 +100,10 @@ public class StatusDatabase : MonoBehaviour
                     Debug.Log("조합 : " + CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi));
                     if (CardDatabase.Instance.SpeciesCombination(BattleManager.Instance.SpeciesCombi) >= 3) return;
                     StatusPopup(enemy);
-                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    BattleManager.Instance.Heal_Enemy(enemy._statusValue, enemy);
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.Instance.card_token(cardName));
-                    BattleManager.Instance.AddCard(queue, true);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, true);
 
                     return;
                 }
@@ -135,7 +135,7 @@ public class StatusDatabase : MonoBehaviour
                     if (UnityEngine.Random.Range(0, 10) < 2)
                     {
                         StatusPopup(enemy);
-                        BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
+                        BattleManager.Instance.Summon_Enemy(EnemyDatabase.Instance.enemy(enemyName));
                     }
                     return;
                 }
@@ -153,14 +153,14 @@ public class StatusDatabase : MonoBehaviour
                         enemy.setAttackBuff(enemy._statusValue);
                     }
                     else if (RandomValue == 2)
-                        BattleManager.Instance.enemyDamage(enemy._statusValue, false, enemy);
+                        BattleManager.Instance.Damage_toEnemy(enemy._statusValue, false, enemy);
                     else if (RandomValue == 3)
                     {
                         enemy.statusValueChange(enemy._statusValue+Random.Range(1, 11));
                     }
                     else if (RandomValue == 4)
                     {
-                        BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                        BattleManager.Instance.Heal_Enemy(enemy._statusValue, enemy);
                     }
 
                     return;
@@ -182,7 +182,7 @@ public class StatusDatabase : MonoBehaviour
                     if (enemy._statusValue > 0) return; 
                     StatusPopup(enemy);
                     EffectManager.effectOn(EffectManager.EffectName.Fire, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
-                    BattleManager.Instance.takeDamage(50);
+                    BattleManager.Instance.Damage_toPlayer(50);
                     enemy.statusValueChange(3);
                     return;
                 }
@@ -197,7 +197,7 @@ public class StatusDatabase : MonoBehaviour
                 {
                     if (enemy._statusValue == 0) return;
                     StatusPopup(enemy);
-                    BattleManager.Instance.healEnemy(enemy._statusValue, enemy);
+                    BattleManager.Instance.Heal_Enemy(enemy._statusValue, enemy);
                     enemy.statusValueChange(enemy._statusValue - 1);
                     return;
                 }
@@ -205,7 +205,7 @@ public class StatusDatabase : MonoBehaviour
                 {
                     StatusPopup(enemy);
                     EffectManager.effectOn(EffectManager.EffectName.Fracture, new Vector2(BattleManager.Instance.HandPos[2].x, BattleManager.Instance.HandPos[0].y));
-                    BattleManager.Instance.takeDamage(enemy._statusValue);
+                    BattleManager.Instance.Damage_toPlayer(enemy._statusValue);
                     enemy.statusValueChange(enemy._statusValue + 1);
                     return;
                 }
@@ -234,7 +234,7 @@ public class StatusDatabase : MonoBehaviour
                     StatusPopup(enemy);
                     Queue<CardStruct> queue = new Queue<CardStruct>();
                     queue.Enqueue(CardDatabase.Instance.card_token(cardName));
-                    BattleManager.Instance.AddCard(queue, false);
+                    BattleManager.Instance.Card_Add_toDeckOrGrave(queue, false);
                     return;
                 }
         }
@@ -247,14 +247,14 @@ public class StatusDatabase : MonoBehaviour
             case ("보급형폭탄"):
                 {
                     StatusPopup(enemy);
-                    BattleManager.Instance.enemyWideDamage(20);
+                    BattleManager.Instance.Damage_toEnemy_Wide(20);
                     return;
                 }
             case ("목마"):
                 {
                     var enemyName = "영웅오킬레스";
                     StatusPopup(enemy);
-                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
+                    BattleManager.Instance.Summon_Enemy(EnemyDatabase.Instance.enemy(enemyName));
                     return;
                 }
             case ("응원"):
@@ -268,7 +268,7 @@ public class StatusDatabase : MonoBehaviour
                 {
                     var enemyName = "가고일석상";
                     StatusPopup(enemy);
-                    BattleManager.Instance.summonEnemy(EnemyDatabase.Instance.enemy(enemyName));
+                    BattleManager.Instance.Summon_Enemy(EnemyDatabase.Instance.enemy(enemyName));
                     return;
                 }
         }

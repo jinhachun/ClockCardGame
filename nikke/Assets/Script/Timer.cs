@@ -12,15 +12,14 @@ public class Timer : MonoBehaviour
         instance = this;
     }
     public bool End => (Resource.Instance.Area == 4 && Resource.Instance.Stage != 1);
-   
-    public string TIME()
+
+    static public int totalSec => (int)Mathf.Round(Resource.Instance.time);
+    static public int Min => (int)(totalSec / 60);
+    static public int Sec => (totalSec - 60 * Min);
+
+    static public string TIME()
     {
-        var totalSec = Mathf.Round(Resource.Instance.time);
-        Debug.Log(totalSec+" "+ Resource.Instance.time);
-        var Min = (int)(totalSec / 60);
-        var Sec = (totalSec - 60 * Min);
-        Debug.Log(Min + " : " + Sec);
-        return $"{Min}MIN {Sec}SEC";
+        return $"{Timer.Min}MIN {Timer.Sec}SEC";
     }
     void Update()
     {

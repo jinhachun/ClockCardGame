@@ -25,6 +25,8 @@ public class EventDatabase : MonoBehaviour
             return eventStruct._isAreaThree;
         else if (area == 4)
             return eventStruct._isAreaFour;
+        else if (area == 5)
+            return eventStruct._isAreaEnd;
         else return false;
     }
     public List<EventStruct> EventList_area(int area, bool boss) => EventList.Where(x => (isArea(area, x)) && x._boss == boss).ToList();
@@ -573,6 +575,12 @@ public class EventDatabase : MonoBehaviour
 
                         });
                     }
+                    else if (selectIndex == 2)
+                    {
+                        return (() =>
+                        {
+                        });
+                    }
                     return null;
                 }
             case "[합체] 우리들의 워게임":
@@ -621,9 +629,9 @@ public class EventDatabase : MonoBehaviour
                     if (selectIndex == 1)
                     {
                         return (() =>
-                        {
-                            DG.Tweening.DOTween.KillAll();
-                            UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+                        {   
+
+                            MainMenu.Instance.Show_Score();
                         });
                     }
                     return null;
@@ -635,6 +643,12 @@ public class EventDatabase : MonoBehaviour
                         return (() =>
                         {
                             Resource.Instance.Event_Heal(Resource.Instance.mHp);
+                        });
+                    }
+                    else if (selectIndex == 1)
+                    {
+                        return (() =>
+                        {
                         });
                     }
                     return null ;
@@ -652,6 +666,7 @@ public struct EventStruct
     public bool _isAreaTwo;
     public bool _isAreaThree;
     public bool _isAreaFour;
+    public bool _isAreaEnd;
     public string _eventName;
     [Multiline(4)]
     public string _eventText;

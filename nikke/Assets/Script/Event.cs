@@ -46,7 +46,7 @@ public class Event : MonoBehaviour
         if (Resource.Instance.Area >= 4 && Resource.Instance.Stage != 1)
         {
             Resource.Instance.GameWin();
-            eventText = eventText.Replace("@", Timer.Instance.TIME());
+            eventText = eventText.Replace("@", Timer.TIME());
         }
         _Text_eventtext.text = eventText;
         _Image_eventimage.sprite = a._eventSprite;
